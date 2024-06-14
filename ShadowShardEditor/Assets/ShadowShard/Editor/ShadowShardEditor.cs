@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using ShadowShard.Editor.Range;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -27,6 +28,19 @@ namespace ShadowShard.Editor
             TextureEditor = new TextureEditor(Utils);
             PopupEditor = new PopupEditor(Utils);
         }
+
+        public float DrawSlider(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0) =>
+            SliderEditor.DrawSlider(label, property, range, indentLevel);
+        
+        public float DrawSlider(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+            SliderEditor.DrawSlider(label, property, indentLevel);
+
+        public int DrawIntSlider(GUIContent label, SerializedProperty property, IntRange range, int indentLevel = 0) =>
+            SliderEditor.DrawIntSlider(label, property, range, indentLevel);
+        
+        public int DrawIntSlider(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+            SliderEditor.DrawIntSlider(label, property, indentLevel);
+        
         
         public void IncludeMaterialEditor(UnityEditor.MaterialEditor materialEditor) => 
             MaterialEditor = materialEditor;
