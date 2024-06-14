@@ -79,6 +79,7 @@ namespace ShadowShard.Editor
         public FloatRange DrawMinMaxSlider(GUIContent label, SerializedProperty minProperty, SerializedProperty maxProperty, int indentLevel = 0) =>
             DrawMinMaxSlider(label, minProperty, maxProperty, _defaultFloatRange, indentLevel);
         
+        //TODO: move to MaterialEditor
         public FloatRange DrawMinMaxVector4StartSlider(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0)
         {
             _editorUtils.DrawIndented(indentLevel, () =>
