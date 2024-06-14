@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
 using ShadowShard.Editor.Range;
 using UnityEditor;
 using UnityEngine;
@@ -10,7 +8,7 @@ namespace ShadowShard.Editor
 {
     public class ShadowShardEditor
     {
-        public UnityEditor.MaterialEditor MaterialEditor;
+        public MaterialEditor MaterialEditor;
         public readonly EditorUtils Utils;
         public readonly SliderEditor SliderEditor;
         public readonly ToggleEditor ToggleEditor;
@@ -29,6 +27,8 @@ namespace ShadowShard.Editor
             PopupEditor = new PopupEditor(Utils);
         }
 
+        #region SliderEditorRegion
+        
         public float DrawSlider(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0) =>
             SliderEditor.DrawSlider(label, property, range, indentLevel);
         
@@ -41,8 +41,28 @@ namespace ShadowShard.Editor
         public int DrawIntSlider(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
             SliderEditor.DrawIntSlider(label, property, indentLevel);
         
+        public FloatRange DrawMinMaxSlider(GUIContent label, SerializedProperty minProperty, SerializedProperty maxProperty, FloatRange range, int indentLevel = 0) =>
+            SliderEditor.DrawMinMaxSlider(label, minProperty, maxProperty, range, indentLevel);
         
-        public void IncludeMaterialEditor(UnityEditor.MaterialEditor materialEditor) => 
+        public FloatRange DrawMinMaxSlider(GUIContent label, SerializedProperty minProperty, SerializedProperty maxProperty, int indentLevel = 0) =>
+            SliderEditor.DrawMinMaxSlider(label, minProperty, maxProperty, indentLevel);
+        
+        public FloatRange DrawMinMaxVector4StartSlider(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0) =>
+            SliderEditor.DrawMinMaxVector4StartSlider(label, property, range, indentLevel);
+        
+        public FloatRange DrawMinMaxVector4StartSlider(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+            SliderEditor.DrawMinMaxVector4StartSlider(label, property, indentLevel);
+        
+        public FloatRange DrawMinMaxVector4EndSlider(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0) =>
+            SliderEditor.DrawMinMaxVector4EndSlider(label, property, range, indentLevel);
+        
+        public FloatRange DrawMinMaxVector4EndSlider(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+            SliderEditor.DrawMinMaxVector4EndSlider(label, property, indentLevel);
+
+        #endregion
+        
+        
+        public void IncludeMaterialEditor(MaterialEditor materialEditor) => 
             MaterialEditor = materialEditor;
         
         public IEnumerable<Object> GetTargets() => 
