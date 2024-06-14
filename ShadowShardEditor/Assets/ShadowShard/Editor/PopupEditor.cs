@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 
 namespace ShadowShard.Editor
@@ -12,83 +13,99 @@ namespace ShadowShard.Editor
         public PopupEditor(EditorUtils editorUtils) =>
             _editorUtils = editorUtils;
         
-        public int DrawPopup<T>(GUIContent label, T property, string[] displayedOptions, int indentLevel = 0) where T : class
+        public TEnum DrawEnumPopup<TEnum>(SerializedProperty property, int indentLevel = 0)
+            where TEnum : Enum
         {
-            if (property is null)
-                return 0;
+            Type enumType = typeof(TEnum);
+            GUIContent label = new(ObjectNames.NicifyVariableName(enumType.Name));
             
-            _editorUtils.DrawIndented(indentLevel, () =>
-            {
-                EditorGUI.BeginChangeCheck();
-                var propertyValue = _editorUtils.GetEnumPropertyValue(property);
+            int enumOption = DrawPopup(label, property, Enum.GetNames(enumType), indentLevel);
 
-                EditorGUI.showMixedValue = _editorUtils.HasMixedValue(property);
-                var newValue = EditorGUILayout.Popup(label, propertyValue, displayedOptions);
-                EditorGUI.showMixedValue = false;
-                
-                if (EditorGUI.EndChangeCheck()) 
-                    _editorUtils.SetEnumPropertyValue(property, newValue);
-            });
-            
-            return _editorUtils.GetEnumPropertyValue(property);
+            return (TEnum)Enum
+                .GetValues(enumType)
+                .GetValue(enumOption);
         }
         
-        public bool DrawBooleanPopup<T>(GUIContent label, T property, string[] displayedOptions, int indentLevel = 0) where T : class
+        public TEnum DrawEnumPopup<TEnum>(GUIContent label, SerializedProperty property, int indentLevel = 0)
+            where TEnum : Enum
         {
-            if (property is null)
-                return false;
-
-            if (displayedOptions.Length != 2)
-            {
-                EditorGUILayout.HelpBox(BooleanDisplayedOptionsError, MessageType.Error);
-                return false;
-            }
+            Type enumType = typeof(TEnum);
             
+            int enumOption = DrawPopup(label, property, Enum.GetNames(enumType), indentLevel);
+
+            return (TEnum)Enum
+                .GetValues(enumType)
+                .GetValue(enumOption);
+        }
+        
+        public int DrawPopup(GUIContent label, SerializedProperty property, string[] displayedOptions, int indentLevel = 0)
+        {
             _editorUtils.DrawIndented(indentLevel, () =>
             {
                 EditorGUI.BeginChangeCheck();
-                var propertyValue = _editorUtils.GetEnumPropertyValue(property);
-            
-                EditorGUI.showMixedValue = _editorUtils.HasMixedValue(property);
-                var newValue = EditorGUILayout.Popup(label, propertyValue, displayedOptions);
+
+                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
+                int newValue = EditorGUILayout.Popup(label, property.enumValueIndex, displayedOptions);
                 EditorGUI.showMixedValue = false;
-            
+
                 if (EditorGUI.EndChangeCheck())
-                    _editorUtils.SetEnumPropertyValue(property, newValue);
+                    property.enumValueIndex = newValue;
             });
             
-            return _editorUtils.GetEnumPropertyValue(property) > 0;
+            return property.enumValueIndex;
         }
         
-        public bool DrawBooleanPopup<T>(GUIContent label, T property, string[] displayedOptions, string keyword, int indentLevel = 0) where T : class
+        public bool DrawBooleanPopup(GUIContent label, SerializedProperty property, string[] displayedOptions, int indentLevel = 0)
         {
-            if (property is null)
+            if (!IsDisplayedBooleanErrorMessage(displayedOptions)) 
                 return false;
-
-            if (displayedOptions.Length != 2)
-            {
-                EditorGUILayout.HelpBox(BooleanDisplayedOptionsError, MessageType.Error);
-                return false;
-            }
             
             _editorUtils.DrawIndented(indentLevel, () =>
             {
                 EditorGUI.BeginChangeCheck();
-                var propertyValue = _editorUtils.GetEnumPropertyValue(property);
             
-                EditorGUI.showMixedValue = _editorUtils.HasMixedValue(property);
-                var newValue = EditorGUILayout.Popup(label, propertyValue, displayedOptions);
+                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
+                int newValue = EditorGUILayout.Popup(label, property.enumValueIndex, displayedOptions);
+                EditorGUI.showMixedValue = false;
+
+                if (EditorGUI.EndChangeCheck())
+                    property.enumValueIndex = newValue;
+            });
+            
+            return property.enumValueIndex > 0;
+        }
+        
+        public bool DrawShaderGlobalKeywordBooleanPopup(GUIContent label, SerializedProperty property, 
+            string[] displayedOptions, string shaderGlobalKeyword, int indentLevel = 0)
+        {
+            if (!IsDisplayedBooleanErrorMessage(displayedOptions)) 
+                return false;
+            
+            _editorUtils.DrawIndented(indentLevel, () =>
+            {
+                EditorGUI.BeginChangeCheck();
+            
+                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
+                int newValue = EditorGUILayout.Popup(label, property.enumValueIndex, displayedOptions);
                 EditorGUI.showMixedValue = false;
             
                 if (EditorGUI.EndChangeCheck())
                 {
-                    var val = newValue > 0;
-                    _editorUtils.SetPropertyValue(property, val);
-                    RPUtils.SetGlobalKeyword(keyword, val);
+                    property.enumValueIndex = newValue;
+                    RPUtils.SetGlobalKeyword(shaderGlobalKeyword, newValue > 0);
                 }
             });
 
-            return _editorUtils.GetEnumPropertyValue(property) > 0;
+            return property.enumValueIndex > 0;
+        }
+
+        private bool IsDisplayedBooleanErrorMessage(string[] displayedOptions)
+        {
+            if (displayedOptions.Length == 2) 
+                return true;
+            
+            EditorGUILayout.HelpBox(BooleanDisplayedOptionsError, MessageType.Error);
+            return false;
         }
     }
 }

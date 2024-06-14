@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using ShadowShard.Editor.Range;
+using UnityEditor;
 using UnityEngine;
 
 namespace ShadowShard.Editor
@@ -10,144 +11,116 @@ namespace ShadowShard.Editor
         public SliderEditor(EditorUtils editorUtils) =>
             _editorUtils = editorUtils;
         
-        public void DrawSlider<T>(GUIContent label, T property, Vector2 minMax, int indentLevel = 0) where T : class
+        public float DrawSlider(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0)
         {
-            if (property is null)
-                return;
+            _editorUtils.DrawIndented(indentLevel, () =>
+            {
+                EditorGUI.BeginChangeCheck();
+                
+                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
+                float newValue = EditorGUILayout.Slider(label, property.floatValue, range.Min, range.Max);
+                EditorGUI.showMixedValue = false;
 
-            _editorUtils.DrawIndented(indentLevel, () =>
-            {
-                EditorGUI.BeginChangeCheck();
-                var propertyValue = _editorUtils.GetPropertyValue<float>(property);
-                
-                EditorGUI.showMixedValue = _editorUtils.HasMixedValue(property);
-                var newValue = EditorGUILayout.Slider(label, propertyValue, minMax.x, minMax.y);
-                EditorGUI.showMixedValue = false;
-                
                 if (EditorGUI.EndChangeCheck())
-                    _editorUtils.SetPropertyValue(property, newValue);
+                    property.floatValue = newValue;
             });
-        }
-        
-        public void DrawSlider<T>(GUIContent label, T property, int indentLevel = 0) where T : class =>
-            DrawSlider(label, property, new Vector2(0.0f, 1.0f), indentLevel);
-        
-        public void DrawSlider<T>(GUIContent label, T property, VectorParam vectorParam, Vector2 minMax, int indentLevel = 0) where T : class
-        {
-            if (property is null)
-                return;
-            
-            _editorUtils.DrawIndented(indentLevel, () =>
-            {
-                EditorGUI.BeginChangeCheck();
-                var propertyValue = _editorUtils.GetPropertyValue<Vector4>(property);
-            
-                EditorGUI.showMixedValue = _editorUtils.HasMixedValue(property);
-                var val = propertyValue[(int)vectorParam];
-                var newValue = EditorGUILayout.Slider(label, val, minMax.x, minMax.y);
-                EditorGUI.showMixedValue = false;
-            
-                if (EditorGUI.EndChangeCheck())
-                {
-                    propertyValue[(int)vectorParam] = newValue;
-                    _editorUtils.SetPropertyValue(property, propertyValue);
-                }
-            });
-        }
-        
-        public void DrawSlider<T>(GUIContent label, T property, VectorParam vectorParam, int indentLevel = 0) where T : class =>
-            DrawSlider(label, property, vectorParam, new Vector2(0.0f, 1.0f), indentLevel);
-        
-        public void DrawIntSlider<T>(GUIContent label, T property, Vector2Int minMax, int indentLevel = 0) where T : class
-        {
-            if (property is null)
-                return;
 
+            return property.floatValue;
+        }
+        
+        public float DrawSlider(GUIContent label, SerializedProperty property, int indentLevel = 0) => 
+            DrawSlider(label, property, FloatRange.Normalized, indentLevel);
+        
+        public int DrawIntSlider(GUIContent label, SerializedProperty property, IntRange range, int indentLevel = 0)
+        {
             _editorUtils.DrawIndented(indentLevel, () =>
             {
                 EditorGUI.BeginChangeCheck();
-                var propertyValue = _editorUtils.GetIntPropertyValue(property);
                 
-                EditorGUI.showMixedValue = _editorUtils.HasMixedValue(property);
-                var newValue = EditorGUILayout.IntSlider(label, propertyValue, minMax.x, minMax.y);
+                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
+                int newValue = EditorGUILayout.IntSlider(label, property.intValue, range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
                 
                 if (EditorGUI.EndChangeCheck())
-                    _editorUtils.SetIntPropertyValue(property, newValue);
+                    property.intValue = newValue;
             });
+
+            return property.intValue;
         }
         
-        public void DrawIntSlider<T>(GUIContent label, T property, int indentLevel = 0) where T : class =>
-            DrawIntSlider(label, property, new Vector2Int(0, 1), indentLevel);
+        public int DrawIntSlider(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+            DrawIntSlider(label, property, IntRange.Normalized, indentLevel);
         
-        public void DrawMinMaxShaderSlider<T>(GUIContent label, T min, T max, Vector2 minMax, int indentLevel = 0) where T : class
+        public FloatRange DrawMinMaxSlider(GUIContent label, SerializedProperty minProperty, SerializedProperty maxProperty, FloatRange range, int indentLevel = 0)
         {
-            if (min is null || max is null)
-                return;
-            
             _editorUtils.DrawIndented(indentLevel, () =>
             {
                 EditorGUI.BeginChangeCheck();
-                var minValue = _editorUtils.GetPropertyValue<float>(min);
-                var maxValue = _editorUtils.GetPropertyValue<float>(max);
+                float minValue = minProperty.floatValue;
+                float maxValue = maxProperty.floatValue;
                 
-                EditorGUI.showMixedValue = _editorUtils.HasMixedValue(min) || _editorUtils.HasMixedValue(max);
-                EditorGUILayout.MinMaxSlider(label, ref minValue, ref maxValue, minMax.x, minMax.y);
+                EditorGUI.showMixedValue = minProperty.hasMultipleDifferentValues || maxProperty.hasMultipleDifferentValues;
+                EditorGUILayout.MinMaxSlider(label, ref minValue, ref maxValue, range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
                 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    _editorUtils.SetPropertyValue(min, minValue);
-                    _editorUtils.SetPropertyValue(max, maxValue);
+                    minProperty.floatValue = minValue;
+                    maxProperty.floatValue = maxValue;
                 }
             });
-        }
-        
-        public void DrawMinMaxShaderSlider<T>(GUIContent label, T min, T max, int indentLevel = 0) where T : class =>
-            DrawMinMaxShaderSlider(label, min, max, new Vector2(0.0f, 1.0f), indentLevel);
-        
-        public void DrawMinMaxSliderXY<T>(GUIContent label, T property, Vector2 minMax, int indentLevel = 0) where T : class
-        {
-            if (property is null)
-                return;
-            
-            _editorUtils.DrawIndented(indentLevel, () =>
-            {
-                EditorGUI.BeginChangeCheck();
-                var propertyValue = _editorUtils.GetPropertyValue<Vector4>(property);
-                
-                EditorGUI.showMixedValue = _editorUtils.HasMixedValue(property);
-                EditorGUILayout.MinMaxSlider(label, ref propertyValue.x, ref propertyValue.y, minMax.x, minMax.y);
-                EditorGUI.showMixedValue = false;
-                
-                if (EditorGUI.EndChangeCheck()) 
-                    _editorUtils.SetPropertyValue(property, propertyValue);
-            });
-        }
-        
-        public void DrawMinMaxSliderXY<T>(GUIContent label, T property, int indentLevel = 0) where T : class =>
-            DrawMinMaxSliderXY(label, property, new Vector2(0.0f, 1.0f), indentLevel);
 
-        public void DrawMinMaxSliderZW<T>(GUIContent label, T property, Vector2 minMax, int indentLevel = 0) where T : class
+            return new FloatRange(minProperty.floatValue, maxProperty.floatValue);
+        }
+
+        public FloatRange DrawMinMaxSlider(GUIContent label, SerializedProperty minProperty, SerializedProperty maxProperty, int indentLevel = 0) =>
+            DrawMinMaxSlider(label, minProperty, maxProperty, FloatRange.Normalized, indentLevel);
+        
+        //TODO: move to MaterialEditor
+        public FloatRange DrawMinMaxVector4StartSlider(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0)
         {
-            if (property is null)
-                return;
-            
             _editorUtils.DrawIndented(indentLevel, () =>
             {
                 EditorGUI.BeginChangeCheck();
-                var propertyValue = _editorUtils.GetPropertyValue<Vector4>(property);
+                Vector4 propertyValue = property.vector4Value;
                 
-                EditorGUI.showMixedValue = _editorUtils.HasMixedValue(property);
-                EditorGUILayout.MinMaxSlider(label, ref propertyValue.z, ref propertyValue.w, minMax.x, minMax.y);
+                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
+                EditorGUILayout.MinMaxSlider(label, ref propertyValue.x, ref propertyValue.y, range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
                 
-                if (EditorGUI.EndChangeCheck()) 
-                    _editorUtils.SetPropertyValue(property, propertyValue);
+                if (EditorGUI.EndChangeCheck())
+                {
+                    property.vector4Value = propertyValue;
+                }
             });
+
+            return new FloatRange(property.vector4Value.x, property.vector4Value.y);
         }
         
-        public void DrawMinMaxSliderZW<T>(GUIContent label, T property, int indentLevel = 0) where T : class =>
-            DrawMinMaxSliderZW(label, property, new Vector2(0.0f, 1.0f), indentLevel);
+        public FloatRange DrawMinMaxVector4StartSlider(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+            DrawMinMaxVector4StartSlider(label, property, FloatRange.Normalized, indentLevel);
+
+        public FloatRange DrawMinMaxVector4EndSlider(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0)
+        {
+            _editorUtils.DrawIndented(indentLevel, () =>
+            {
+                EditorGUI.BeginChangeCheck();
+                Vector4 propertyValue = property.vector4Value;
+                
+                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
+                EditorGUILayout.MinMaxSlider(label, ref propertyValue.z, ref propertyValue.w, range.Min, range.Max);
+                EditorGUI.showMixedValue = false;
+                
+                if (EditorGUI.EndChangeCheck())
+                {
+                    property.vector4Value = propertyValue;
+                }
+            });
+
+            return new FloatRange(property.vector4Value.x, property.vector4Value.y);
+        }
+        
+        public FloatRange DrawMinMaxVector4EndSlider(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+            DrawMinMaxVector4EndSlider(label, property, FloatRange.Normalized, indentLevel);
     }
 }

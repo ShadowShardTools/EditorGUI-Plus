@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using ShadowShard.Editor.Range;
+using UnityEditor;
 using UnityEngine;
 
 namespace ShadowShard.Editor
@@ -10,39 +11,102 @@ namespace ShadowShard.Editor
         public VectorEditor(EditorUtils editorUtils) =>
             _editorUtils = editorUtils;
         
-        public void DrawFloat<T>(GUIContent label, T property, Vector2 minMax, int indentLevel = 0) where T : class
+        public float DrawFloat(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0)
         {
-            if (property is null)
-                return;
-            
             _editorUtils.DrawIndented(indentLevel, () =>
             {
                 EditorGUI.BeginChangeCheck();
-                var propertyValue = _editorUtils.GetPropertyValue<float>(property);
+                float propertyValue = property.floatValue;
                 
-                EditorGUI.showMixedValue = _editorUtils.HasMixedValue(property);
-                var newValue = Mathf.Clamp(EditorGUILayout.FloatField(label, propertyValue), minMax.x, minMax.y);
+                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
+                float newValue = Mathf.Clamp(EditorGUILayout.FloatField(label, propertyValue), range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
                 
                 if (EditorGUI.EndChangeCheck()) 
                     _editorUtils.SetPropertyValue(property, newValue);
             });
+            
+            return property.floatValue;
         }
         
-        public void DrawFloat<T>(GUIContent label, T property, int indentLevel = 0) where T : class =>
-            DrawFloat(label, property, new Vector2(float.MinValue, float.MaxValue), indentLevel);
+        public float DrawFloat(GUIContent label, SerializedProperty property, int indentLevel = 0) => 
+            DrawFloat(label, property, FloatRange.Full, indentLevel);
         
-        public void DrawClampedFloat<T>(GUIContent label, T property, int indentLevel = 0) where T : class =>
-            DrawFloat(label, property, new Vector2(0.0f, 1.0f), indentLevel);
+        public float DrawNormalizedFloat(GUIContent label, SerializedProperty property, int indentLevel = 0) => 
+            DrawFloat(label, property, FloatRange.Normalized, indentLevel);
         
-        public void DrawMinFloat<T>(GUIContent label, T property, float min = 0.0f, int indentLevel = 0) where T : class =>
-            DrawFloat(label, property, new Vector2(min, float.MaxValue), indentLevel);
+        public float DrawMinFloat(GUIContent label, SerializedProperty property, float min = 0.0f, int indentLevel = 0) =>
+            DrawFloat(label, property, FloatRange.ToMaxFrom(min), indentLevel);
+
+        public Vector2 DrawVector2(GUIContent label, SerializedProperty property, int indentLevel = 0)
+        {
+            _editorUtils.DrawIndented(indentLevel, () =>
+            {
+                EditorGUI.BeginChangeCheck();
+                
+                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
+                Vector2 newValue = EditorGUILayout.Vector2Field(label, property.vector2Value);
+                EditorGUI.showMixedValue = false;
+
+                if (EditorGUI.EndChangeCheck())
+                    property.vector2Value = newValue;
+            });
+
+            return property.vector2Value;
+        }
         
+        public Vector3 DrawVector3(GUIContent label, SerializedProperty property, int indentLevel = 0)
+        {
+            _editorUtils.DrawIndented(indentLevel, () =>
+            {
+                EditorGUI.BeginChangeCheck();
+                
+                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
+                Vector3 newValue = EditorGUILayout.Vector3Field(label, property.vector3Value);
+                EditorGUI.showMixedValue = false;
+                
+                if (EditorGUI.EndChangeCheck())
+                    property.vector3Value = newValue;
+            });
+
+            return property.vector3Value;
+        }
+        
+        public Vector4 DrawVector4(GUIContent label, SerializedProperty property, int indentLevel = 0)
+        {
+            _editorUtils.DrawIndented(indentLevel, () =>
+            {
+                EditorGUI.BeginChangeCheck();
+                
+                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
+                Vector3 newValue = EditorGUILayout.Vector4Field(label, property.vector4Value);
+                EditorGUI.showMixedValue = false;
+
+                if (EditorGUI.EndChangeCheck())
+                    property.vector4Value = newValue;
+            });
+
+            return property.vector4Value;
+        }
+        
+        public void DrawColor(GUIContent label, SerializedProperty property, int indentLevel = 0)
+        {
+            _editorUtils.DrawIndented(indentLevel, () =>
+            {
+                EditorGUI.BeginChangeCheck();
+
+                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
+                Color newValue = EditorGUILayout.ColorField(label, property.colorValue);
+                EditorGUI.showMixedValue = false;
+
+                if (EditorGUI.EndChangeCheck())
+                    property.colorValue = newValue;
+            });
+        }
+        
+        //TODO: move to MaterialEditor
         public void DrawVectorFloat<T>(GUIContent label, T property, VectorParam vectorParam, Vector2 minMax, int indentLevel = 0) where T : class
         {
-            if (property is null)
-                return;
-            
             _editorUtils.DrawIndented(indentLevel, () =>
             {
                 EditorGUI.BeginChangeCheck();
@@ -66,63 +130,6 @@ namespace ShadowShard.Editor
         
         public void DrawMinVectorFloat<T>(GUIContent label, T property, VectorParam vectorParam, float min = 0.0f, int indentLevel = 0) where T : class =>
             DrawVectorFloat(label, property, vectorParam,new Vector2(min, float.MaxValue), indentLevel);
-
-        public void DrawVector2<T>(GUIContent label, T property, int indentLevel = 0) where T : class
-        {
-            if (property is null)
-                return;
-            
-            _editorUtils.DrawIndented(indentLevel, () =>
-            {
-                EditorGUI.BeginChangeCheck();
-                Vector4 propertyValue = _editorUtils.GetVectorPropertyValue(property);
-                
-                EditorGUI.showMixedValue = _editorUtils.HasMixedValue(property);
-                Vector2 newValue = EditorGUILayout.Vector2Field(label, propertyValue);
-                EditorGUI.showMixedValue = false;
-                
-                if (EditorGUI.EndChangeCheck())
-                    _editorUtils.SetPropertyValue(property, newValue);
-            });
-        }
-        
-        public void DrawVector3<T>(GUIContent label, T property, int indentLevel = 0) where T : class
-        {
-            if (property is null)
-                return;
-            
-            _editorUtils.DrawIndented(indentLevel, () =>
-            {
-                EditorGUI.BeginChangeCheck();
-                Vector3 propertyValue = _editorUtils.GetPropertyValue<Vector3>(property);
-                
-                EditorGUI.showMixedValue = _editorUtils.HasMixedValue(property);
-                Vector3 newValue = EditorGUILayout.Vector3Field(label, propertyValue);
-                EditorGUI.showMixedValue = false;
-                
-                if (EditorGUI.EndChangeCheck())
-                    _editorUtils.SetPropertyValue(property, newValue);
-            });
-        }
-        
-        public void DrawVector4<T>(GUIContent label, T property, int indentLevel = 0) where T : class
-        {
-            if (property is null)
-                return;
-            
-            _editorUtils.DrawIndented(indentLevel, () =>
-            {
-                EditorGUI.BeginChangeCheck();
-                Vector4 propertyValue = _editorUtils.GetPropertyValue<Vector4>(property);
-                
-                EditorGUI.showMixedValue = _editorUtils.HasMixedValue(property);
-                Vector3 newValue = EditorGUILayout.Vector3Field(label, propertyValue);
-                EditorGUI.showMixedValue = false;
-                
-                if (EditorGUI.EndChangeCheck())
-                    _editorUtils.SetPropertyValue(property, newValue);
-            });
-        }
         
         public void DrawVector2XY<T>(GUIContent label, T property, int indentLevel = 0) where T : class
         {
@@ -175,25 +182,6 @@ namespace ShadowShard.Editor
                     Vector4 newVector4Value = new(propertyVector4Value.x, propertyVector4Value.y, newValue.x, newValue.y);
                     _editorUtils.SetPropertyValue(property, newVector4Value);
                 }
-            });
-        }
-        
-        public void DrawColor<T>(GUIContent label, T property, int indentLevel = 0) where T : class
-        {
-            if (property is null)
-                return;
-            
-            _editorUtils.DrawIndented(indentLevel, () =>
-            {
-                EditorGUI.BeginChangeCheck();
-                Color propertyValue = _editorUtils.GetPropertyValue<Color>(property);
-
-                EditorGUI.showMixedValue = _editorUtils.HasMixedValue(property);
-                Color newValue = EditorGUILayout.ColorField(label, propertyValue);
-                EditorGUI.showMixedValue = false;
-
-                if (EditorGUI.EndChangeCheck()) 
-                    _editorUtils.SetPropertyValue(property, newValue);
             });
         }
     }
