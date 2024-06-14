@@ -71,6 +71,41 @@ namespace ShadowShard.Editor
         
         #endregion
         
+        #region VectorEditorRegion
+
+        public float DrawFloat(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0) =>
+            VectorEditor.DrawFloat(label, property, range, indentLevel);
+        
+        public float DrawFloat(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+            VectorEditor.DrawFloat(label, property, indentLevel);
+        
+        public float DrawNormalizedFloat(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+            VectorEditor.DrawNormalizedFloat(label, property, indentLevel);
+        
+        public float DrawMinFloat(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+            VectorEditor.DrawMinFloat(label, property, indentLevel);
+        
+        public Vector2 DrawVector2(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+            VectorEditor.DrawVector2(label, property, indentLevel);
+        
+        public Vector3 DrawVector3(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+            VectorEditor.DrawVector3(label, property, indentLevel);
+        
+        public Vector4 DrawVector4(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+            VectorEditor.DrawVector4(label, property, indentLevel);
+        
+        #endregion
+        
+        #region TextureEditorRegion
+
+        public Texture2D DrawTexture(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+            TextureEditor.DrawTexture(label, property, indentLevel);
+        
+        public Texture2D DrawSmallTextureField(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+            TextureEditor.DrawSmallTextureField(label, property, indentLevel);
+        
+        #endregion
+        
         public void IncludeMaterialEditor(MaterialEditor materialEditor) => 
             MaterialEditor = materialEditor;
         

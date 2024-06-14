@@ -8,9 +8,6 @@ namespace ShadowShard.Editor
     {
         private readonly EditorUtils _editorUtils;
 
-        private readonly FloatRange _defaultFloatRange = new(0.0f, 1.0f);
-        private readonly IntRange _defaultIntRange = new(0, 1);
-
         public SliderEditor(EditorUtils editorUtils) =>
             _editorUtils = editorUtils;
         
@@ -32,7 +29,7 @@ namespace ShadowShard.Editor
         }
         
         public float DrawSlider(GUIContent label, SerializedProperty property, int indentLevel = 0) => 
-            DrawSlider(label, property, _defaultFloatRange, indentLevel);
+            DrawSlider(label, property, FloatRange.Normalized, indentLevel);
         
         public int DrawIntSlider(GUIContent label, SerializedProperty property, IntRange range, int indentLevel = 0)
         {
@@ -52,7 +49,7 @@ namespace ShadowShard.Editor
         }
         
         public int DrawIntSlider(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            DrawIntSlider(label, property, _defaultIntRange, indentLevel);
+            DrawIntSlider(label, property, IntRange.Normalized, indentLevel);
         
         public FloatRange DrawMinMaxSlider(GUIContent label, SerializedProperty minProperty, SerializedProperty maxProperty, FloatRange range, int indentLevel = 0)
         {
@@ -77,7 +74,7 @@ namespace ShadowShard.Editor
         }
 
         public FloatRange DrawMinMaxSlider(GUIContent label, SerializedProperty minProperty, SerializedProperty maxProperty, int indentLevel = 0) =>
-            DrawMinMaxSlider(label, minProperty, maxProperty, _defaultFloatRange, indentLevel);
+            DrawMinMaxSlider(label, minProperty, maxProperty, FloatRange.Normalized, indentLevel);
         
         //TODO: move to MaterialEditor
         public FloatRange DrawMinMaxVector4StartSlider(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0)
@@ -101,7 +98,7 @@ namespace ShadowShard.Editor
         }
         
         public FloatRange DrawMinMaxVector4StartSlider(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            DrawMinMaxVector4StartSlider(label, property, _defaultFloatRange, indentLevel);
+            DrawMinMaxVector4StartSlider(label, property, FloatRange.Normalized, indentLevel);
 
         public FloatRange DrawMinMaxVector4EndSlider(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0)
         {
@@ -124,6 +121,6 @@ namespace ShadowShard.Editor
         }
         
         public FloatRange DrawMinMaxVector4EndSlider(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            DrawMinMaxVector4EndSlider(label, property, _defaultFloatRange, indentLevel);
+            DrawMinMaxVector4EndSlider(label, property, FloatRange.Normalized, indentLevel);
     }
 }
