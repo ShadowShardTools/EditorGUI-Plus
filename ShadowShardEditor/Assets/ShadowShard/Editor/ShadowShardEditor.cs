@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using ShadowShard.Editor.Range;
 using UnityEditor;
@@ -103,6 +104,26 @@ namespace ShadowShard.Editor
         
         public Texture2D DrawSmallTextureField(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
             TextureEditor.DrawSmallTextureField(label, property, indentLevel);
+        
+        #endregion
+        
+        #region PopupEditorRegion
+        
+        public TEnum DrawEnumPopup<TEnum>(SerializedProperty property, int indentLevel = 0) where TEnum : Enum =>
+            PopupEditor.DrawEnumPopup<TEnum>(property, indentLevel);
+        
+        public TEnum DrawEnumPopup<TEnum>(GUIContent label, SerializedProperty property, int indentLevel = 0) where TEnum : Enum =>
+            PopupEditor.DrawEnumPopup<TEnum>(label, property, indentLevel);
+        
+        public int DrawPopup(GUIContent label, SerializedProperty property, string[] displayedOptions, int indentLevel = 0) =>
+            PopupEditor.DrawPopup(label, property, displayedOptions, indentLevel);
+        
+        public bool DrawBooleanPopup(GUIContent label, SerializedProperty property, string[] displayedOptions, int indentLevel = 0) =>
+            PopupEditor.DrawBooleanPopup(label, property, displayedOptions, indentLevel);
+        
+        public bool DrawShaderGlobalKeywordBooleanPopup(GUIContent label, SerializedProperty property, 
+            string[] displayedOptions, string shaderGlobalKeyword, int indentLevel = 0) =>
+            PopupEditor.DrawShaderGlobalKeywordBooleanPopup(label, property, displayedOptions, shaderGlobalKeyword, indentLevel);
         
         #endregion
         
