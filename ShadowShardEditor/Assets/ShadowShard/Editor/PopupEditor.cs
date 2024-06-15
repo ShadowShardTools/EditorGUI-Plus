@@ -23,18 +23,13 @@ namespace ShadowShard.Editor
             Type enumType = typeof(TEnum);
             GUIContent label = new(ObjectNames.NicifyVariableName(enumType.Name));
             
-            int enumOption = DrawPopup(label, property, Enum.GetNames(enumType), indentLevel);
-
-            return (TEnum)Enum
-                .GetValues(enumType)
-                .GetValue(enumOption);
+            return DrawEnumPopup<TEnum, TProperty>(label, property, indentLevel);
         }
         
         internal TEnum DrawEnumPopup<TEnum, TProperty>(GUIContent label, TProperty property, int indentLevel = 0)
             where TEnum : Enum
         {
             Type enumType = typeof(TEnum);
-            
             int enumOption = DrawPopup(label, property, Enum.GetNames(enumType), indentLevel);
 
             return (TEnum)Enum
@@ -47,19 +42,14 @@ namespace ShadowShard.Editor
         {
             Type enumType = typeof(TEnum);
             GUIContent label = new(ObjectNames.NicifyVariableName(enumType.Name));
-            
-            int enumOption = DrawBooleanPopup(label, property, Enum.GetNames(enumType), indentLevel);
 
-            return (TEnum)Enum
-                .GetValues(enumType)
-                .GetValue(enumOption);
+            return DrawBooleanPopup<TEnum, TProperty>(label, property, indentLevel);
         }
         
         internal TEnum DrawBooleanPopup<TEnum, TProperty>(GUIContent label, TProperty property, int indentLevel = 0)
             where TEnum : Enum
         {
             Type enumType = typeof(TEnum);
-            
             int enumOption = DrawBooleanPopup(label, property, Enum.GetNames(enumType), indentLevel);
 
             return (TEnum)Enum
@@ -72,12 +62,8 @@ namespace ShadowShard.Editor
         {
             Type enumType = typeof(TEnum);
             GUIContent label = new(ObjectNames.NicifyVariableName(enumType.Name));
-            
-            int enumOption = DrawShaderGlobalKeywordBooleanPopup(label, property, Enum.GetNames(enumType), shaderGlobalKeyword, indentLevel);
 
-            return (TEnum)Enum
-                .GetValues(enumType)
-                .GetValue(enumOption);
+            return DrawShaderGlobalKeywordBooleanPopup<TEnum, TProperty>(label, property, shaderGlobalKeyword, indentLevel);
         }
         
         internal TEnum DrawShaderGlobalKeywordBooleanPopup<TEnum, TProperty>(GUIContent label, TProperty property, string shaderGlobalKeyword, int indentLevel = 0)

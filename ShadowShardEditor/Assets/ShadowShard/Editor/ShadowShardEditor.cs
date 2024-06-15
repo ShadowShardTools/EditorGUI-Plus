@@ -196,6 +196,14 @@ namespace ShadowShard.Editor
         
         #endregion
         
+        #region ObjectEditorRegion
+
+        public void DrawObjectField<TObject>(GUIContent label, SerializedProperty property, int indentLevel = 0,
+            bool allowSceneObjects = true, Action<TObject> onChangedCallback = null) where TObject : Object =>
+            _objectEditor.DrawObjectField<TObject>(label, property, indentLevel, allowSceneObjects, onChangedCallback);
+        
+        #endregion
+        
         #region TextEditorRegion
 
         public string DrawTextField(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
@@ -203,14 +211,6 @@ namespace ShadowShard.Editor
         
         public string DrawFolderPathField(GUIContent label, SerializedProperty property, string defaultDirectory) =>
             _textEditor.DrawFolderPathField(label, property, defaultDirectory);
-        
-        #endregion
-        
-        #region ObjectEditorRegion
-
-        public void DrawObjectField<TObject>(GUIContent label, SerializedProperty property, int indentLevel = 0,
-            bool allowSceneObjects = true, Action<TObject> onChangedCallback = null) where TObject : Object =>
-            _objectEditor.DrawObjectField<TObject>(label, property, indentLevel, allowSceneObjects, onChangedCallback);
         
         #endregion
     }

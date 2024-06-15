@@ -15,11 +15,10 @@ namespace ShadowShard.Editor.MaterialEditor.ShaderGUI
 
         private static MaterialProperty FindProperty(string propertyName, IReadOnlyCollection<MaterialProperty> properties, bool propertyIsMandatory)
         {
-            var property = properties.FirstOrDefault(prop => prop != null && prop.name == propertyName);
+            MaterialProperty property = properties.FirstOrDefault(prop => prop != null && prop.name == propertyName);
             if (property == null && propertyIsMandatory)
-            {
                 throw new ArgumentException($"Could not find MaterialProperty: '{propertyName}', Num properties: {properties.Count}");
-            }
+            
             return property;
         }
     }
