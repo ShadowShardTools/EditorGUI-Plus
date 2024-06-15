@@ -3,15 +3,16 @@ using UnityEditor;
 using UnityEditor.Rendering;
 using UnityEngine;
 
-namespace ShadowShard.Editor.ShaderGUI.Section
+namespace ShadowShard.Editor.Section
 {
     public class HeaderScope : IDisposable
     {
         public readonly bool Expanded;
+
         private readonly bool _spaceAtEnd;
-        #if !UNITY_2020_1_OR_NEWER
+#if !UNITY_2020_1_OR_NEWER
         private int oldIndentLevel;
-        #endif
+#endif
 
         public HeaderScope(ISection section, bool spaceAtEnd = true, bool subHeader = false)
         {
@@ -49,9 +50,9 @@ namespace ShadowShard.Editor.ShaderGUI.Section
                 (Event.current.type == EventType.Repaint || Event.current.type == EventType.Layout))
                 EditorGUILayout.Space();
 
-            #if !UNITY_2020_1_OR_NEWER
+#if !UNITY_2020_1_OR_NEWER
             EditorGUI.indentLevel = oldIndentLevel;
-            #endif
+#endif
             GUILayout.EndVertical();
         }
     }

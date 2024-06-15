@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ShadowShard.Editor.ShaderGUI.Section;
+using ShadowShard.Editor.Section;
 using UnityEditor;
 using UnityEngine;
 
@@ -16,7 +16,7 @@ namespace ShadowShard.Editor.ShaderGUI
         protected static Vector2 IconSize = new(5, 5);
         protected const string BaseOffsetPropertyName = "_BaseMap";
 
-        protected List<ISection> Sections = new();
+        protected List<MaterialSection> Sections = new();
 
         public virtual void MaterialChanged(Material material) => 
             ValidateMaterial(material);
@@ -25,12 +25,12 @@ namespace ShadowShard.Editor.ShaderGUI
             SetKeywords(material);
         
         public virtual void OnOpenGUI(Material material) => 
-            Sections = new List<ISection>();
+            Sections = new List<MaterialSection>();
 
         public virtual void OnUpdateGUI(Material material) { }
         
         public virtual IEnumerable<ISection> SetSections(Material material) => 
-            Sections = new List<ISection>();
+            Sections = new List<MaterialSection>();
 
         public override void OnGUI(MaterialEditor materialEditorIn, MaterialProperty[] properties)
         {
@@ -39,7 +39,7 @@ namespace ShadowShard.Editor.ShaderGUI
             
             _materialEditor = materialEditorIn;
             _shadowShardEditor.IncludeMaterialEditor(_materialEditor);
-            var material = _materialEditor != null ? _materialEditor.target as Material : null;
+            Material material = _materialEditor != null ? _materialEditor.target as Material : null;
             
             if (material == null)
                 return;
@@ -60,28 +60,28 @@ namespace ShadowShard.Editor.ShaderGUI
             if (properties == null)
                 return;
             
-            foreach (var section in Sections)
+            foreach (MaterialSection section in Sections)
                 section.FindProperties(properties);
         }
         
         protected virtual void RenderSections()
         {
-            foreach (var section in Sections.Where(section => section.IsRendered))
+            foreach (MaterialSection section in Sections.Where(section => section.IsRendered))
                 RenderSection(section);
         }
 
-        protected virtual void RenderSection(ISection section)
+        protected virtual void RenderSection(MaterialSection section)
         {
             EditorGUIUtility.SetIconSize(IconSize);
 
-            using var header = new HeaderScope(section, _materialEditor);
+            using HeaderScope header = new(section, _materialEditor);
             if (header.Expanded)
                 section.DrawProperties(_shadowShardEditor);
         }
         
         protected virtual void SetKeywords(Material material)
         {
-            foreach (var section in Sections)
+            foreach (MaterialSection section in Sections)
                 section.SetKeywords(material);
         }
     }
