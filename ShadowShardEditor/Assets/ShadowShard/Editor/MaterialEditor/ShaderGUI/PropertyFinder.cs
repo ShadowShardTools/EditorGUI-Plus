@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 
-namespace ShadowShard.Editor.ShaderGUI
+namespace ShadowShard.Editor.MaterialEditor.ShaderGUI
 {
     public static class PropertyFinder
     {

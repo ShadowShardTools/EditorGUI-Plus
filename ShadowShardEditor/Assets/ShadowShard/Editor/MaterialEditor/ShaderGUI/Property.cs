@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace ShadowShard.Editor.ShaderGUI
+namespace ShadowShard.Editor.MaterialEditor.ShaderGUI
 {
     public struct Property
     {

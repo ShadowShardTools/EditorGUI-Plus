@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 namespace ShadowShard.Editor
@@ -58,7 +57,7 @@ namespace ShadowShard.Editor
         }
         
         //TODO: move to MaterialEditor
-        public void DrawTexture(MaterialEditor materialEditor, GUIContent label, MaterialProperty property)
+        /*public void DrawTexture(MaterialEditor materialEditor, GUIContent label, MaterialProperty property)
         {
             materialEditor.TexturePropertySingleLine(label, property);
         }
@@ -109,7 +108,7 @@ namespace ShadowShard.Editor
                 return;
             
             materialEditor.TextureScaleOffsetProperty(textureProperty);
-        }
+        }*/
         
         private bool IsMobilePlatform() => 
             UnityEditorInternal.InternalEditorUtility.IsMobilePlatform(EditorUserBuildSettings.activeBuildTarget);
