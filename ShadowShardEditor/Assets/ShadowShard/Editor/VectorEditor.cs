@@ -28,15 +28,6 @@ namespace ShadowShard.Editor
             
             return property.floatValue;
         }
-        
-        public float DrawFloat(GUIContent label, SerializedProperty property, int indentLevel = 0) => 
-            DrawFloat(label, property, FloatRange.Full, indentLevel);
-        
-        public float DrawNormalizedFloat(GUIContent label, SerializedProperty property, int indentLevel = 0) => 
-            DrawFloat(label, property, FloatRange.Normalized, indentLevel);
-        
-        public float DrawMinFloat(GUIContent label, SerializedProperty property, float min = 0.0f, int indentLevel = 0) =>
-            DrawFloat(label, property, FloatRange.ToMaxFrom(min), indentLevel);
 
         public Vector2 DrawVector2(GUIContent label, SerializedProperty property, int indentLevel = 0)
         {

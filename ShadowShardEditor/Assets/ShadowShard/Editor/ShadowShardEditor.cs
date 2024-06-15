@@ -10,7 +10,6 @@ namespace ShadowShard.Editor
     public class ShadowShardEditor
     {
         public MaterialEditor MaterialEditor;
-        public readonly EditorUtils Utils;
         public readonly GroupEditor GroupEditor;
         public readonly SliderEditor SliderEditor;
         public readonly ToggleEditor ToggleEditor;
@@ -20,7 +19,6 @@ namespace ShadowShard.Editor
         
         public ShadowShardEditor()
         {
-            Utils = new EditorUtils();
             GroupEditor = new GroupEditor();
             SliderEditor = new SliderEditor(GroupEditor);
             ToggleEditor = new ToggleEditor(GroupEditor);
@@ -118,13 +116,13 @@ namespace ShadowShard.Editor
             VectorEditor.DrawFloat(label, property, range, indentLevel);
         
         public float DrawFloat(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            VectorEditor.DrawFloat(label, property, indentLevel);
+            VectorEditor.DrawFloat(label, property, FloatRange.Full, indentLevel);
         
         public float DrawNormalizedFloat(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            VectorEditor.DrawNormalizedFloat(label, property, indentLevel);
+            VectorEditor.DrawFloat(label, property, FloatRange.Normalized, indentLevel);
         
-        public float DrawMinFloat(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            VectorEditor.DrawMinFloat(label, property, indentLevel);
+        public float DrawMinFloat(GUIContent label, SerializedProperty property, float min = 0.0f, int indentLevel = 0) =>
+            VectorEditor.DrawFloat(label, property, FloatRange.ToMaxFrom(min), indentLevel);
         
         public Vector2 DrawVector2(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
             VectorEditor.DrawVector2(label, property, indentLevel);
