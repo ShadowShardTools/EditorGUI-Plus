@@ -6,99 +6,176 @@ namespace ShadowShard.Editor
 {
     public class VectorEditor
     {
+        private readonly PropertyService _propertyService;
         private readonly GroupEditor _groupEditor;
 
-        public VectorEditor(GroupEditor groupEditor) =>
+        internal VectorEditor(PropertyService propertyService, GroupEditor groupEditor)
+        {
+            _propertyService = propertyService;
             _groupEditor = groupEditor;
+        }
         
-        public float DrawFloat(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0)
+        internal float DrawFloat<TProperty>(GUIContent label, TProperty property, FloatRange range, int indentLevel = 0)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
-            return property.floatValue;
+            return _propertyService.GetFloat(property);
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-                float propertyValue = property.floatValue;
                 
-                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                float propertyValue = _propertyService.GetFloat(property);
                 float newValue = Mathf.Clamp(EditorGUILayout.FloatField(label, propertyValue), range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
                 
                 if (EditorGUI.EndChangeCheck()) 
-                    property.floatValue = newValue;
+                    _propertyService.SetFloat(property, newValue);
             }
         }
 
-        public Vector2 DrawVector2(GUIContent label, SerializedProperty property, int indentLevel = 0)
+        internal Vector2 DrawVector2<TProperty>(GUIContent label, TProperty property, int indentLevel = 0)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
-            return property.vector2Value;
+            return _propertyService.GetVector2(property);
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
                 
-                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
-                Vector2 newValue = EditorGUILayout.Vector2Field(label, property.vector2Value);
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                Vector2 propertyValue = _propertyService.GetVector2(property);
+                Vector2 newValue = EditorGUILayout.Vector2Field(label, propertyValue);
                 EditorGUI.showMixedValue = false;
 
                 if (EditorGUI.EndChangeCheck())
-                    property.vector2Value = newValue;
-            }
-        }
-        
-        public Vector3 DrawVector3(GUIContent label, SerializedProperty property, int indentLevel = 0)
-        {
-            _groupEditor.DrawIndented(indentLevel, Draw);
-            return property.vector3Value;
-
-            void Draw()
-            {
-                EditorGUI.BeginChangeCheck();
-                
-                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
-                Vector3 newValue = EditorGUILayout.Vector3Field(label, property.vector3Value);
-                EditorGUI.showMixedValue = false;
-                
-                if (EditorGUI.EndChangeCheck())
-                    property.vector3Value = newValue;
+                    _propertyService.SetVector2(property, newValue);
             }
         }
         
-        public Vector4 DrawVector4(GUIContent label, SerializedProperty property, int indentLevel = 0)
+        internal Vector3 DrawVector3<TProperty>(GUIContent label, TProperty property, int indentLevel = 0)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
-            return property.vector4Value;
+            return _propertyService.GetVector3(property);
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
                 
-                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
-                Vector4 newValue = EditorGUILayout.Vector4Field(label, property.vector4Value);
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                Vector3 propertyValue = _propertyService.GetVector3(property);
+                Vector3 newValue = EditorGUILayout.Vector3Field(label, propertyValue);
+                EditorGUI.showMixedValue = false;
+                
+                if (EditorGUI.EndChangeCheck())
+                    _propertyService.SetVector3(property, newValue);
+            }
+        }
+        
+        internal Vector4 DrawVector4<TProperty>(GUIContent label, TProperty property, int indentLevel = 0)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return _propertyService.GetVector4(property);
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+                
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                Vector4 propertyValue = _propertyService.GetVector4(property);
+                Vector4 newValue = EditorGUILayout.Vector4Field(label, propertyValue);
                 EditorGUI.showMixedValue = false;
 
                 if (EditorGUI.EndChangeCheck())
-                    property.vector4Value = newValue;
+                    _propertyService.SetVector4(property, newValue);
             }
         }
-
-        public Color DrawColor(GUIContent label, SerializedProperty property, bool showAlpha = true, bool hdr = false, int indentLevel = 0)
+        
+        internal Vector4 DrawFloatFromVector4<TProperty>(GUIContent label, TProperty property, Vector4Param vector4Param, FloatRange range, int indentLevel = 0)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
-            return property.colorValue;
+            return _propertyService.GetVector4(property);
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+                
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                Vector4 propertyValue = _propertyService.GetVector4(property);
+                float val = propertyValue[(int)vector4Param];
+                float newValue = Mathf.Clamp(EditorGUILayout.FloatField(label, val), range.Min, range.Max);
+                EditorGUI.showMixedValue = false;
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    propertyValue[(int)vector4Param] = newValue;
+                    _propertyService.SetVector4(property, propertyValue);
+                }
+            }
+        }
+        
+        internal Vector4 DrawVector4Start<TProperty>(GUIContent label, TProperty property, int indentLevel = 0)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return _propertyService.GetVector4(property);
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
 
-                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
-                Color newValue = EditorGUILayout.ColorField(label, property.colorValue, true, showAlpha, hdr);
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                Vector4 propertyVector4Value = _propertyService.GetVector4(property);
+                Vector2 propertyValue = new(propertyVector4Value.x, propertyVector4Value.y);
+                Vector2 newValue = EditorGUILayout.Vector2Field(label, propertyValue);
                 EditorGUI.showMixedValue = false;
 
                 if (EditorGUI.EndChangeCheck())
-                    property.colorValue = newValue;
+                {
+                    Vector4 newVector4Value = new(newValue.x, newValue.y, propertyVector4Value.z, propertyVector4Value.w);
+                    _propertyService.SetVector4(property, newVector4Value);
+                }
+            }
+        }
+        
+        internal Vector4 DrawVector4End<TProperty>(GUIContent label, TProperty property, int indentLevel = 0)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return _propertyService.GetVector4(property);
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                Vector4 propertyVector4Value = _propertyService.GetVector4(property);
+                Vector2 propertyValue = new(propertyVector4Value.z, propertyVector4Value.w);
+                Vector2 newValue = EditorGUILayout.Vector2Field(label, propertyValue);
+                EditorGUI.showMixedValue = false;
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    Vector4 newVector4Value = new(propertyVector4Value.x, propertyVector4Value.y, newValue.x, newValue.y);
+                    _propertyService.SetVector4(property, newVector4Value);
+                }
+            }
+        }
+
+        internal Color DrawColor<TProperty>(GUIContent label, TProperty property, bool showAlpha = true, bool hdr = false, int indentLevel = 0)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return _propertyService.GetColor(property);
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                Color propertyValue = _propertyService.GetColor(property);
+                Color newValue = EditorGUILayout.ColorField(label, propertyValue, true, showAlpha, hdr);
+                EditorGUI.showMixedValue = false;
+
+                if (EditorGUI.EndChangeCheck())
+                    _propertyService.SetColor(property, newValue);
             }
         }
     }

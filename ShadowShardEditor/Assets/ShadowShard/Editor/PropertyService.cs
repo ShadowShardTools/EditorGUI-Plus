@@ -75,6 +75,29 @@ namespace ShadowShard.Editor
             }
         }
         
+        internal Vector2 GetVector2(object property)
+        {
+            return property switch
+            {
+                MaterialProperty matProperty => matProperty.vectorValue,
+                SerializedProperty serializedProperty => serializedProperty.vector3Value,
+                _ => default
+            };
+        }
+        
+        internal void SetVector2(object property, Vector2 newValue)
+        {
+            switch (property)
+            {
+                case MaterialProperty matProperty:
+                    matProperty.vectorValue = new Vector4(newValue.x, newValue.y, matProperty.vectorValue.z, matProperty.vectorValue.w);
+                    break;
+                case SerializedProperty serializedProperty:
+                    serializedProperty.vector3Value = newValue;
+                    break;
+            }
+        }
+        
         internal Vector3 GetVector3(object property)
         {
             return property switch
@@ -117,6 +140,29 @@ namespace ShadowShard.Editor
                     break;
                 case SerializedProperty serializedProperty:
                     serializedProperty.vector4Value = newValue;
+                    break;
+            }
+        }
+        
+        internal Vector4 GetColor(object property)
+        {
+            return property switch
+            {
+                MaterialProperty matProperty => matProperty.colorValue,
+                SerializedProperty serializedProperty => serializedProperty.colorValue,
+                _ => default
+            };
+        }
+        
+        internal void SetColor(object property, Vector4 newValue)
+        {
+            switch (property)
+            {
+                case MaterialProperty matProperty:
+                    matProperty.colorValue = newValue;
+                    break;
+                case SerializedProperty serializedProperty:
+                    serializedProperty.colorValue = newValue;
                     break;
             }
         }

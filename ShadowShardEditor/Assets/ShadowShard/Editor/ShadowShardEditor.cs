@@ -25,7 +25,7 @@ namespace ShadowShard.Editor
             _groupEditor = new GroupEditor();
             _sliderEditor = new SliderEditor(_propertyService, _groupEditor);
             _toggleEditor = new ToggleEditor(_propertyService, _groupEditor);
-            _vectorEditor = new VectorEditor(_groupEditor);
+            _vectorEditor = new VectorEditor(_propertyService, _groupEditor);
             _textureEditor = new TextureEditor(_groupEditor);
             _popupEditor = new PopupEditor(_groupEditor);
             _textEditor = new TextEditor(_groupEditor);
@@ -137,6 +137,21 @@ namespace ShadowShard.Editor
         
         public Vector4 DrawVector4(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
             _vectorEditor.DrawVector4(label, property, indentLevel);
+        
+        public Vector4 DrawFloatFromVector4(GUIContent label, SerializedProperty property, Vector4Param vector4Param, FloatRange range, int indentLevel = 0) =>
+            _vectorEditor.DrawFloatFromVector4(label, property, vector4Param, range, indentLevel);
+        
+        public Vector4 DrawNormalizedFloatFromVector4(GUIContent label, SerializedProperty property, Vector4Param vector4Param, int indentLevel = 0) =>
+            _vectorEditor.DrawFloatFromVector4(label, property, vector4Param, FloatRange.Normalized, indentLevel);
+        
+        public Vector4 DrawMinFloatFromVector4(GUIContent label, SerializedProperty property, Vector4Param vector4Param, float min = 0.0f, int indentLevel = 0) =>
+            _vectorEditor.DrawFloatFromVector4(label, property, vector4Param, FloatRange.ToMaxFrom(min), indentLevel);
+        
+        public Vector4 DrawVector4Start(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+            _vectorEditor.DrawVector4Start(label, property, indentLevel);
+        
+        public Vector4 DrawVector4End(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+            _vectorEditor.DrawVector4End(label, property, indentLevel);
         
         public Color DrawColor(GUIContent label, SerializedProperty property, bool showAlpha = true, bool hdr = false, int indentLevel = 0) =>
             _vectorEditor.DrawColor(label, property, showAlpha, hdr, indentLevel);

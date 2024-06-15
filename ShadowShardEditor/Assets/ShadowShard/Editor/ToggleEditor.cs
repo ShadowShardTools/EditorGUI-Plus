@@ -14,7 +14,7 @@ namespace ShadowShard.Editor
             _groupEditor = groupEditor;
         }
         
-        public bool DrawToggle<TProperty>(GUIContent label, TProperty property, int indentLevel = 0)
+        internal bool DrawToggle<TProperty>(GUIContent label, TProperty property, int indentLevel = 0)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetBool(property);
@@ -34,7 +34,7 @@ namespace ShadowShard.Editor
         }
         
         
-        public bool DrawShaderGlobalKeywordToggle<TProperty>(GUIContent label, TProperty property, string shaderGlobalKeyword, int indentLevel = 0)
+        internal bool DrawShaderGlobalKeywordToggle<TProperty>(GUIContent label, TProperty property, string shaderGlobalKeyword, int indentLevel = 0)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetBool(property);
