@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using ShadowShard.Editor.Range;
 using UnityEditor;
 using UnityEngine;
@@ -15,8 +14,8 @@ namespace ShadowShard.Editor
         private readonly VectorEditor _vectorEditor;
         private readonly TextureEditor _textureEditor;
         private readonly PopupEditor _popupEditor;
-        private readonly TextEditor _textEditor;
         private readonly ObjectEditor _objectEditor;
+        private readonly TextEditor _textEditor;
         
         public ShadowShardEditor()
         {
@@ -27,9 +26,9 @@ namespace ShadowShard.Editor
             _toggleEditor = new ToggleEditor(propertyService, _groupEditor);
             _vectorEditor = new VectorEditor(propertyService, _groupEditor);
             _textureEditor = new TextureEditor(propertyService, _groupEditor);
-            _popupEditor = new PopupEditor(_groupEditor);
-            _textEditor = new TextEditor(_groupEditor);
+            _popupEditor = new PopupEditor(propertyService, _groupEditor);
             _objectEditor = new ObjectEditor(_groupEditor);
+            _textEditor = new TextEditor(_groupEditor);
         }
         
         #region GroupEditorRegion
@@ -168,18 +167,30 @@ namespace ShadowShard.Editor
         #region PopupEditorRegion
         
         public TEnum DrawEnumPopup<TEnum>(SerializedProperty property, int indentLevel = 0) where TEnum : Enum =>
-            _popupEditor.DrawEnumPopup<TEnum>(property, indentLevel);
+            _popupEditor.DrawEnumPopup<TEnum, SerializedProperty>(property, indentLevel);
         
         public TEnum DrawEnumPopup<TEnum>(GUIContent label, SerializedProperty property, int indentLevel = 0) where TEnum : Enum =>
-            _popupEditor.DrawEnumPopup<TEnum>(label, property, indentLevel);
+            _popupEditor.DrawEnumPopup<TEnum, SerializedProperty>(label, property, indentLevel);
+        
+        public TEnum DrawBooleanPopup<TEnum>(SerializedProperty property, int indentLevel = 0) where TEnum : Enum =>
+            _popupEditor.DrawBooleanPopup<TEnum, SerializedProperty>(property, indentLevel);
+        
+        public TEnum DrawBooleanPopup<TEnum>(GUIContent label, SerializedProperty property, int indentLevel = 0) where TEnum : Enum =>
+            _popupEditor.DrawBooleanPopup<TEnum, SerializedProperty>(label, property, indentLevel);
+        
+        public TEnum DrawShaderGlobalKeywordBooleanPopup<TEnum>(SerializedProperty property, string shaderGlobalKeyword, int indentLevel = 0) where TEnum : Enum =>
+            _popupEditor.DrawShaderGlobalKeywordBooleanPopup<TEnum, SerializedProperty>(property, shaderGlobalKeyword, indentLevel);
+        
+        public TEnum DrawShaderGlobalKeywordBooleanPopup<TEnum>(GUIContent label, SerializedProperty property, string shaderGlobalKeyword, int indentLevel = 0) where TEnum : Enum =>
+            _popupEditor.DrawShaderGlobalKeywordBooleanPopup<TEnum, SerializedProperty>(label, property, shaderGlobalKeyword, indentLevel);
         
         public int DrawPopup(GUIContent label, SerializedProperty property, string[] displayedOptions, int indentLevel = 0) =>
             _popupEditor.DrawPopup(label, property, displayedOptions, indentLevel);
         
-        public bool DrawBooleanPopup(GUIContent label, SerializedProperty property, string[] displayedOptions, int indentLevel = 0) =>
+        public int DrawBooleanPopup(GUIContent label, SerializedProperty property, string[] displayedOptions, int indentLevel = 0) =>
             _popupEditor.DrawBooleanPopup(label, property, displayedOptions, indentLevel);
         
-        public bool DrawShaderGlobalKeywordBooleanPopup(GUIContent label, SerializedProperty property, 
+        public int DrawShaderGlobalKeywordBooleanPopup(GUIContent label, SerializedProperty property, 
             string[] displayedOptions, string shaderGlobalKeyword, int indentLevel = 0) =>
             _popupEditor.DrawShaderGlobalKeywordBooleanPopup(label, property, displayedOptions, shaderGlobalKeyword, indentLevel);
         

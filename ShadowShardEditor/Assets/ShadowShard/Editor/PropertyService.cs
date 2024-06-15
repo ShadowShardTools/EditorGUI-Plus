@@ -174,6 +174,29 @@ namespace ShadowShard.Editor
             }
         }
         
+        public int GetEnumIndex(object property)
+        {
+            return property switch
+            {
+                MaterialProperty matProperty => (int)matProperty.floatValue,
+                SerializedProperty serializedProperty => serializedProperty.enumValueIndex,
+                _ => default
+            };
+        }
+        
+        public void SetEnumIndex(object property, int value)
+        {
+            switch (property)
+            {
+                case MaterialProperty matProperty:
+                    matProperty.floatValue = value;
+                    break;
+                case SerializedProperty serializedProperty:
+                    serializedProperty.enumValueIndex = value;
+                    break;
+            }
+        }
+        
         internal Texture GetTexture(object property)
         {
             return property switch
