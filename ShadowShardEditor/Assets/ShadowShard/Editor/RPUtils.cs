@@ -7,7 +7,7 @@ namespace ShadowShard.Editor
     {
         public static string ConvertVector4ToGuid(Vector4 vector)
         {
-            var bytes = new byte[16];
+            byte[] bytes = new byte[16];
 
             BitConverter.GetBytes(vector.x).CopyTo(bytes, 0);
             BitConverter.GetBytes(vector.y).CopyTo(bytes, 4);
@@ -19,25 +19,25 @@ namespace ShadowShard.Editor
     
         public static Vector4 ConvertGuidToVector4(string guid)
         {
-            var guidBytes = Guid.ParseExact(guid, "N").ToByteArray(); // Parse the GUID without hyphens
+            byte[] guidBytes = Guid.ParseExact(guid, "N").ToByteArray(); // Parse the GUID without hyphens
 
-            var x = BitConverter.ToSingle(guidBytes, 0);
-            var y = BitConverter.ToSingle(guidBytes, 4);
-            var z = BitConverter.ToSingle(guidBytes, 8);
-            var w = BitConverter.ToSingle(guidBytes, 12);
+            float x = BitConverter.ToSingle(guidBytes, 0);
+            float y = BitConverter.ToSingle(guidBytes, 4);
+            float z = BitConverter.ToSingle(guidBytes, 8);
+            float w = BitConverter.ToSingle(guidBytes, 12);
 
             return new Vector4(x, y, z, w);
         }
         
         public static float AsFloat(uint val)
         {
-            var bytes = BitConverter.GetBytes(val);
+            byte[] bytes = BitConverter.GetBytes(val);
             return BitConverter.ToSingle(bytes, 0);
         }
 
         public static float AsFloat(int val)
         {
-            var bytes = BitConverter.GetBytes(val);
+            byte[] bytes = BitConverter.GetBytes(val);
             return BitConverter.ToSingle(bytes, 0);
         }
         

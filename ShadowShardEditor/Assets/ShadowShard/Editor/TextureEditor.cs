@@ -12,14 +12,14 @@ namespace ShadowShard.Editor
         private static readonly GUIContent BumpScaleNotSupported =
             EditorGUIUtility.TrTextContent("Bump scale is not supported on mobile platforms");
         
-        private readonly EditorUtils _editorUtils;
+        private readonly GroupEditor _groupEditor;
 
-        public TextureEditor(EditorUtils editorUtils) => 
-            _editorUtils = editorUtils;
+        public TextureEditor(GroupEditor groupEditor) => 
+            _groupEditor = groupEditor;
 
         public Texture2D DrawTexture(GUIContent label, SerializedProperty property, int indentLevel = 0)
         {
-            _editorUtils.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, () =>
             {
                 EditorGUI.BeginChangeCheck();
                 
@@ -45,9 +45,9 @@ namespace ShadowShard.Editor
             
             Texture2D propertyValue = (Texture2D)property.objectReferenceValue;
             
-            _editorUtils.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, () =>
             {
-                EditorGUI.showMixedValue = _editorUtils.HasMixedValue(property);
+                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
                 EditorGUI.DrawTextureTransparent(thumbnailRect, propertyValue, ScaleMode.ScaleToFit);
                 EditorGUI.PropertyField(thumbnailRect, property, label);
                 EditorGUI.showMixedValue = false;
@@ -87,7 +87,7 @@ namespace ShadowShard.Editor
                 return;
             
             bool incorrectScale = Math.Abs(normalMapScale.floatValue - 1.0f) > 0.001f;
-            if (incorrectScale && _editorUtils.IsMobilePlatform())
+            if (incorrectScale && IsMobilePlatform())
                 FixNormalScale(materialEditor, normalMapScale);
         }
 
@@ -109,5 +109,8 @@ namespace ShadowShard.Editor
             
             materialEditor.TextureScaleOffsetProperty(textureProperty);
         }
+        
+        private bool IsMobilePlatform() => 
+            UnityEditorInternal.InternalEditorUtility.IsMobilePlatform(EditorUserBuildSettings.activeBuildTarget);
     }
 }

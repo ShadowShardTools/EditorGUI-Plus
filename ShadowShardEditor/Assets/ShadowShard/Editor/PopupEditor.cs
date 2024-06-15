@@ -6,12 +6,12 @@ namespace ShadowShard.Editor
 {
     public class PopupEditor
     {
-        private readonly EditorUtils _editorUtils;
+        private readonly GroupEditor _groupEditor;
 
         private const string BooleanDisplayedOptionsError = "The displayedOptions array should contain exactly two options.";
 
-        public PopupEditor(EditorUtils editorUtils) =>
-            _editorUtils = editorUtils;
+        public PopupEditor(GroupEditor groupEditor) =>
+            _groupEditor = groupEditor;
         
         public TEnum DrawEnumPopup<TEnum>(SerializedProperty property, int indentLevel = 0)
             where TEnum : Enum
@@ -40,7 +40,7 @@ namespace ShadowShard.Editor
         
         public int DrawPopup(GUIContent label, SerializedProperty property, string[] displayedOptions, int indentLevel = 0)
         {
-            _editorUtils.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, () =>
             {
                 EditorGUI.BeginChangeCheck();
 
@@ -60,7 +60,7 @@ namespace ShadowShard.Editor
             if (!IsDisplayedBooleanErrorMessage(displayedOptions)) 
                 return false;
             
-            _editorUtils.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, () =>
             {
                 EditorGUI.BeginChangeCheck();
             
@@ -81,7 +81,7 @@ namespace ShadowShard.Editor
             if (!IsDisplayedBooleanErrorMessage(displayedOptions)) 
                 return false;
             
-            _editorUtils.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, () =>
             {
                 EditorGUI.BeginChangeCheck();
             

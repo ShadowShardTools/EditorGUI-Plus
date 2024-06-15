@@ -5,14 +5,14 @@ namespace ShadowShard.Editor
 {
     public class ToggleEditor
     {
-        private readonly EditorUtils _editorUtils;
+        private readonly GroupEditor _groupEditor;
 
-        public ToggleEditor(EditorUtils editorUtils) =>
-            _editorUtils = editorUtils;
+        public ToggleEditor(GroupEditor groupEditor) =>
+            _groupEditor = groupEditor;
         
         public bool DrawToggle(GUIContent label, SerializedProperty property, int indentLevel = 0)
         {
-            _editorUtils.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, () =>
             {
                 EditorGUI.BeginChangeCheck();
                 
@@ -30,7 +30,7 @@ namespace ShadowShard.Editor
         
         public bool DrawShaderGlobalKeywordToggle(GUIContent label, SerializedProperty property, string shaderGlobalKeyword, int indentLevel = 0)
         {
-            _editorUtils.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, () =>
             {
                 EditorGUI.BeginChangeCheck();
                 
