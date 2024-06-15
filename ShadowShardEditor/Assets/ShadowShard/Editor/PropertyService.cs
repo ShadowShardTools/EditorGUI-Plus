@@ -25,6 +25,7 @@ namespace ShadowShard.Editor
                     break;
                 case SerializedProperty serializedProperty:
                     serializedProperty.floatValue = newValue;
+                    serializedProperty.serializedObject.ApplyModifiedProperties();
                     break;
             }
         }
@@ -48,6 +49,7 @@ namespace ShadowShard.Editor
                     break;
                 case SerializedProperty serializedProperty:
                     serializedProperty.intValue = newValue;
+                    serializedProperty.serializedObject.ApplyModifiedProperties();
                     break;
             }
         }
@@ -71,6 +73,7 @@ namespace ShadowShard.Editor
                     break;
                 case SerializedProperty serializedProperty:
                     serializedProperty.boolValue = newValue;
+                    serializedProperty.serializedObject.ApplyModifiedProperties();
                     break;
             }
         }
@@ -94,6 +97,7 @@ namespace ShadowShard.Editor
                     break;
                 case SerializedProperty serializedProperty:
                     serializedProperty.vector3Value = newValue;
+                    serializedProperty.serializedObject.ApplyModifiedProperties();
                     break;
             }
         }
@@ -117,6 +121,7 @@ namespace ShadowShard.Editor
                     break;
                 case SerializedProperty serializedProperty:
                     serializedProperty.vector3Value = newValue;
+                    serializedProperty.serializedObject.ApplyModifiedProperties();
                     break;
             }
         }
@@ -140,6 +145,7 @@ namespace ShadowShard.Editor
                     break;
                 case SerializedProperty serializedProperty:
                     serializedProperty.vector4Value = newValue;
+                    serializedProperty.serializedObject.ApplyModifiedProperties();
                     break;
             }
         }
@@ -163,6 +169,31 @@ namespace ShadowShard.Editor
                     break;
                 case SerializedProperty serializedProperty:
                     serializedProperty.colorValue = newValue;
+                    serializedProperty.serializedObject.ApplyModifiedProperties();
+                    break;
+            }
+        }
+        
+        internal Texture GetTexture(object property)
+        {
+            return property switch
+            {
+                MaterialProperty matProperty => matProperty.textureValue,
+                SerializedProperty serializedProperty => (Texture)serializedProperty.objectReferenceValue,
+                _ => default
+            };
+        }
+        
+        internal void SetTexture(object property, Texture newValue)
+        {
+            switch (property)
+            {
+                case MaterialProperty matProperty:
+                    matProperty.textureValue = newValue;
+                    break;
+                case SerializedProperty serializedProperty:
+                    serializedProperty.objectReferenceValue = newValue;
+                    serializedProperty.serializedObject.ApplyModifiedProperties();
                     break;
             }
         }

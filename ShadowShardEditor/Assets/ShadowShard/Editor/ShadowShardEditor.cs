@@ -9,7 +9,6 @@ namespace ShadowShard.Editor
 {
     public class ShadowShardEditor
     {
-        private readonly PropertyService _propertyService;
         private readonly GroupEditor _groupEditor;
         private readonly SliderEditor _sliderEditor;
         private readonly ToggleEditor _toggleEditor;
@@ -21,12 +20,13 @@ namespace ShadowShard.Editor
         
         public ShadowShardEditor()
         {
-            _propertyService = new PropertyService();
+            PropertyService propertyService = new();
+            
             _groupEditor = new GroupEditor();
-            _sliderEditor = new SliderEditor(_propertyService, _groupEditor);
-            _toggleEditor = new ToggleEditor(_propertyService, _groupEditor);
-            _vectorEditor = new VectorEditor(_propertyService, _groupEditor);
-            _textureEditor = new TextureEditor(_groupEditor);
+            _sliderEditor = new SliderEditor(propertyService, _groupEditor);
+            _toggleEditor = new ToggleEditor(propertyService, _groupEditor);
+            _vectorEditor = new VectorEditor(propertyService, _groupEditor);
+            _textureEditor = new TextureEditor(propertyService, _groupEditor);
             _popupEditor = new PopupEditor(_groupEditor);
             _textEditor = new TextEditor(_groupEditor);
             _objectEditor = new ObjectEditor(_groupEditor);
@@ -160,11 +160,8 @@ namespace ShadowShard.Editor
         
         #region TextureEditorRegion
 
-        public Texture2D DrawTexture(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+        public Texture DrawTexture(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
             _textureEditor.DrawTexture(label, property, indentLevel);
-        
-        public Texture2D DrawSmallTextureField(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            _textureEditor.DrawSmallTextureField(label, property, indentLevel);
         
         #endregion
         
