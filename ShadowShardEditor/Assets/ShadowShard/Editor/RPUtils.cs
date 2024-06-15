@@ -1,11 +1,9 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ShadowShard.Editor
 {
     public static class RPUtils
     {
-        
         public static void SetGlobalKeyword(string keyword, bool state)
         {
             if (state)

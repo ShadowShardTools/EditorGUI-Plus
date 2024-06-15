@@ -3,14 +3,14 @@ using UnityEngine;
 
 namespace ShadowShard.Editor
 {
-    public class TextEditor
+    internal class TextEditor
     {
         private readonly GroupEditor _groupEditor;
 
-        public TextEditor(GroupEditor groupEditor) =>
+        internal TextEditor(GroupEditor groupEditor) =>
             _groupEditor = groupEditor;
         
-        public string DrawTextField(GUIContent label, SerializedProperty property, int indentLevel = 0)
+        internal string DrawTextField(GUIContent label, SerializedProperty property, int indentLevel = 0)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return property.stringValue;
@@ -29,7 +29,7 @@ namespace ShadowShard.Editor
             }
         }
         
-        public string DrawFolderPathField(GUIContent label, SerializedProperty property, string defaultDirectory, int indentLevel = 0)
+        internal string DrawFolderPathField(GUIContent label, SerializedProperty property, string defaultDirectory, int indentLevel = 0)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return property.stringValue;

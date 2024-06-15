@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using ShadowShard.Editor.MaterialEditor;
+using ShadowShard.Editor.MaterialEditor.AssetObject;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace ShadowShard.Editor
 {
-    public class ObjectEditor
+    internal class ObjectEditor
     {
         private readonly GroupEditor _groupEditor;
 
-        public ObjectEditor(GroupEditor groupEditor) =>
+        internal ObjectEditor(GroupEditor groupEditor) =>
             _groupEditor = groupEditor;
         
-        public void DrawObjectField<TObject>(GUIContent label, SerializedProperty property, int indentLevel = 0,
+        internal void DrawObjectField<TObject>(GUIContent label, SerializedProperty property, int indentLevel = 0,
             bool allowSceneObjects = true, Action<TObject> onChangedCallback = null)
             where TObject : Object
         {
@@ -39,7 +40,7 @@ namespace ShadowShard.Editor
             }
         }
         
-        public void DrawObjectField(
+        internal void DrawObjectField(
             GUIContent label, 
             Material material, 
             UnityEditor.MaterialEditor materialEditor,

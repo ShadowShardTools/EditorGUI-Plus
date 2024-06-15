@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ShadowShard.Editor.MaterialEditor
+namespace ShadowShard.Editor.MaterialEditor.AssetObject
 {
     public interface IMaterialAssetObject
     {

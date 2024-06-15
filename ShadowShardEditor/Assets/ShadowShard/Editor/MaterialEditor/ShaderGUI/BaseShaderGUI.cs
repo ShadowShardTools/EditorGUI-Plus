@@ -9,7 +9,7 @@ namespace ShadowShard.Editor.MaterialEditor.ShaderGUI
 {
     public class BaseShaderGUI : UnityEditor.ShaderGUI
     {
-        private readonly ShadowShardEditor _shadowShardEditor = new();
+        private readonly ShadowShardMaterialEditor _shadowShardMaterialEditor = new();
         private UnityEditor.MaterialEditor _materialEditor;
         
         protected bool FirstTimeApply = true;
@@ -38,6 +38,7 @@ namespace ShadowShard.Editor.MaterialEditor.ShaderGUI
                 throw new ArgumentNullException(nameof(materialEditorIn));
             
             _materialEditor = materialEditorIn;
+            _shadowShardMaterialEditor.InitializeMaterialEditor(_materialEditor);
             Material material = _materialEditor != null ? _materialEditor.target as Material : null;
             
             if (material == null)
@@ -75,7 +76,7 @@ namespace ShadowShard.Editor.MaterialEditor.ShaderGUI
 
             using HeaderScope header = new(section, _materialEditor);
             if (header.Expanded)
-                section.DrawProperties(_shadowShardEditor);
+                section.DrawProperties(_shadowShardMaterialEditor);
         }
         
         protected virtual void SetKeywords(Material material)

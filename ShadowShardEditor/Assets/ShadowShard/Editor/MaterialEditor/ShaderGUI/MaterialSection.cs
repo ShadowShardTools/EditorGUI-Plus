@@ -18,7 +18,7 @@ namespace ShadowShard.Editor.MaterialEditor.ShaderGUI
         }
         
         public abstract void FindProperties(MaterialProperty[] properties);
-        public abstract void DrawProperties(ShadowShardEditor materialEditorWrapper);
+        public abstract void DrawProperties(ShadowShardMaterialEditor materialMaterialEditorWrapper);
         public abstract void SetKeywords(Material material);
     }
 }

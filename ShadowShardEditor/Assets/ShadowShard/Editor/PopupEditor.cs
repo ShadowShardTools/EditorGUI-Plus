@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ShadowShard.Editor
 {
-    public class PopupEditor
+    internal class PopupEditor
     {
         private const string BooleanDisplayedOptionsError = "The displayedOptions array should contain exactly two options.";
 

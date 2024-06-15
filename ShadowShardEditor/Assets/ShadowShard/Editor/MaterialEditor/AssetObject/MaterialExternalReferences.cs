@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace ShadowShard.Editor.MaterialEditor
+namespace ShadowShard.Editor.MaterialEditor.AssetObject
 {
     public class MaterialExternalReferences : ScriptableObject
     {

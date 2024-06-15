@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace ShadowShard.Editor.MaterialEditor
+namespace ShadowShard.Editor.MaterialEditor.AssetObject
 {
     public class MaterialAssetObject : ScriptableObject, IMaterialAssetObject
     {
