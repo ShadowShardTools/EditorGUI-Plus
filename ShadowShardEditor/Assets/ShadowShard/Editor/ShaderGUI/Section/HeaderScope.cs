@@ -13,13 +13,12 @@ namespace ShadowShard.Editor.ShaderGUI.Section
         private int oldIndentLevel;
         #endif
 
-        public HeaderScope(ISection section, UnityEditor.MaterialEditor materialEditor,
-            bool spaceAtEnd = true, bool subHeader = false)
+        public HeaderScope(ISection section, bool spaceAtEnd = true, bool subHeader = false)
         {
             if (section.Label == null)
                 throw new ArgumentNullException(nameof(section.Label));
 
-            var beforeExpanded = section.IsExpanded;
+            bool beforeExpanded = section.IsExpanded;
 
             _spaceAtEnd = spaceAtEnd;
             #if !UNITY_2020_1_OR_NEWER
@@ -31,7 +30,7 @@ namespace ShadowShard.Editor.ShaderGUI.Section
                 CoreEditorUtils.DrawSplitter();
             GUILayout.BeginVertical();
 
-            var saveChangeState = GUI.changed;
+            bool saveChangeState = GUI.changed;
             Expanded = subHeader
                 ? CoreEditorUtils.DrawSubHeaderFoldout(section.Label, beforeExpanded, false)
                 : CoreEditorUtils.DrawHeaderFoldout(section.Label, beforeExpanded);

@@ -40,7 +40,10 @@ namespace ShadowShard.Editor
         
         public int DrawPopup(GUIContent label, SerializedProperty property, string[] displayedOptions, int indentLevel = 0)
         {
-            _groupEditor.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return property.enumValueIndex;
+
+            void Draw()
             {
                 EditorGUI.BeginChangeCheck();
 
@@ -50,9 +53,7 @@ namespace ShadowShard.Editor
 
                 if (EditorGUI.EndChangeCheck())
                     property.enumValueIndex = newValue;
-            });
-            
-            return property.enumValueIndex;
+            }
         }
         
         public bool DrawBooleanPopup(GUIContent label, SerializedProperty property, string[] displayedOptions, int indentLevel = 0)
@@ -60,7 +61,10 @@ namespace ShadowShard.Editor
             if (!IsDisplayedBooleanErrorMessage(displayedOptions)) 
                 return false;
             
-            _groupEditor.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return property.enumValueIndex > 0;
+            
+            void Draw()
             {
                 EditorGUI.BeginChangeCheck();
             
@@ -70,9 +74,7 @@ namespace ShadowShard.Editor
 
                 if (EditorGUI.EndChangeCheck())
                     property.enumValueIndex = newValue;
-            });
-            
-            return property.enumValueIndex > 0;
+            }
         }
         
         public bool DrawShaderGlobalKeywordBooleanPopup(GUIContent label, SerializedProperty property, 
@@ -81,7 +83,10 @@ namespace ShadowShard.Editor
             if (!IsDisplayedBooleanErrorMessage(displayedOptions)) 
                 return false;
             
-            _groupEditor.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return property.enumValueIndex > 0;
+            
+            void Draw()
             {
                 EditorGUI.BeginChangeCheck();
             
@@ -94,9 +99,7 @@ namespace ShadowShard.Editor
                     property.enumValueIndex = newValue;
                     RPUtils.SetGlobalKeyword(shaderGlobalKeyword, newValue > 0);
                 }
-            });
-
-            return property.enumValueIndex > 0;
+            }
         }
 
         private bool IsDisplayedBooleanErrorMessage(string[] displayedOptions)

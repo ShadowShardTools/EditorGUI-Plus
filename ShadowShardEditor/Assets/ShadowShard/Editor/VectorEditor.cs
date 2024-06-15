@@ -13,7 +13,10 @@ namespace ShadowShard.Editor
         
         public float DrawFloat(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0)
         {
-            _groupEditor.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return property.floatValue;
+
+            void Draw()
             {
                 EditorGUI.BeginChangeCheck();
                 float propertyValue = property.floatValue;
@@ -24,14 +27,15 @@ namespace ShadowShard.Editor
                 
                 if (EditorGUI.EndChangeCheck()) 
                     property.floatValue = newValue;
-            });
-            
-            return property.floatValue;
+            }
         }
 
         public Vector2 DrawVector2(GUIContent label, SerializedProperty property, int indentLevel = 0)
         {
-            _groupEditor.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return property.vector2Value;
+
+            void Draw()
             {
                 EditorGUI.BeginChangeCheck();
                 
@@ -41,14 +45,15 @@ namespace ShadowShard.Editor
 
                 if (EditorGUI.EndChangeCheck())
                     property.vector2Value = newValue;
-            });
-
-            return property.vector2Value;
+            }
         }
         
         public Vector3 DrawVector3(GUIContent label, SerializedProperty property, int indentLevel = 0)
         {
-            _groupEditor.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return property.vector3Value;
+
+            void Draw()
             {
                 EditorGUI.BeginChangeCheck();
                 
@@ -58,14 +63,15 @@ namespace ShadowShard.Editor
                 
                 if (EditorGUI.EndChangeCheck())
                     property.vector3Value = newValue;
-            });
-
-            return property.vector3Value;
+            }
         }
         
         public Vector4 DrawVector4(GUIContent label, SerializedProperty property, int indentLevel = 0)
         {
-            _groupEditor.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return property.vector4Value;
+
+            void Draw()
             {
                 EditorGUI.BeginChangeCheck();
                 
@@ -75,14 +81,15 @@ namespace ShadowShard.Editor
 
                 if (EditorGUI.EndChangeCheck())
                     property.vector4Value = newValue;
-            });
-
-            return property.vector4Value;
+            }
         }
 
         public Color DrawColor(GUIContent label, SerializedProperty property, bool showAlpha = true, bool hdr = false, int indentLevel = 0)
         {
-            _groupEditor.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return property.colorValue;
+
+            void Draw()
             {
                 EditorGUI.BeginChangeCheck();
 
@@ -92,9 +99,7 @@ namespace ShadowShard.Editor
 
                 if (EditorGUI.EndChangeCheck())
                     property.colorValue = newValue;
-            });
-
-            return property.colorValue;
+            }
         }
         
         //TODO: move to MaterialEditor

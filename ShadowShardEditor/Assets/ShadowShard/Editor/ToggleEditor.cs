@@ -12,7 +12,10 @@ namespace ShadowShard.Editor
         
         public bool DrawToggle(GUIContent label, SerializedProperty property, int indentLevel = 0)
         {
-            _groupEditor.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return property.boolValue;
+
+            void Draw()
             {
                 EditorGUI.BeginChangeCheck();
                 
@@ -22,15 +25,16 @@ namespace ShadowShard.Editor
 
                 if (EditorGUI.EndChangeCheck())
                     property.boolValue = newValue;
-            });
-
-            return property.boolValue;
+            }
         }
         
         
         public bool DrawShaderGlobalKeywordToggle(GUIContent label, SerializedProperty property, string shaderGlobalKeyword, int indentLevel = 0)
         {
-            _groupEditor.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return property.boolValue;
+
+            void Draw()
             {
                 EditorGUI.BeginChangeCheck();
                 
@@ -43,9 +47,7 @@ namespace ShadowShard.Editor
                     property.boolValue = newValue;
                     RPUtils.SetGlobalKeyword(shaderGlobalKeyword, newValue);
                 }
-            });
-
-            return property.boolValue;
+            }
         }
     }
 }
