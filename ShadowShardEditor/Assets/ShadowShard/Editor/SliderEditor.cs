@@ -1,53 +1,60 @@
-﻿using ShadowShard.Editor.Range;
+﻿using ShadowShard.Editor.Enums;
+using ShadowShard.Editor.Range;
 using UnityEditor;
 using UnityEngine;
 
 namespace ShadowShard.Editor
 {
-    public class SliderEditor
+    internal class SliderEditor
     {
+        private readonly PropertyService _propertyService;
         private readonly GroupEditor _groupEditor;
 
-        public SliderEditor(GroupEditor groupEditor) =>
+        internal SliderEditor(PropertyService propertyService, GroupEditor groupEditor)
+        {
+            _propertyService = propertyService;
             _groupEditor = groupEditor;
-        
-        public float DrawSlider(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0)
+        }
+
+        internal float DrawSlider<TProperty>(GUIContent label, TProperty property, FloatRange range, int indentLevel = 0)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
-            return property.floatValue;
+            return _propertyService.GetFloat(property);
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
                 
-                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
-                float newValue = EditorGUILayout.Slider(label, property.floatValue, range.Min, range.Max);
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                float propertyValue = _propertyService.GetFloat(property);
+                float newValue = EditorGUILayout.Slider(label, propertyValue, range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
 
                 if (EditorGUI.EndChangeCheck())
-                    property.floatValue = newValue;
+                    _propertyService.SetFloat(property, newValue);
             }
         }
         
-        public int DrawIntSlider(GUIContent label, SerializedProperty property, IntRange range, int indentLevel = 0)
+        internal int DrawIntSlider<TProperty>(GUIContent label, TProperty property, IntRange range, int indentLevel = 0)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
-            return property.intValue;
+            return _propertyService.GetInt(property);
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
                 
-                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
-                int newValue = EditorGUILayout.IntSlider(label, property.intValue, range.Min, range.Max);
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                int propertyValue = _propertyService.GetInt(property);
+                int newValue = EditorGUILayout.IntSlider(label, propertyValue, range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
                 
                 if (EditorGUI.EndChangeCheck())
-                    property.intValue = newValue;
+                    _propertyService.SetInt(property, newValue);
             }
         }
 
-        public void DrawFromVector3ParamSlider(GUIContent label, SerializedProperty property, Vector3Param vectorParam, FloatRange range, int indentLevel = 0)
+        internal void DrawFromVector3ParamSlider<TProperty>(GUIContent label, TProperty property, Vector3Param vectorParam, FloatRange range, int indentLevel = 0)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return;
@@ -56,8 +63,8 @@ namespace ShadowShard.Editor
             {
                 EditorGUI.BeginChangeCheck();
 
-                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
-                Vector3 propertyValue = property.vector3Value;
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                Vector3 propertyValue = _propertyService.GetVector3(property);
                 float channelValue = propertyValue[(int)vectorParam];
                 float newValue = EditorGUILayout.Slider(label, channelValue, range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
@@ -65,86 +72,83 @@ namespace ShadowShard.Editor
                 if(EditorGUI.EndChangeCheck())
                 {
                     propertyValue[(int)vectorParam] = newValue;
-                    property.vector3Value = propertyValue;
+                    _propertyService.SetVector3(property, propertyValue);
                 }
             }
         }
         
-        public void DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, SerializedProperty property, FloatRange range, int indentLevel = 0)
+        internal void DrawVector3Sliders<TProperty>(GUIContent labelX, GUIContent labelY, GUIContent labelZ, TProperty property, FloatRange range, int indentLevel = 0)
         {
             DrawFromVector3ParamSlider(labelX, property, Vector3Param.X, range, indentLevel);
             DrawFromVector3ParamSlider(labelY, property, Vector3Param.Y, range, indentLevel);
             DrawFromVector3ParamSlider(labelZ, property, Vector3Param.Z, range, indentLevel);
         }
         
-        public FloatRange DrawMinMaxSlider(GUIContent label, SerializedProperty minProperty, SerializedProperty maxProperty, FloatRange range, int indentLevel = 0)
+        internal FloatRange DrawMinMaxSlider<TProperty>(GUIContent label, TProperty minProperty, TProperty maxProperty, FloatRange range, int indentLevel = 0)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
-            return new FloatRange(minProperty.floatValue, maxProperty.floatValue);
+            return new FloatRange(_propertyService.GetFloat(minProperty), _propertyService.GetFloat(maxProperty));
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-                float minValue = minProperty.floatValue;
-                float maxValue = maxProperty.floatValue;
+                float minValue = _propertyService.GetFloat(minProperty);
+                float maxValue = _propertyService.GetFloat(maxProperty);
                 
-                EditorGUI.showMixedValue = minProperty.hasMultipleDifferentValues || maxProperty.hasMultipleDifferentValues;
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(minProperty) || _propertyService.HasMixedValue(maxProperty);
                 EditorGUILayout.MinMaxSlider(label, ref minValue, ref maxValue, range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
                 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    minProperty.floatValue = minValue;
-                    maxProperty.floatValue = maxValue;
+                    _propertyService.SetFloat(minProperty, minValue);
+                    _propertyService.SetFloat(maxProperty, maxValue);
                 }
             }
         }
         
-        //TODO: move to MaterialEditor
-        public FloatRange DrawMinMaxVector4StartSlider(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0)
+        internal FloatRange DrawMinMaxVector4StartSlider<TProperty>(GUIContent label, TProperty property, FloatRange range, int indentLevel = 0)
         {
-            _groupEditor.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return new FloatRange(_propertyService.GetVector4(property).x, _propertyService.GetVector4(property).y);
+
+            void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-                Vector4 propertyValue = property.vector4Value;
+                Vector4 propertyValue = _propertyService.GetVector4(property);
                 
-                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
                 EditorGUILayout.MinMaxSlider(label, ref propertyValue.x, ref propertyValue.y, range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
                 
-                if (EditorGUI.EndChangeCheck())
-                {
-                    property.vector4Value = propertyValue;
-                }
-            });
-
-            return new FloatRange(property.vector4Value.x, property.vector4Value.y);
+                if (EditorGUI.EndChangeCheck()) 
+                    _propertyService.SetVector4(property, propertyValue);
+            }
         }
         
-        public FloatRange DrawMinMaxVector4StartSlider(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+        internal FloatRange DrawMinMaxVector4StartSlider<TProperty>(GUIContent label, TProperty property, int indentLevel = 0) =>
             DrawMinMaxVector4StartSlider(label, property, FloatRange.Normalized, indentLevel);
 
-        public FloatRange DrawMinMaxVector4EndSlider(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0)
+        internal FloatRange DrawMinMaxVector4EndSlider<TProperty>(GUIContent label, TProperty property, FloatRange range, int indentLevel = 0)
         {
-            _groupEditor.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return new FloatRange(_propertyService.GetVector4(property).z, _propertyService.GetVector4(property).w);
+
+            void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-                Vector4 propertyValue = property.vector4Value;
+                Vector4 propertyValue = _propertyService.GetVector4(property);
                 
-                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
                 EditorGUILayout.MinMaxSlider(label, ref propertyValue.z, ref propertyValue.w, range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
                 
-                if (EditorGUI.EndChangeCheck())
-                {
-                    property.vector4Value = propertyValue;
-                }
-            });
-
-            return new FloatRange(property.vector4Value.x, property.vector4Value.y);
+                if (EditorGUI.EndChangeCheck()) 
+                    _propertyService.SetVector4(property, propertyValue);
+            }
         }
         
-        public FloatRange DrawMinMaxVector4EndSlider(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+        internal FloatRange DrawMinMaxVector4EndSlider<TProperty>(GUIContent label, TProperty property, int indentLevel = 0) =>
             DrawMinMaxVector4EndSlider(label, property, FloatRange.Normalized, indentLevel);
     }
 }

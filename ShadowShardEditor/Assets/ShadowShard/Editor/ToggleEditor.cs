@@ -1,51 +1,58 @@
-﻿using UnityEditor;
+﻿using ShadowShard.Editor.MaterialEditor;
+using UnityEditor;
 using UnityEngine;
 
 namespace ShadowShard.Editor
 {
-    public class ToggleEditor
+    internal class ToggleEditor
     {
+        private readonly PropertyService _propertyService;
         private readonly GroupEditor _groupEditor;
 
-        public ToggleEditor(GroupEditor groupEditor) =>
+        internal ToggleEditor(PropertyService propertyService, GroupEditor groupEditor)
+        {
+            _propertyService = propertyService;
             _groupEditor = groupEditor;
+        }
         
-        public bool DrawToggle(GUIContent label, SerializedProperty property, int indentLevel = 0)
+        internal bool DrawToggle<TProperty>(GUIContent label, TProperty property, int indentLevel = 0)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
-            return property.boolValue;
+            return _propertyService.GetBool(property);
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
                 
-                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
-                bool newValue = EditorGUILayout.Toggle(label, property.boolValue);
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                bool propertyValue = _propertyService.GetBool(property);
+                bool newValue = EditorGUILayout.Toggle(label, propertyValue);
                 EditorGUI.showMixedValue = false;
 
                 if (EditorGUI.EndChangeCheck())
-                    property.boolValue = newValue;
+                    _propertyService.SetBool(property, newValue);
             }
         }
         
         
-        public bool DrawShaderGlobalKeywordToggle(GUIContent label, SerializedProperty property, string shaderGlobalKeyword, int indentLevel = 0)
+        internal bool DrawShaderGlobalKeywordToggle<TProperty>(GUIContent label, TProperty property, string shaderGlobalKeyword, int indentLevel = 0)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
-            return property.boolValue;
+            return _propertyService.GetBool(property);
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
                 
-                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
-                bool newValue = EditorGUILayout.Toggle(label, property.boolValue);
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                bool propertyValue = _propertyService.GetBool(property);
+                bool newValue = EditorGUILayout.Toggle(label, propertyValue);
                 EditorGUI.showMixedValue = false;
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    property.boolValue = newValue;
-                    RPUtils.SetGlobalKeyword(shaderGlobalKeyword, newValue);
+                    _propertyService.SetBool(property, newValue);
+                    GlobalKeywordsService.SetGlobalKeyword(shaderGlobalKeyword, newValue);
                 }
             }
         }

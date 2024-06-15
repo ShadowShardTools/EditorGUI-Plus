@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 
-namespace ShadowShard.Editor.ShaderGUI
+namespace ShadowShard.Editor.MaterialEditor.ShaderGUI
 {
     public static class PropertyFinder
     {
@@ -15,11 +15,10 @@ namespace ShadowShard.Editor.ShaderGUI
 
         private static MaterialProperty FindProperty(string propertyName, IReadOnlyCollection<MaterialProperty> properties, bool propertyIsMandatory)
         {
-            var property = properties.FirstOrDefault(prop => prop != null && prop.name == propertyName);
+            MaterialProperty property = properties.FirstOrDefault(prop => prop != null && prop.name == propertyName);
             if (property == null && propertyIsMandatory)
-            {
                 throw new ArgumentException($"Could not find MaterialProperty: '{propertyName}', Num properties: {properties.Count}");
-            }
+            
             return property;
         }
     }

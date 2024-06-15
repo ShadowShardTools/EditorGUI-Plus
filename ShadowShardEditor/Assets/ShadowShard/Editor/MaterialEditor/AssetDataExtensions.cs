@@ -1,11 +1,11 @@
 ﻿using System;
 using UnityEngine;
 
-namespace ShadowShard.Editor
+namespace ShadowShard.Editor.MaterialEditor
 {
-    public static class RPUtils
+    public static class AssetDataExtensions
     {
-        public static string ConvertVector4ToGuid(Vector4 vector)
+        public static string ToGuid(this Vector4 vector)
         {
             byte[] bytes = new byte[16];
 
@@ -17,7 +17,7 @@ namespace ShadowShard.Editor
             return new Guid(bytes).ToString("N"); // Specify "N" format for hyphen-less GUID string
         }
     
-        public static Vector4 ConvertGuidToVector4(string guid)
+        public static Vector4 ToVector4(this string guid)
         {
             byte[] guidBytes = Guid.ParseExact(guid, "N").ToByteArray(); // Parse the GUID without hyphens
 
@@ -29,24 +29,16 @@ namespace ShadowShard.Editor
             return new Vector4(x, y, z, w);
         }
         
-        public static float AsFloat(uint val)
+        public static float AsFloat(this uint val)
         {
             byte[] bytes = BitConverter.GetBytes(val);
             return BitConverter.ToSingle(bytes, 0);
         }
 
-        public static float AsFloat(int val)
+        public static float AsFloat(this int val)
         {
             byte[] bytes = BitConverter.GetBytes(val);
             return BitConverter.ToSingle(bytes, 0);
-        }
-        
-        public static void SetGlobalKeyword(string keyword, bool state)
-        {
-            if (state)
-                Shader.EnableKeyword(keyword);
-            else
-                Shader.DisableKeyword(keyword);
         }
     }
 }

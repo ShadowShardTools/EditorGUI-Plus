@@ -5,12 +5,12 @@ using ShadowShard.Editor.Section;
 using UnityEditor;
 using UnityEngine;
 
-namespace ShadowShard.Editor.ShaderGUI
+namespace ShadowShard.Editor.MaterialEditor.ShaderGUI
 {
     public class BaseShaderGUI : UnityEditor.ShaderGUI
     {
-        private readonly ShadowShardEditor _shadowShardEditor = new();
-        private MaterialEditor _materialEditor;
+        private readonly ShadowShardMaterialEditor _shadowShardMaterialEditor = new();
+        private UnityEditor.MaterialEditor _materialEditor;
         
         protected bool FirstTimeApply = true;
         protected static Vector2 IconSize = new(5, 5);
@@ -32,13 +32,13 @@ namespace ShadowShard.Editor.ShaderGUI
         public virtual IEnumerable<ISection> SetSections(Material material) => 
             Sections = new List<MaterialSection>();
 
-        public override void OnGUI(MaterialEditor materialEditorIn, MaterialProperty[] properties)
+        public override void OnGUI(UnityEditor.MaterialEditor materialEditorIn, MaterialProperty[] properties)
         {
             if (materialEditorIn == null)
                 throw new ArgumentNullException(nameof(materialEditorIn));
             
             _materialEditor = materialEditorIn;
-            _shadowShardEditor.IncludeMaterialEditor(_materialEditor);
+            _shadowShardMaterialEditor.InitializeMaterialEditor(_materialEditor);
             Material material = _materialEditor != null ? _materialEditor.target as Material : null;
             
             if (material == null)
@@ -76,7 +76,7 @@ namespace ShadowShard.Editor.ShaderGUI
 
             using HeaderScope header = new(section, _materialEditor);
             if (header.Expanded)
-                section.DrawProperties(_shadowShardEditor);
+                section.DrawProperties(_shadowShardMaterialEditor);
         }
         
         protected virtual void SetKeywords(Material material)

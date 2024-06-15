@@ -4,30 +4,30 @@ using UnityEngine;
 
 namespace ShadowShard.Editor
 {
-    public class GroupEditor
+    internal class GroupEditor
     {
-        public void DrawVertical(GUIStyle styles, Action drawCall)
+        internal void DrawVertical(GUIStyle styles, Action drawCall)
         {
             EditorGUILayout.BeginVertical(styles);
             drawCall.Invoke();
             EditorGUILayout.EndVertical();
         }
         
-        public void DrawIndented(int indentLevel, Action drawCall)
+        internal void DrawIndented(int indentLevel, Action drawCall)
         {
             EditorGUI.indentLevel += indentLevel;
             drawCall.Invoke();
             EditorGUI.indentLevel -= indentLevel;
         }
         
-        public void DrawDisabled(bool isDisabled, Action drawCall)
+        internal void DrawDisabled(bool isDisabled, Action drawCall)
         {
             EditorGUI.BeginDisabledGroup(isDisabled);
             drawCall.Invoke();
             EditorGUI.EndDisabledGroup();
         }
 
-        public void DrawIndentedDisabled(int indentLevel, bool isDisabled, Action drawCall)
+        internal void DrawIndentedDisabled(int indentLevel, bool isDisabled, Action drawCall)
         {
             DrawDisabled(isDisabled, Draw);
             return;
@@ -36,7 +36,7 @@ namespace ShadowShard.Editor
                 DrawIndented(indentLevel, drawCall);
         }
         
-        public void DrawGroup(bool isDisabled, Action drawCall)
+        internal void DrawGroup(bool isDisabled, Action drawCall)
         {
             DrawVertical(EditorStyles.helpBox, Draw);
             return;
@@ -45,7 +45,7 @@ namespace ShadowShard.Editor
                 DrawDisabled(isDisabled, drawCall);
         }
         
-        public void DrawGroup(GUIContent label, bool isDisabled, Action drawCall)
+        internal void DrawGroup(GUIContent label, bool isDisabled, Action drawCall)
         {
             DrawVertical(EditorStyles.helpBox, Draw);
             return;
