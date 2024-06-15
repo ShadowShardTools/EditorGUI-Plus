@@ -24,7 +24,7 @@ namespace ShadowShard.Editor
             _propertyService = new PropertyService();
             _groupEditor = new GroupEditor();
             _sliderEditor = new SliderEditor(_propertyService, _groupEditor);
-            _toggleEditor = new ToggleEditor(_groupEditor);
+            _toggleEditor = new ToggleEditor(_propertyService, _groupEditor);
             _vectorEditor = new VectorEditor(_groupEditor);
             _textureEditor = new TextureEditor(_groupEditor);
             _popupEditor = new PopupEditor(_groupEditor);
