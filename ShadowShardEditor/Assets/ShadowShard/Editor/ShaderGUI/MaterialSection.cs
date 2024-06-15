@@ -1,15 +1,16 @@
-﻿using UnityEditor;
+﻿using ShadowShard.Editor.Section;
+using UnityEditor;
 using UnityEngine;
 
-namespace ShadowShard.Editor.ShaderGUI.Section
+namespace ShadowShard.Editor.ShaderGUI
 {
-    public abstract class Section : ISection
+    public abstract class MaterialSection : ISection
     {
         public GUIContent Label { get; set; }
         public bool IsExpanded { get; set; }
         public bool IsRendered { get; set; }
         
-        public Section(GUIContent label)
+        public MaterialSection(GUIContent label)
         {
             Label = label;
             IsExpanded = true;

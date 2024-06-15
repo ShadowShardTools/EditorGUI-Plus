@@ -3,23 +3,23 @@ using UnityEditor;
 using UnityEditor.Rendering;
 using UnityEngine;
 
-namespace ShadowShard.Editor.ShaderGUI.Section
+namespace ShadowShard.Editor.Section
 {
     public class HeaderScope : IDisposable
     {
         public readonly bool Expanded;
-        private readonly bool _spaceAtEnd;
-        #if !UNITY_2020_1_OR_NEWER
-        private int oldIndentLevel;
-        #endif
 
-        public HeaderScope(ISection section, UnityEditor.MaterialEditor materialEditor,
-            bool spaceAtEnd = true, bool subHeader = false)
+        private readonly bool _spaceAtEnd;
+#if !UNITY_2020_1_OR_NEWER
+        private int oldIndentLevel;
+#endif
+
+        public HeaderScope(ISection section, bool spaceAtEnd = true, bool subHeader = false)
         {
             if (section.Label == null)
                 throw new ArgumentNullException(nameof(section.Label));
 
-            var beforeExpanded = section.IsExpanded;
+            bool beforeExpanded = section.IsExpanded;
 
             _spaceAtEnd = spaceAtEnd;
             #if !UNITY_2020_1_OR_NEWER
@@ -31,7 +31,7 @@ namespace ShadowShard.Editor.ShaderGUI.Section
                 CoreEditorUtils.DrawSplitter();
             GUILayout.BeginVertical();
 
-            var saveChangeState = GUI.changed;
+            bool saveChangeState = GUI.changed;
             Expanded = subHeader
                 ? CoreEditorUtils.DrawSubHeaderFoldout(section.Label, beforeExpanded, false)
                 : CoreEditorUtils.DrawHeaderFoldout(section.Label, beforeExpanded);
@@ -50,9 +50,9 @@ namespace ShadowShard.Editor.ShaderGUI.Section
                 (Event.current.type == EventType.Repaint || Event.current.type == EventType.Layout))
                 EditorGUILayout.Space();
 
-            #if !UNITY_2020_1_OR_NEWER
+#if !UNITY_2020_1_OR_NEWER
             EditorGUI.indentLevel = oldIndentLevel;
-            #endif
+#endif
             GUILayout.EndVertical();
         }
     }

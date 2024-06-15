@@ -19,7 +19,10 @@ namespace ShadowShard.Editor
 
         public Texture2D DrawTexture(GUIContent label, SerializedProperty property, int indentLevel = 0)
         {
-            _groupEditor.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return (Texture2D)property.objectReferenceValue;
+
+            void Draw()
             {
                 EditorGUI.BeginChangeCheck();
                 
@@ -32,9 +35,7 @@ namespace ShadowShard.Editor
                     property.objectReferenceValue = newValue;
                     property.serializedObject.ApplyModifiedProperties();
                 }
-            });
-
-            return (Texture2D)property.objectReferenceValue;
+            }
         }
         
         public Texture2D DrawSmallTextureField(GUIContent label, SerializedProperty property, int indentLevel = 0)
@@ -42,18 +43,18 @@ namespace ShadowShard.Editor
             const float thumbnailSize = 16f;
 
             Rect thumbnailRect = EditorGUILayout.GetControlRect(false, thumbnailSize);
-            
             Texture2D propertyValue = (Texture2D)property.objectReferenceValue;
             
-            _groupEditor.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return propertyValue;
+
+            void Draw()
             {
                 EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
                 EditorGUI.DrawTextureTransparent(thumbnailRect, propertyValue, ScaleMode.ScaleToFit);
                 EditorGUI.PropertyField(thumbnailRect, property, label);
                 EditorGUI.showMixedValue = false;
-            });
-            
-            return propertyValue;
+            }
         }
         
         //TODO: move to MaterialEditor

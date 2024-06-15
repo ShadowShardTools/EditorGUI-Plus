@@ -12,7 +12,10 @@ namespace ShadowShard.Editor
         
         public string DrawTextField(GUIContent label, SerializedProperty property, int indentLevel = 0)
         {
-            _groupEditor.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return property.stringValue;
+
+            void Draw()
             {
                 EditorGUI.BeginChangeCheck();
                 string propertyValue = property.stringValue;
@@ -23,40 +26,42 @@ namespace ShadowShard.Editor
 
                 if(EditorGUI.EndChangeCheck())
                     property.stringValue = newValue;
-            });
-
-            return property.stringValue;
+            }
         }
         
-        public string DrawFolderPathField(GUIContent label, SerializedProperty property, string defaultDirectory)
+        public string DrawFolderPathField(GUIContent label, SerializedProperty property, string defaultDirectory, int indentLevel = 0)
         {
-            EditorGUI.BeginChangeCheck();
-            string propertyValue = property.stringValue;
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return property.stringValue;
 
-            using(new GUILayout.HorizontalScope())
+            void Draw()
             {
-                const float labelDelta = 16;
-                EditorGUILayout.LabelField(label, GUILayout.Width(EditorGUIUtility.labelWidth - labelDelta));
-                propertyValue = EditorGUILayout.TextField(propertyValue);
-                if(GUILayout.Button(" ... ", GUILayout.ExpandWidth(false), GUILayout.Height(EditorGUIUtility.singleLineHeight)))
+                EditorGUI.BeginChangeCheck();
+                string propertyValue = property.stringValue;
+
+                using(new GUILayout.HorizontalScope())
                 {
-                    if(AssetDatabase.IsValidFolder(propertyValue))
-                        propertyValue = defaultDirectory;
+                    const float labelDelta = 16;
+                    EditorGUILayout.LabelField(label, GUILayout.Width(EditorGUIUtility.labelWidth - labelDelta));
+                    propertyValue = EditorGUILayout.TextField(propertyValue);
+                    if(GUILayout.Button(" ... ", GUILayout.ExpandWidth(false), GUILayout.Height(EditorGUIUtility.singleLineHeight)))
+                    {
+                        if(AssetDatabase.IsValidFolder(propertyValue))
+                            propertyValue = defaultDirectory;
                     
-                    string chosenDirectory = EditorUtility.SaveFolderPanel("Choose folder to save", defaultDirectory, defaultDirectory);
+                        string chosenDirectory = EditorUtility.SaveFolderPanel("Choose folder to save", defaultDirectory, defaultDirectory);
                     
-                    if(!string.IsNullOrEmpty(chosenDirectory)) 
-                        propertyValue = chosenDirectory;
+                        if(!string.IsNullOrEmpty(chosenDirectory)) 
+                            propertyValue = chosenDirectory;
+                    }
+                }
+
+                if(EditorGUI.EndChangeCheck())
+                {
+                    property.stringValue = propertyValue;
+                    property.serializedObject.ApplyModifiedProperties();
                 }
             }
-
-            if(EditorGUI.EndChangeCheck())
-            {
-                property.stringValue = propertyValue;
-                property.serializedObject.ApplyModifiedProperties();
-            }
-
-            return propertyValue;
         }
     }
 }
