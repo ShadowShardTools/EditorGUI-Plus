@@ -40,35 +40,87 @@ namespace ShadowShard.Editor
             }
         }
         
-        internal void DrawTexture(UnityEditor.MaterialEditor materialEditor, GUIContent label, MaterialProperty property)
+        internal void DrawSingleLineTexture(
+            UnityEditor.MaterialEditor materialEditor,
+            GUIContent label, 
+            MaterialProperty textureProperty, 
+            int indentLevel = 0)
         {
-            materialEditor.TexturePropertySingleLine(label, property);
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return;
+
+            void Draw()
+            {
+                materialEditor.TexturePropertySingleLine(label, textureProperty);
+            }
         }
-        
-        internal void DrawTexture(UnityEditor.MaterialEditor materialEditor, GUIContent label, MaterialProperty textureProperty, MaterialProperty secondProperty)
+
+        internal void DrawSingleLineTexture(
+            UnityEditor.MaterialEditor materialEditor, 
+            GUIContent label, 
+            MaterialProperty textureProperty, 
+            MaterialProperty secondProperty, 
+            int indentLevel = 0)
         {
-            materialEditor.TexturePropertySingleLine(label, textureProperty, secondProperty);
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return;
+
+            void Draw()
+            {
+                materialEditor.TexturePropertySingleLine(label, textureProperty, secondProperty);
+            }
         }
-        
-        internal void DrawTextureWithHDRColor(UnityEditor.MaterialEditor materialEditor, GUIContent label, MaterialProperty textureProperty, MaterialProperty colorProperty)
+
+        internal void DrawSingleLineTextureWithHDRColor(
+            UnityEditor.MaterialEditor materialEditor,
+            GUIContent label, 
+            MaterialProperty textureProperty, 
+            MaterialProperty colorProperty, 
+            bool showAlpha = false,
+            int indentLevel = 0)
         {
-            materialEditor.TexturePropertyWithHDRColor(label, textureProperty, 
-                colorProperty, false);
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return;
+
+            void Draw()
+            {
+                materialEditor.TexturePropertyWithHDRColor(label, textureProperty, colorProperty, showAlpha);
+            }
         }
-        
-        internal void DrawNormalTexture(UnityEditor.MaterialEditor materialEditor, GUIContent label, MaterialProperty normalMap, MaterialProperty normalMapScale = null)
+
+        internal void DrawSingleLineNormalTexture(
+            UnityEditor.MaterialEditor materialEditor, 
+            GUIContent label, 
+            MaterialProperty normalMap, 
+            MaterialProperty normalMapScale = null, 
+            int indentLevel = 0)
         {
-            bool hasBumpMap = normalMap.textureValue is not null;
-            MaterialProperty materialProperty = hasBumpMap ? normalMapScale : null;
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return;
+
+            void Draw()
+            {
+                bool hasBumpMap = normalMap.textureValue != null;
+                materialEditor.TexturePropertySingleLine(label, normalMap, hasBumpMap ? normalMapScale : null);
             
-            materialEditor.TexturePropertySingleLine(label, normalMap, materialProperty);
+                if (normalMapScale is null)
+                    return;
             
-            if (normalMapScale is null)
-                return;
-            
-            bool incorrectScale = Math.Abs(normalMapScale.floatValue - 1.0f) > 0.001f;
-            if (incorrectScale && IsMobilePlatform())
-                FixNormalScale(materialEditor, normalMapScale);
+                bool incorrectScale = Math.Abs(normalMapScale.floatValue - 1.0f) > 0.001f;
+                if (incorrectScale && IsMobilePlatform())
+                    FixNormalScale(materialEditor, normalMapScale);
+            }
+        }
+
+        internal void DrawTextureScaleOffset(UnityEditor.MaterialEditor materialEditor, MaterialProperty textureProperty, int indentLevel = 0)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return;
+
+            void Draw()
+            {
+                materialEditor.TextureScaleOffsetProperty(textureProperty);
+            }
         }
 
         internal void FixNormalScale(UnityEditor.MaterialEditor materialEditor, MaterialProperty normalMapScale)
@@ -80,14 +132,6 @@ namespace ShadowShard.Editor
             
             if (fixScale)
                 normalMapScale.floatValue = 1.0f;
-        }
-
-        internal void DrawTextureScaleOffset(UnityEditor.MaterialEditor materialEditor, MaterialProperty textureProperty)
-        {
-            if(textureProperty is null)
-                return;
-            
-            materialEditor.TextureScaleOffsetProperty(textureProperty);
         }
         
         internal bool IsMobilePlatform() => 

@@ -1,4 +1,5 @@
 ﻿using System;
+using ShadowShard.Editor.MaterialEditor;
 using UnityEditor;
 using UnityEngine;
 
@@ -140,7 +141,7 @@ namespace ShadowShard.Editor
                 if (EditorGUI.EndChangeCheck())
                 {
                     _propertyService.SetEnumIndex(property, newValue);
-                    RPUtils.SetGlobalKeyword(shaderGlobalKeyword, newValue > 0);
+                    GlobalKeywordsService.SetGlobalKeyword(shaderGlobalKeyword, newValue > 0);
                 }
             }
         }

@@ -1,4 +1,4 @@
-﻿namespace ShadowShard.Editor
+﻿namespace ShadowShard.Editor.Enums
 {
     public enum Vector4Param
     {

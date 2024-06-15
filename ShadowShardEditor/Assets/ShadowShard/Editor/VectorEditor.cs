@@ -1,4 +1,5 @@
-﻿using ShadowShard.Editor.Range;
+﻿using ShadowShard.Editor.Enums;
+using ShadowShard.Editor.Range;
 using UnityEditor;
 using UnityEngine;
 
@@ -88,6 +89,52 @@ namespace ShadowShard.Editor
 
                 if (EditorGUI.EndChangeCheck())
                     _propertyService.SetVector4(property, newValue);
+            }
+        }
+        
+        internal Vector2 DrawFloatFromVector2<TProperty>(GUIContent label, TProperty property, Vector2Param vector2Param, FloatRange range, int indentLevel = 0)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return _propertyService.GetVector2(property);
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+                
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                Vector2 propertyValue = _propertyService.GetVector2(property);
+                float val = propertyValue[(int)vector2Param];
+                float newValue = Mathf.Clamp(EditorGUILayout.FloatField(label, val), range.Min, range.Max);
+                EditorGUI.showMixedValue = false;
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    propertyValue[(int)vector2Param] = newValue;
+                    _propertyService.SetVector2(property, propertyValue);
+                }
+            }
+        }
+        
+        internal Vector3 DrawFloatFromVector3<TProperty>(GUIContent label, TProperty property, Vector3Param vector3Param, FloatRange range, int indentLevel = 0)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return _propertyService.GetVector3(property);
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+                
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                Vector3 propertyValue = _propertyService.GetVector3(property);
+                float val = propertyValue[(int)vector3Param];
+                float newValue = Mathf.Clamp(EditorGUILayout.FloatField(label, val), range.Min, range.Max);
+                EditorGUI.showMixedValue = false;
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    propertyValue[(int)vector3Param] = newValue;
+                    _propertyService.SetVector3(property, propertyValue);
+                }
             }
         }
         

@@ -1,4 +1,5 @@
-﻿using ShadowShard.Editor.Range;
+﻿using ShadowShard.Editor.Enums;
+using ShadowShard.Editor.Range;
 using UnityEditor;
 using UnityEngine;
 

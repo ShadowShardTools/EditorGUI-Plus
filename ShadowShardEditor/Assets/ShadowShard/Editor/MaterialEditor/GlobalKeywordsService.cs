@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace ShadowShard.Editor
+namespace ShadowShard.Editor.MaterialEditor
 {
-    public static class RPUtils
+    public static class GlobalKeywordsService
     {
         public static void SetGlobalKeyword(string keyword, bool state)
         {

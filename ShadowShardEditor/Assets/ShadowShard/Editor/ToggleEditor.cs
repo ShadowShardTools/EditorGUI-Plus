@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using ShadowShard.Editor.MaterialEditor;
+using UnityEditor;
 using UnityEngine;
 
 namespace ShadowShard.Editor
@@ -51,7 +52,7 @@ namespace ShadowShard.Editor
                 if (EditorGUI.EndChangeCheck())
                 {
                     _propertyService.SetBool(property, newValue);
-                    RPUtils.SetGlobalKeyword(shaderGlobalKeyword, newValue);
+                    GlobalKeywordsService.SetGlobalKeyword(shaderGlobalKeyword, newValue);
                 }
             }
         }
