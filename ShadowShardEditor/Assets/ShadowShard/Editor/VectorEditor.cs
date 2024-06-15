@@ -89,14 +89,14 @@ namespace ShadowShard.Editor
             return property.vector4Value;
         }
         
-        public void DrawColor(GUIContent label, SerializedProperty property, int indentLevel = 0)
+        public void DrawColor(GUIContent label, SerializedProperty property, bool showAlpha = true, bool hdr = false, int indentLevel = 0)
         {
             _editorUtils.DrawIndented(indentLevel, () =>
             {
                 EditorGUI.BeginChangeCheck();
 
                 EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
-                Color newValue = EditorGUILayout.ColorField(label, property.colorValue);
+                Color newValue = EditorGUILayout.ColorField(label, property.colorValue, true, showAlpha, hdr);
                 EditorGUI.showMixedValue = false;
 
                 if (EditorGUI.EndChangeCheck())
@@ -105,7 +105,7 @@ namespace ShadowShard.Editor
         }
         
         //TODO: move to MaterialEditor
-        public void DrawVectorFloat<T>(GUIContent label, T property, VectorParam vectorParam, Vector2 minMax, int indentLevel = 0) where T : class
+        public void DrawVectorFloat<T>(GUIContent label, T property, Vector4Param vector4Param, Vector2 minMax, int indentLevel = 0) where T : class
         {
             _editorUtils.DrawIndented(indentLevel, () =>
             {
@@ -113,23 +113,23 @@ namespace ShadowShard.Editor
                 Vector4 propertyValue = _editorUtils.GetPropertyValue<Vector4>(property);
                 
                 EditorGUI.showMixedValue = _editorUtils.HasMixedValue(property);
-                var val = propertyValue[(int)vectorParam];
+                var val = propertyValue[(int)vector4Param];
                 var newValue = Mathf.Clamp(EditorGUILayout.FloatField(label, val), minMax.x, minMax.y);
                 EditorGUI.showMixedValue = false;
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    propertyValue[(int)vectorParam] = newValue;
+                    propertyValue[(int)vector4Param] = newValue;
                     _editorUtils.SetPropertyValue(property, propertyValue);
                 }
             });
         }
         
-        public void DrawClampedVectorFloat<T>(GUIContent label, T property, VectorParam vectorParam, int indentLevel = 0) where T : class =>
-            DrawVectorFloat(label, property, vectorParam, new Vector2(0.0f, 1.0f), indentLevel);
+        public void DrawClampedVectorFloat<T>(GUIContent label, T property, Vector4Param vector4Param, int indentLevel = 0) where T : class =>
+            DrawVectorFloat(label, property, vector4Param, new Vector2(0.0f, 1.0f), indentLevel);
         
-        public void DrawMinVectorFloat<T>(GUIContent label, T property, VectorParam vectorParam, float min = 0.0f, int indentLevel = 0) where T : class =>
-            DrawVectorFloat(label, property, vectorParam,new Vector2(min, float.MaxValue), indentLevel);
+        public void DrawMinVectorFloat<T>(GUIContent label, T property, Vector4Param vector4Param, float min = 0.0f, int indentLevel = 0) where T : class =>
+            DrawVectorFloat(label, property, vector4Param,new Vector2(min, float.MaxValue), indentLevel);
         
         public void DrawVector2XY<T>(GUIContent label, T property, int indentLevel = 0) where T : class
         {

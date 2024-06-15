@@ -50,6 +50,39 @@ namespace ShadowShard.Editor
         
         public int DrawIntSlider(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
             DrawIntSlider(label, property, IntRange.Normalized, indentLevel);
+
+        public void DrawFromVector3ParamSlider(GUIContent label, SerializedProperty property, Vector3Param vectorParam, FloatRange range, int indentLevel = 0)
+        {
+            _editorUtils.DrawIndented(indentLevel, () =>
+            {
+                EditorGUI.BeginChangeCheck();
+
+                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
+                Vector3 propertyValue = property.vector3Value;
+                float channelValue = propertyValue[(int)vectorParam];
+                float newValue = EditorGUILayout.Slider(label, channelValue, range.Min, range.Max);
+                EditorGUI.showMixedValue = false;
+
+                if(EditorGUI.EndChangeCheck())
+                {
+                    propertyValue[(int)vectorParam] = newValue;
+                    _editorUtils.SetPropertyValue(property, propertyValue);
+                }
+            });
+        }
+
+        public void DrawFromVector3ParamSlider(GUIContent label, SerializedProperty property, Vector3Param vectorParam, int indentLevel = 0) =>
+            DrawFromVector3ParamSlider(label, property, vectorParam, FloatRange.Normalized, indentLevel);
+        
+        public void DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, SerializedProperty property, FloatRange range, int indentLevel = 0)
+        {
+            DrawFromVector3ParamSlider(labelX, property, Vector3Param.X, range, indentLevel);
+            DrawFromVector3ParamSlider(labelY, property, Vector3Param.Y, range, indentLevel);
+            DrawFromVector3ParamSlider(labelZ, property, Vector3Param.Z, range, indentLevel);
+        }
+
+        public void DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, SerializedProperty property, int indentLevel = 0) =>
+            DrawVector3Sliders(labelX, labelY, labelZ, property, FloatRange.Normalized, indentLevel);
         
         public FloatRange DrawMinMaxSlider(GUIContent label, SerializedProperty minProperty, SerializedProperty maxProperty, FloatRange range, int indentLevel = 0)
         {

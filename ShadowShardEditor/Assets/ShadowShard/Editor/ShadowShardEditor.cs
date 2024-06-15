@@ -47,6 +47,17 @@ namespace ShadowShard.Editor
         
         public FloatRange DrawMinMaxSlider(GUIContent label, SerializedProperty minProperty, SerializedProperty maxProperty, int indentLevel = 0) =>
             SliderEditor.DrawMinMaxSlider(label, minProperty, maxProperty, indentLevel);
+        public void DrawFromVector3ParamSlider(GUIContent label, SerializedProperty property, Vector3Param vectorParam, FloatRange range, int indentLevel = 0) =>
+            SliderEditor.DrawFromVector3ParamSlider(label, property, vectorParam, range, indentLevel);
+        
+        public void DrawFromVector3ParamSlider(GUIContent label, SerializedProperty property, Vector3Param vectorParam, int indentLevel = 0) =>
+            SliderEditor.DrawFromVector3ParamSlider(label, property, vectorParam, indentLevel);
+        
+        public void DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, SerializedProperty property, FloatRange range, int indentLevel = 0) =>
+            SliderEditor.DrawVector3Sliders(labelX, labelY, labelZ, property, range, indentLevel);
+        
+        public void DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, SerializedProperty property, int indentLevel = 0) =>
+            SliderEditor.DrawVector3Sliders(labelX, labelY, labelZ, property, indentLevel);
         
         public FloatRange DrawMinMaxVector4StartSlider(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0) =>
             SliderEditor.DrawMinMaxVector4StartSlider(label, property, range, indentLevel);
