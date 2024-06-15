@@ -9,175 +9,177 @@ namespace ShadowShard.Editor
 {
     public class ShadowShardEditor
     {
-        public readonly GroupEditor GroupEditor;
-        public readonly SliderEditor SliderEditor;
-        public readonly ToggleEditor ToggleEditor;
-        public readonly VectorEditor VectorEditor;
-        public readonly TextureEditor TextureEditor;
-        public readonly PopupEditor PopupEditor;
-        public readonly TextEditor TextEditor;
-        public readonly ObjectEditor ObjectEditor;
+        private readonly PropertyService _propertyService;
+        private readonly GroupEditor _groupEditor;
+        private readonly SliderEditor _sliderEditor;
+        private readonly ToggleEditor _toggleEditor;
+        private readonly VectorEditor _vectorEditor;
+        private readonly TextureEditor _textureEditor;
+        private readonly PopupEditor _popupEditor;
+        private readonly TextEditor _textEditor;
+        private readonly ObjectEditor _objectEditor;
         
         public ShadowShardEditor()
         {
-            GroupEditor = new GroupEditor();
-            SliderEditor = new SliderEditor(GroupEditor);
-            ToggleEditor = new ToggleEditor(GroupEditor);
-            VectorEditor = new VectorEditor(GroupEditor);
-            TextureEditor = new TextureEditor(GroupEditor);
-            PopupEditor = new PopupEditor(GroupEditor);
-            TextEditor = new TextEditor(GroupEditor);
-            ObjectEditor = new ObjectEditor(GroupEditor);
+            _propertyService = new PropertyService();
+            _groupEditor = new GroupEditor();
+            _sliderEditor = new SliderEditor(_propertyService, _groupEditor);
+            _toggleEditor = new ToggleEditor(_groupEditor);
+            _vectorEditor = new VectorEditor(_groupEditor);
+            _textureEditor = new TextureEditor(_groupEditor);
+            _popupEditor = new PopupEditor(_groupEditor);
+            _textEditor = new TextEditor(_groupEditor);
+            _objectEditor = new ObjectEditor(_groupEditor);
         }
         
         #region GroupEditorRegion
 
         public void DrawVertical(GUIStyle styles, Action drawCall) =>
-            GroupEditor.DrawVertical(styles, drawCall);
+            _groupEditor.DrawVertical(styles, drawCall);
         
         public void DrawIndented(int indentLevel, Action drawCall) =>
-            GroupEditor.DrawIndented(indentLevel, drawCall);
+            _groupEditor.DrawIndented(indentLevel, drawCall);
         
         public void DrawDisabled(bool isDisabled, Action drawCall) =>
-            GroupEditor.DrawDisabled(isDisabled, drawCall);
+            _groupEditor.DrawDisabled(isDisabled, drawCall);
         
         public void DrawIndentedDisabled(int indentLevel, bool isDisabled, Action drawCall) =>
-            GroupEditor.DrawIndentedDisabled(indentLevel, isDisabled, drawCall);
+            _groupEditor.DrawIndentedDisabled(indentLevel, isDisabled, drawCall);
         
         public void DrawGroup(bool isDisabled, Action drawCall) =>
-            GroupEditor.DrawGroup(isDisabled, drawCall);
+            _groupEditor.DrawGroup(isDisabled, drawCall);
         
         public void DrawGroup(Action drawCall) =>
-            GroupEditor.DrawGroup(false, drawCall);
+            _groupEditor.DrawGroup(false, drawCall);
         
         public void DrawGroup(GUIContent label, bool isDisabled, Action drawCall) =>
-            GroupEditor.DrawGroup(label, isDisabled, drawCall);
+            _groupEditor.DrawGroup(label, isDisabled, drawCall);
         
         public void DrawGroup(GUIContent label, Action drawCall) =>
-            GroupEditor.DrawGroup(label, false, drawCall);
+            _groupEditor.DrawGroup(label, false, drawCall);
         
         #endregion
 
         #region SliderEditorRegion
         
         public float DrawSlider(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0) =>
-            SliderEditor.DrawSlider(label, property, range, indentLevel);
+            _sliderEditor.DrawSlider(label, property, range, indentLevel);
         
         public float DrawSlider(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            SliderEditor.DrawSlider(label, property, FloatRange.Normalized, indentLevel);
+            _sliderEditor.DrawSlider(label, property, FloatRange.Normalized, indentLevel);
 
         public int DrawIntSlider(GUIContent label, SerializedProperty property, IntRange range, int indentLevel = 0) =>
-            SliderEditor.DrawIntSlider(label, property, range, indentLevel);
+            _sliderEditor.DrawIntSlider(label, property, range, indentLevel);
         
         public int DrawIntSlider(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            SliderEditor.DrawIntSlider(label, property, IntRange.Normalized, indentLevel);
+            _sliderEditor.DrawIntSlider(label, property, IntRange.Normalized, indentLevel);
         public void DrawFromVector3ParamSlider(GUIContent label, SerializedProperty property, Vector3Param vectorParam, FloatRange range, int indentLevel = 0) =>
-            SliderEditor.DrawFromVector3ParamSlider(label, property, vectorParam, range, indentLevel);
+            _sliderEditor.DrawFromVector3ParamSlider(label, property, vectorParam, range, indentLevel);
         
         public void DrawFromVector3ParamSlider(GUIContent label, SerializedProperty property, Vector3Param vectorParam, int indentLevel = 0) =>
-            SliderEditor.DrawFromVector3ParamSlider(label, property, vectorParam, FloatRange.Normalized, indentLevel);
+            _sliderEditor.DrawFromVector3ParamSlider(label, property, vectorParam, FloatRange.Normalized, indentLevel);
         
         public void DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, SerializedProperty property, FloatRange range, int indentLevel = 0) =>
-            SliderEditor.DrawVector3Sliders(labelX, labelY, labelZ, property, range, indentLevel);
+            _sliderEditor.DrawVector3Sliders(labelX, labelY, labelZ, property, range, indentLevel);
         
         public void DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, SerializedProperty property, int indentLevel = 0) =>
-            SliderEditor.DrawVector3Sliders(labelX, labelY, labelZ, property, FloatRange.Normalized, indentLevel);
+            _sliderEditor.DrawVector3Sliders(labelX, labelY, labelZ, property, FloatRange.Normalized, indentLevel);
         
         public FloatRange DrawMinMaxSlider(GUIContent label, SerializedProperty minProperty, SerializedProperty maxProperty, FloatRange range, int indentLevel = 0) =>
-            SliderEditor.DrawMinMaxSlider(label, minProperty, maxProperty, range, indentLevel);
+            _sliderEditor.DrawMinMaxSlider(label, minProperty, maxProperty, range, indentLevel);
         
         public FloatRange DrawMinMaxSlider(GUIContent label, SerializedProperty minProperty, SerializedProperty maxProperty, int indentLevel = 0) =>
-            SliderEditor.DrawMinMaxSlider(label, minProperty, maxProperty, FloatRange.Normalized, indentLevel);
+            _sliderEditor.DrawMinMaxSlider(label, minProperty, maxProperty, FloatRange.Normalized, indentLevel);
         
         public FloatRange DrawMinMaxVector4StartSlider(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0) =>
-            SliderEditor.DrawMinMaxVector4StartSlider(label, property, range, indentLevel);
+            _sliderEditor.DrawMinMaxVector4StartSlider(label, property, range, indentLevel);
         
         public FloatRange DrawMinMaxVector4StartSlider(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            SliderEditor.DrawMinMaxVector4StartSlider(label, property, indentLevel);
+            _sliderEditor.DrawMinMaxVector4StartSlider(label, property, indentLevel);
         
         public FloatRange DrawMinMaxVector4EndSlider(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0) =>
-            SliderEditor.DrawMinMaxVector4EndSlider(label, property, range, indentLevel);
+            _sliderEditor.DrawMinMaxVector4EndSlider(label, property, range, indentLevel);
         
         public FloatRange DrawMinMaxVector4EndSlider(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            SliderEditor.DrawMinMaxVector4EndSlider(label, property, indentLevel);
+            _sliderEditor.DrawMinMaxVector4EndSlider(label, property, indentLevel);
 
         #endregion
         
         #region ToggleEditorRegion
 
         public bool DrawToggle(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            ToggleEditor.DrawToggle(label, property, indentLevel);
+            _toggleEditor.DrawToggle(label, property, indentLevel);
         
         public bool DrawShaderGlobalKeywordToggle(GUIContent label, SerializedProperty property, string shaderGlobalKeyword, int indentLevel = 0) =>
-            ToggleEditor.DrawShaderGlobalKeywordToggle(label, property, shaderGlobalKeyword, indentLevel);
+            _toggleEditor.DrawShaderGlobalKeywordToggle(label, property, shaderGlobalKeyword, indentLevel);
         
         #endregion
         
         #region VectorEditorRegion
 
         public float DrawFloat(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0) =>
-            VectorEditor.DrawFloat(label, property, range, indentLevel);
+            _vectorEditor.DrawFloat(label, property, range, indentLevel);
         
         public float DrawFloat(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            VectorEditor.DrawFloat(label, property, FloatRange.Full, indentLevel);
+            _vectorEditor.DrawFloat(label, property, FloatRange.Full, indentLevel);
         
         public float DrawNormalizedFloat(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            VectorEditor.DrawFloat(label, property, FloatRange.Normalized, indentLevel);
+            _vectorEditor.DrawFloat(label, property, FloatRange.Normalized, indentLevel);
         
         public float DrawMinFloat(GUIContent label, SerializedProperty property, float min = 0.0f, int indentLevel = 0) =>
-            VectorEditor.DrawFloat(label, property, FloatRange.ToMaxFrom(min), indentLevel);
+            _vectorEditor.DrawFloat(label, property, FloatRange.ToMaxFrom(min), indentLevel);
         
         public Vector2 DrawVector2(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            VectorEditor.DrawVector2(label, property, indentLevel);
+            _vectorEditor.DrawVector2(label, property, indentLevel);
         
         public Vector3 DrawVector3(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            VectorEditor.DrawVector3(label, property, indentLevel);
+            _vectorEditor.DrawVector3(label, property, indentLevel);
         
         public Vector4 DrawVector4(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            VectorEditor.DrawVector4(label, property, indentLevel);
+            _vectorEditor.DrawVector4(label, property, indentLevel);
         
         public Color DrawColor(GUIContent label, SerializedProperty property, bool showAlpha = true, bool hdr = false, int indentLevel = 0) =>
-            VectorEditor.DrawColor(label, property, showAlpha, hdr, indentLevel);
+            _vectorEditor.DrawColor(label, property, showAlpha, hdr, indentLevel);
         
         #endregion
         
         #region TextureEditorRegion
 
         public Texture2D DrawTexture(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            TextureEditor.DrawTexture(label, property, indentLevel);
+            _textureEditor.DrawTexture(label, property, indentLevel);
         
         public Texture2D DrawSmallTextureField(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            TextureEditor.DrawSmallTextureField(label, property, indentLevel);
+            _textureEditor.DrawSmallTextureField(label, property, indentLevel);
         
         #endregion
         
         #region PopupEditorRegion
         
         public TEnum DrawEnumPopup<TEnum>(SerializedProperty property, int indentLevel = 0) where TEnum : Enum =>
-            PopupEditor.DrawEnumPopup<TEnum>(property, indentLevel);
+            _popupEditor.DrawEnumPopup<TEnum>(property, indentLevel);
         
         public TEnum DrawEnumPopup<TEnum>(GUIContent label, SerializedProperty property, int indentLevel = 0) where TEnum : Enum =>
-            PopupEditor.DrawEnumPopup<TEnum>(label, property, indentLevel);
+            _popupEditor.DrawEnumPopup<TEnum>(label, property, indentLevel);
         
         public int DrawPopup(GUIContent label, SerializedProperty property, string[] displayedOptions, int indentLevel = 0) =>
-            PopupEditor.DrawPopup(label, property, displayedOptions, indentLevel);
+            _popupEditor.DrawPopup(label, property, displayedOptions, indentLevel);
         
         public bool DrawBooleanPopup(GUIContent label, SerializedProperty property, string[] displayedOptions, int indentLevel = 0) =>
-            PopupEditor.DrawBooleanPopup(label, property, displayedOptions, indentLevel);
+            _popupEditor.DrawBooleanPopup(label, property, displayedOptions, indentLevel);
         
         public bool DrawShaderGlobalKeywordBooleanPopup(GUIContent label, SerializedProperty property, 
             string[] displayedOptions, string shaderGlobalKeyword, int indentLevel = 0) =>
-            PopupEditor.DrawShaderGlobalKeywordBooleanPopup(label, property, displayedOptions, shaderGlobalKeyword, indentLevel);
+            _popupEditor.DrawShaderGlobalKeywordBooleanPopup(label, property, displayedOptions, shaderGlobalKeyword, indentLevel);
         
         #endregion
         
         #region TextEditorRegion
 
         public string DrawTextField(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            TextEditor.DrawTextField(label, property, indentLevel);
+            _textEditor.DrawTextField(label, property, indentLevel);
         
         public string DrawFolderPathField(GUIContent label, SerializedProperty property, string defaultDirectory) =>
-            TextEditor.DrawFolderPathField(label, property, defaultDirectory);
+            _textEditor.DrawFolderPathField(label, property, defaultDirectory);
         
         #endregion
         
@@ -185,7 +187,7 @@ namespace ShadowShard.Editor
 
         public void DrawObjectField<TObject>(GUIContent label, SerializedProperty property, int indentLevel = 0,
             bool allowSceneObjects = true, Action<TObject> onChangedCallback = null) where TObject : Object =>
-            ObjectEditor.DrawObjectField<TObject>(label, property, indentLevel, allowSceneObjects, onChangedCallback);
+            _objectEditor.DrawObjectField<TObject>(label, property, indentLevel, allowSceneObjects, onChangedCallback);
         
         #endregion
     }
