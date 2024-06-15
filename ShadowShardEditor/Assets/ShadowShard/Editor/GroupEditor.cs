@@ -29,28 +29,28 @@ namespace ShadowShard.Editor
 
         public void DrawIndentedDisabled(int indentLevel, bool isDisabled, Action drawCall)
         {
-            DrawDisabled(isDisabled, DrawIndentedLocal);
+            DrawDisabled(isDisabled, Draw);
             return;
 
-            void DrawIndentedLocal() => 
+            void Draw() => 
                 DrawIndented(indentLevel, drawCall);
         }
         
         public void DrawGroup(bool isDisabled, Action drawCall)
         {
-            DrawVertical(EditorStyles.helpBox, DrawDisabledLocal);
+            DrawVertical(EditorStyles.helpBox, Draw);
             return;
 
-            void DrawDisabledLocal() => 
+            void Draw() => 
                 DrawDisabled(isDisabled, drawCall);
         }
         
         public void DrawGroup(GUIContent label, bool isDisabled, Action drawCall)
         {
-            DrawVertical(EditorStyles.helpBox, DrawDisabledLocal);
+            DrawVertical(EditorStyles.helpBox, Draw);
             return;
 
-            void DrawDisabledLocal()
+            void Draw()
             {
                 EditorGUILayout.LabelField(label, EditorStyles.boldLabel);
                 DrawDisabled(isDisabled, drawCall);

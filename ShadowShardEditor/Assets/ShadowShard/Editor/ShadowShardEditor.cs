@@ -17,6 +17,7 @@ namespace ShadowShard.Editor
         public readonly TextureEditor TextureEditor;
         public readonly PopupEditor PopupEditor;
         public readonly TextEditor TextEditor;
+        public readonly ObjectEditor ObjectEditor;
         
         public ShadowShardEditor()
         {
@@ -27,6 +28,7 @@ namespace ShadowShard.Editor
             TextureEditor = new TextureEditor(GroupEditor);
             PopupEditor = new PopupEditor(GroupEditor);
             TextEditor = new TextEditor(GroupEditor);
+            ObjectEditor = new ObjectEditor(GroupEditor);
         }
         
         #region GroupEditorRegion
@@ -177,6 +179,14 @@ namespace ShadowShard.Editor
         
         public string DrawFolderPathField(GUIContent label, SerializedProperty property, string defaultDirectory) =>
             TextEditor.DrawFolderPathField(label, property, defaultDirectory);
+        
+        #endregion
+        
+        #region ObjectEditorRegion
+
+        public void DrawObjectField<TObject>(GUIContent label, SerializedProperty property, int indentLevel = 0,
+            bool allowSceneObjects = true, Action<TObject> onChangedCallback = null) where TObject : Object =>
+            ObjectEditor.DrawObjectField<TObject>(label, property, indentLevel, allowSceneObjects, onChangedCallback);
         
         #endregion
         
