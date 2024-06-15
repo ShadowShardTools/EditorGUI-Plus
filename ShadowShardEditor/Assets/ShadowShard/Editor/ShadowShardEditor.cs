@@ -16,6 +16,7 @@ namespace ShadowShard.Editor
         public readonly VectorEditor VectorEditor;
         public readonly TextureEditor TextureEditor;
         public readonly PopupEditor PopupEditor;
+        public readonly TextEditor TextEditor;
         
         public ShadowShardEditor()
         {
@@ -25,6 +26,7 @@ namespace ShadowShard.Editor
             VectorEditor = new VectorEditor(GroupEditor);
             TextureEditor = new TextureEditor(GroupEditor);
             PopupEditor = new PopupEditor(GroupEditor);
+            TextEditor = new TextEditor(GroupEditor);
         }
         
         #region GroupEditorRegion
@@ -165,6 +167,16 @@ namespace ShadowShard.Editor
         public bool DrawShaderGlobalKeywordBooleanPopup(GUIContent label, SerializedProperty property, 
             string[] displayedOptions, string shaderGlobalKeyword, int indentLevel = 0) =>
             PopupEditor.DrawShaderGlobalKeywordBooleanPopup(label, property, displayedOptions, shaderGlobalKeyword, indentLevel);
+        
+        #endregion
+        
+        #region TextEditorRegion
+
+        public string DrawTextField(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+            TextEditor.DrawTextField(label, property, indentLevel);
+        
+        public string DrawFolderPathField(GUIContent label, SerializedProperty property, string defaultDirectory) =>
+            TextEditor.DrawFolderPathField(label, property, defaultDirectory);
         
         #endregion
         
