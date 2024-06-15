@@ -6,14 +6,14 @@ namespace ShadowShard.Editor
 {
     public class SliderEditor
     {
-        private readonly EditorUtils _editorUtils;
+        private readonly GroupEditor _groupEditor;
 
-        public SliderEditor(EditorUtils editorUtils) =>
-            _editorUtils = editorUtils;
+        public SliderEditor(GroupEditor groupEditor) =>
+            _groupEditor = groupEditor;
         
         public float DrawSlider(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0)
         {
-            _editorUtils.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, () =>
             {
                 EditorGUI.BeginChangeCheck();
                 
@@ -28,12 +28,9 @@ namespace ShadowShard.Editor
             return property.floatValue;
         }
         
-        public float DrawSlider(GUIContent label, SerializedProperty property, int indentLevel = 0) => 
-            DrawSlider(label, property, FloatRange.Normalized, indentLevel);
-        
         public int DrawIntSlider(GUIContent label, SerializedProperty property, IntRange range, int indentLevel = 0)
         {
-            _editorUtils.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, () =>
             {
                 EditorGUI.BeginChangeCheck();
                 
@@ -47,13 +44,10 @@ namespace ShadowShard.Editor
 
             return property.intValue;
         }
-        
-        public int DrawIntSlider(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            DrawIntSlider(label, property, IntRange.Normalized, indentLevel);
 
         public void DrawFromVector3ParamSlider(GUIContent label, SerializedProperty property, Vector3Param vectorParam, FloatRange range, int indentLevel = 0)
         {
-            _editorUtils.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, () =>
             {
                 EditorGUI.BeginChangeCheck();
 
@@ -66,13 +60,10 @@ namespace ShadowShard.Editor
                 if(EditorGUI.EndChangeCheck())
                 {
                     propertyValue[(int)vectorParam] = newValue;
-                    _editorUtils.SetPropertyValue(property, propertyValue);
+                    property.vector3Value = propertyValue;
                 }
             });
         }
-
-        public void DrawFromVector3ParamSlider(GUIContent label, SerializedProperty property, Vector3Param vectorParam, int indentLevel = 0) =>
-            DrawFromVector3ParamSlider(label, property, vectorParam, FloatRange.Normalized, indentLevel);
         
         public void DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, SerializedProperty property, FloatRange range, int indentLevel = 0)
         {
@@ -80,13 +71,10 @@ namespace ShadowShard.Editor
             DrawFromVector3ParamSlider(labelY, property, Vector3Param.Y, range, indentLevel);
             DrawFromVector3ParamSlider(labelZ, property, Vector3Param.Z, range, indentLevel);
         }
-
-        public void DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, SerializedProperty property, int indentLevel = 0) =>
-            DrawVector3Sliders(labelX, labelY, labelZ, property, FloatRange.Normalized, indentLevel);
         
         public FloatRange DrawMinMaxSlider(GUIContent label, SerializedProperty minProperty, SerializedProperty maxProperty, FloatRange range, int indentLevel = 0)
         {
-            _editorUtils.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, () =>
             {
                 EditorGUI.BeginChangeCheck();
                 float minValue = minProperty.floatValue;
@@ -105,14 +93,11 @@ namespace ShadowShard.Editor
 
             return new FloatRange(minProperty.floatValue, maxProperty.floatValue);
         }
-
-        public FloatRange DrawMinMaxSlider(GUIContent label, SerializedProperty minProperty, SerializedProperty maxProperty, int indentLevel = 0) =>
-            DrawMinMaxSlider(label, minProperty, maxProperty, FloatRange.Normalized, indentLevel);
         
         //TODO: move to MaterialEditor
         public FloatRange DrawMinMaxVector4StartSlider(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0)
         {
-            _editorUtils.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, () =>
             {
                 EditorGUI.BeginChangeCheck();
                 Vector4 propertyValue = property.vector4Value;
@@ -135,7 +120,7 @@ namespace ShadowShard.Editor
 
         public FloatRange DrawMinMaxVector4EndSlider(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0)
         {
-            _editorUtils.DrawIndented(indentLevel, () =>
+            _groupEditor.DrawIndented(indentLevel, () =>
             {
                 EditorGUI.BeginChangeCheck();
                 Vector4 propertyValue = property.vector4Value;
