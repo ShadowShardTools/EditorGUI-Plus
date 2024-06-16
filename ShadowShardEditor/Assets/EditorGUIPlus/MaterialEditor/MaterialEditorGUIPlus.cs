@@ -411,6 +411,16 @@ namespace EditorGUIPlus.MaterialEditor
             Action onChangedCallback = null) where TEnum : Enum =>
             _popupEditor.DrawBooleanPopup<TEnum, MaterialProperty>(label, property, indentLevel, onChangedCallback);
         
+        public TEnum DrawShaderLocalKeywordBooleanPopup<TEnum>(Material material, MaterialProperty property,
+            string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum =>
+            _popupEditor.DrawShaderLocalKeywordBooleanPopup<TEnum, MaterialProperty>(material, property, shaderGlobalKeyword, 
+                indentLevel, onChangedCallback);
+        
+        public TEnum DrawShaderLocalKeywordBooleanPopup<TEnum>(GUIContent label, Material material, MaterialProperty property, 
+            string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum =>
+            _popupEditor.DrawShaderLocalKeywordBooleanPopup<TEnum, MaterialProperty>(label, material, property, 
+                shaderGlobalKeyword, indentLevel, onChangedCallback);
+        
         public TEnum DrawShaderGlobalKeywordBooleanPopup<TEnum>(MaterialProperty property, string shaderGlobalKeyword, 
             int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum =>
             _popupEditor.DrawShaderGlobalKeywordBooleanPopup<TEnum, MaterialProperty>(property, shaderGlobalKeyword, 
@@ -428,6 +438,11 @@ namespace EditorGUIPlus.MaterialEditor
         public int DrawBooleanPopup(GUIContent label, MaterialProperty property, string[] displayedOptions, 
             int indentLevel = 0, Action onChangedCallback = null) =>
             _popupEditor.DrawBooleanPopup(label, property, displayedOptions, indentLevel, onChangedCallback);
+        
+        public int DrawShaderLocalKeywordBooleanPopup(GUIContent label, Material material, MaterialProperty property, 
+            string[] displayedOptions, string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) =>
+            _popupEditor.DrawShaderLocalKeywordBooleanPopup(label, material, property, displayedOptions, shaderGlobalKeyword, 
+                indentLevel, onChangedCallback);
         
         public int DrawShaderGlobalKeywordBooleanPopup(GUIContent label, MaterialProperty property, 
             string[] displayedOptions, string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) =>
