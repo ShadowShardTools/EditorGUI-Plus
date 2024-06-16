@@ -79,17 +79,30 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
-  IndentLevel: 1
+  IndentLevel: 2
   IsDisabled: 0
   Label:
-    m_Text: sgdfag
-    m_Image: {fileID: 2800000, guid: 727a75301c3d24613a3ebcec4a24c2c8, type: 3}
-    m_Tooltip: sadgdsaga
-  SliderValue: 0.409
-  MinValue: 0.4076851
-  MaxValue: 0.92502344
-  IntSliderValue: 6
-  Vector3Value: {x: 0.434, y: 0.602, z: 0.484}
-  Vector4Value: {x: 0.4194002, y: 0.64151824, z: 0.29287723, w: 0.72352386}
+    m_Text: Test Label
+    m_Image: {fileID: 0}
+    m_Tooltip: 
+  SliderValue: 0.5
+  MinValue: 0
+  MaxValue: 1
+  IntSliderValue: 5
+  Vector3Value: {x: 1, y: 2, z: 3}
+  Vector4Value: {x: 1, y: 2, z: 3, w: 4}
   ToggleValue: 0
   ShaderGlobalKeyword: SHADER_GLOBAL_KEYWORD
+  FloatValue: 0
+  Vector2Value: {x: 0, y: 0}
+  ColorValue: {r: 0, g: 0, b: 0, a: 0}
+  Vector2IntValue: {x: 0, y: 0}
+  Vector3IntValue: {x: 0, y: 0, z: 0}
+  TextureValue: {fileID: 0}
+  TextFieldValue: 
+  FolderPathValue: 
+  IntValue: 0
+  DisplayedOptions:
+  - Option1
+  - Option2
+  SelectedOption: 0

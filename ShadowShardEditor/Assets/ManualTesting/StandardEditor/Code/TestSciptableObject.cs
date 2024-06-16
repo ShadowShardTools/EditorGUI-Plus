@@ -29,8 +29,16 @@ namespace ManualTesting.StandardEditor.Code
         public string TextFieldValue = "";
         public string FolderPathValue = "";
         public int IntValue;
+        public string[] DisplayedOptions = { "Option1", "Option2" };
+        public Some SelectedOption;
         
         public SerializedObject GetSerializedObject() =>
             new(this);
+    }
+    
+    public enum Some
+    {
+        One,
+        Two,
     }
 }

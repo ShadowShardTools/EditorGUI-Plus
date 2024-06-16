@@ -42,6 +42,7 @@ namespace ManualTesting.StandardEditor.Code.Editor
             DrawSliders();
             DrawToggles();
             DrawVectorEditors();
+            DrawTextureAndPopupEditors();
 
             if(EditorGUI.EndChangeCheck())
             {
@@ -113,6 +114,14 @@ namespace ManualTesting.StandardEditor.Code.Editor
             _shadowShardEditor.DrawInt(new GUIContent("Int"), _serializedShadowShardData.FindProperty("IntValue"), IntRange.Normalized, _shadowShardData.IndentLevel);
             _shadowShardEditor.DrawVector2Int(new GUIContent("Vector2Int"), _serializedShadowShardData.FindProperty("Vector2IntValue"), Vector2IntRange.Normalized, _shadowShardData.IndentLevel);
             _shadowShardEditor.DrawVector3Int(new GUIContent("Vector3Int"), _serializedShadowShardData.FindProperty("Vector3IntValue"), Vector3IntRange.Normalized, _shadowShardData.IndentLevel);
+        }
+        
+        private void DrawTextureAndPopupEditors()
+        {
+            _shadowShardEditor.DrawTexture(new GUIContent("Texture"), _serializedShadowShardData.FindProperty("TextureValue"), _shadowShardData.IndentLevel);
+            _shadowShardEditor.DrawPopup(new GUIContent("Popup"), _serializedShadowShardData.FindProperty("SelectedOption"), _shadowShardData.DisplayedOptions, _shadowShardData.IndentLevel);
+            _shadowShardEditor.DrawBooleanPopup(new GUIContent("Boolean Popup"), _serializedShadowShardData.FindProperty("SelectedOption"), _shadowShardData.DisplayedOptions, _shadowShardData.IndentLevel);
+            _shadowShardEditor.DrawShaderGlobalKeywordBooleanPopup(new GUIContent("Shader Global Keyword Boolean Popup"), _serializedShadowShardData.FindProperty("SelectedOption"), _shadowShardData.DisplayedOptions, _shadowShardData.ShaderGlobalKeyword, _shadowShardData.IndentLevel);
         }
     }
 }
