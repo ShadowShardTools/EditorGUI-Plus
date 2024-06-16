@@ -35,7 +35,7 @@ namespace ShadowShard.Editor
             }
         }
 
-        internal Vector2Int DrawVector2Int<TProperty>(GUIContent label, TProperty property, int indentLevel = 0)
+        internal Vector2Int DrawVector2Int<TProperty>(GUIContent label, TProperty property, Vector2IntRange range, int indentLevel = 0)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector2Int(property);
@@ -54,7 +54,7 @@ namespace ShadowShard.Editor
             }
         }
         
-        internal Vector3Int DrawVector3Int<TProperty>(GUIContent label, TProperty property, int indentLevel = 0)
+        internal Vector3Int DrawVector3Int<TProperty>(GUIContent label, TProperty property, Vector3IntRange range, int indentLevel = 0)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector3Int(property);
@@ -73,7 +73,7 @@ namespace ShadowShard.Editor
             }
         }
         
-        internal Vector2Int DrawFloatFromVector2Int<TProperty>(GUIContent label, TProperty property, Vector2Param vector2Param, IntRange range, int indentLevel = 0)
+        internal Vector2Int DrawIntFromVector2Int<TProperty>(GUIContent label, TProperty property, Vector2Param vector2Param, IntRange range, int indentLevel = 0)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector2Int(property);
@@ -96,7 +96,7 @@ namespace ShadowShard.Editor
             }
         }
         
-        internal Vector3Int DrawFloatFromVector3Int<TProperty>(GUIContent label, TProperty property, Vector3Param vector3Param, IntRange range, int indentLevel = 0)
+        internal Vector3Int DrawIntFromVector3Int<TProperty>(GUIContent label, TProperty property, Vector3Param vector3Param, IntRange range, int indentLevel = 0)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector3Int(property);
