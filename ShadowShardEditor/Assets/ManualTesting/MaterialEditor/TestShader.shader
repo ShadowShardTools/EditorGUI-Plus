@@ -5,6 +5,8 @@
         _BaseMap ("Base Map", 2D) = "white" {}
         _Color ("Main Color", Color) = (1, 1, 1, 1)
         _FloatValue ("Float Value", Range(0, 1)) = 0.5
+        _FloatMinValue ("Float Value", Range(0, 1)) = 0.5
+        _FloatMaxValue ("Float Value", Range(0, 1)) = 0.5
         _IntValue ("Int Value", Range(0, 10)) = 5
         _VectorValue ("Vector Value", Vector) = (0, 0, 0, 0)
         _ToggleValue ("Toggle Value", Float) = 0
