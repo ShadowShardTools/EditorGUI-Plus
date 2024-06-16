@@ -1,6 +1,6 @@
-using ShadowShard.Editor;
-using ShadowShard.Editor.Data.Enums;
-using ShadowShard.Editor.Data.Range;
+using EditorGUIPlus;
+using EditorGUIPlus.Data.Enums;
+using EditorGUIPlus.Data.Range;
 using UnityEditor;
 using UnityEngine;
 

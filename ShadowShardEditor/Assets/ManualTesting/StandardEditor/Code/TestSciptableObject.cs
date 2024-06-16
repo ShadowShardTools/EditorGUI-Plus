@@ -1,4 +1,4 @@
-using ShadowShard.Editor.Data.Range;
+using EditorGUIPlus.Data.Range;
 using UnityEditor;
 using UnityEngine;
 
