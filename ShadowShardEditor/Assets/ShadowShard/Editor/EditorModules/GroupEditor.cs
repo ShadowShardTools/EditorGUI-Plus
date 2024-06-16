@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace ShadowShard.Editor
+namespace ShadowShard.Editor.EditorModules
 {
     internal class GroupEditor
     {

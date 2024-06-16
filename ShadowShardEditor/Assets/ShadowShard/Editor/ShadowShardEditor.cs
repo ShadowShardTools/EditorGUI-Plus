@@ -1,9 +1,11 @@
 using System;
-using ShadowShard.Editor.Enums;
-using ShadowShard.Editor.Range;
+using ShadowShard.Editor.Data.Enums;
+using ShadowShard.Editor.Data.Range;
+using ShadowShard.Editor.EditorModules;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using TextEditor = ShadowShard.Editor.EditorModules.TextEditor;
 
 namespace ShadowShard.Editor
 {

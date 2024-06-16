@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace ShadowShard.Editor.Range
+namespace ShadowShard.Editor.Data.Range
 {
     [Serializable]
     public readonly struct Vector3Range

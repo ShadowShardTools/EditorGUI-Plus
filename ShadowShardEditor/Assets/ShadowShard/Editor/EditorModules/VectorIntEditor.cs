@@ -1,9 +1,9 @@
-﻿using ShadowShard.Editor.Enums;
-using ShadowShard.Editor.Range;
+﻿using ShadowShard.Editor.Data.Enums;
+using ShadowShard.Editor.Data.Range;
 using UnityEditor;
 using UnityEngine;
 
-namespace ShadowShard.Editor
+namespace ShadowShard.Editor.EditorModules
 {
     public class VectorIntEditor
     {

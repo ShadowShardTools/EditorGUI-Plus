@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ShadowShard.Editor
+namespace ShadowShard.Editor.EditorModules
 {
     public static class VectorsExtensions
     {

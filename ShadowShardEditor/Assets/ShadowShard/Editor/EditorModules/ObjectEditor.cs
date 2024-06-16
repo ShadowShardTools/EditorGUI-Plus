@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace ShadowShard.Editor
+namespace ShadowShard.Editor.EditorModules
 {
     internal class ObjectEditor
     {

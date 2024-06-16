@@ -1,7 +1,8 @@
 using System;
-using ShadowShard.Editor.Enums;
+using ShadowShard.Editor.Data.Enums;
+using ShadowShard.Editor.Data.Range;
+using ShadowShard.Editor.EditorModules;
 using ShadowShard.Editor.MaterialEditor.AssetObject;
-using ShadowShard.Editor.Range;
 using UnityEditor;
 using UnityEngine;
 
