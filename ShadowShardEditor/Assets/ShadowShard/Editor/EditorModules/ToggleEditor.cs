@@ -1,4 +1,5 @@
-﻿using ShadowShard.Editor.MaterialEditor;
+﻿using System;
+using ShadowShard.Editor.MaterialEditor;
 using UnityEditor;
 using UnityEngine;
 
@@ -15,7 +16,8 @@ namespace ShadowShard.Editor.EditorModules
             _groupEditor = groupEditor;
         }
         
-        internal bool DrawToggle<TProperty>(GUIContent label, TProperty property, int indentLevel = 0)
+        internal bool DrawToggle<TProperty>(GUIContent label, TProperty property, int indentLevel = 0, 
+            Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetBool(property);
@@ -30,12 +32,16 @@ namespace ShadowShard.Editor.EditorModules
                 EditorGUI.showMixedValue = false;
 
                 if (EditorGUI.EndChangeCheck())
+                {
                     _propertyService.SetBool(property, newValue);
+                    onChangedCallback?.Invoke();
+                }
             }
         }
         
         
-        internal bool DrawShaderGlobalKeywordToggle<TProperty>(GUIContent label, TProperty property, string shaderGlobalKeyword, int indentLevel = 0)
+        internal bool DrawShaderGlobalKeywordToggle<TProperty>(GUIContent label, TProperty property, 
+            string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetBool(property);
@@ -53,6 +59,7 @@ namespace ShadowShard.Editor.EditorModules
                 {
                     _propertyService.SetBool(property, newValue);
                     GlobalKeywordsService.SetGlobalKeyword(shaderGlobalKeyword, newValue);
+                    onChangedCallback?.Invoke();
                 }
             }
         }

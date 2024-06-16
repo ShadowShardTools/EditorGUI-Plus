@@ -111,11 +111,13 @@ namespace ShadowShard.Editor
         
         #region ToggleEditorRegion
 
-        public bool DrawToggle(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            _toggleEditor.DrawToggle(label, property, indentLevel);
+        public bool DrawToggle(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            Action onChangedCallback = null) =>
+            _toggleEditor.DrawToggle(label, property, indentLevel, onChangedCallback);
         
-        public bool DrawShaderGlobalKeywordToggle(GUIContent label, SerializedProperty property, string shaderGlobalKeyword, int indentLevel = 0) =>
-            _toggleEditor.DrawShaderGlobalKeywordToggle(label, property, shaderGlobalKeyword, indentLevel);
+        public bool DrawShaderGlobalKeywordToggle(GUIContent label, SerializedProperty property, 
+            string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) =>
+            _toggleEditor.DrawShaderGlobalKeywordToggle(label, property, shaderGlobalKeyword, indentLevel, onChangedCallback);
         
         #endregion
         
