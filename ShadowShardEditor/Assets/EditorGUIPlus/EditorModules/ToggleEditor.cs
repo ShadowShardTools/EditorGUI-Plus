@@ -2,6 +2,7 @@
 using EditorGUIPlus.MaterialEditor;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace EditorGUIPlus.EditorModules
 {
@@ -39,6 +40,30 @@ namespace EditorGUIPlus.EditorModules
             }
         }
         
+        internal bool DrawShaderLocalKeywordToggle<TProperty>(GUIContent label, Material material, TProperty property, 
+            string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return _propertyService.GetBool(property);
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+                
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                bool propertyValue = _propertyService.GetBool(property);
+                bool newValue = EditorGUILayout.Toggle(label, propertyValue);
+                EditorGUI.showMixedValue = false;
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    _propertyService.SetBool(property, newValue);
+                    KeywordsService.SetKeyword(material, shaderGlobalKeyword, newValue);
+                    onChangedCallback?.Invoke();
+                }
+            }
+        }
+        
         internal bool DrawShaderGlobalKeywordToggle<TProperty>(GUIContent label, TProperty property, 
             string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null)
         {
@@ -57,7 +82,7 @@ namespace EditorGUIPlus.EditorModules
                 if (EditorGUI.EndChangeCheck())
                 {
                     _propertyService.SetBool(property, newValue);
-                    GlobalKeywordsService.SetGlobalKeyword(shaderGlobalKeyword, newValue);
+                    KeywordsService.SetGlobalKeyword(shaderGlobalKeyword, newValue);
                     onChangedCallback?.Invoke();
                 }
             }

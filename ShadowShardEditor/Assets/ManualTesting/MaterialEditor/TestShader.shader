@@ -28,6 +28,8 @@
             #pragma fragment frag
             // make fog work
             #pragma multi_compile_fog
+            //#pragma shader_feature_local_fragment _TEST_KEYWORD
+            #pragma multi_compile _ _TEST_KEYWORD
 
             #include "UnityCG.cginc"
 
@@ -61,7 +63,18 @@
             half4 frag (v2f i) : SV_Target
             {
                 half4 col = tex2D(_BaseMap, i.uv) * _Color;
-                return col * _FloatValue + _VectorValue;
+                half4 fin = col * _FloatValue + _VectorValue;
+                
+                if(_ToggleValue > 0.5f)
+                    fin += 1;
+
+                #ifdef _TEST_KEYWORD
+                    return half4(1.0, 1.0, 1.0, 1.0);
+                #else
+                    return fin;
+                #endif
+                
+                return fin;
             }
             ENDCG
         }

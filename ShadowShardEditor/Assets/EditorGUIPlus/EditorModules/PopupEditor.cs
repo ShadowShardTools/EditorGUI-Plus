@@ -151,7 +151,7 @@ namespace EditorGUIPlus.EditorModules
                 if (EditorGUI.EndChangeCheck())
                 {
                     _propertyService.SetEnumIndex(property, newValue);
-                    GlobalKeywordsService.SetGlobalKeyword(shaderGlobalKeyword, newValue > 0);
+                    KeywordsService.SetGlobalKeyword(shaderGlobalKeyword, newValue > 0);
                     onChangedCallback?.Invoke();
                 }
             }
