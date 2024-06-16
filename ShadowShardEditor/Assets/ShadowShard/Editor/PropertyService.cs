@@ -30,30 +30,6 @@ namespace ShadowShard.Editor
             }
         }
         
-        internal int GetInt(object property)
-        {
-            return property switch
-            {
-                MaterialProperty matProperty => (int)matProperty.floatValue,
-                SerializedProperty serializedProperty => serializedProperty.intValue,
-                _ => default
-            };
-        }
-        
-        internal void SetInt(object property, int newValue)
-        {
-            switch (property)
-            {
-                case MaterialProperty matProperty:
-                    matProperty.floatValue = newValue;
-                    break;
-                case SerializedProperty serializedProperty:
-                    serializedProperty.intValue = newValue;
-                    serializedProperty.serializedObject.ApplyModifiedProperties();
-                    break;
-            }
-        }
-        
         internal bool GetBool(object property)
         {
             return property switch
@@ -83,7 +59,7 @@ namespace ShadowShard.Editor
             return property switch
             {
                 MaterialProperty matProperty => matProperty.vectorValue,
-                SerializedProperty serializedProperty => serializedProperty.vector3Value,
+                SerializedProperty serializedProperty => serializedProperty.vector2Value,
                 _ => default
             };
         }
@@ -96,7 +72,7 @@ namespace ShadowShard.Editor
                     matProperty.vectorValue = new Vector4(newValue.x, newValue.y, matProperty.vectorValue.z, matProperty.vectorValue.w);
                     break;
                 case SerializedProperty serializedProperty:
-                    serializedProperty.vector3Value = newValue;
+                    serializedProperty.vector2Value = newValue;
                     serializedProperty.serializedObject.ApplyModifiedProperties();
                     break;
             }
@@ -169,6 +145,78 @@ namespace ShadowShard.Editor
                     break;
                 case SerializedProperty serializedProperty:
                     serializedProperty.colorValue = newValue;
+                    serializedProperty.serializedObject.ApplyModifiedProperties();
+                    break;
+            }
+        }
+        
+        internal int GetInt(object property)
+        {
+            return property switch
+            {
+                MaterialProperty matProperty => (int)matProperty.floatValue,
+                SerializedProperty serializedProperty => serializedProperty.intValue,
+                _ => default
+            };
+        }
+        
+        internal void SetInt(object property, int newValue)
+        {
+            switch (property)
+            {
+                case MaterialProperty matProperty:
+                    matProperty.floatValue = newValue;
+                    break;
+                case SerializedProperty serializedProperty:
+                    serializedProperty.intValue = newValue;
+                    serializedProperty.serializedObject.ApplyModifiedProperties();
+                    break;
+            }
+        }
+        
+        internal Vector2Int GetVector2Int(object property)
+        {
+            return property switch
+            {
+                MaterialProperty matProperty => new Vector2Int((int)matProperty.vectorValue.x, (int)matProperty.vectorValue.y),
+                SerializedProperty serializedProperty => serializedProperty.vector2IntValue,
+                _ => default
+            };
+        }
+        
+        internal void SetVector2Int(object property, Vector2Int newValue)
+        {
+            switch (property)
+            {
+                case MaterialProperty matProperty:
+                    matProperty.vectorValue = new Vector4(newValue.x, newValue.y, matProperty.vectorValue.z, matProperty.vectorValue.w);
+                    break;
+                case SerializedProperty serializedProperty:
+                    serializedProperty.vector2IntValue = newValue;
+                    serializedProperty.serializedObject.ApplyModifiedProperties();
+                    break;
+            }
+        }
+        
+        internal Vector3Int GetVector3Int(object property)
+        {
+            return property switch
+            {
+                MaterialProperty matProperty => new Vector3Int((int)matProperty.vectorValue.x, (int)matProperty.vectorValue.y, (int)matProperty.vectorValue.z),
+                SerializedProperty serializedProperty => serializedProperty.vector3IntValue,
+                _ => default
+            };
+        }
+        
+        internal void SetVector3Int(object property, Vector3Int newValue)
+        {
+            switch (property)
+            {
+                case MaterialProperty matProperty:
+                    matProperty.vectorValue = new Vector4(newValue.x, newValue.y, newValue.z, matProperty.vectorValue.w);
+                    break;
+                case SerializedProperty serializedProperty:
+                    serializedProperty.vector3Value = newValue;
                     serializedProperty.serializedObject.ApplyModifiedProperties();
                     break;
             }
