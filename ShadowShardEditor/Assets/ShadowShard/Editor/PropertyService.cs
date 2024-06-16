@@ -216,7 +216,7 @@ namespace ShadowShard.Editor
                     matProperty.vectorValue = new Vector4(newValue.x, newValue.y, newValue.z, matProperty.vectorValue.w);
                     break;
                 case SerializedProperty serializedProperty:
-                    serializedProperty.vector3Value = newValue;
+                    serializedProperty.vector3IntValue = newValue;
                     serializedProperty.serializedObject.ApplyModifiedProperties();
                     break;
             }
