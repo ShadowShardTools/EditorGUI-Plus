@@ -100,16 +100,19 @@ namespace ManualTesting.StandardEditor.Code.Editor
         
         private void DrawVectorEditors()
         {
-            _shadowShardData.FloatValue = _shadowShardEditor.DrawFloat(new GUIContent("Float"), _serializedShadowShardData.FindProperty("FloatValue"), FloatRange.Normalized, _shadowShardData.IndentLevel);
-            _shadowShardData.Vector2Value = _shadowShardEditor.DrawVector2(new GUIContent("Vector2"), _serializedShadowShardData.FindProperty("Vector2Value"), Vector2Range.Normalized, _shadowShardData.IndentLevel);
-            _shadowShardData.Vector3Value = _shadowShardEditor.DrawVector3(new GUIContent("Vector3"), _serializedShadowShardData.FindProperty("Vector3Value"), Vector3Range.Normalized, _shadowShardData.IndentLevel);
-            _shadowShardData.Vector4Value = _shadowShardEditor.DrawVector4(new GUIContent("Vector4"), _serializedShadowShardData.FindProperty("Vector4Value"), Vector4Range.Normalized, _shadowShardData.IndentLevel);
-            _shadowShardData.ColorValue = _shadowShardEditor.DrawColor(new GUIContent("Color"), _serializedShadowShardData.FindProperty("ColorValue"), true, false, _shadowShardData.IndentLevel);
-            _shadowShardData.Vector2IntValue = _shadowShardEditor.DrawNormalizedIntFromVector2Int(new GUIContent("Vector2Int"), _serializedShadowShardData.FindProperty("Vector2IntValue"), Vector2Param.X, _shadowShardData.IndentLevel);
-            _shadowShardData.Vector3IntValue = _shadowShardEditor.DrawNormalizedIntFromVector3Int(new GUIContent("Vector3Int"), _serializedShadowShardData.FindProperty("Vector3IntValue"), Vector3Param.X, _shadowShardData.IndentLevel);
-            _shadowShardData.TextureValue = _shadowShardEditor.DrawTexture(new GUIContent("Texture"), _serializedShadowShardData.FindProperty("TextureValue"), _shadowShardData.IndentLevel);
-            _shadowShardData.TextFieldValue = _shadowShardEditor.DrawTextField(new GUIContent("Text Field"), _serializedShadowShardData.FindProperty("TextFieldValue"), _shadowShardData.IndentLevel);
-            _shadowShardData.FolderPathValue = _shadowShardEditor.DrawFolderPathField(new GUIContent("Folder Path"), _serializedShadowShardData.FindProperty("FolderPathValue"), "", _shadowShardData.IndentLevel);
+            _shadowShardEditor.DrawFloat(new GUIContent("Float"), _serializedShadowShardData.FindProperty("FloatValue"), FloatRange.Normalized, _shadowShardData.IndentLevel);
+            _shadowShardEditor.DrawVector2(new GUIContent("Vector2"), _serializedShadowShardData.FindProperty("Vector2Value"), Vector2Range.Normalized, _shadowShardData.IndentLevel);
+            _shadowShardEditor.DrawVector3(new GUIContent("Vector3"), _serializedShadowShardData.FindProperty("Vector3Value"), Vector3Range.Normalized, _shadowShardData.IndentLevel);
+            _shadowShardEditor.DrawVector4(new GUIContent("Vector4"), _serializedShadowShardData.FindProperty("Vector4Value"), Vector4Range.Normalized, _shadowShardData.IndentLevel);
+            _shadowShardEditor.DrawColor(new GUIContent("Color"), _serializedShadowShardData.FindProperty("ColorValue"), true, false, _shadowShardData.IndentLevel);
+            _shadowShardEditor.DrawNormalizedIntFromVector2Int(new GUIContent("Vector2Int"), _serializedShadowShardData.FindProperty("Vector2IntValue"), Vector2Param.X, _shadowShardData.IndentLevel);
+            _shadowShardEditor.DrawNormalizedIntFromVector3Int(new GUIContent("Vector3Int"), _serializedShadowShardData.FindProperty("Vector3IntValue"), Vector3Param.X, _shadowShardData.IndentLevel);
+            _shadowShardEditor.DrawTexture(new GUIContent("Texture"), _serializedShadowShardData.FindProperty("TextureValue"), _shadowShardData.IndentLevel);
+            _shadowShardEditor.DrawTextField(new GUIContent("Text Field"), _serializedShadowShardData.FindProperty("TextFieldValue"), _shadowShardData.IndentLevel);
+            _shadowShardEditor.DrawFolderPathField(new GUIContent("Folder Path"), _serializedShadowShardData.FindProperty("FolderPathValue"), "", _shadowShardData.IndentLevel);
+            _shadowShardEditor.DrawInt(new GUIContent("Int"), _serializedShadowShardData.FindProperty("IntValue"), IntRange.Normalized, _shadowShardData.IndentLevel);
+            _shadowShardEditor.DrawVector2Int(new GUIContent("Vector2Int"), _serializedShadowShardData.FindProperty("Vector2IntValue"), Vector2IntRange.Normalized, _shadowShardData.IndentLevel);
+            _shadowShardEditor.DrawVector3Int(new GUIContent("Vector3Int"), _serializedShadowShardData.FindProperty("Vector3IntValue"), Vector3IntRange.Normalized, _shadowShardData.IndentLevel);
         }
     }
 }

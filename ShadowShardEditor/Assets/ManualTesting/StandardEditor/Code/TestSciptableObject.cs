@@ -28,6 +28,7 @@ namespace ManualTesting.StandardEditor.Code
         public Texture TextureValue;
         public string TextFieldValue = "";
         public string FolderPathValue = "";
+        public int IntValue;
         
         public SerializedObject GetSerializedObject() =>
             new(this);
