@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 
 namespace ShadowShard.Editor.EditorModules
@@ -10,7 +11,7 @@ namespace ShadowShard.Editor.EditorModules
         internal TextEditor(GroupEditor groupEditor) =>
             _groupEditor = groupEditor;
         
-        internal string DrawTextField(GUIContent label, SerializedProperty property, int indentLevel = 0)
+        internal string DrawTextField(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return property.stringValue;
@@ -24,12 +25,16 @@ namespace ShadowShard.Editor.EditorModules
                 string newValue = EditorGUILayout.TextField(label, propertyValue);
                 EditorGUI.showMixedValue = false;
 
-                if(EditorGUI.EndChangeCheck())
+                if (EditorGUI.EndChangeCheck())
+                {
                     property.stringValue = newValue;
+                    onChangedCallback?.Invoke();
+                }
             }
         }
         
-        internal string DrawFolderPathField(GUIContent label, SerializedProperty property, string defaultDirectory, int indentLevel = 0)
+        internal string DrawFolderPathField(GUIContent label, SerializedProperty property, string defaultDirectory, 
+            int indentLevel = 0, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return property.stringValue;
@@ -60,6 +65,7 @@ namespace ShadowShard.Editor.EditorModules
                 {
                     property.stringValue = propertyValue;
                     property.serializedObject.ApplyModifiedProperties();
+                    onChangedCallback?.Invoke();
                 }
             }
         }

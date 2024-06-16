@@ -345,11 +345,12 @@ namespace ShadowShard.Editor
         
         #region TextEditorRegion
 
-        public string DrawTextField(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            _textEditor.DrawTextField(label, property, indentLevel);
+        public string DrawTextField(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null) =>
+            _textEditor.DrawTextField(label, property, indentLevel, onChangedCallback);
         
-        public string DrawFolderPathField(GUIContent label, SerializedProperty property, string defaultDirectory, int indentLevel = 0) =>
-            _textEditor.DrawFolderPathField(label, property, defaultDirectory, indentLevel);
+        public string DrawFolderPathField(GUIContent label, SerializedProperty property, string defaultDirectory, 
+            int indentLevel = 0, Action onChangedCallback = null) =>
+            _textEditor.DrawFolderPathField(label, property, defaultDirectory, indentLevel, onChangedCallback);
         
         #endregion
     }
