@@ -109,7 +109,7 @@ namespace ManualTesting.StandardEditor.Code.Editor
             _shadowShardData.Vector3IntValue = _shadowShardEditor.DrawNormalizedIntFromVector3Int(new GUIContent("Vector3Int"), _serializedShadowShardData.FindProperty("Vector3IntValue"), Vector3Param.X, _shadowShardData.IndentLevel);
             _shadowShardData.TextureValue = _shadowShardEditor.DrawTexture(new GUIContent("Texture"), _serializedShadowShardData.FindProperty("TextureValue"), _shadowShardData.IndentLevel);
             _shadowShardData.TextFieldValue = _shadowShardEditor.DrawTextField(new GUIContent("Text Field"), _serializedShadowShardData.FindProperty("TextFieldValue"), _shadowShardData.IndentLevel);
-            _shadowShardData.FolderPathValue = _shadowShardEditor.DrawFolderPathField(new GUIContent("Folder Path"), _serializedShadowShardData.FindProperty("FolderPathValue"), "");
+            _shadowShardData.FolderPathValue = _shadowShardEditor.DrawFolderPathField(new GUIContent("Folder Path"), _serializedShadowShardData.FindProperty("FolderPathValue"), "", _shadowShardData.IndentLevel);
         }
     }
 }
