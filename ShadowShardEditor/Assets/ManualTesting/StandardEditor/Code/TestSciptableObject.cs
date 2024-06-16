@@ -20,6 +20,14 @@ namespace ManualTesting.StandardEditor.Code
         public FloatRange FloatRangeValue = new FloatRange(0, 1);
         public bool ToggleValue;
         public string ShaderGlobalKeyword = "SHADER_GLOBAL_KEYWORD";
+        public float FloatValue;
+        public Vector2 Vector2Value;
+        public Color ColorValue;
+        public Vector2Int Vector2IntValue;
+        public Vector3Int Vector3IntValue;
+        public Texture TextureValue;
+        public string TextFieldValue = "";
+        public string FolderPathValue = "";
         
         public SerializedObject GetSerializedObject() =>
             new(this);
