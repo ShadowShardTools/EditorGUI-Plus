@@ -287,8 +287,8 @@ namespace ShadowShard.Editor
         
         #region TextureEditorRegion
 
-        public Texture DrawTexture(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            _textureEditor.DrawTexture(label, property, indentLevel);
+        public Texture DrawTexture(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null) =>
+            _textureEditor.DrawTexture(label, property, indentLevel, onChangedCallback);
         
         #endregion
         
