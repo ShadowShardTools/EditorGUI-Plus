@@ -21,7 +21,8 @@ namespace ShadowShard.Editor.EditorModules
             _groupEditor = groupEditor;
         }
 
-        internal Texture DrawTexture<TProperty>(GUIContent label, TProperty property, int indentLevel = 0)
+        internal Texture DrawTexture<TProperty>(GUIContent label, TProperty property, int indentLevel = 0, 
+            Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetTexture(property);
@@ -35,8 +36,11 @@ namespace ShadowShard.Editor.EditorModules
                 Texture newValue = EditorGUILayout.ObjectField(label, propertyValue, typeof(Texture), false) as Texture;
                 EditorGUI.showMixedValue = false;
 
-                if (EditorGUI.EndChangeCheck()) 
+                if (EditorGUI.EndChangeCheck())
+                {
                     _propertyService.SetTexture(property, newValue);
+                    onChangedCallback?.Invoke();
+                }
             }
         }
         

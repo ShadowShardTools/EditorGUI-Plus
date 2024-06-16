@@ -1,4 +1,5 @@
-﻿using ShadowShard.Editor.Data.Enums;
+﻿using System;
+using ShadowShard.Editor.Data.Enums;
 using ShadowShard.Editor.Data.Range;
 using UnityEditor;
 using UnityEngine;
@@ -16,7 +17,8 @@ namespace ShadowShard.Editor.EditorModules
             _groupEditor = groupEditor;
         }
         
-        internal float DrawFloat<TProperty>(GUIContent label, TProperty property, FloatRange range, int indentLevel = 0)
+        internal float DrawFloat<TProperty>(GUIContent label, TProperty property, FloatRange range, int indentLevel = 0, 
+            Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetFloat(property);
@@ -29,13 +31,17 @@ namespace ShadowShard.Editor.EditorModules
                 float propertyValue = _propertyService.GetFloat(property);
                 float newValue = Mathf.Clamp(EditorGUILayout.FloatField(label, propertyValue), range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
-                
-                if (EditorGUI.EndChangeCheck()) 
+
+                if (EditorGUI.EndChangeCheck())
+                {
                     _propertyService.SetFloat(property, newValue);
+                    onChangedCallback?.Invoke();
+                }
             }
         }
 
-        internal Vector2 DrawVector2<TProperty>(GUIContent label, TProperty property, Vector2Range range, int indentLevel = 0)
+        internal Vector2 DrawVector2<TProperty>(GUIContent label, TProperty property, Vector2Range range, 
+            int indentLevel = 0, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector2(property);
@@ -50,11 +56,15 @@ namespace ShadowShard.Editor.EditorModules
                 EditorGUI.showMixedValue = false;
 
                 if (EditorGUI.EndChangeCheck())
+                {
                     _propertyService.SetVector2(property, newValue);
+                    onChangedCallback?.Invoke();
+                }
             }
         }
         
-        internal Vector3 DrawVector3<TProperty>(GUIContent label, TProperty property, Vector3Range range, int indentLevel = 0)
+        internal Vector3 DrawVector3<TProperty>(GUIContent label, TProperty property, Vector3Range range, 
+            int indentLevel = 0, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector3(property);
@@ -67,13 +77,17 @@ namespace ShadowShard.Editor.EditorModules
                 Vector3 propertyValue = _propertyService.GetVector3(property);
                 Vector3 newValue = EditorGUILayout.Vector3Field(label, propertyValue).Clamp(range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
-                
+
                 if (EditorGUI.EndChangeCheck())
+                {
                     _propertyService.SetVector3(property, newValue);
+                    onChangedCallback?.Invoke();
+                }
             }
         }
         
-        internal Vector4 DrawVector4<TProperty>(GUIContent label, TProperty property, Vector4Range range, int indentLevel = 0)
+        internal Vector4 DrawVector4<TProperty>(GUIContent label, TProperty property, Vector4Range range, 
+            int indentLevel = 0, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector4(property);
@@ -88,11 +102,15 @@ namespace ShadowShard.Editor.EditorModules
                 EditorGUI.showMixedValue = false;
 
                 if (EditorGUI.EndChangeCheck())
+                {
                     _propertyService.SetVector4(property, newValue);
+                    onChangedCallback?.Invoke();
+                }
             }
         }
         
-        internal Vector2 DrawFloatFromVector2<TProperty>(GUIContent label, TProperty property, Vector2Param vector2Param, FloatRange range, int indentLevel = 0)
+        internal Vector2 DrawFloatFromVector2<TProperty>(GUIContent label, TProperty property, Vector2Param vector2Param, 
+            FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector2(property);
@@ -111,11 +129,13 @@ namespace ShadowShard.Editor.EditorModules
                 {
                     propertyValue[(int)vector2Param] = newValue;
                     _propertyService.SetVector2(property, propertyValue);
+                    onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal Vector3 DrawFloatFromVector3<TProperty>(GUIContent label, TProperty property, Vector3Param vector3Param, FloatRange range, int indentLevel = 0)
+        internal Vector3 DrawFloatFromVector3<TProperty>(GUIContent label, TProperty property, Vector3Param vector3Param, 
+            FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector3(property);
@@ -134,11 +154,13 @@ namespace ShadowShard.Editor.EditorModules
                 {
                     propertyValue[(int)vector3Param] = newValue;
                     _propertyService.SetVector3(property, propertyValue);
+                    onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal Vector4 DrawFloatFromVector4<TProperty>(GUIContent label, TProperty property, Vector4Param vector4Param, FloatRange range, int indentLevel = 0)
+        internal Vector4 DrawFloatFromVector4<TProperty>(GUIContent label, TProperty property, Vector4Param vector4Param, 
+            FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector4(property);
@@ -157,11 +179,13 @@ namespace ShadowShard.Editor.EditorModules
                 {
                     propertyValue[(int)vector4Param] = newValue;
                     _propertyService.SetVector4(property, propertyValue);
+                    onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal Vector4 DrawVector4Start<TProperty>(GUIContent label, TProperty property, Vector2Range range, int indentLevel = 0)
+        internal Vector4 DrawVector4Start<TProperty>(GUIContent label, TProperty property, Vector2Range range, 
+            int indentLevel = 0, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector4(property);
@@ -180,11 +204,13 @@ namespace ShadowShard.Editor.EditorModules
                 {
                     Vector4 newVector4Value = new(newValue.x, newValue.y, propertyVector4Value.z, propertyVector4Value.w);
                     _propertyService.SetVector4(property, newVector4Value);
+                    onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal Vector4 DrawVector4End<TProperty>(GUIContent label, TProperty property, Vector2Range range, int indentLevel = 0)
+        internal Vector4 DrawVector4End<TProperty>(GUIContent label, TProperty property, Vector2Range range, 
+            int indentLevel = 0, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector4(property);
@@ -203,11 +229,13 @@ namespace ShadowShard.Editor.EditorModules
                 {
                     Vector4 newVector4Value = new(propertyVector4Value.x, propertyVector4Value.y, newValue.x, newValue.y);
                     _propertyService.SetVector4(property, newVector4Value);
+                    onChangedCallback?.Invoke();
                 }
             }
         }
 
-        internal Color DrawColor<TProperty>(GUIContent label, TProperty property, bool showAlpha = true, bool hdr = false, int indentLevel = 0)
+        internal Color DrawColor<TProperty>(GUIContent label, TProperty property, bool showAlpha = true,
+            bool hdr = false, int indentLevel = 0, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetColor(property);
@@ -220,9 +248,12 @@ namespace ShadowShard.Editor.EditorModules
                 Color propertyValue = _propertyService.GetColor(property);
                 Color newValue = EditorGUILayout.ColorField(label, propertyValue, true, showAlpha, hdr);
                 EditorGUI.showMixedValue = false;
-
+                
                 if (EditorGUI.EndChangeCheck())
+                {
                     _propertyService.SetColor(property, newValue);
+                    onChangedCallback?.Invoke();
+                }
             }
         }
     }
