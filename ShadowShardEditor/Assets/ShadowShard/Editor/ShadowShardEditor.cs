@@ -21,6 +21,7 @@ namespace ShadowShard.Editor
         private readonly PopupEditor _popupEditor;
         private readonly ObjectEditor _objectEditor;
         private readonly TextEditor _textEditor;
+        private readonly CurveEditor _curveEditor;
         
         public ShadowShardEditor()
         {
@@ -36,6 +37,7 @@ namespace ShadowShard.Editor
             _popupEditor = new PopupEditor(propertyService, _groupEditor);
             _objectEditor = new ObjectEditor(_groupEditor);
             _textEditor = new TextEditor(_groupEditor);
+            _curveEditor = new CurveEditor(_groupEditor);
         }
         
         #region GroupEditorRegion
@@ -418,6 +420,13 @@ namespace ShadowShard.Editor
         public string DrawFolderPathField(GUIContent label, SerializedProperty property, string defaultDirectory, 
             int indentLevel = 0, Action onChangedCallback = null) =>
             _textEditor.DrawFolderPathField(label, property, defaultDirectory, indentLevel, onChangedCallback);
+        
+        #endregion
+        
+        #region CurveTEditorRegion
+
+        public AnimationCurve DrawAnimationCurve(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null) =>
+            _curveEditor.DrawAnimationCurve(label, property, indentLevel, onChangedCallback);
         
         #endregion
     }
