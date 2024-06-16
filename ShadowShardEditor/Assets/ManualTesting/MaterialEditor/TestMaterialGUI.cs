@@ -16,6 +16,7 @@ namespace ManualTesting.MaterialEditor
             return new List<MaterialSection>
             {
                 new SlidersTestSection(),
+                new IntSlidersTestSection(),
             };
         }
     }
