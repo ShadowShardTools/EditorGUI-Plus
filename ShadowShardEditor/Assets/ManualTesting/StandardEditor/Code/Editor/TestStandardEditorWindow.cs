@@ -1,3 +1,5 @@
+using EditorGUIPlus.Data.Enums;
+using EditorGUIPlus.Data.Range;
 using UnityEditor;
 using UnityEngine;
 
@@ -6,7 +8,7 @@ namespace ManualTesting.StandardEditor.Code.Editor
     public class ShadowShardEditorWindow : EditorWindow
     {
         private ShadowShardData _shadowShardData;
-        private EditorGUIPlus _shadowShardEditor;
+        private EditorGUIPlus.EditorGUIPlus _shadowShardEditor;
         private SerializedObject _serializedShadowShardData;
         private Vector2 _scrollPosition;
 
@@ -17,7 +19,7 @@ namespace ManualTesting.StandardEditor.Code.Editor
         private void OnGUI()
         {
             _shadowShardData = EditorGUILayout.ObjectField("Test data", _shadowShardData, typeof(ShadowShardData), false) as ShadowShardData;
-            _shadowShardEditor ??= new ShadowShardEditor();
+            _shadowShardEditor ??= new EditorGUIPlus.EditorGUIPlus();
             if(_shadowShardData == null)
             {
                 EditorGUILayout.HelpBox("Test data is not set!", MessageType.Error);

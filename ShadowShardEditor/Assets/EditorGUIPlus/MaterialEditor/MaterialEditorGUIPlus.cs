@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace EditorGUIPlus.MaterialEditor
 {
-    public sealed class ShadowShardMaterialEditor : IShadowShardMaterialEditor
+    public sealed class MaterialEditorGUIPlus : IMaterialEditorGUIPlus
     {
         private readonly GroupEditor _groupEditor;
         private readonly SliderEditor _sliderEditor;
@@ -22,7 +22,7 @@ namespace EditorGUIPlus.MaterialEditor
         
         public UnityEditor.MaterialEditor MaterialEditor;
         
-        public ShadowShardMaterialEditor()
+        public MaterialEditorGUIPlus()
         {
             PropertyService propertyService = new();
             
@@ -134,9 +134,17 @@ namespace EditorGUIPlus.MaterialEditor
             Vector3Param vectorParam, IntRange range, int indentLevel = 0, Action onChangedCallback = null) =>
             _sliderIntEditor.DrawFromVector3IntParamSlider(label, property, vectorParam, range, indentLevel, onChangedCallback);
         
+        public void DrawFromVector3IntParamSlider<TProperty>(GUIContent label, TProperty property, 
+            Vector3Param vectorParam, int indentLevel = 0, Action onChangedCallback = null) =>
+            _sliderIntEditor.DrawFromVector3IntParamSlider(label, property, vectorParam, IntRange.Normalized, indentLevel, onChangedCallback);
+        
         public void DrawVector3IntSliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
             MaterialProperty property, IntRange range, int indentLevel = 0, Action onChangedCallback = null) =>
             _sliderIntEditor.DrawVector3IntSliders(labelX, labelY, labelZ, property, range, indentLevel, onChangedCallback);
+        
+        public void DrawVector3IntSliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
+            MaterialProperty property, int indentLevel = 0, Action onChangedCallback = null) =>
+            _sliderIntEditor.DrawVector3IntSliders(labelX, labelY, labelZ, property, IntRange.Normalized, indentLevel, onChangedCallback);
 
         #endregion
         
@@ -145,6 +153,10 @@ namespace EditorGUIPlus.MaterialEditor
         public bool DrawToggle(GUIContent label, MaterialProperty property, int indentLevel = 0, 
             Action onChangedCallback = null) =>
             _toggleEditor.DrawToggle(label, property, indentLevel, onChangedCallback);
+        
+        public bool DrawShaderLocalKeywordToggle(GUIContent label, Material material, MaterialProperty property, 
+            string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) =>
+            _toggleEditor.DrawShaderLocalKeywordToggle(label, material, property, shaderGlobalKeyword, indentLevel, onChangedCallback);
         
         public bool DrawShaderGlobalKeywordToggle(GUIContent label, MaterialProperty property, 
             string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) =>
@@ -185,6 +197,18 @@ namespace EditorGUIPlus.MaterialEditor
         public Vector4 DrawVector4(GUIContent label, MaterialProperty property, int indentLevel = 0,
             Action onChangedCallback = null) =>
             _vectorEditor.DrawVector4(label, property, Vector4Range.Full, indentLevel, onChangedCallback);
+        
+        public Vector2 DrawFloatFromVector2(GUIContent label, MaterialProperty property, Vector2Param vector2Param, 
+            FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
+            _vectorEditor.DrawFloatFromVector2(label, property, vector2Param, range, indentLevel, onChangedCallback);
+        
+        public Vector3 DrawFloatFromVector3(GUIContent label, MaterialProperty property, Vector3Param vector3Param, 
+            FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
+            _vectorEditor.DrawFloatFromVector3(label, property, vector3Param, range, indentLevel, onChangedCallback);
+        
+        public Vector4 DrawFloatFromVector4(GUIContent label, MaterialProperty property, Vector4Param vector4Param, 
+            FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
+            _vectorEditor.DrawFloatFromVector4(label, property, vector4Param, range, indentLevel, onChangedCallback);
         
         public float DrawNormalizedFloat(GUIContent label, MaterialProperty property, int indentLevel = 0, 
             Action onChangedCallback = null) =>
@@ -242,17 +266,6 @@ namespace EditorGUIPlus.MaterialEditor
             float min = 0.0f, int indentLevel = 0, Action onChangedCallback = null) =>
             _vectorEditor.DrawFloatFromVector4(label, property, vector4Param, FloatRange.ToMaxFrom(min), indentLevel, onChangedCallback);
         
-        public Vector2 DrawFloatFromVector2(GUIContent label, MaterialProperty property, Vector2Param vector2Param, 
-            FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorEditor.DrawFloatFromVector2(label, property, vector2Param, range, indentLevel, onChangedCallback);
-        
-        public Vector3 DrawFloatFromVector3(GUIContent label, MaterialProperty property, Vector3Param vector3Param, 
-            FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorEditor.DrawFloatFromVector3(label, property, vector3Param, range, indentLevel, onChangedCallback);
-        
-        public Vector4 DrawFloatFromVector4(GUIContent label, MaterialProperty property, Vector4Param vector4Param, 
-            FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorEditor.DrawFloatFromVector4(label, property, vector4Param, range, indentLevel, onChangedCallback);
         public Vector4 DrawVector4Start(GUIContent label, MaterialProperty property, Vector2Range range, 
             int indentLevel = 0, Action onChangedCallback = null) =>
             _vectorEditor.DrawVector4Start(label, property, range, indentLevel, onChangedCallback);
@@ -398,6 +411,16 @@ namespace EditorGUIPlus.MaterialEditor
             Action onChangedCallback = null) where TEnum : Enum =>
             _popupEditor.DrawBooleanPopup<TEnum, MaterialProperty>(label, property, indentLevel, onChangedCallback);
         
+        public TEnum DrawShaderLocalKeywordBooleanPopup<TEnum>(Material material, MaterialProperty property,
+            string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum =>
+            _popupEditor.DrawShaderLocalKeywordBooleanPopup<TEnum, MaterialProperty>(material, property, shaderGlobalKeyword, 
+                indentLevel, onChangedCallback);
+        
+        public TEnum DrawShaderLocalKeywordBooleanPopup<TEnum>(GUIContent label, Material material, MaterialProperty property, 
+            string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum =>
+            _popupEditor.DrawShaderLocalKeywordBooleanPopup<TEnum, MaterialProperty>(label, material, property, 
+                shaderGlobalKeyword, indentLevel, onChangedCallback);
+        
         public TEnum DrawShaderGlobalKeywordBooleanPopup<TEnum>(MaterialProperty property, string shaderGlobalKeyword, 
             int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum =>
             _popupEditor.DrawShaderGlobalKeywordBooleanPopup<TEnum, MaterialProperty>(property, shaderGlobalKeyword, 
@@ -415,6 +438,11 @@ namespace EditorGUIPlus.MaterialEditor
         public int DrawBooleanPopup(GUIContent label, MaterialProperty property, string[] displayedOptions, 
             int indentLevel = 0, Action onChangedCallback = null) =>
             _popupEditor.DrawBooleanPopup(label, property, displayedOptions, indentLevel, onChangedCallback);
+        
+        public int DrawShaderLocalKeywordBooleanPopup(GUIContent label, Material material, MaterialProperty property, 
+            string[] displayedOptions, string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) =>
+            _popupEditor.DrawShaderLocalKeywordBooleanPopup(label, material, property, displayedOptions, shaderGlobalKeyword, 
+                indentLevel, onChangedCallback);
         
         public int DrawShaderGlobalKeywordBooleanPopup(GUIContent label, MaterialProperty property, 
             string[] displayedOptions, string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) =>

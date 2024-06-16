@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace EditorGUIPlus.MaterialEditor
 {
-    public interface IShadowShardMaterialEditor
+    public interface IMaterialEditorGUIPlus
     {
         void InitializeMaterialEditor(UnityEditor.MaterialEditor materialEditor);
         void DrawVertical(GUIStyle styles, Action drawCall);

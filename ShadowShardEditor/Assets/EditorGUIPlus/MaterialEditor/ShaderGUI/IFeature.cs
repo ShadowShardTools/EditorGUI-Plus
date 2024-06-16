@@ -7,7 +7,7 @@ namespace EditorGUIPlus.MaterialEditor.ShaderGUI
     {
         public void FindProperties(MaterialProperty[] properties);
 
-        public void Draw(ShadowShardMaterialEditor materialEditor);
+        public void Draw(MaterialEditorGUIPlus materialEditorGUIPlus);
 
         public void SetKeywords(Material material);
     }

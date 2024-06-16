@@ -58,6 +58,29 @@ namespace EditorGUIPlus.EditorModules
                 .GetValue(enumOption);
         }
         
+        internal TEnum DrawShaderLocalKeywordBooleanPopup<TEnum, TProperty>(Material material, TProperty property,
+            string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum
+        {
+            Type enumType = typeof(TEnum);
+            GUIContent label = new(ObjectNames.NicifyVariableName(enumType.Name));
+
+            return DrawShaderLocalKeywordBooleanPopup<TEnum, TProperty>(label, material, property, shaderGlobalKeyword, 
+                indentLevel, onChangedCallback);
+        }
+        
+        internal TEnum DrawShaderLocalKeywordBooleanPopup<TEnum, TProperty>(GUIContent label, Material material, 
+            TProperty property, string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum
+        {
+            Type enumType = typeof(TEnum);
+            
+            int enumOption = DrawShaderLocalKeywordBooleanPopup(label, material, property, Enum.GetNames(enumType), 
+                shaderGlobalKeyword, indentLevel, onChangedCallback);
+
+            return (TEnum)Enum
+                .GetValues(enumType)
+                .GetValue(enumOption);
+        }
+        
         internal TEnum DrawShaderGlobalKeywordBooleanPopup<TEnum, TProperty>(TProperty property, 
             string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum
         {
@@ -130,6 +153,33 @@ namespace EditorGUIPlus.EditorModules
             }
         }
         
+        internal int DrawShaderLocalKeywordBooleanPopup<TProperty>(GUIContent label, Material material, TProperty property, 
+            string[] displayedOptions, string shaderLocalKeyword, int indentLevel = 0, Action onChangedCallback = null)
+        {
+            if (!IsDisplayedBooleanErrorMessage(displayedOptions)) 
+                return 0;
+            
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return _propertyService.GetEnumIndex(property);
+            
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+            
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                int propertyValue = _propertyService.GetEnumIndex(property);
+                int newValue = EditorGUILayout.Popup(label, propertyValue, displayedOptions);
+                EditorGUI.showMixedValue = false;
+            
+                if (EditorGUI.EndChangeCheck())
+                {
+                    _propertyService.SetEnumIndex(property, newValue);
+                    KeywordsService.SetKeyword(material, shaderLocalKeyword, newValue > 0);
+                    onChangedCallback?.Invoke();
+                }
+            }
+        }
+        
         internal int DrawShaderGlobalKeywordBooleanPopup<TProperty>(GUIContent label, TProperty property, 
             string[] displayedOptions, string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null)
         {
@@ -151,7 +201,7 @@ namespace EditorGUIPlus.EditorModules
                 if (EditorGUI.EndChangeCheck())
                 {
                     _propertyService.SetEnumIndex(property, newValue);
-                    GlobalKeywordsService.SetGlobalKeyword(shaderGlobalKeyword, newValue > 0);
+                    KeywordsService.SetGlobalKeyword(shaderGlobalKeyword, newValue > 0);
                     onChangedCallback?.Invoke();
                 }
             }

@@ -9,7 +9,7 @@ namespace EditorGUIPlus.MaterialEditor.ShaderGUI
 {
     public class BaseShaderGUI : UnityEditor.ShaderGUI
     {
-        private readonly ShadowShardMaterialEditor _shadowShardMaterialEditor = new();
+        private readonly MaterialEditorGUIPlus _materialEditorGUIPlus = new();
         private UnityEditor.MaterialEditor _materialEditor;
         
         protected bool FirstTimeApply = true;
@@ -29,7 +29,7 @@ namespace EditorGUIPlus.MaterialEditor.ShaderGUI
 
         public virtual void OnUpdateGUI(Material material) { }
         
-        public virtual IEnumerable<ISection> SetSections(Material material) => 
+        public virtual IEnumerable<MaterialSection> SetSections(Material material) => 
             Sections = new List<MaterialSection>();
 
         public override void OnGUI(UnityEditor.MaterialEditor materialEditorIn, MaterialProperty[] properties)
@@ -38,7 +38,7 @@ namespace EditorGUIPlus.MaterialEditor.ShaderGUI
                 throw new ArgumentNullException(nameof(materialEditorIn));
             
             _materialEditor = materialEditorIn;
-            _shadowShardMaterialEditor.InitializeMaterialEditor(_materialEditor);
+            _materialEditorGUIPlus.InitializeMaterialEditor(_materialEditor);
             Material material = _materialEditor != null ? _materialEditor.target as Material : null;
             
             if (material == null)
@@ -76,7 +76,7 @@ namespace EditorGUIPlus.MaterialEditor.ShaderGUI
 
             using HeaderScope header = new(section, _materialEditor);
             if (header.Expanded)
-                section.DrawProperties(_shadowShardMaterialEditor);
+                section.DrawProperties(_materialEditorGUIPlus);
         }
         
         protected virtual void SetKeywords(Material material)
