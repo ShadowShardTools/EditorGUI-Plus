@@ -39,29 +39,6 @@ namespace ShadowShard.Editor.EditorModules
                 }
             }
         }
-        
-        internal int DrawIntSlider<TProperty>(GUIContent label, TProperty property, IntRange range, int indentLevel = 0, 
-            Action onChangedCallback = null)
-        {
-            _groupEditor.DrawIndented(indentLevel, Draw);
-            return _propertyService.GetInt(property);
-
-            void Draw()
-            {
-                EditorGUI.BeginChangeCheck();
-                
-                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
-                int propertyValue = _propertyService.GetInt(property);
-                int newValue = EditorGUILayout.IntSlider(label, propertyValue, range.Min, range.Max);
-                EditorGUI.showMixedValue = false;
-
-                if (EditorGUI.EndChangeCheck())
-                {
-                    _propertyService.SetInt(property, newValue);
-                    onChangedCallback?.Invoke();
-                }
-            }
-        }
 
         internal void DrawFromVector3ParamSlider<TProperty>(GUIContent label, TProperty property, 
             Vector3Param vectorParam, FloatRange range, int indentLevel = 0, Action onChangedCallback = null)

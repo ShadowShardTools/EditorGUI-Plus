@@ -13,6 +13,7 @@ namespace ShadowShard.Editor
     {
         private readonly GroupEditor _groupEditor;
         private readonly SliderEditor _sliderEditor;
+        private readonly SliderIntEditor _sliderIntEditor;
         private readonly ToggleEditor _toggleEditor;
         private readonly VectorEditor _vectorEditor;
         private readonly VectorIntEditor _vectorIntEditor;
@@ -27,6 +28,7 @@ namespace ShadowShard.Editor
             
             _groupEditor = new GroupEditor();
             _sliderEditor = new SliderEditor(propertyService, _groupEditor);
+            _sliderIntEditor = new SliderIntEditor(propertyService, _groupEditor);
             _toggleEditor = new ToggleEditor(propertyService, _groupEditor);
             _vectorEditor = new VectorEditor(propertyService, _groupEditor);
             _vectorIntEditor = new VectorIntEditor(propertyService, _groupEditor);
@@ -73,14 +75,7 @@ namespace ShadowShard.Editor
         public float DrawSlider(GUIContent label, SerializedProperty property, int indentLevel = 0, 
             Action onChangedCallback = null) =>
             _sliderEditor.DrawSlider(label, property, FloatRange.Normalized, indentLevel, onChangedCallback);
-
-        public int DrawIntSlider(GUIContent label, SerializedProperty property, IntRange range, int indentLevel = 0, 
-            Action onChangedCallback = null) =>
-            _sliderEditor.DrawIntSlider(label, property, range, indentLevel, onChangedCallback);
         
-        public int DrawIntSlider(GUIContent label, SerializedProperty property, int indentLevel = 0, 
-            Action onChangedCallback = null) =>
-            _sliderEditor.DrawIntSlider(label, property, IntRange.Normalized, indentLevel, onChangedCallback);
         public void DrawFromVector3ParamSlider(GUIContent label, SerializedProperty property, Vector3Param vectorParam, 
             FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
             _sliderEditor.DrawFromVector3ParamSlider(label, property, vectorParam, range, indentLevel, onChangedCallback);
@@ -120,6 +115,26 @@ namespace ShadowShard.Editor
         public FloatRange DrawMinMaxVector4EndSlider(GUIContent label, SerializedProperty property, int indentLevel = 0, 
             Action onChangedCallback = null) =>
             _sliderEditor.DrawMinMaxVector4EndSlider(label, property, FloatRange.Normalized, indentLevel, onChangedCallback);
+
+        #endregion
+        
+        #region SliderIntEditorRegion
+
+        public int DrawIntSlider(GUIContent label, SerializedProperty property, IntRange range, int indentLevel = 0, 
+            Action onChangedCallback = null) =>
+            _sliderIntEditor.DrawIntSlider(label, property, range, indentLevel, onChangedCallback);
+        
+        public int DrawIntSlider(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            Action onChangedCallback = null) =>
+            _sliderIntEditor.DrawIntSlider(label, property, IntRange.Normalized, indentLevel, onChangedCallback);
+        
+        public void DrawFromVector3IntParamSlider<TProperty>(GUIContent label, TProperty property, 
+            Vector3Param vectorParam, IntRange range, int indentLevel = 0, Action onChangedCallback = null) =>
+            _sliderIntEditor.DrawFromVector3IntParamSlider(label, property, vectorParam, range, indentLevel, onChangedCallback);
+        
+        public void DrawVector3IntSliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
+            SerializedProperty property, IntRange range, int indentLevel = 0, Action onChangedCallback = null) =>
+            _sliderIntEditor.DrawVector3IntSliders(labelX, labelY, labelZ, property, range, indentLevel, onChangedCallback);
 
         #endregion
         
