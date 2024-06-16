@@ -1,6 +1,3 @@
-using EditorGUIPlus;
-using EditorGUIPlus.Data.Enums;
-using EditorGUIPlus.Data.Range;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,7 +6,7 @@ namespace ManualTesting.StandardEditor.Code.Editor
     public class ShadowShardEditorWindow : EditorWindow
     {
         private ShadowShardData _shadowShardData;
-        private ShadowShardEditor _shadowShardEditor;
+        private EditorGUIPlus _shadowShardEditor;
         private SerializedObject _serializedShadowShardData;
         private Vector2 _scrollPosition;
 
