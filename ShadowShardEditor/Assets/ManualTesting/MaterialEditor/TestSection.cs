@@ -1,4 +1,5 @@
 ﻿using EditorGUIPlus;
+using EditorGUIPlus.MaterialEditor;
 using EditorGUIPlus.MaterialEditor.ShaderGUI;
 using UnityEditor;
 using UnityEngine;
@@ -7,49 +8,37 @@ namespace ManualTesting.MaterialEditor
 {
     public class TestSection : MaterialSection
     {
-        protected Property DetailMap = new(DetailInputsProperties.DetailMap);
-        protected Property DetailAlbedoScale = new(DetailInputsProperties.DetailAlbedoScale);
-        protected Property DetailNormalScale = new(DetailInputsProperties.DetailNormalScale);
-        protected Property DetailSmoothnessScale = new(DetailInputsProperties.DetailSmoothnessScale);
+        protected Property BaseMap = new("_BaseMap");
+        protected Property Color = new("_Color");
+        protected Property FloatValue = new("_FloatValue");
+        protected Property IntValue = new("_IntValue");
+        protected Property VectorValue = new("_VectorValue");
+        protected Property ToggleValue = new("_ToggleValue");
+        protected Property EnumValue = new("_EnumValue");
+        protected Property ShaderKeywordToggle = new("_ShaderKeywordToggle");
 
-        public TestSection() : base(DetailInputsStyles.Label)
+        public TestSection() : base(new GUIContent("Test Label"))
         {
         }
 
         public override void FindProperties(MaterialProperty[] properties)
         {
-            DetailMap.Find(properties);
-            DetailAlbedoScale.Find(properties);
-            DetailNormalScale.Find(properties);
-            DetailSmoothnessScale.Find(properties);
+            BaseMap.Find(properties);
+            Color.Find(properties);
+            FloatValue.Find(properties);
+            IntValue.Find(properties);
+            VectorValue.Find(properties);
+            ToggleValue.Find(properties);
+            EnumValue.Find(properties);
+            ShaderKeywordToggle.Find(properties);
         }
 
-        public override void DrawProperties(EditorGUIPlus.EditorGUIPlus editorGUIPlus)
+        public override void DrawProperties(MaterialEditorGUIPlus editor)
         {
-            DrawDetailMap(editorGUIPlus);
-            DrawDetailMapProperties(editorGUIPlus);
-            editorGUIPlus.TextureEditor.DrawTextureScaleOffset(editorGUIPlus.MaterialEditor, DetailMap.MaterialProperty);
-        }
-
-        private void DrawDetailMap(EditorGUIPlus.EditorGUIPlus editorGUIPlus) =>
-            editorGUIPlus.TextureEditor.DrawTexture(editorGUIPlus.MaterialEditor, DetailInputsStyles.DetailMap,
-                DetailMap.MaterialProperty);
-
-        protected virtual void DrawDetailMapProperties(EditorGUIPlus.EditorGUIPlus editorGUIPlus)
-        {
-            if (DetailMap.MaterialProperty.textureValue is null)
-                return;
-
-            editorGUIPlus.SliderEditor.DrawSlider(DetailInputsStyles.DetailAlbedoScale, DetailAlbedoScale.MaterialProperty, 1);
-            editorGUIPlus.SliderEditor.DrawSlider(DetailInputsStyles.DetailNormalScale, DetailNormalScale.MaterialProperty, 1);
-            editorGUIPlus.SliderEditor.DrawSlider(DetailInputsStyles.DetailSmoothnessScale,
-                DetailSmoothnessScale.MaterialProperty, 1);
         }
 
         public override void SetKeywords(Material material)
         {
-            if (material.HasProperty(DetailMap.ID))
-                CoreUtils.SetKeyword(material, DetailInputsKeywords.Detail, material.GetTexture(DetailMap.ID));
         }
     }
 }
