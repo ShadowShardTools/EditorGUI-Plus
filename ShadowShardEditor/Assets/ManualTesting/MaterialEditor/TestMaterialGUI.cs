@@ -17,7 +17,8 @@ namespace ManualTesting.MaterialEditor
             {
                 new SlidersTestSection(),
                 new IntSlidersTestSection(),
-                new ToggleTestSection()
+                new ToggleTestSection(),
+                new VectorTestSection()
             };
         }
     }

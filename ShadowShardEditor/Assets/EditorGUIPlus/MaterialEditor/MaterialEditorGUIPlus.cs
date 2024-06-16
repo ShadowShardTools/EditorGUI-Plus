@@ -198,6 +198,18 @@ namespace EditorGUIPlus.MaterialEditor
             Action onChangedCallback = null) =>
             _vectorEditor.DrawVector4(label, property, Vector4Range.Full, indentLevel, onChangedCallback);
         
+        public Vector2 DrawFloatFromVector2(GUIContent label, MaterialProperty property, Vector2Param vector2Param, 
+            FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
+            _vectorEditor.DrawFloatFromVector2(label, property, vector2Param, range, indentLevel, onChangedCallback);
+        
+        public Vector3 DrawFloatFromVector3(GUIContent label, MaterialProperty property, Vector3Param vector3Param, 
+            FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
+            _vectorEditor.DrawFloatFromVector3(label, property, vector3Param, range, indentLevel, onChangedCallback);
+        
+        public Vector4 DrawFloatFromVector4(GUIContent label, MaterialProperty property, Vector4Param vector4Param, 
+            FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
+            _vectorEditor.DrawFloatFromVector4(label, property, vector4Param, range, indentLevel, onChangedCallback);
+        
         public float DrawNormalizedFloat(GUIContent label, MaterialProperty property, int indentLevel = 0, 
             Action onChangedCallback = null) =>
             _vectorEditor.DrawFloat(label, property, FloatRange.Normalized, indentLevel, onChangedCallback);
@@ -254,17 +266,6 @@ namespace EditorGUIPlus.MaterialEditor
             float min = 0.0f, int indentLevel = 0, Action onChangedCallback = null) =>
             _vectorEditor.DrawFloatFromVector4(label, property, vector4Param, FloatRange.ToMaxFrom(min), indentLevel, onChangedCallback);
         
-        public Vector2 DrawFloatFromVector2(GUIContent label, MaterialProperty property, Vector2Param vector2Param, 
-            FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorEditor.DrawFloatFromVector2(label, property, vector2Param, range, indentLevel, onChangedCallback);
-        
-        public Vector3 DrawFloatFromVector3(GUIContent label, MaterialProperty property, Vector3Param vector3Param, 
-            FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorEditor.DrawFloatFromVector3(label, property, vector3Param, range, indentLevel, onChangedCallback);
-        
-        public Vector4 DrawFloatFromVector4(GUIContent label, MaterialProperty property, Vector4Param vector4Param, 
-            FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorEditor.DrawFloatFromVector4(label, property, vector4Param, range, indentLevel, onChangedCallback);
         public Vector4 DrawVector4Start(GUIContent label, MaterialProperty property, Vector2Range range, 
             int indentLevel = 0, Action onChangedCallback = null) =>
             _vectorEditor.DrawVector4Start(label, property, range, indentLevel, onChangedCallback);
