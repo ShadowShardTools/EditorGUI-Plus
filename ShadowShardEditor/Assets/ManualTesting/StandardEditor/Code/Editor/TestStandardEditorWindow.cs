@@ -43,6 +43,7 @@ namespace ManualTesting.StandardEditor.Code.Editor
             DrawToggles();
             DrawVectorEditors();
             DrawTextureAndPopupEditors();
+            DrawObjectAndTextEditors();
 
             if(EditorGUI.EndChangeCheck())
             {
@@ -122,6 +123,13 @@ namespace ManualTesting.StandardEditor.Code.Editor
             _shadowShardEditor.DrawPopup(new GUIContent("Popup"), _serializedShadowShardData.FindProperty("SelectedOption"), _shadowShardData.DisplayedOptions, _shadowShardData.IndentLevel);
             _shadowShardEditor.DrawBooleanPopup(new GUIContent("Boolean Popup"), _serializedShadowShardData.FindProperty("SelectedOption"), _shadowShardData.DisplayedOptions, _shadowShardData.IndentLevel);
             _shadowShardEditor.DrawShaderGlobalKeywordBooleanPopup(new GUIContent("Shader Global Keyword Boolean Popup"), _serializedShadowShardData.FindProperty("SelectedOption"), _shadowShardData.DisplayedOptions, _shadowShardData.ShaderGlobalKeyword, _shadowShardData.IndentLevel);
+        }
+        
+        private void DrawObjectAndTextEditors()
+        {
+            _shadowShardEditor.DrawObjectField<Object>(new GUIContent("Object Field"), _serializedShadowShardData.FindProperty("ObjectValue"), _shadowShardData.IndentLevel, true, null);
+            _shadowShardEditor.DrawTextField(new GUIContent("Text Field"), _serializedShadowShardData.FindProperty("TextFieldValue"), _shadowShardData.IndentLevel);
+            _shadowShardEditor.DrawFolderPathField(new GUIContent("Folder Path"), _serializedShadowShardData.FindProperty("FolderPathValue"), "", _shadowShardData.IndentLevel);
         }
     }
 }

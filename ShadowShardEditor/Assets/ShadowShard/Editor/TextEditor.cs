@@ -42,7 +42,7 @@ namespace ShadowShard.Editor
                 using(new GUILayout.HorizontalScope())
                 {
                     const float labelDelta = 16;
-                    EditorGUILayout.LabelField(label, GUILayout.Width(EditorGUIUtility.labelWidth - labelDelta));
+                    EditorGUILayout.LabelField(label, GUILayout.Width(EditorGUIUtility.labelWidth - (labelDelta)));
                     propertyValue = EditorGUILayout.TextField(propertyValue);
                     if(GUILayout.Button(" ... ", GUILayout.ExpandWidth(false), GUILayout.Height(EditorGUIUtility.singleLineHeight)))
                     {

@@ -31,6 +31,7 @@ namespace ManualTesting.StandardEditor.Code
         public int IntValue;
         public string[] DisplayedOptions = { "Option1", "Option2" };
         public Some SelectedOption;
+        public Object ObjectValue;
         
         public SerializedObject GetSerializedObject() =>
             new(this);
