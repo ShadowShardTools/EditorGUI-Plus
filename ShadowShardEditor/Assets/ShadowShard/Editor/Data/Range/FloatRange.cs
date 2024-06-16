@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ShadowShard.Editor.Range
+namespace ShadowShard.Editor.Data.Range
 {
     [Serializable]
     public readonly struct FloatRange

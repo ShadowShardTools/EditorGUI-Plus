@@ -1,11 +1,11 @@
-﻿using ShadowShard.Editor.Enums;
-using ShadowShard.Editor.Range;
+﻿using ShadowShard.Editor.Data.Enums;
+using ShadowShard.Editor.Data.Range;
 using UnityEditor;
 using UnityEngine;
 
-namespace ShadowShard.Editor
+namespace ShadowShard.Editor.EditorModules
 {
-    internal class VectorEditor
+    internal sealed class VectorEditor
     {
         private readonly PropertyService _propertyService;
         private readonly GroupEditor _groupEditor;

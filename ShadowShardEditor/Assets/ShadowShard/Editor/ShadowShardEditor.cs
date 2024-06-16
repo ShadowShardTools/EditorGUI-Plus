@@ -1,13 +1,15 @@
 using System;
-using ShadowShard.Editor.Enums;
-using ShadowShard.Editor.Range;
+using ShadowShard.Editor.Data.Enums;
+using ShadowShard.Editor.Data.Range;
+using ShadowShard.Editor.EditorModules;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using TextEditor = ShadowShard.Editor.EditorModules.TextEditor;
 
 namespace ShadowShard.Editor
 {
-    public class ShadowShardEditor
+    public sealed class ShadowShardEditor : IShadowShardEditor
     {
         private readonly GroupEditor _groupEditor;
         private readonly SliderEditor _sliderEditor;
@@ -326,7 +328,7 @@ namespace ShadowShard.Editor
 
         public void DrawObjectField<TObject>(GUIContent label, SerializedProperty property, int indentLevel = 0,
             bool allowSceneObjects = true, Action<TObject> onChangedCallback = null) where TObject : Object =>
-            _objectEditor.DrawObjectField<TObject>(label, property, indentLevel, allowSceneObjects, onChangedCallback);
+            _objectEditor.DrawObjectField(label, property, indentLevel, allowSceneObjects, onChangedCallback);
         
         #endregion
         

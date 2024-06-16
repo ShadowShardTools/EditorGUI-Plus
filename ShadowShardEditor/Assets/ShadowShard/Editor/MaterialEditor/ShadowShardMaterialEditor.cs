@@ -1,13 +1,14 @@
 using System;
-using ShadowShard.Editor.Enums;
+using ShadowShard.Editor.Data.Enums;
+using ShadowShard.Editor.Data.Range;
+using ShadowShard.Editor.EditorModules;
 using ShadowShard.Editor.MaterialEditor.AssetObject;
-using ShadowShard.Editor.Range;
 using UnityEditor;
 using UnityEngine;
 
 namespace ShadowShard.Editor.MaterialEditor
 {
-    public class ShadowShardMaterialEditor
+    public sealed class ShadowShardMaterialEditor : IShadowShardMaterialEditor
     {
         private readonly GroupEditor _groupEditor;
         private readonly SliderEditor _sliderEditor;

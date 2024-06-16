@@ -2,9 +2,9 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace ShadowShard.Editor
+namespace ShadowShard.Editor.EditorModules
 {
-    internal class TextureEditor
+    internal sealed class TextureEditor
     {
         private static readonly GUIContent FixNormal =
             EditorGUIUtility.TrTextContent("Fix now", "Converts the assigned texture to be a normal map format.");

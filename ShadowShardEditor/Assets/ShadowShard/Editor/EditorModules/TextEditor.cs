@@ -1,9 +1,9 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace ShadowShard.Editor
+namespace ShadowShard.Editor.EditorModules
 {
-    internal class TextEditor
+    internal sealed class TextEditor
     {
         private readonly GroupEditor _groupEditor;
 

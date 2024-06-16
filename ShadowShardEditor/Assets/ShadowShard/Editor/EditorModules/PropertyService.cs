@@ -2,9 +2,9 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace ShadowShard.Editor
+namespace ShadowShard.Editor.EditorModules
 {
-    internal class PropertyService
+    internal sealed class PropertyService
     {
         internal float GetFloat(object property)
         {
