@@ -12,6 +12,7 @@
         _ToggleValue ("Toggle Value", Float) = 0
         _EnumValue ("Enum Value", Float) = 0
         _ShaderKeywordToggle ("Shader Keyword Toggle", Float) = 0
+        _NormalScale("NormalScale", Range(0.0, 8.0)) = 1
     }
     SubShader
     {

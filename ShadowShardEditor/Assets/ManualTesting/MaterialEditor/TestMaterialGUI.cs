@@ -19,7 +19,8 @@ namespace ManualTesting.MaterialEditor
                 new IntSlidersTestSection(),
                 new ToggleTestSection(),
                 new VectorTestSection(),
-                new VectorIntTestSection()
+                new VectorIntTestSection(),
+                new TextureTestSection()
             };
         }
     }
