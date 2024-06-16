@@ -122,32 +122,38 @@ namespace ShadowShard.Editor
         public float DrawFloat(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0) =>
             _vectorEditor.DrawFloat(label, property, range, indentLevel);
         
+        public Vector2 DrawVector2(GUIContent label, SerializedProperty property, Vector2Range range, int indentLevel = 0) =>
+            _vectorEditor.DrawVector2(label, property, range, indentLevel);
+        
+        public Vector3 DrawVector3(GUIContent label, SerializedProperty property, Vector3Range range, int indentLevel = 0) =>
+            _vectorEditor.DrawVector3(label, property, range, indentLevel);
+        
+        public Vector4 DrawVector4(GUIContent label, SerializedProperty property, Vector4Range range, int indentLevel = 0) =>
+            _vectorEditor.DrawVector4(label, property, range, indentLevel);
+        
         public float DrawFloat(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
             _vectorEditor.DrawFloat(label, property, FloatRange.Full, indentLevel);
         
         public Vector2 DrawVector2(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            _vectorEditor.DrawVector2(label, property, indentLevel);
+            _vectorEditor.DrawVector2(label, property, Vector2Range.Full, indentLevel);
         
         public Vector3 DrawVector3(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            _vectorEditor.DrawVector3(label, property, indentLevel);
+            _vectorEditor.DrawVector3(label, property, Vector3Range.Full, indentLevel);
         
         public Vector4 DrawVector4(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            _vectorEditor.DrawVector4(label, property, indentLevel);
-        
-        public Vector2 DrawFloatFromVector2(GUIContent label, SerializedProperty property, Vector2Param vector2Param, 
-            FloatRange range, int indentLevel = 0) =>
-            _vectorEditor.DrawFloatFromVector2(label, property, vector2Param, range, indentLevel);
-        
-        public Vector3 DrawFloatFromVector3(GUIContent label, SerializedProperty property, Vector3Param vector3Param, 
-            FloatRange range, int indentLevel = 0) =>
-            _vectorEditor.DrawFloatFromVector3(label, property, vector3Param, range, indentLevel);
-        
-        public Vector4 DrawFloatFromVector4(GUIContent label, SerializedProperty property, Vector4Param vector4Param, 
-            FloatRange range, int indentLevel = 0) =>
-            _vectorEditor.DrawFloatFromVector4(label, property, vector4Param, range, indentLevel);
+            _vectorEditor.DrawVector4(label, property, Vector4Range.Full, indentLevel);
         
         public float DrawNormalizedFloat(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
             _vectorEditor.DrawFloat(label, property, FloatRange.Normalized, indentLevel);
+        
+        public Vector2 DrawNormalizedVector2(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+            _vectorEditor.DrawVector2(label, property, Vector2Range.Normalized, indentLevel);
+        
+        public Vector2 DrawNormalizedVector3(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+            _vectorEditor.DrawVector3(label, property, Vector3Range.Normalized, indentLevel);
+        
+        public Vector2 DrawNormalizedVector4(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+            _vectorEditor.DrawVector4(label, property, Vector4Range.Normalized, indentLevel);
         
         public Vector2 DrawNormalizedFloatFromVector2(GUIContent label, SerializedProperty property, 
             Vector2Param vector2Param, int indentLevel = 0) =>
@@ -164,6 +170,15 @@ namespace ShadowShard.Editor
         public float DrawMinFloat(GUIContent label, SerializedProperty property, float min = 0.0f, int indentLevel = 0) =>
             _vectorEditor.DrawFloat(label, property, FloatRange.ToMaxFrom(min), indentLevel);
         
+        public Vector2 DrawMinVector2(GUIContent label, SerializedProperty property, Vector2 min, int indentLevel = 0) =>
+            _vectorEditor.DrawVector2(label, property, Vector2Range.ToMaxFrom(min), indentLevel);
+        
+        public Vector2 DrawMinVector3(GUIContent label, SerializedProperty property, Vector3 min, int indentLevel = 0) =>
+            _vectorEditor.DrawVector3(label, property, Vector3Range.ToMaxFrom(min), indentLevel);
+        
+        public Vector2 DrawMinVector4(GUIContent label, SerializedProperty property, Vector4 min, int indentLevel = 0) =>
+            _vectorEditor.DrawVector4(label, property, Vector4Range.ToMaxFrom(min), indentLevel);
+        
         public Vector2 DrawMinFloatFromVector2(GUIContent label, SerializedProperty property, Vector2Param vector2Param, 
             float min = 0.0f, int indentLevel = 0) =>
             _vectorEditor.DrawFloatFromVector2(label, property, vector2Param, FloatRange.ToMaxFrom(min), indentLevel);
@@ -176,11 +191,28 @@ namespace ShadowShard.Editor
             float min = 0.0f, int indentLevel = 0) =>
             _vectorEditor.DrawFloatFromVector4(label, property, vector4Param, FloatRange.ToMaxFrom(min), indentLevel);
         
+        public Vector2 DrawFloatFromVector2(GUIContent label, SerializedProperty property, Vector2Param vector2Param, 
+            FloatRange range, int indentLevel = 0) =>
+            _vectorEditor.DrawFloatFromVector2(label, property, vector2Param, range, indentLevel);
+        
+        public Vector3 DrawFloatFromVector3(GUIContent label, SerializedProperty property, Vector3Param vector3Param, 
+            FloatRange range, int indentLevel = 0) =>
+            _vectorEditor.DrawFloatFromVector3(label, property, vector3Param, range, indentLevel);
+        
+        public Vector4 DrawFloatFromVector4(GUIContent label, SerializedProperty property, Vector4Param vector4Param, 
+            FloatRange range, int indentLevel = 0) =>
+            _vectorEditor.DrawFloatFromVector4(label, property, vector4Param, range, indentLevel);
+        public Vector4 DrawVector4Start(GUIContent label, SerializedProperty property, Vector2Range range, int indentLevel = 0) =>
+            _vectorEditor.DrawVector4Start(label, property, range, indentLevel);
+        
         public Vector4 DrawVector4Start(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            _vectorEditor.DrawVector4Start(label, property, indentLevel);
+            _vectorEditor.DrawVector4Start(label, property, Vector2Range.Full, indentLevel);
+        
+        public Vector4 DrawVector4End(GUIContent label, SerializedProperty property, Vector2Range range, int indentLevel = 0) =>
+            _vectorEditor.DrawVector4End(label, property, range, indentLevel);
         
         public Vector4 DrawVector4End(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            _vectorEditor.DrawVector4End(label, property, indentLevel);
+            _vectorEditor.DrawVector4End(label, property, Vector2Range.Full, indentLevel);
         
         public Color DrawColor(GUIContent label, SerializedProperty property, bool showAlpha = true, bool hdr = false, int indentLevel = 0) =>
             _vectorEditor.DrawColor(label, property, showAlpha, hdr, indentLevel);

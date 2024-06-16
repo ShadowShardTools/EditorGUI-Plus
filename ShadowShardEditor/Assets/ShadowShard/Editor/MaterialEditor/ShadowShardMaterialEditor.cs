@@ -125,32 +125,38 @@ namespace ShadowShard.Editor.MaterialEditor
         public float DrawFloat(GUIContent label, MaterialProperty property, FloatRange range, int indentLevel = 0) =>
             _vectorEditor.DrawFloat(label, property, range, indentLevel);
         
+        public Vector2 DrawVector2(GUIContent label, MaterialProperty property, Vector2Range range, int indentLevel = 0) =>
+            _vectorEditor.DrawVector2(label, property, range, indentLevel);
+        
+        public Vector3 DrawVector3(GUIContent label, MaterialProperty property, Vector3Range range, int indentLevel = 0) =>
+            _vectorEditor.DrawVector3(label, property, range, indentLevel);
+        
+        public Vector4 DrawVector4(GUIContent label, MaterialProperty property, Vector4Range range, int indentLevel = 0) =>
+            _vectorEditor.DrawVector4(label, property, range, indentLevel);
+        
         public float DrawFloat(GUIContent label, MaterialProperty property, int indentLevel = 0) =>
             _vectorEditor.DrawFloat(label, property, FloatRange.Full, indentLevel);
         
         public Vector2 DrawVector2(GUIContent label, MaterialProperty property, int indentLevel = 0) =>
-            _vectorEditor.DrawVector2(label, property, indentLevel);
+            _vectorEditor.DrawVector2(label, property, Vector2Range.Full, indentLevel);
         
         public Vector3 DrawVector3(GUIContent label, MaterialProperty property, int indentLevel = 0) =>
-            _vectorEditor.DrawVector3(label, property, indentLevel);
+            _vectorEditor.DrawVector3(label, property, Vector3Range.Full, indentLevel);
         
         public Vector4 DrawVector4(GUIContent label, MaterialProperty property, int indentLevel = 0) =>
-            _vectorEditor.DrawVector4(label, property, indentLevel);
-        
-        public Vector2 DrawFloatFromVector2(GUIContent label, MaterialProperty property, Vector2Param vector2Param, 
-            FloatRange range, int indentLevel = 0) =>
-            _vectorEditor.DrawFloatFromVector2(label, property, vector2Param, range, indentLevel);
-        
-        public Vector3 DrawFloatFromVector3(GUIContent label, MaterialProperty property, Vector3Param vector3Param, 
-            FloatRange range, int indentLevel = 0) =>
-            _vectorEditor.DrawFloatFromVector3(label, property, vector3Param, range, indentLevel);
-        
-        public Vector4 DrawFloatFromVector4(GUIContent label, MaterialProperty property, Vector4Param vector4Param, 
-            FloatRange range, int indentLevel = 0) =>
-            _vectorEditor.DrawFloatFromVector4(label, property, vector4Param, range, indentLevel);
+            _vectorEditor.DrawVector4(label, property, Vector4Range.Full, indentLevel);
         
         public float DrawNormalizedFloat(GUIContent label, MaterialProperty property, int indentLevel = 0) =>
             _vectorEditor.DrawFloat(label, property, FloatRange.Normalized, indentLevel);
+        
+        public Vector2 DrawNormalizedVector2(GUIContent label, MaterialProperty property, int indentLevel = 0) =>
+            _vectorEditor.DrawVector2(label, property, Vector2Range.Normalized, indentLevel);
+        
+        public Vector2 DrawNormalizedVector3(GUIContent label, MaterialProperty property, int indentLevel = 0) =>
+            _vectorEditor.DrawVector3(label, property, Vector3Range.Normalized, indentLevel);
+        
+        public Vector2 DrawNormalizedVector4(GUIContent label, MaterialProperty property, int indentLevel = 0) =>
+            _vectorEditor.DrawVector4(label, property, Vector4Range.Normalized, indentLevel);
         
         public Vector2 DrawNormalizedFloatFromVector2(GUIContent label, MaterialProperty property, 
             Vector2Param vector2Param, int indentLevel = 0) =>
@@ -167,6 +173,15 @@ namespace ShadowShard.Editor.MaterialEditor
         public float DrawMinFloat(GUIContent label, MaterialProperty property, float min = 0.0f, int indentLevel = 0) =>
             _vectorEditor.DrawFloat(label, property, FloatRange.ToMaxFrom(min), indentLevel);
         
+        public Vector2 DrawMinVector2(GUIContent label, MaterialProperty property, Vector2 min, int indentLevel = 0) =>
+            _vectorEditor.DrawVector2(label, property, Vector2Range.ToMaxFrom(min), indentLevel);
+        
+        public Vector2 DrawMinVector3(GUIContent label, MaterialProperty property, Vector3 min, int indentLevel = 0) =>
+            _vectorEditor.DrawVector3(label, property, Vector3Range.ToMaxFrom(min), indentLevel);
+        
+        public Vector2 DrawMinVector4(GUIContent label, MaterialProperty property, Vector4 min, int indentLevel = 0) =>
+            _vectorEditor.DrawVector4(label, property, Vector4Range.ToMaxFrom(min), indentLevel);
+        
         public Vector2 DrawMinFloatFromVector2(GUIContent label, MaterialProperty property, Vector2Param vector2Param, 
             float min = 0.0f, int indentLevel = 0) =>
             _vectorEditor.DrawFloatFromVector2(label, property, vector2Param, FloatRange.ToMaxFrom(min), indentLevel);
@@ -179,11 +194,28 @@ namespace ShadowShard.Editor.MaterialEditor
             float min = 0.0f, int indentLevel = 0) =>
             _vectorEditor.DrawFloatFromVector4(label, property, vector4Param, FloatRange.ToMaxFrom(min), indentLevel);
         
+        public Vector2 DrawFloatFromVector2(GUIContent label, MaterialProperty property, Vector2Param vector2Param, 
+            FloatRange range, int indentLevel = 0) =>
+            _vectorEditor.DrawFloatFromVector2(label, property, vector2Param, range, indentLevel);
+        
+        public Vector3 DrawFloatFromVector3(GUIContent label, MaterialProperty property, Vector3Param vector3Param, 
+            FloatRange range, int indentLevel = 0) =>
+            _vectorEditor.DrawFloatFromVector3(label, property, vector3Param, range, indentLevel);
+        
+        public Vector4 DrawFloatFromVector4(GUIContent label, MaterialProperty property, Vector4Param vector4Param, 
+            FloatRange range, int indentLevel = 0) =>
+            _vectorEditor.DrawFloatFromVector4(label, property, vector4Param, range, indentLevel);
+        public Vector4 DrawVector4Start(GUIContent label, MaterialProperty property, Vector2Range range, int indentLevel = 0) =>
+            _vectorEditor.DrawVector4Start(label, property, range, indentLevel);
+        
         public Vector4 DrawVector4Start(GUIContent label, MaterialProperty property, int indentLevel = 0) =>
-            _vectorEditor.DrawVector4Start(label, property, indentLevel);
+            _vectorEditor.DrawVector4Start(label, property, Vector2Range.Full, indentLevel);
+        
+        public Vector4 DrawVector4End(GUIContent label, MaterialProperty property, Vector2Range range, int indentLevel = 0) =>
+            _vectorEditor.DrawVector4End(label, property, range, indentLevel);
         
         public Vector4 DrawVector4End(GUIContent label, MaterialProperty property, int indentLevel = 0) =>
-            _vectorEditor.DrawVector4End(label, property, indentLevel);
+            _vectorEditor.DrawVector4End(label, property, Vector2Range.Full, indentLevel);
         
         public Color DrawColor(GUIContent label, MaterialProperty property, bool showAlpha = true, bool hdr = false, int indentLevel = 0) =>
             _vectorEditor.DrawColor(label, property, showAlpha, hdr, indentLevel);
@@ -192,45 +224,45 @@ namespace ShadowShard.Editor.MaterialEditor
         
         #region VectorIntEditorRegion
 
-        public float DrawInt(GUIContent label, SerializedProperty property, IntRange range, int indentLevel = 0) =>
+        public float DrawInt(GUIContent label, MaterialProperty property, IntRange range, int indentLevel = 0) =>
             _vectorIntEditor.DrawInt(label, property, range, indentLevel);
         
-        public float DrawInt(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+        public float DrawInt(GUIContent label, MaterialProperty property, int indentLevel = 0) =>
             _vectorIntEditor.DrawInt(label, property, IntRange.Full, indentLevel);
         
-        public Vector2Int DrawVector2Int(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+        public Vector2Int DrawVector2Int(GUIContent label, MaterialProperty property, int indentLevel = 0) =>
             _vectorIntEditor.DrawVector2Int(label, property, indentLevel);
         
-        public Vector3Int DrawVector3Int(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+        public Vector3Int DrawVector3Int(GUIContent label, MaterialProperty property, int indentLevel = 0) =>
             _vectorIntEditor.DrawVector3Int(label, property, indentLevel);
         
-        public Vector2Int DrawFloatFromVector2Int(GUIContent label, SerializedProperty property, Vector2Param vector2Param, 
+        public Vector2Int DrawFloatFromVector2Int(GUIContent label, MaterialProperty property, Vector2Param vector2Param, 
             IntRange range, int indentLevel = 0) =>
             _vectorIntEditor.DrawFloatFromVector2Int(label, property, vector2Param, range, indentLevel);
         
-        public Vector3Int DrawFloatFromVector3(GUIContent label, SerializedProperty property, Vector3Param vector3Param, 
+        public Vector3Int DrawFloatFromVector3(GUIContent label, MaterialProperty property, Vector3Param vector3Param, 
             IntRange range, int indentLevel = 0) =>
             _vectorIntEditor.DrawFloatFromVector3Int(label, property, vector3Param, range, indentLevel);
         
-        public float DrawNormalizedInt(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+        public float DrawNormalizedInt(GUIContent label, MaterialProperty property, int indentLevel = 0) =>
             _vectorIntEditor.DrawInt(label, property, IntRange.Normalized, indentLevel);
         
-        public Vector2Int DrawNormalizedFloatFromVector2Int(GUIContent label, SerializedProperty property, 
+        public Vector2Int DrawNormalizedFloatFromVector2Int(GUIContent label, MaterialProperty property, 
             Vector2Param vector2Param, int indentLevel = 0) =>
             _vectorIntEditor.DrawFloatFromVector2Int(label, property, vector2Param, IntRange.Normalized, indentLevel);
         
-        public Vector3Int DrawNormalizedFloatFromVector3Int(GUIContent label, SerializedProperty property, 
+        public Vector3Int DrawNormalizedFloatFromVector3Int(GUIContent label, MaterialProperty property, 
             Vector3Param vector3Param, int indentLevel = 0) =>
             _vectorIntEditor.DrawFloatFromVector3Int(label, property, vector3Param, IntRange.Normalized, indentLevel);
         
-        public int DrawMinInt(GUIContent label, SerializedProperty property, int min = 0, int indentLevel = 0) =>
+        public int DrawMinInt(GUIContent label, MaterialProperty property, int min = 0, int indentLevel = 0) =>
             _vectorIntEditor.DrawInt(label, property, IntRange.ToMaxFrom(min), indentLevel);
         
-        public Vector2Int DrawMinFloatFromVector2Int(GUIContent label, SerializedProperty property, Vector2Param vector2Param, 
+        public Vector2Int DrawMinFloatFromVector2Int(GUIContent label, MaterialProperty property, Vector2Param vector2Param, 
             int min = 0, int indentLevel = 0) =>
             _vectorIntEditor.DrawFloatFromVector2Int(label, property, vector2Param, IntRange.ToMaxFrom(min), indentLevel);
         
-        public Vector3Int DrawMinFloatFromVector3Int(GUIContent label, SerializedProperty property, Vector3Param vector3Param, 
+        public Vector3Int DrawMinFloatFromVector3Int(GUIContent label, MaterialProperty property, Vector3Param vector3Param, 
             int min = 0, int indentLevel = 0) =>
             _vectorIntEditor.DrawFloatFromVector3Int(label, property, vector3Param, IntRange.ToMaxFrom(min), indentLevel);
         
