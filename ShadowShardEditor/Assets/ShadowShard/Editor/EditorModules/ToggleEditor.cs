@@ -39,7 +39,6 @@ namespace ShadowShard.Editor.EditorModules
             }
         }
         
-        
         internal bool DrawShaderGlobalKeywordToggle<TProperty>(GUIContent label, TProperty property, 
             string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null)
         {
