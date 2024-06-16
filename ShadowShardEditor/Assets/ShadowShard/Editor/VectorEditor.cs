@@ -35,7 +35,7 @@ namespace ShadowShard.Editor
             }
         }
 
-        internal Vector2 DrawVector2<TProperty>(GUIContent label, TProperty property, int indentLevel = 0)
+        internal Vector2 DrawVector2<TProperty>(GUIContent label, TProperty property, Vector2Range range, int indentLevel = 0)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector2(property);
@@ -46,7 +46,7 @@ namespace ShadowShard.Editor
                 
                 EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
                 Vector2 propertyValue = _propertyService.GetVector2(property);
-                Vector2 newValue = EditorGUILayout.Vector2Field(label, propertyValue);
+                Vector2 newValue = EditorGUILayout.Vector2Field(label, propertyValue).Clamp(range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
 
                 if (EditorGUI.EndChangeCheck())
@@ -54,7 +54,7 @@ namespace ShadowShard.Editor
             }
         }
         
-        internal Vector3 DrawVector3<TProperty>(GUIContent label, TProperty property, int indentLevel = 0)
+        internal Vector3 DrawVector3<TProperty>(GUIContent label, TProperty property, Vector3Range range, int indentLevel = 0)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector3(property);
@@ -65,7 +65,7 @@ namespace ShadowShard.Editor
                 
                 EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
                 Vector3 propertyValue = _propertyService.GetVector3(property);
-                Vector3 newValue = EditorGUILayout.Vector3Field(label, propertyValue);
+                Vector3 newValue = EditorGUILayout.Vector3Field(label, propertyValue).Clamp(range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
                 
                 if (EditorGUI.EndChangeCheck())
@@ -73,7 +73,7 @@ namespace ShadowShard.Editor
             }
         }
         
-        internal Vector4 DrawVector4<TProperty>(GUIContent label, TProperty property, int indentLevel = 0)
+        internal Vector4 DrawVector4<TProperty>(GUIContent label, TProperty property, Vector4Range range, int indentLevel = 0)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector4(property);
@@ -84,7 +84,7 @@ namespace ShadowShard.Editor
                 
                 EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
                 Vector4 propertyValue = _propertyService.GetVector4(property);
-                Vector4 newValue = EditorGUILayout.Vector4Field(label, propertyValue);
+                Vector4 newValue = EditorGUILayout.Vector4Field(label, propertyValue).Clamp(range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
 
                 if (EditorGUI.EndChangeCheck())
@@ -161,7 +161,7 @@ namespace ShadowShard.Editor
             }
         }
         
-        internal Vector4 DrawVector4Start<TProperty>(GUIContent label, TProperty property, int indentLevel = 0)
+        internal Vector4 DrawVector4Start<TProperty>(GUIContent label, TProperty property, Vector2Range range, int indentLevel = 0)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector4(property);
@@ -173,7 +173,7 @@ namespace ShadowShard.Editor
                 EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
                 Vector4 propertyVector4Value = _propertyService.GetVector4(property);
                 Vector2 propertyValue = new(propertyVector4Value.x, propertyVector4Value.y);
-                Vector2 newValue = EditorGUILayout.Vector2Field(label, propertyValue);
+                Vector2 newValue = EditorGUILayout.Vector2Field(label, propertyValue).Clamp(range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
 
                 if (EditorGUI.EndChangeCheck())
@@ -184,7 +184,7 @@ namespace ShadowShard.Editor
             }
         }
         
-        internal Vector4 DrawVector4End<TProperty>(GUIContent label, TProperty property, int indentLevel = 0)
+        internal Vector4 DrawVector4End<TProperty>(GUIContent label, TProperty property, Vector2Range range, int indentLevel = 0)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector4(property);
@@ -196,7 +196,7 @@ namespace ShadowShard.Editor
                 EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
                 Vector4 propertyVector4Value = _propertyService.GetVector4(property);
                 Vector2 propertyValue = new(propertyVector4Value.z, propertyVector4Value.w);
-                Vector2 newValue = EditorGUILayout.Vector2Field(label, propertyValue);
+                Vector2 newValue = EditorGUILayout.Vector2Field(label, propertyValue).Clamp(range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
 
                 if (EditorGUI.EndChangeCheck())
