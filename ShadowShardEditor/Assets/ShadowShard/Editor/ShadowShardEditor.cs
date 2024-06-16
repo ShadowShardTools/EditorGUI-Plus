@@ -39,7 +39,10 @@ namespace ShadowShard.Editor
         }
         
         #region GroupEditorRegion
-
+        
+        public void ScrollView(Action drawCall, ref Vector2 scrollPosition, params GUILayoutOption[] options) =>
+            _groupEditor.ScrollView(drawCall, ref scrollPosition, options);
+        
         public void DrawVertical(GUIStyle styles, Action drawCall) =>
             _groupEditor.DrawVertical(styles, drawCall);
         
