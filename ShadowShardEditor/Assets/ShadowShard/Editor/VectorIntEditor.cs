@@ -46,7 +46,7 @@ namespace ShadowShard.Editor
                 
                 EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
                 Vector2Int propertyValue = _propertyService.GetVector2Int(property);
-                Vector2Int newValue = EditorGUILayout.Vector2IntField(label, propertyValue);
+                Vector2Int newValue = EditorGUILayout.Vector2IntField(label, propertyValue).ClampInt(range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
 
                 if (EditorGUI.EndChangeCheck())
@@ -65,7 +65,7 @@ namespace ShadowShard.Editor
                 
                 EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
                 Vector3Int propertyValue = _propertyService.GetVector3Int(property);
-                Vector3Int newValue = EditorGUILayout.Vector3IntField(label, propertyValue);
+                Vector3Int newValue = EditorGUILayout.Vector3IntField(label, propertyValue).ClampInt(range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
                 
                 if (EditorGUI.EndChangeCheck())
