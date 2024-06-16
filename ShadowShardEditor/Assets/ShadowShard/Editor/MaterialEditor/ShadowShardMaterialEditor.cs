@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace ShadowShard.Editor.MaterialEditor
 {
-    public sealed class ShadowShardMaterialEditor
+    public sealed class ShadowShardMaterialEditor : IShadowShardMaterialEditor
     {
         private readonly GroupEditor _groupEditor;
         private readonly SliderEditor _sliderEditor;
