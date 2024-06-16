@@ -9,7 +9,7 @@ using TextEditor = ShadowShard.Editor.EditorModules.TextEditor;
 
 namespace ShadowShard.Editor
 {
-    public class ShadowShardEditor
+    public sealed class ShadowShardEditor
     {
         private readonly GroupEditor _groupEditor;
         private readonly SliderEditor _sliderEditor;

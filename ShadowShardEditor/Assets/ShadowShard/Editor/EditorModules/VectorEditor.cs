@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ShadowShard.Editor.EditorModules
 {
-    internal class VectorEditor
+    internal sealed class VectorEditor
     {
         private readonly PropertyService _propertyService;
         private readonly GroupEditor _groupEditor;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ShadowShard.Editor.EditorModules
 {
-    internal class GroupEditor
+    internal sealed class GroupEditor
     {
         internal void DrawVertical(GUIStyle styles, Action drawCall)
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ShadowShard.Editor.EditorModules
 {
-    internal class ToggleEditor
+    internal sealed class ToggleEditor
     {
         private readonly PropertyService _propertyService;
         private readonly GroupEditor _groupEditor;

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ShadowShard.Editor.EditorModules
 {
-    internal class SliderEditor
+    internal sealed class SliderEditor
     {
         private readonly PropertyService _propertyService;
         private readonly GroupEditor _groupEditor;
