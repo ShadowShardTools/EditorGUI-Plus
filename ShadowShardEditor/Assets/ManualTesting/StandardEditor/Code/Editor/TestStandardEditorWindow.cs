@@ -17,7 +17,7 @@ namespace ManualTesting.StandardEditor.Code.Editor
         private void OnGUI()
         {
             _shadowShardData = EditorGUILayout.ObjectField("Test data", _shadowShardData, typeof(ShadowShardData), false) as ShadowShardData;
-            _shadowShardEditor ??= new ShadowShardEditor();
+            _shadowShardEditor ??= new EditorGUIPlus();
             if(_shadowShardData == null)
             {
                 EditorGUILayout.HelpBox("Test data is not set!", MessageType.Error);

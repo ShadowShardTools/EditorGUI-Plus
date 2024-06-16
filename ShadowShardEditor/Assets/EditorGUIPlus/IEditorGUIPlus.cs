@@ -7,7 +7,7 @@ using Object = UnityEngine.Object;
 
 namespace EditorGUIPlus
 {
-    public interface IShadowShardEditor
+    public interface IEditorGUIPlus
     {
         void ScrollView(Action drawCall, ref Vector2 scrollPosition, params GUILayoutOption[] options);
         void DrawVertical(GUIStyle styles, Action drawCall);

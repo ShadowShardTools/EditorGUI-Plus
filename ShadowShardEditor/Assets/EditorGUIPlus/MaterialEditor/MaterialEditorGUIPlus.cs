@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace EditorGUIPlus.MaterialEditor
 {
-    public sealed class ShadowShardMaterialEditor : IShadowShardMaterialEditor
+    public sealed class MaterialEditorGUIPlus : IMaterialEditorGUIPlus
     {
         private readonly GroupEditor _groupEditor;
         private readonly SliderEditor _sliderEditor;
@@ -22,7 +22,7 @@ namespace EditorGUIPlus.MaterialEditor
         
         public UnityEditor.MaterialEditor MaterialEditor;
         
-        public ShadowShardMaterialEditor()
+        public MaterialEditorGUIPlus()
         {
             PropertyService propertyService = new();
             

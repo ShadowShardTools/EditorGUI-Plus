@@ -9,7 +9,7 @@ using TextEditor = EditorGUIPlus.EditorModules.TextEditor;
 
 namespace EditorGUIPlus
 {
-    public sealed class ShadowShardEditor : IShadowShardEditor
+    public sealed class EditorGUIPlus : IEditorGUIPlus
     {
         private readonly GroupEditor _groupEditor;
         private readonly SliderEditor _sliderEditor;
@@ -23,7 +23,7 @@ namespace EditorGUIPlus
         private readonly TextEditor _textEditor;
         private readonly CurveEditor _curveEditor;
         
-        public ShadowShardEditor()
+        public EditorGUIPlus()
         {
             PropertyService propertyService = new();
             
