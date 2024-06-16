@@ -11,6 +11,7 @@ namespace ManualTesting.StandardEditor.Code.Editor
         private ShadowShardData _shadowShardData;
         private ShadowShardEditor _shadowShardEditor;
         private SerializedObject _serializedShadowShardData;
+        private Vector2 _scrollPosition;
 
         [MenuItem("Window/EditorTesting/Standard Editor Tests")]
         public static void ShowWindow() =>
@@ -34,7 +35,22 @@ namespace ManualTesting.StandardEditor.Code.Editor
             }
 
             EditorGUI.BeginChangeCheck();
+            using EditorGUILayout.ScrollViewScope scroll = new(_scrollPosition);
+            _scrollPosition = scroll.scrollPosition;
+            
+            DrawGroups();
+            DrawSliders();
+            DrawToggles();
 
+            if(EditorGUI.EndChangeCheck())
+            {
+                _serializedShadowShardData.ApplyModifiedProperties();
+                _serializedShadowShardData.Update();
+            }
+        }
+
+        private void DrawGroups()
+        {
             _shadowShardEditor.DrawVertical(_shadowShardData.Styles, () => { });
             _shadowShardEditor.DrawIndented(_shadowShardData.IndentLevel, () => { });
             _shadowShardEditor.DrawDisabled(_shadowShardData.IsDisabled, () => { });
@@ -43,7 +59,10 @@ namespace ManualTesting.StandardEditor.Code.Editor
             _shadowShardEditor.DrawGroup(() => { });
             _shadowShardEditor.DrawGroup(_shadowShardData.Label, _shadowShardData.IsDisabled, () => { });
             _shadowShardEditor.DrawGroup(_shadowShardData.Label, () => { });
+        }
 
+        private void DrawSliders()
+        {
             _shadowShardData.SliderValue = _shadowShardEditor.DrawSlider(
                 new GUIContent("Slider"), _serializedShadowShardData.FindProperty("SliderValue"), new FloatRange(0, 1), _shadowShardData.IndentLevel);
 
@@ -66,12 +85,16 @@ namespace ManualTesting.StandardEditor.Code.Editor
 
             _shadowShardEditor.DrawMinMaxVector4EndSlider(
                 new GUIContent("Vector4 End Slider"), _serializedShadowShardData.FindProperty("Vector4Value"), new FloatRange(0, 1), _shadowShardData.IndentLevel);
+        }
 
-            if(EditorGUI.EndChangeCheck())
-            {
-                _serializedShadowShardData.ApplyModifiedProperties();
-                _serializedShadowShardData.Update();
-            }
+        private void DrawToggles()
+        {
+            _shadowShardData.ToggleValue = _shadowShardEditor.DrawToggle(
+                new GUIContent("Toggle"), _serializedShadowShardData.FindProperty("ToggleValue"), _shadowShardData.IndentLevel);
+
+            _shadowShardData.ToggleValue = _shadowShardEditor.DrawShaderGlobalKeywordToggle(
+                new GUIContent("Shader Global Keyword Toggle"), _serializedShadowShardData.FindProperty("ToggleValue"), _shadowShardData.ShaderGlobalKeyword,
+                _shadowShardData.IndentLevel);
         }
     }
 }

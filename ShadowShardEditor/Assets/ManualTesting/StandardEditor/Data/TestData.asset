@@ -85,9 +85,11 @@ MonoBehaviour:
     m_Text: sgdfag
     m_Image: {fileID: 2800000, guid: 727a75301c3d24613a3ebcec4a24c2c8, type: 3}
     m_Tooltip: sadgdsaga
-  SliderValue: 0.222
+  SliderValue: 0.409
   MinValue: 0.4076851
   MaxValue: 0.92502344
   IntSliderValue: 6
   Vector3Value: {x: 0.434, y: 0.602, z: 0.484}
   Vector4Value: {x: 0.4194002, y: 0.64151824, z: 0.29287723, w: 0.72352386}
+  ToggleValue: 0
+  ShaderGlobalKeyword: SHADER_GLOBAL_KEYWORD

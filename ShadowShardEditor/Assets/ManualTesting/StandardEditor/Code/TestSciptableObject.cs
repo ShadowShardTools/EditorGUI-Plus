@@ -18,6 +18,8 @@ namespace ManualTesting.StandardEditor.Code
         public Vector3 Vector3Value = new Vector3(1, 2, 3);
         public Vector4 Vector4Value = new Vector4(1, 2, 3, 4);
         public FloatRange FloatRangeValue = new FloatRange(0, 1);
+        public bool ToggleValue;
+        public string ShaderGlobalKeyword = "SHADER_GLOBAL_KEYWORD";
         
         public SerializedObject GetSerializedObject() =>
             new(this);
