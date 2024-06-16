@@ -224,44 +224,62 @@ namespace ShadowShard.Editor
         public float DrawInt(GUIContent label, SerializedProperty property, IntRange range, int indentLevel = 0) =>
             _vectorIntEditor.DrawInt(label, property, range, indentLevel);
         
+        public Vector2Int DrawVector2Int(GUIContent label, SerializedProperty property, Vector2IntRange range, int indentLevel = 0) =>
+            _vectorIntEditor.DrawVector2Int(label, property, range, indentLevel);
+        
+        public Vector3Int DrawVector3Int(GUIContent label, SerializedProperty property, Vector3IntRange range, int indentLevel = 0) =>
+            _vectorIntEditor.DrawVector3Int(label, property, range, indentLevel);
+        
         public float DrawInt(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
             _vectorIntEditor.DrawInt(label, property, IntRange.Full, indentLevel);
         
         public Vector2Int DrawVector2Int(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            _vectorIntEditor.DrawVector2Int(label, property, indentLevel);
+            _vectorIntEditor.DrawVector2Int(label, property, Vector2IntRange.Full, indentLevel);
         
         public Vector3Int DrawVector3Int(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
-            _vectorIntEditor.DrawVector3Int(label, property, indentLevel);
-        
-        public Vector2Int DrawFloatFromVector2Int(GUIContent label, SerializedProperty property, Vector2Param vector2Param, 
-            IntRange range, int indentLevel = 0) =>
-            _vectorIntEditor.DrawFloatFromVector2Int(label, property, vector2Param, range, indentLevel);
-        
-        public Vector3Int DrawFloatFromVector3(GUIContent label, SerializedProperty property, Vector3Param vector3Param, 
-            IntRange range, int indentLevel = 0) =>
-            _vectorIntEditor.DrawFloatFromVector3Int(label, property, vector3Param, range, indentLevel);
+            _vectorIntEditor.DrawVector3Int(label, property, Vector3IntRange.Full, indentLevel);
         
         public float DrawNormalizedInt(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
             _vectorIntEditor.DrawInt(label, property, IntRange.Normalized, indentLevel);
         
-        public Vector2Int DrawNormalizedFloatFromVector2Int(GUIContent label, SerializedProperty property, 
-            Vector2Param vector2Param, int indentLevel = 0) =>
-            _vectorIntEditor.DrawFloatFromVector2Int(label, property, vector2Param, IntRange.Normalized, indentLevel);
+        public Vector2Int DrawNormalizedVector2Int(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+            _vectorIntEditor.DrawVector2Int(label, property, Vector2IntRange.Normalized, indentLevel);
         
-        public Vector3Int DrawNormalizedFloatFromVector3Int(GUIContent label, SerializedProperty property, 
-            Vector3Param vector3Param, int indentLevel = 0) =>
-            _vectorIntEditor.DrawFloatFromVector3Int(label, property, vector3Param, IntRange.Normalized, indentLevel);
+        public Vector3Int DrawNormalizedVector3Int(GUIContent label, SerializedProperty property, int indentLevel = 0) =>
+            _vectorIntEditor.DrawVector3Int(label, property, Vector3IntRange.Normalized, indentLevel);
         
         public int DrawMinInt(GUIContent label, SerializedProperty property, int min = 0, int indentLevel = 0) =>
             _vectorIntEditor.DrawInt(label, property, IntRange.ToMaxFrom(min), indentLevel);
         
-        public Vector2Int DrawMinFloatFromVector2Int(GUIContent label, SerializedProperty property, Vector2Param vector2Param, 
-            int min = 0, int indentLevel = 0) =>
-            _vectorIntEditor.DrawFloatFromVector2Int(label, property, vector2Param, IntRange.ToMaxFrom(min), indentLevel);
+        public Vector2Int DrawMinVector2Int(GUIContent label, SerializedProperty property, Vector2Int min, int indentLevel = 0) =>
+            _vectorIntEditor.DrawVector2Int(label, property, Vector2IntRange.ToMaxFrom(min), indentLevel);
         
-        public Vector3Int DrawMinFloatFromVector3Int(GUIContent label, SerializedProperty property, Vector3Param vector3Param, 
+        public Vector3Int DrawMinVector3Int(GUIContent label, SerializedProperty property, Vector3Int min, int indentLevel = 0) =>
+            _vectorIntEditor.DrawVector3Int(label, property, Vector3IntRange.ToMaxFrom(min), indentLevel);
+        
+        public Vector2Int DrawIntFromVector2Int(GUIContent label, SerializedProperty property, Vector2Param vector2Param, 
+            IntRange range, int indentLevel = 0) =>
+            _vectorIntEditor.DrawIntFromVector2Int(label, property, vector2Param, range, indentLevel);
+        
+        public Vector3Int DrawIntFromVector3Int(GUIContent label, SerializedProperty property, Vector3Param vector3Param, 
+            IntRange range, int indentLevel = 0) =>
+            _vectorIntEditor.DrawIntFromVector3Int(label, property, vector3Param, range, indentLevel);
+        
+        public Vector2Int DrawNormalizedIntFromVector2Int(GUIContent label, SerializedProperty property, 
+            Vector2Param vector2Param, int indentLevel = 0) =>
+            _vectorIntEditor.DrawIntFromVector2Int(label, property, vector2Param, IntRange.Normalized, indentLevel);
+        
+        public Vector3Int DrawNormalizedIntFromVector3Int(GUIContent label, SerializedProperty property, 
+            Vector3Param vector3Param, int indentLevel = 0) =>
+            _vectorIntEditor.DrawIntFromVector3Int(label, property, vector3Param, IntRange.Normalized, indentLevel);
+        
+        public Vector2Int DrawMinIntFromVector2Int(GUIContent label, SerializedProperty property, Vector2Param vector2Param, 
             int min = 0, int indentLevel = 0) =>
-            _vectorIntEditor.DrawFloatFromVector3Int(label, property, vector3Param, IntRange.ToMaxFrom(min), indentLevel);
+            _vectorIntEditor.DrawIntFromVector2Int(label, property, vector2Param, IntRange.ToMaxFrom(min), indentLevel);
+        
+        public Vector3Int DrawMinIntFromVector3Int(GUIContent label, SerializedProperty property, Vector3Param vector3Param, 
+            int min = 0, int indentLevel = 0) =>
+            _vectorIntEditor.DrawIntFromVector3Int(label, property, vector3Param, IntRange.ToMaxFrom(min), indentLevel);
         
         #endregion
         
