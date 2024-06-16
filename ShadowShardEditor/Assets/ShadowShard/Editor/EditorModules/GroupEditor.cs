@@ -6,6 +6,13 @@ namespace ShadowShard.Editor.EditorModules
 {
     internal sealed class GroupEditor
     {
+        internal void ScrollView(Action drawCall, ref Vector2 scrollPosition, params GUILayoutOption[] options)
+        {
+            using EditorGUILayout.ScrollViewScope scrollViewScope = new(scrollPosition, options);
+            scrollPosition = scrollViewScope.scrollPosition;
+            drawCall.Invoke();
+        }
+        
         internal void DrawVertical(GUIStyle styles, Action drawCall)
         {
             EditorGUILayout.BeginVertical(styles);
