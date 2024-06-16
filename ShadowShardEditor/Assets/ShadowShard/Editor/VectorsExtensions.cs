@@ -8,6 +8,7 @@ namespace ShadowShard.Editor
         {
             value.x = Mathf.Clamp(value.x, min.x, max.x);
             value.y = Mathf.Clamp(value.y, min.y, max.y);
+            
             return value;
         }
 
@@ -16,6 +17,7 @@ namespace ShadowShard.Editor
             value.x = Mathf.Clamp(value.x, min.x, max.x);
             value.y = Mathf.Clamp(value.y, min.y, max.y);
             value.z = Mathf.Clamp(value.z, min.z, max.z);
+            
             return value;
         }
 
@@ -25,6 +27,24 @@ namespace ShadowShard.Editor
             value.y = Mathf.Clamp(value.y, min.y, max.y);
             value.z = Mathf.Clamp(value.z, min.z, max.z);
             value.w = Mathf.Clamp(value.w, min.w, max.w);
+            
+            return value;
+        }
+        
+        public static Vector2Int ClampInt(this Vector2Int value, Vector2Int min, Vector2Int max)
+        {
+            value.x = Mathf.Clamp(value.x, min.x, max.x);
+            value.y = Mathf.Clamp(value.y, min.y, max.y);
+            
+            return value;
+        }
+
+        public static Vector3Int ClampInt(this Vector3Int value, Vector3Int min, Vector3Int max)
+        {
+            value.x = Mathf.Clamp(value.x, min.x, max.x);
+            value.y = Mathf.Clamp(value.y, min.y, max.y);
+            value.z = Mathf.Clamp(value.z, min.z, max.z);
+            
             return value;
         }
     }
