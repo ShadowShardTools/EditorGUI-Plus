@@ -14,7 +14,6 @@ namespace EditorGUIPlus.MaterialEditor.ShaderGUI
         
         protected bool FirstTimeApply = true;
         protected static Vector2 IconSize = new(5, 5);
-        protected const string BaseOffsetPropertyName = "_BaseMap";
 
         protected List<MaterialSection> Sections = new();
 
@@ -25,7 +24,7 @@ namespace EditorGUIPlus.MaterialEditor.ShaderGUI
             SetKeywords(material);
         
         public virtual void OnOpenGUI(Material material) => 
-            Sections = new List<MaterialSection>();
+            Sections = new List<MaterialSection>(SetSections(material));
 
         public virtual void OnUpdateGUI(Material material) { }
         

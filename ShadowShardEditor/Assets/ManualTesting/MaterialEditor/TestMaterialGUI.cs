@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using EditorGUIPlus.MaterialEditor.ShaderGUI;
-using EditorGUIPlus.Section;
 using UnityEngine;
 
 namespace ManualTesting.MaterialEditor
