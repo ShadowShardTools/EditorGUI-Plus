@@ -28,7 +28,7 @@
 * Popups - Create dropdown menus for enum values and boolean choices.
 * Objects - Manage scriptable object fields.
 
-## Usage
+## Using EditorGUI+
 ### Initializing EditorGUI+
 To use EditorGUI+ in your custom editor scripts, you need to create an instance of the EditorGUIPlus class:
 
@@ -137,4 +137,81 @@ Draw and edit animation curves in your custom editor.
 SerializedProperty curveProperty = serializedObject.FindProperty("curveField");
 
 _editorGUIPlus.DrawCurveField(new GUIContent("Curve Field"), curveProperty);
+```
+
+## Using MaterialEditorGUI+
+### Initializing MaterialEditorGUI+
+To use MaterialEditorGUI+ in your own material editor scripts, you need to create an instance of the MaterialEditorGUIPlus class or use BaseShaderGUI from EditorGUI+.
+To do this in your own material editor scripts, initialize it in the base class:
+
+```csharp
+public class BaseShaderGUI : UnityEditor.ShaderGUI
+{
+    private readonly MaterialEditorGUIPlus _materialEditorGUIPlus = new();
+    .....
+    public override void OnGUI(UnityEditor.MaterialEditor materialEditorIn, MaterialProperty[] properties)
+    {
+        if (materialEditorIn == null)
+            throw new ArgumentNullException(nameof(materialEditorIn));
+            
+        _materialEditor = materialEditorIn;
+        _materialEditorGUIPlus.InitializeMaterialEditor(_materialEditor);
+        Material material = _materialEditor != null ? _materialEditor.target as Material : null;
+            
+        if (material == null)
+            return;
+    }
+}
+```
+
+### MaterialEditorGUI+ BaseShaderGUI
+```csharp
+using EditorGUIPlus.MaterialEditor.ShaderGUI;
+
+public class ExampleMaterialGUI : BaseShaderGUI
+{
+    public override void OnOpenGUI(Material material)
+    {
+        Sections = new List<MaterialSection>(SetSections(material));
+    }
+
+    public override IEnumerable<MaterialSection> SetSections(Material material)
+    {
+        return new List<MaterialSection>
+        {
+            new Example1Section(),
+            new Example2Section(material)
+            new Example3Section(material)
+        };
+    }
+}
+```
+
+### MaterialSection in MaterialEditorGUI+
+```csharp
+public class Example2Section : MaterialSection
+{
+    private Material _material;
+    protected Property TestProperty = new("_TestProfileAsset");
+    private readonly GUIContent _label = new("Test");
+
+    public Example2Section(Material material) : base(new GUIContent("Test Label"))
+    {
+        _material = material;
+    }
+
+    public override void FindProperties(MaterialProperty[] properties)
+    {
+        TestProperty.Find(properties);
+    }
+
+    public override void DrawProperties(MaterialEditorGUIPlus editor)
+    {
+        ... draw TestProperty
+    }
+    public override void SetKeywords(Material material)
+    {
+        ...keywords logic
+    }
+}
 ```
