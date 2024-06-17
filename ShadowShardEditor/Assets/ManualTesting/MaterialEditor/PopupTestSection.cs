@@ -11,7 +11,6 @@ namespace ManualTesting.MaterialEditor
     {
         protected Property Color = new("_Color");
         protected Property BaseMap = new("_BaseMap");
-        protected Property _EnumValue = new("_EnumValue");
         protected Property VectorValue = new("_VectorValue");
         protected Property EnumValue = new("_EnumValue");
 

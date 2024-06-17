@@ -56,7 +56,7 @@ namespace EditorGUIPlus.MaterialEditor.AssetObject
                 }
             }
 
-            if (matExternalRefs == null)
+            if (matExternalRefs is null)
             {
                 matExternalRefs = CreateInstance<MaterialExternalReferences>();
                 matExternalRefs.hideFlags = HideFlags.HideInHierarchy | HideFlags.HideInInspector | HideFlags.NotEditable;

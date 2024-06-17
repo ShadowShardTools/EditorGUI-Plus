@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace EditorGUIPlus.MaterialEditor
 {
-    public sealed class MaterialEditorGUIPlus : IMaterialEditorGUIPlus
+    public sealed class MaterialEditorGUIPlus
     {
         private readonly GroupEditor _groupEditor;
         private readonly SliderEditor _sliderEditor;
@@ -453,16 +453,19 @@ namespace EditorGUIPlus.MaterialEditor
         
         #region ObjectEditorRegion
             
-        public void DrawObjectField(
-            GUIContent label, 
-            Material material, 
-            MaterialProperty assetProperty, 
-            MaterialProperty hashProperty, 
+        public void DrawMaterialAssetObject(
+            Material material,
+            MaterialProperty assetProperty,
+            MaterialProperty hashProperty,
+            Func<MaterialAssetObject> drawObjectField,
             int indentLevel = 0,
-            bool allowSceneObjects = false, 
-            Action<MaterialAssetObject> onChangedCallback = null)=>
-            _objectEditor.DrawObjectField(label, material, MaterialEditor, assetProperty, hashProperty, indentLevel, allowSceneObjects, onChangedCallback);
+            Action onChangedCallback = null) =>
+            _objectEditor.DrawMaterialAssetObject(material, MaterialEditor, assetProperty, hashProperty, drawObjectField, 
+                indentLevel, onChangedCallback);
         
+        public T GetMaterialAssetObjectFromGuid<T>(string guid) where T : MaterialAssetObject => 
+            _objectEditor.GetMaterialAssetObjectFromGuid<T>(guid);
+
         #endregion
     }
 }

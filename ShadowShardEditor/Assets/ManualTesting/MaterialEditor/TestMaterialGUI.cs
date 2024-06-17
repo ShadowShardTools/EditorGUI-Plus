@@ -21,7 +21,8 @@ namespace ManualTesting.MaterialEditor
                 new VectorTestSection(),
                 new VectorIntTestSection(),
                 new TextureTestSection(),
-                new PopupTestSection()
+                new PopupTestSection(),
+                new ObjectTestSection(material)
             };
         }
     }

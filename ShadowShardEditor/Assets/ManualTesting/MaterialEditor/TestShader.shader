@@ -13,6 +13,12 @@
         _EnumValue ("Enum Value", Float) = 0
         _ShaderKeywordToggle ("Shader Keyword Toggle", Float) = 0
         _NormalScale("NormalScale", Range(0.0, 8.0)) = 1
+        
+        [HideInInspector] _TestProfile("Obsolete, kept for migration purpose", Int) = 0
+        [HideInInspector] _TestProfileAsset("Profile Asset", Vector) = (0, 0, 0, 0)
+        [HideInInspector] _TestProfileHash("Profile Hash", Float) = 0
+        
+        _TestFloatValue("Profile Float Value", Float) = 0
     }
     SubShader
     {
@@ -52,6 +58,7 @@
             float _FloatValue;
             float4 _VectorValue;
             float _ToggleValue;
+            float _TestFloatValue;
 
             v2f vert (appdata v)
             {
@@ -69,13 +76,13 @@
                 if(_ToggleValue > 0.5f)
                     fin += 1;
 
-                #ifdef _TEST_KEYWORD
+                /*#ifdef _TEST_KEYWORD
                     return half4(1.0, 1.0, 1.0, 1.0);
                 #else
                     return fin;
-                #endif
+                #endif*/
                 
-                return fin;
+                return _TestFloatValue;
             }
             ENDCG
         }

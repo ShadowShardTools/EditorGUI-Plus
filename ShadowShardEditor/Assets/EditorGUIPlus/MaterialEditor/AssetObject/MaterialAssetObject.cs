@@ -5,12 +5,13 @@ namespace EditorGUIPlus.MaterialEditor.AssetObject
 {
     public class MaterialAssetObject : ScriptableObject, IMaterialAssetObject
     {
-        [SerializeField] 
-        private List<Material> childMaterials;
+        [SerializeField]
+        [HideInInspector]
+        private List<Material> childMaterials = new();
         
-        public readonly uint Hash = 0;
-            
-        public MaterialAssetObject() => 
+        public readonly uint Hash;
+
+        public MaterialAssetObject() =>
             ResetToDefault();
 
         private void OnValidate() => 
@@ -34,9 +35,15 @@ namespace EditorGUIPlus.MaterialEditor.AssetObject
         }
 
         public virtual void AddChildMaterial(Material material)
-        { }
+        {
+            if(!childMaterials.Contains(material))
+                childMaterials.Add(material);
+        }
 
         public virtual void RemoveChildMaterial(Material material)
-        { }
+        {
+            if(childMaterials.Contains(material))
+                childMaterials.Remove(material);
+        }
     }
 }
