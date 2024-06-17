@@ -142,8 +142,8 @@ _editorGUIPlus.DrawCurveField(new GUIContent("Curve Field"), curveProperty);
 ## Using MaterialEditorGUI+
 ### Initializing MaterialEditorGUI+
 To use MaterialEditorGUI+ in your own material editor scripts, you need to create an instance of the MaterialEditorGUIPlus class or use BaseShaderGUI from EditorGUI+.
-
 To do this in your own material editor scripts, initialize it in the base class:
+
 ```csharp
 public class BaseShaderGUI : UnityEditor.ShaderGUI
 {
@@ -165,6 +165,7 @@ public class BaseShaderGUI : UnityEditor.ShaderGUI
 ```
 
 ### MaterialEditorGUI+ BaseShaderGUI
+
 ```csharp
 using EditorGUIPlus.MaterialEditor.ShaderGUI;
 
@@ -188,6 +189,7 @@ public class ExampleMaterialGUI : BaseShaderGUI
 ```
 
 ### MaterialSection in MaterialEditorGUI+
+
 ```csharp
 public class Example2Section : MaterialSection
 {
@@ -213,5 +215,73 @@ public class Example2Section : MaterialSection
     {
         ...Keywords logic
     }
+}
+```
+
+### Sliders
+Draw sliders for float and integer properties with custom ranges.
+
+```csharp
+MaterialProperty floatProperty = FindProperty("_FloatField", properties);
+MaterialProperty intProperty = FindProperty("_IntField", properties);
+
+_materialEditorGUIPlus.DrawSlider(new GUIContent("Float Slider"), floatProperty, new FloatRange(0f, 1f));
+_materialEditorGUIPlus.DrawIntSlider(new GUIContent("Int Slider"), intProperty, new IntRange(0, 10));
+```
+
+### Toggles
+Add boolean toggles to your editor interface.
+
+```csharp
+MaterialProperty toggleProperty = FindProperty("_ToggleField", properties);
+
+_materialEditorGUIPlus.DrawToggle(new GUIContent("Toggle"), toggleProperty);
+```
+
+### Vectors
+Draw vector fields for Vector2, Vector3, and Vector4 properties.
+
+```csharp
+MaterialProperty vector3Property = FindProperty("_Vector3Field", properties);
+
+_materialEditorGUIPlus.DrawVector3(new GUIContent("Vector3 Field"), vector3Property, new Vector3Range(Vector3.zero, Vector3.one));
+```
+
+### Textures
+Handle texture fields in your custom editor.
+
+```csharp
+MaterialProperty textureProperty = FindProperty("_TextureField", properties);
+
+_materialEditorGUIPlus.DrawSingleLineTexture(new GUIContent("Texture Field"), textureProperty);
+```
+
+### Popups
+Create dropdown menus for selecting from predefined options.
+
+```csharp
+MaterialProperty popupProperty = FindProperty("_PopupField", properties);
+string[] options = new string[] { "Option1", "Option2", "Option3" };
+
+_materialEditorGUIPlus.DrawPopup(new GUIContent("Popup Field"), popupProperty, options);
+```
+
+### Objects
+Manage scriptable object fields in your custom editor.
+
+```csharp
+MaterialProperty ExampleProfileAsset = FindProperty("_ExampleProfileAsset", properties);
+MaterialProperty ExampleProfileHash = FindProperty("_ExampleProfileHash", properties);
+
+_materialEditorGUIPlus.DrawMaterialAssetObject(_material, ExampleProfileAsset.MaterialProperty, ExampleProfileHash.MaterialProperty, DrawExampleProfile, 1);
+return;
+
+MaterialAssetObject DrawExampleProfile()
+{
+    string guid = ExampleProfileAsset.MaterialProperty.vectorValue.ToGuid();
+    ExampleProfile assetObject = editor.GetMaterialAssetObjectFromGuid<ExampleProfile>(guid);
+            
+    return EditorGUILayout.ObjectField(_label, assetObject, 
+        typeof(ExampleProfile), allowSceneObjects: false) as ExampleProfile;
 }
 ```
