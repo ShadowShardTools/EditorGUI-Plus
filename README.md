@@ -442,25 +442,25 @@ DrawVector2Int(GUIContent label, SerializedProperty property, int indentLevel = 
 
 DrawVector3Int(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null)
 
+DrawIntFromVector2Int(GUIContent label, SerializedProperty property, Vector2Param vector2Param, IntRange range, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawIntFromVector3Int(GUIContent label, SerializedProperty property, Vector3Param vector3Param, IntRange range, int indentLevel = 0, Action onChangedCallback = null)
+
 DrawNormalizedInt(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null)
 
 DrawNormalizedVector2Int(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null)
 
 DrawNormalizedVector3Int(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null)
 
+DrawNormalizedIntFromVector2Int(GUIContent label, SerializedProperty property, Vector2Param vector2Param, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawNormalizedIntFromVector3Int(GUIContent label, SerializedProperty property, Vector3Param vector3Param, int indentLevel = 0, Action onChangedCallback = null)
+
 DrawMinInt(GUIContent label, SerializedProperty property, int min = 0, int indentLevel = 0, Action onChangedCallback = null)
 
 DrawMinVector2Int(GUIContent label, SerializedProperty property, Vector2Int min, int indentLevel = 0, Action onChangedCallback = null)
 
 DrawMinVector3Int(GUIContent label, SerializedProperty property, Vector3Int min, int indentLevel = 0, Action onChangedCallback = null)
-
-DrawIntFromVector2Int(GUIContent label, SerializedProperty property, Vector2Param vector2Param, IntRange range, int indentLevel = 0, Action onChangedCallback = null)
-
-DrawIntFromVector3Int(GUIContent label, SerializedProperty property, Vector3Param vector3Param, IntRange range, int indentLevel = 0, Action onChangedCallback = null)
-
-DrawNormalizedIntFromVector2Int(GUIContent label, SerializedProperty property, Vector2Param vector2Param, int indentLevel = 0, Action onChangedCallback = null)
-
-DrawNormalizedIntFromVector3Int(GUIContent label, SerializedProperty property, Vector3Param vector3Param, int indentLevel = 0, Action onChangedCallback = null)
 
 DrawMinIntFromVector2Int(GUIContent label, SerializedProperty property, Vector2Param vector2Param, int min = 0, int indentLevel = 0, Action onChangedCallback = null)
 
