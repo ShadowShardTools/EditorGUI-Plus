@@ -142,8 +142,8 @@ _editorGUIPlus.DrawCurveField(new GUIContent("Curve Field"), curveProperty);
 ## Using MaterialEditorGUI+
 ### Initializing MaterialEditorGUI+
 To use MaterialEditorGUI+ in your own material editor scripts, you need to create an instance of the MaterialEditorGUIPlus class or use BaseShaderGUI from EditorGUI+.
-To do this in your own material editor scripts, initialize it in the base class:
 
+To do this in your own material editor scripts, initialize it in the base class:
 ```csharp
 public class BaseShaderGUI : UnityEditor.ShaderGUI
 {
@@ -207,11 +207,11 @@ public class Example2Section : MaterialSection
 
     public override void DrawProperties(MaterialEditorGUIPlus editor)
     {
-        ... draw TestProperty
+        ...Draw TestProperty
     }
     public override void SetKeywords(Material material)
     {
-        ...keywords logic
+        ...Keywords logic
     }
 }
 ```
