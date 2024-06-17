@@ -29,16 +29,9 @@ namespace EditorGUIPlus.MaterialEditor
             return new Vector4(x, y, z, w);
         }
         
-        public static float AsFloat(this uint val)
+        public static float AsFloat(this uint value)
         {
-            byte[] bytes = BitConverter.GetBytes(val);
-            return BitConverter.ToSingle(bytes, 0);
-        }
-
-        public static float AsFloat(this int val)
-        {
-            byte[] bytes = BitConverter.GetBytes(val);
-            return BitConverter.ToSingle(bytes, 0);
+            return BitConverter.ToSingle(BitConverter.GetBytes(value), 0);
         }
     }
 }

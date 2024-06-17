@@ -40,15 +40,14 @@ namespace EditorGUIPlus.EditorModules
             }
         }
         
-        internal void DrawObjectField(
-            GUIContent label, 
+        internal void DrawMaterialAssetObject(
             Material material, 
             UnityEditor.MaterialEditor materialEditor,
-            MaterialProperty assetProperty, 
+            MaterialProperty assetProperty,
             MaterialProperty hashProperty,
+            Func<MaterialAssetObject> drawObjectField,
             int indentLevel = 0,
-            bool allowSceneObjects = true, 
-            Action<MaterialAssetObject> onChangedCallback = null)
+            Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return;
@@ -58,70 +57,66 @@ namespace EditorGUIPlus.EditorModules
                 EditorGUI.BeginChangeCheck();
 
                 EditorGUI.showMixedValue = assetProperty.hasMixedValue || hashProperty.hasMixedValue;
-                string guid = assetProperty.vectorValue.ToGuid();
-                MaterialAssetObject assetObject = GetMaterialAssetObjectFromGuid<MaterialAssetObject>(guid);
-                MaterialAssetObject newValue = EditorGUILayout.ObjectField(label, assetObject, typeof(MaterialAssetObject), allowSceneObjects: allowSceneObjects) as MaterialAssetObject;
+                MaterialAssetObject newValue = drawObjectField.Invoke();
                 EditorGUI.showMixedValue = false;
 
                 if(EditorGUI.EndChangeCheck())
                 {
-                    UpdateMaterialAssetObject(material, assetObject, assetProperty, hashProperty, guid);
-                    UpdateExternalReference(materialEditor, assetObject);
-                    onChangedCallback?.Invoke(newValue);
+                    UpdateMaterialAssetObject(material, newValue, assetProperty, hashProperty);
+                    UpdateExternalReference(materialEditor, newValue);
+                    onChangedCallback?.Invoke();
                 }
             }
         }
         
-        private TObject GetMaterialAssetObjectFromGuid<TObject>(string guid) where TObject : Object
+        public T GetMaterialAssetObjectFromGuid<T>(string guid) where T : MaterialAssetObject
         {
+            if (string.IsNullOrEmpty(guid))
+                return null;
+
             string assetPath = AssetDatabase.GUIDToAssetPath(guid);
-            
-            return string.IsNullOrEmpty(assetPath) ? null : AssetDatabase.LoadAssetAtPath<TObject>(assetPath);
+            return string.IsNullOrEmpty(assetPath) ? null : AssetDatabase.LoadAssetAtPath<T>(assetPath);
         }
         
-        private void UpdateMaterialAssetObject(Material material, MaterialAssetObject materialAssetObject, 
-            MaterialProperty assetProperty, MaterialProperty hashProperty, string guid)
+        private void UpdateMaterialAssetObject<T>(Material material, T newMaterialAssetObject,
+            MaterialProperty assetProperty, MaterialProperty hashProperty) where T : MaterialAssetObject
         {
-            if (guid == null)
-                throw new ArgumentNullException(nameof(guid));
-
             Vector4 newGuid = Vector4.zero;
             float hash = 0;
 
-            if (materialAssetObject != null)
+            if (newMaterialAssetObject != null)
             {
-                guid = AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(materialAssetObject));
-                newGuid = guid.ToVector4();
-                hash = materialAssetObject.Hash.AsFloat();
+                string newGuidString = AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(newMaterialAssetObject));
+                newGuid = newGuidString.ToVector4();
+                hash = newMaterialAssetObject.Hash.AsFloat();
 
-                materialAssetObject.SetMaterialAssetObject(material);
-                materialAssetObject.AddChildMaterial(material);
+                newMaterialAssetObject.SetMaterialAssetObject(material);
+                newMaterialAssetObject.AddChildMaterial(material);
             }
 
+            string oldGuidString = assetProperty.vectorValue.ToGuid();
             if (assetProperty.vectorValue != newGuid)
             {
-                string oldProfileGuid = assetProperty.vectorValue.ToGuid();
-                MaterialAssetObject oldProfileSettings = 
-                    AssetDatabase.LoadAssetAtPath<MaterialAssetObject>(AssetDatabase.GUIDToAssetPath(oldProfileGuid));
+                MaterialAssetObject oldMaterialAssetObject = 
+                    AssetDatabase.LoadAssetAtPath<MaterialAssetObject>(AssetDatabase.GUIDToAssetPath(oldGuidString));
 
-                if (oldProfileSettings != null && oldProfileSettings != materialAssetObject)
-                    oldProfileSettings.RemoveChildMaterial(material);
+                if (oldMaterialAssetObject != null && oldMaterialAssetObject != newMaterialAssetObject)
+                {
+                    oldMaterialAssetObject.RemoveChildMaterial(material);
+                }
+
+                assetProperty.vectorValue = newGuid;
+                hashProperty.floatValue = hash;
             }
-
-            assetProperty.vectorValue = newGuid;
-            hashProperty.floatValue = hash;
         }
         
-        private void UpdateExternalReference(UnityEditor.MaterialEditor materialEditor, MaterialAssetObject materialAssetObject)
+        private void UpdateExternalReference<T>(UnityEditor.MaterialEditor materialEditor, T newMaterialAssetObject) where T : MaterialAssetObject
         {
-            foreach (Object target in GetTargets(materialEditor))
+            foreach (Object target in materialEditor.targets)
             {
                 MaterialExternalReferences matExternalRefs = MaterialExternalReferences.GetMaterialExternalReferences(target as Material);
-                matExternalRefs.SetMaterialAssetObjectReference(0, materialAssetObject);
+                matExternalRefs.SetMaterialAssetObjectReference(0, newMaterialAssetObject);
             }
         }
-        
-        private IEnumerable<Object> GetTargets(UnityEditor.MaterialEditor materialEditor) => 
-            materialEditor.targets;
     }
 }
