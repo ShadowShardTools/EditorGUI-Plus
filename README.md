@@ -344,9 +344,9 @@ DrawIntSlider(GUIContent label, SerializedProperty property, IntRange range, int
 
 DrawIntSlider(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null)
 
-DrawFromVector3IntParamSlider<TProperty>(GUIContent label, TProperty property, Vector3Param vectorParam, IntRange range, int indentLevel = 0, Action onChangedCallback = null)
+DrawFromVector3IntParamSlider(GUIContent label, SerializedProperty property, Vector3Param vectorParam, IntRange range, int indentLevel = 0, Action onChangedCallback = null)
 
-DrawFromVector3IntParamSlider<TProperty>(GUIContent label, TProperty property, Vector3Param vectorParam, int indentLevel = 0, Action onChangedCallback = null)
+DrawFromVector3IntParamSlider(GUIContent label, SerializedProperty property, Vector3Param vectorParam, int indentLevel = 0, Action onChangedCallback = null)
 
 DrawVector3IntSliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, SerializedProperty property, IntRange range, int indentLevel = 0, Action onChangedCallback = null)
 
@@ -578,9 +578,9 @@ DrawIntSlider(GUIContent label, MaterialProperty property, IntRange range, int i
 
 DrawIntSlider(GUIContent label, MaterialProperty property, int indentLevel = 0, Action onChangedCallback = null)
 
-DrawFromVector3IntParamSlider<TProperty>(GUIContent label, TProperty property, Vector3Param vectorParam, IntRange range, int indentLevel = 0, Action onChangedCallback = null)
+DrawFromVector3IntParamSlider(GUIContent label, MaterialProperty property, Vector3Param vectorParam, IntRange range, int indentLevel = 0, Action onChangedCallback = null)
 
-DrawFromVector3IntParamSlider<TProperty>(GUIContent label, TProperty property, Vector3Param vectorParam, int indentLevel = 0, Action onChangedCallback = null)
+DrawFromVector3IntParamSlider(GUIContent label, MaterialProperty property, Vector3Param vectorParam, int indentLevel = 0, Action onChangedCallback = null)
 
 DrawVector3IntSliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, MaterialProperty property, IntRange range, int indentLevel = 0, Action onChangedCallback = null)
 
@@ -616,6 +616,14 @@ DrawVector3(GUIContent label, MaterialProperty property, int indentLevel = 0, Ac
 
 DrawVector4(GUIContent label, MaterialProperty property, int indentLevel = 0, Action onChangedCallback = null)
 
+DrawVector4Start(GUIContent label, MaterialProperty property, Vector2Range range, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawVector4Start(GUIContent label, MaterialProperty property, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawVector4End(GUIContent label, MaterialProperty property, Vector2Range range, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawVector4End(GUIContent label, MaterialProperty property, int indentLevel = 0, Action onChangedCallback = null)
+
 DrawFloatFromVector2(GUIContent label, MaterialProperty property, Vector2Param vector2Param, FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
 
 DrawFloatFromVector3(GUIContent label, MaterialProperty property, Vector3Param vector3Param, FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
@@ -630,39 +638,75 @@ DrawNormalizedVector3(GUIContent label, MaterialProperty property, int indentLev
 
 DrawNormalizedVector4(GUIContent label, MaterialProperty property, int indentLevel = 0, Action onChangedCallback = null)
 
+DrawNormalizedVector4Start(GUIContent label, MaterialProperty property, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawNormalizedVector4End(GUIContent label, MaterialProperty property, int indentLevel = 0, Action onChangedCallback = null)
+
 DrawNormalizedFloatFromVector2(GUIContent label, MaterialProperty property, Vector2Param vector2Param, int indentLevel = 0, Action onChangedCallback = null)
 
 DrawNormalizedFloatFromVector3(GUIContent label, MaterialProperty property, Vector3Param vector3Param, int indentLevel = 0, Action onChangedCallback = null)
 
 DrawNormalizedFloatFromVector4(GUIContent label, MaterialProperty property, Vector4Param vector4Param, int indentLevel = 0, Action onChangedCallback = null)
 
-DrawVector2FromVector3(GUIContent label, MaterialProperty property, Vector3Param vector3Param, Vector2Range range, int indentLevel = 0, Action onChangedCallback = null)
+DrawMinFloat(GUIContent label, MaterialProperty property, float min = 0.0f, int indentLevel = 0, Action onChangedCallback = null)
 
-DrawVector2FromVector4(GUIContent label, MaterialProperty property, Vector4Param vector4Param, Vector2Range range, int indentLevel = 0, Action onChangedCallback = null)
+DrawMinVector2(GUIContent label, MaterialProperty property, Vector2 min, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawMinVector3(GUIContent label, MaterialProperty property, Vector3 min, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawMinVector4(GUIContent label, MaterialProperty property, Vector4 min, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawMinFloatFromVector2(GUIContent label, MaterialProperty property, Vector2Param vector2Param, float min = 0.0f, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawMinFloatFromVector3(GUIContent label, MaterialProperty property, Vector3Param vector3Param, float min = 0.0f, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawMinFloatFromVector4(GUIContent label, MaterialProperty property, Vector4Param vector4Param, float min = 0.0f, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawMinVector4Start(GUIContent label, MaterialProperty property, Vector2 min, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawMinVector4End(GUIContent label, MaterialProperty property, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawColor(GUIContent label, MaterialProperty property, bool showAlpha = true, bool hdr = false, int indentLevel = 0, Action onChangedCallback = null)
 ```
 
 ### Vector Int Editor
 
 ```csharp
+DrawInt(GUIContent label, MaterialProperty property, IntRange range, int indentLevel = 0, Action onChangedCallback = null)
+
 DrawVector2Int(GUIContent label, MaterialProperty property, Vector2IntRange range, int indentLevel = 0, Action onChangedCallback = null)
 
 DrawVector3Int(GUIContent label, MaterialProperty property, Vector3IntRange range, int indentLevel = 0, Action onChangedCallback = null)
 
-DrawVector4Int(GUIContent label, MaterialProperty property, Vector4IntRange range, int indentLevel = 0, Action onChangedCallback = null)
+DrawInt(GUIContent label, MaterialProperty property, int indentLevel = 0, Action onChangedCallback = null)
 
 DrawVector2Int(GUIContent label, MaterialProperty property, int indentLevel = 0, Action onChangedCallback = null)
 
 DrawVector3Int(GUIContent label, MaterialProperty property, int indentLevel = 0, Action onChangedCallback = null)
 
-DrawVector4Int(GUIContent label, MaterialProperty property, int indentLevel = 0, Action onChangedCallback = null)
+DrawIntFromVector2Int(GUIContent label, MaterialProperty property, Vector2Param vector2Param, IntRange range, int indentLevel = 0, Action onChangedCallback = null)
 
-DrawVector2IntFromVector3Int(GUIContent label, MaterialProperty property, Vector3Param vector3Param, Vector2IntRange range, int indentLevel = 0, Action onChangedCallback = null)
+DrawIntFromVector3Int(GUIContent label, MaterialProperty property, Vector3Param vector3Param, IntRange range, int indentLevel = 0, Action onChangedCallback = null)
 
-DrawVector2IntFromVector4Int(GUIContent label, MaterialProperty property, Vector4Param vector4Param, Vector2IntRange range, int indentLevel = 0, Action onChangedCallback = null)
+DrawNormalizedInt(GUIContent label, MaterialProperty property, int indentLevel = 0, Action onChangedCallback = null)
 
-DrawVector2IntFromVector3Int(GUIContent label, MaterialProperty property, Vector3Param vector3Param, int indentLevel = 0, Action onChangedCallback = null)
+DrawNormalizedVector2Int(GUIContent label, MaterialProperty property, int indentLevel = 0, Action onChangedCallback = null)
 
-DrawVector2IntFromVector4Int(GUIContent label, MaterialProperty property, Vector4Param vector4Param, int indentLevel = 0, Action onChangedCallback = null)
+DrawNormalizedVector3Int(GUIContent label, MaterialProperty property, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawNormalizedIntFromVector2Int(GUIContent label, MaterialProperty property, Vector2Param vector2Param, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawNormalizedIntFromVector3Int(GUIContent label, MaterialProperty property, Vector3Param vector3Param, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawMinInt(GUIContent label, MaterialProperty property, int min = 0, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawMinVector2Int(GUIContent label, MaterialProperty property, Vector2Int min, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawMinVector3Int(GUIContent label, MaterialProperty property, Vector3Int min, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawMinIntFromVector2Int(GUIContent label, MaterialProperty property, Vector2Param vector2Param, int min = 0, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawMinIntFromVector3Int(GUIContent label, MaterialProperty property, Vector3Param vector3Param, int min = 0, int indentLevel = 0, Action onChangedCallback = null)
 ```
 
 ### Texture Editor
