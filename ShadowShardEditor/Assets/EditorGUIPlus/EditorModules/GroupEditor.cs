@@ -18,8 +18,8 @@ namespace EditorGUIPlus.EditorModules
                 ? new EditorGUILayout.VerticalScope(style, options)
                 : new EditorGUILayout.VerticalScope(options);
         
-        internal EditorGUILayout.ScrollViewScope ScrollViewScope(ref Vector2 scrollPosition, params GUILayoutOption[] options) =>
-            new(scrollPosition, options);
+        internal ScrollableScope ScrollViewScope(ref Vector2 scrollPosition, params GUILayoutOption[] options) =>
+            new(ref scrollPosition, options);
         
         internal EditorGUILayout.ToggleGroupScope ToggleGroupScope(GUIContent label, ref bool toggle) =>
             new(label, toggle);

@@ -13,7 +13,7 @@ namespace EditorGUIPlus
     {
         EditorGUILayout.HorizontalScope HorizontalScope(GUIStyle style = null, params GUILayoutOption[] options);
         EditorGUILayout.VerticalScope VerticalScope(GUIStyle style = null, params GUILayoutOption[] options);
-        EditorGUILayout.ScrollViewScope ScrollViewScope(ref Vector2 scrollPosition, params GUILayoutOption[] options);
+        ScrollableScope ScrollViewScope(ref Vector2 scrollPosition, params GUILayoutOption[] options);
         EditorGUILayout.ToggleGroupScope ToggleGroupScope(GUIContent label, ref bool toggle);
         EditorGUILayout.FadeGroupScope FadeGroupScope(float value);
         HeaderScope HeaderScope(ISection section, bool spaceAtEnd = true, bool subHeader = false);

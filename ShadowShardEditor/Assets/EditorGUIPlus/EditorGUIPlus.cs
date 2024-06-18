@@ -49,7 +49,7 @@ namespace EditorGUIPlus
         public EditorGUILayout.VerticalScope VerticalScope(GUIStyle style = null, params GUILayoutOption[] options) =>
             _groupEditor.VerticalScope(style, options);
         
-        public EditorGUILayout.ScrollViewScope ScrollViewScope(ref Vector2 scrollPosition, params GUILayoutOption[] options) =>
+        public ScrollableScope ScrollViewScope(ref Vector2 scrollPosition, params GUILayoutOption[] options) =>
             _groupEditor.ScrollViewScope(ref scrollPosition, options);
         
         public EditorGUILayout.ToggleGroupScope ToggleGroupScope(GUIContent label, ref bool toggle) =>
