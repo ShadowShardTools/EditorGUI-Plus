@@ -52,6 +52,21 @@ public class CustomEditorScript : Editor
 ```
 ### Group Editor
 Group editors help you organize your GUI elements in a structured manner.
+You can use two way of drawing groups: **Scopes** or **Methods with actions**.
+
+#### Scopes method
+Using statement will put the rest of method into the group defined by the scope.
+```csharp
+private void DrawVerticalScope()
+{
+    using var scope = _shadowShardEditor.VerticalScope();
+    GUILayout.Label("This is a vertical scope");
+    GUILayout.Label("All of this content is vertical");
+}
+```
+
+#### Methods With actions
+You may invoke method and pass your content throug a lambda.
 
 ```csharp
 Vector2 scrollPosition = Vector2.zero;
@@ -63,6 +78,14 @@ _editorGUIPlus.ScrollView(() =>
         // Draw your GUI elements here
     });
 }, ref scrollPosition);
+```
+
+Another way is to create a named method and pass a reference.
+
+```csharp
+Vector2 scrollPosition = Vector2.zero;
+
+_editorGUIPlus.ScrollView(YourMethodName, ref scrollPosition);
 ```
 
 ### Sliders
