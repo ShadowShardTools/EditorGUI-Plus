@@ -382,6 +382,14 @@ DrawVector3(GUIContent label, SerializedProperty property, int indentLevel = 0, 
 
 DrawVector4(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null)
 
+DrawVector4Start(GUIContent label, SerializedProperty property, Vector2Range range, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawVector4Start(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawVector4End(GUIContent label, SerializedProperty property, Vector2Range range, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawVector4End(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null)
+
 DrawFloatFromVector2(GUIContent label, SerializedProperty property, Vector2Param vector2Param, FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
 
 DrawFloatFromVector3(GUIContent label, SerializedProperty property, Vector3Param vector3Param, FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
@@ -395,6 +403,10 @@ DrawNormalizedVector2(GUIContent label, SerializedProperty property, int indentL
 DrawNormalizedVector3(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null)
 
 DrawNormalizedVector4(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawNormalizedVector4Start(GUIContent label, MaterialProperty property, int indentLevel = 0, Action onChangedCallback = null)
+
+DrawNormalizedVector4End(GUIContent label, MaterialProperty property, int indentLevel = 0, Action onChangedCallback = null)
 
 DrawNormalizedFloatFromVector2(GUIContent label, SerializedProperty property, Vector2Param vector2Param, int indentLevel = 0, Action onChangedCallback = null)
 
@@ -416,13 +428,9 @@ DrawMinFloatFromVector3(GUIContent label, SerializedProperty property, Vector3Pa
 
 DrawMinFloatFromVector4(GUIContent label, SerializedProperty property, Vector4Param vector4Param, float min = 0.0f, int indentLevel = 0, Action onChangedCallback = null)
 
-DrawVector4Start(GUIContent label, SerializedProperty property, Vector2Range range, int indentLevel = 0, Action onChangedCallback = null)
+DrawMinVector4Start(GUIContent label, MaterialProperty property, Vector2 min, int indentLevel = 0, Action onChangedCallback = null)
 
-DrawVector4Start(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null)
-
-DrawVector4End(GUIContent label, SerializedProperty property, Vector2Range range, int indentLevel = 0, Action onChangedCallback = null)
-
-DrawVector4End(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null)
+DrawMinVector4End(GUIContent label, MaterialProperty property, int indentLevel = 0, Action onChangedCallback = null)
 
 DrawColor(GUIContent label, SerializedProperty property, bool showAlpha = true, bool hdr = false, int indentLevel = 0, Action onChangedCallback = null)
 ```
