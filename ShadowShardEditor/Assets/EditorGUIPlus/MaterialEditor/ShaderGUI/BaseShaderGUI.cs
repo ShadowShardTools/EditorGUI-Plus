@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using EditorGUIPlus.Section;
+using EditorGUIPlus.Scopes.Section;
 using UnityEditor;
 using UnityEngine;
 

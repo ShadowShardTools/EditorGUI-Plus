@@ -1,5 +1,7 @@
 using EditorGUIPlus.Data.Enums;
 using EditorGUIPlus.Data.Range;
+using EditorGUIPlus.Scopes;
+using EditorGUIPlus.Scopes.Section;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,6 +13,7 @@ namespace ManualTesting.StandardEditor.Code.Editor
         private EditorGUIPlus.EditorGUIPlus _shadowShardEditor;
         private SerializedObject _serializedShadowShardData;
         private Vector2 _scrollPosition;
+        private Vector2 _innerScrollPosition;
 
         [MenuItem("Window/EditorTesting/Standard Editor Tests")]
         public static void ShowWindow() =>
@@ -36,7 +39,8 @@ namespace ManualTesting.StandardEditor.Code.Editor
             EditorGUI.BeginChangeCheck();
             using EditorGUILayout.ScrollViewScope scroll = new(_scrollPosition);
             _scrollPosition = scroll.scrollPosition;
-            
+
+            DrawGroupsThroughScope();
             DrawGroups();
             DrawSliders();
             DrawToggles();
@@ -49,6 +53,76 @@ namespace ManualTesting.StandardEditor.Code.Editor
                 _serializedShadowShardData.ApplyModifiedProperties();
                 _serializedShadowShardData.Update();
             }
+        }
+
+        private void DrawGroupsThroughScope()
+        {
+            DrawHorizontalScope();
+            DrawVerticalScope();
+            DrawScrollViewScope();
+            DrawToggleGroupScope();
+            DrawFadeGroupScope();
+            DrawDisabledScope();
+            DrawIntendedDisabledScope();
+            DrawGroupScope();
+        }
+
+        private void DrawHorizontalScope()
+        {
+            using var scope = _shadowShardEditor.HorizontalScope();
+            GUILayout.Label("This is a horizontal scope");
+            GUILayout.Label("All of this content is horizontal");
+        }
+
+        private void DrawVerticalScope()
+        {
+            using var scope = _shadowShardEditor.VerticalScope();
+            GUILayout.Label("This is a vertical scope");
+            GUILayout.Label("All of this content is vertical");
+        }
+
+        private void DrawScrollViewScope()
+        {
+            using var scope = _shadowShardEditor.ScrollViewScope(ref _innerScrollPosition,  GUILayout.Height(50));
+            GUILayout.Label("This is a scroll view scope");
+            GUILayout.Label("All of this content is scrollable");
+            GUILayout.Label("All of this content is scrollable");
+            GUILayout.Label("All of this content is scrollable");
+        }
+
+        private void DrawToggleGroupScope()
+        {
+            using var scope = _shadowShardEditor.ToggleGroupScope(new GUIContent("Toggle Group"), ref _shadowShardData.ToggleValue);
+            GUILayout.Label("This is a toggle group scope");
+            GUILayout.Label("All of this content is toggleable");
+        }
+
+        private void DrawFadeGroupScope()
+        {
+            using var scope = _shadowShardEditor.FadeGroupScope(1);
+            GUILayout.Label("This is a fade group scope");
+            GUILayout.Label("All of this content is fadeable");
+        }
+
+        private void DrawDisabledScope()
+        {
+            using var scope = _shadowShardEditor.DisabledScope(true);
+            GUILayout.Label("This is a disabled scope");
+            GUILayout.Label("All of this content is disabled");
+        }
+
+        private void DrawIntendedDisabledScope()
+        {
+            using var scope = _shadowShardEditor.IndentedDisabledScope(_shadowShardData.IndentLevel, _shadowShardData.IsDisabled);
+            GUILayout.Label("This is an intended disabled scope");
+            GUILayout.Label("All of this content is intended and disabled");
+        }
+
+        private void DrawGroupScope()
+        {
+            using var scope = _shadowShardEditor.GroupScope(new GUIContent("Group"), _shadowShardData.IsDisabled);
+            GUILayout.Label("This is a group scope");
+            GUILayout.Label("All of this content is grouped");
         }
 
         private void DrawGroups()

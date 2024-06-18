@@ -1,6 +1,8 @@
 ﻿using System;
 using EditorGUIPlus.Data.Enums;
 using EditorGUIPlus.Data.Range;
+using EditorGUIPlus.Scopes;
+using EditorGUIPlus.Scopes.Section;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -9,6 +11,16 @@ namespace EditorGUIPlus
 {
     public interface IEditorGUIPlus
     {
+        EditorGUILayout.HorizontalScope HorizontalScope(GUIStyle style = null, params GUILayoutOption[] options);
+        EditorGUILayout.VerticalScope VerticalScope(GUIStyle style = null, params GUILayoutOption[] options);
+        ScrollableScope ScrollViewScope(ref Vector2 scrollPosition, params GUILayoutOption[] options);
+        EditorGUILayout.ToggleGroupScope ToggleGroupScope(GUIContent label, ref bool toggle);
+        EditorGUILayout.FadeGroupScope FadeGroupScope(float value);
+        HeaderScope HeaderScope(ISection section, bool spaceAtEnd = true, bool subHeader = false);
+        IntendedScope IntendedScope(int indentLevel);
+        DisabledScope DisabledScope(bool isDisabled);
+        IntendedDisabledScope IndentedDisabledScope(int indentLevel, bool isDisabled);
+        GroupScope GroupScope(GUIContent label, bool isDisabled);
         void ScrollView(Action drawCall, ref Vector2 scrollPosition, params GUILayoutOption[] options);
         void DrawVertical(GUIStyle styles, Action drawCall);
         void DrawIndented(int indentLevel, Action drawCall);
@@ -76,22 +88,22 @@ namespace EditorGUIPlus
         float DrawFloat(GUIContent label, SerializedProperty property, FloatRange range, int indentLevel = 0, 
             Action onChangedCallback = null);
 
-        float DrawFloat(GUIContent label, SerializedProperty property, int indentLevel = 0, 
-            Action onChangedCallback = null);
-
         Vector2 DrawVector2(GUIContent label, SerializedProperty property, Vector2Range range, int indentLevel = 0, 
-            Action onChangedCallback = null);
-
-        Vector2 DrawVector2(GUIContent label, SerializedProperty property, int indentLevel = 0, 
             Action onChangedCallback = null);
 
         Vector3 DrawVector3(GUIContent label, SerializedProperty property, Vector3Range range, int indentLevel = 0, 
             Action onChangedCallback = null);
 
-        Vector3 DrawVector3(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+        Vector4 DrawVector4(GUIContent label, SerializedProperty property, Vector4Range range, int indentLevel = 0, 
             Action onChangedCallback = null);
 
-        Vector4 DrawVector4(GUIContent label, SerializedProperty property, Vector4Range range, int indentLevel = 0, 
+        float DrawFloat(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            Action onChangedCallback = null);
+
+        Vector2 DrawVector2(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            Action onChangedCallback = null);
+
+        Vector3 DrawVector3(GUIContent label, SerializedProperty property, int indentLevel = 0, 
             Action onChangedCallback = null);
 
         Vector4 DrawVector4(GUIContent label, SerializedProperty property, int indentLevel = 0,
@@ -166,17 +178,17 @@ namespace EditorGUIPlus
         float DrawInt(GUIContent label, SerializedProperty property, IntRange range, int indentLevel = 0, 
             Action onChangedCallback = null);
 
-        float DrawInt(GUIContent label, SerializedProperty property, int indentLevel = 0, 
-            Action onChangedCallback = null);
-
         Vector2Int DrawVector2Int(GUIContent label, SerializedProperty property, Vector2IntRange range, 
             int indentLevel = 0, Action onChangedCallback = null);
 
-        Vector2Int DrawVector2Int(GUIContent label, SerializedProperty property, int indentLevel = 0, 
-            Action onChangedCallback = null);
-
         Vector3Int DrawVector3Int(GUIContent label, SerializedProperty property, Vector3IntRange range, 
             int indentLevel = 0, Action onChangedCallback = null);
+
+        float DrawInt(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            Action onChangedCallback = null);
+
+        Vector2Int DrawVector2Int(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            Action onChangedCallback = null);
 
         Vector3Int DrawVector3Int(GUIContent label, SerializedProperty property, int indentLevel = 0, 
             Action onChangedCallback = null);
@@ -231,20 +243,20 @@ namespace EditorGUIPlus
         TEnum DrawBooleanPopup<TEnum>(GUIContent label, SerializedProperty property, int indentLevel = 0, 
             Action onChangedCallback = null) where TEnum : Enum;
 
-        int DrawBooleanPopup(GUIContent label, SerializedProperty property, string[] displayedOptions, 
-            int indentLevel = 0, Action onChangedCallback = null);
-
         TEnum DrawShaderGlobalKeywordBooleanPopup<TEnum>(SerializedProperty property, string shaderGlobalKeyword, 
             int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum;
 
         TEnum DrawShaderGlobalKeywordBooleanPopup<TEnum>(GUIContent label, SerializedProperty property, 
             string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum;
 
-        int DrawShaderGlobalKeywordBooleanPopup(GUIContent label, SerializedProperty property, 
-            string[] displayedOptions, string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null);
-
         int DrawPopup(GUIContent label, SerializedProperty property, string[] displayedOptions, 
             int indentLevel = 0, Action onChangedCallback = null);
+
+        int DrawBooleanPopup(GUIContent label, SerializedProperty property, string[] displayedOptions, 
+            int indentLevel = 0, Action onChangedCallback = null);
+
+        int DrawShaderGlobalKeywordBooleanPopup(GUIContent label, SerializedProperty property, 
+            string[] displayedOptions, string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null);
 
         void DrawObjectField<TObject>(GUIContent label, SerializedProperty property, int indentLevel = 0,
             bool allowSceneObjects = true, Action<TObject> onChangedCallback = null) where TObject : Object;
