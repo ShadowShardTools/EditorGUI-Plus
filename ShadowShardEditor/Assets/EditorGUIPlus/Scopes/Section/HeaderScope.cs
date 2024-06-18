@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEditor.Rendering;
 using UnityEngine;
 
-namespace EditorGUIPlus.Section
+namespace EditorGUIPlus.Scopes.Section
 {
     public class HeaderScope : IDisposable
     {

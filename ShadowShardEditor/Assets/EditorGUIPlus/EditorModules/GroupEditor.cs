@@ -1,4 +1,6 @@
 ﻿using System;
+using EditorGUIPlus.Scopes;
+using EditorGUIPlus.Scopes.Section;
 using UnityEditor;
 using UnityEngine;
 
@@ -6,7 +8,41 @@ namespace EditorGUIPlus.EditorModules
 {
     internal sealed class GroupEditor
     {
-        internal void ScrollView(Action drawCall, ref Vector2 scrollPosition, params GUILayoutOption[] options)
+        internal EditorGUILayout.HorizontalScope HorizontalScope(GUIStyle style = null, params GUILayoutOption[] options) =>
+            style != null 
+                ? new EditorGUILayout.HorizontalScope(style, options)
+                : new EditorGUILayout.HorizontalScope(options);
+        
+        internal EditorGUILayout.VerticalScope VerticalScope(GUIStyle style = null, params GUILayoutOption[] options) =>
+            style != null 
+                ? new EditorGUILayout.VerticalScope(style, options)
+                : new EditorGUILayout.VerticalScope(options);
+        
+        internal EditorGUILayout.ScrollViewScope ScrollViewScope(ref Vector2 scrollPosition, params GUILayoutOption[] options) =>
+            new(scrollPosition, options);
+        
+        internal EditorGUILayout.ToggleGroupScope ToggleGroupScope(GUIContent label, ref bool toggle) =>
+            new(label, toggle);
+        
+        internal EditorGUILayout.FadeGroupScope FadeGroupScope(float value) =>
+            new(value);
+        
+        internal HeaderScope HeaderScope(ISection section, bool spaceAtEnd = true, bool subHeader = false) =>
+            new(section, spaceAtEnd, subHeader);
+        
+        internal IntendedScope IntendedScope(int indentLevel) =>
+            new(indentLevel);
+        
+        internal DisabledScope DisabledScope(bool isDisabled) =>
+            new(isDisabled);
+        
+        internal IntendedDisabledScope IndentedDisabledScope(int indentLevel, bool isDisabled) =>
+            new(indentLevel, isDisabled);
+        
+        internal GroupScope GroupScope(GUIContent label, bool isDisabled) =>
+            new(label, isDisabled);
+        
+        internal void DrawScrollView(Action drawCall, ref Vector2 scrollPosition, params GUILayoutOption[] options)
         {
             using EditorGUILayout.ScrollViewScope scrollViewScope = new(scrollPosition, options);
             scrollPosition = scrollViewScope.scrollPosition;

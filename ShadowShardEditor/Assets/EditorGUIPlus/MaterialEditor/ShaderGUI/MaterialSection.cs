@@ -1,4 +1,4 @@
-﻿using EditorGUIPlus.Section;
+﻿using EditorGUIPlus.Scopes.Section;
 using UnityEditor;
 using UnityEngine;
 

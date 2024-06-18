@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EditorGUIPlus.Section
+namespace EditorGUIPlus.Scopes.Section
 {
     public interface ISection
     {

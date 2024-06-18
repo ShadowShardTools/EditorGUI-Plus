@@ -2,6 +2,8 @@ using System;
 using EditorGUIPlus.Data.Enums;
 using EditorGUIPlus.Data.Range;
 using EditorGUIPlus.EditorModules;
+using EditorGUIPlus.Scopes;
+using EditorGUIPlus.Scopes.Section;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -39,11 +41,44 @@ namespace EditorGUIPlus
             _textEditor = new TextEditor(_groupEditor);
             _curveEditor = new CurveEditor(_groupEditor);
         }
+
+        #region GroupScopesEditorRegion
+        public EditorGUILayout.HorizontalScope HorizontalScope(GUIStyle style = null, params GUILayoutOption[] options) =>
+            _groupEditor.HorizontalScope(style, options);
+        
+        public EditorGUILayout.VerticalScope VerticalScope(GUIStyle style = null, params GUILayoutOption[] options) =>
+            _groupEditor.VerticalScope(style, options);
+        
+        public EditorGUILayout.ScrollViewScope ScrollViewScope(ref Vector2 scrollPosition, params GUILayoutOption[] options) =>
+            _groupEditor.ScrollViewScope(ref scrollPosition, options);
+        
+        public EditorGUILayout.ToggleGroupScope ToggleGroupScope(GUIContent label, ref bool toggle) =>
+            _groupEditor.ToggleGroupScope(label, ref toggle);
+        
+        public EditorGUILayout.FadeGroupScope FadeGroupScope(float value) =>
+            _groupEditor.FadeGroupScope(value);
+        
+        public HeaderScope HeaderScope(ISection section, bool spaceAtEnd = true, bool subHeader = false) =>
+            _groupEditor.HeaderScope(section, spaceAtEnd, subHeader);
+        
+        public IntendedScope IntendedScope(int indentLevel) =>
+            _groupEditor.IntendedScope(indentLevel);
+        
+        public DisabledScope DisabledScope(bool isDisabled) =>
+            _groupEditor.DisabledScope(isDisabled);
+        
+        public IntendedDisabledScope IndentedDisabledScope(int indentLevel, bool isDisabled) =>
+            _groupEditor.IndentedDisabledScope(indentLevel, isDisabled);
+        
+        public GroupScope GroupScope(GUIContent label, bool isDisabled) =>
+            _groupEditor.GroupScope(label, isDisabled);
+        
+        #endregion
         
         #region GroupEditorRegion
         
         public void ScrollView(Action drawCall, ref Vector2 scrollPosition, params GUILayoutOption[] options) =>
-            _groupEditor.ScrollView(drawCall, ref scrollPosition, options);
+            _groupEditor.DrawScrollView(drawCall, ref scrollPosition, options);
         
         public void DrawVertical(GUIStyle styles, Action drawCall) =>
             _groupEditor.DrawVertical(styles, drawCall);
