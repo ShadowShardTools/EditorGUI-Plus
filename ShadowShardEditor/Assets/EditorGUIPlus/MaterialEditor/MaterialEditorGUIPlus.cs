@@ -579,5 +579,14 @@ namespace EditorGUIPlus.MaterialEditor
             _messageEditor.DrawErrorBox(message, wide, indentLevel);
         
         #endregion
+        
+        public void Space() =>
+            EditorGUILayout.Space();
+        
+        public void Space(float width) =>
+            EditorGUILayout.Space(width);
+        
+        public void Space(float width, bool expand) =>
+            EditorGUILayout.Space(width, expand);
     }
 }
