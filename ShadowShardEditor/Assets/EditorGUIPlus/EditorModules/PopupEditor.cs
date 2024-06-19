@@ -206,6 +206,28 @@ namespace EditorGUIPlus.EditorModules
                 }
             }
         }
+        
+        internal string DrawTagField(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            Action onChangedCallback = null)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return property.stringValue;
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                string newValue = EditorGUILayout.TagField(label, property.stringValue);
+                EditorGUI.showMixedValue = false;
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    property.stringValue = newValue;
+                    onChangedCallback?.Invoke();
+                }
+            }
+        }
 
         internal bool IsDisplayedBooleanErrorMessage(string[] displayedOptions)
         {

@@ -522,6 +522,10 @@ namespace EditorGUIPlus
             _popupEditor.DrawShaderGlobalKeywordBooleanPopup(label, property, displayedOptions, shaderGlobalKeyword, 
                 indentLevel, onChangedCallback);
         
+        public string DrawTagField(GUIContent label,SerializedProperty property,
+            int indentLevel = 0, Action onChangedCallback = null) =>
+            _popupEditor.DrawTagField(label, property, indentLevel, onChangedCallback);
+        
         #endregion
         
         #region ObjectEditorRegion
