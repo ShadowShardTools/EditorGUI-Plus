@@ -77,6 +77,9 @@ namespace EditorGUIPlus
         public GroupScope GroupScope(GUIContent label, bool isDisabled) =>
             _groupEditor.GroupScope(label, isDisabled);
         
+        public BuildTargetSelectionScope BuildTargetSelectionScope() =>
+            _groupEditor.BuildTargetSelectionScope();
+        
         #endregion
         
         #region GroupEditorRegion

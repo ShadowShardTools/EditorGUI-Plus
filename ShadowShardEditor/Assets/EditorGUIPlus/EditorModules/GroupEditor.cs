@@ -42,6 +42,8 @@ namespace EditorGUIPlus.EditorModules
         internal GroupScope GroupScope(GUIContent label, bool isDisabled) =>
             new(label, isDisabled);
         
+        internal BuildTargetSelectionScope BuildTargetSelectionScope() => new();
+        
         internal void DrawScrollView(Action drawCall, ref Vector2 scrollPosition, params GUILayoutOption[] options)
         {
             using EditorGUILayout.ScrollViewScope scrollViewScope = new(scrollPosition, options);
