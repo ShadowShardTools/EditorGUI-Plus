@@ -531,7 +531,13 @@ namespace EditorGUIPlus
         #endregion
         
         #region TextEditorRegion
-
+        
+        public GUIContent DrawLabel(GUIContent label, GUIContent label2, int indentLevel = 0) =>
+            _textEditor.DrawLabel(label, label2, indentLevel);
+        
+        public GUIContent DrawLabel(GUIContent label, int indentLevel = 0) =>
+            _textEditor.DrawLabel(label, new GUIContent(string.Empty), indentLevel);
+        
         public string DrawTextField(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null) =>
             _textEditor.DrawTextField(label, property, indentLevel, onChangedCallback);
         

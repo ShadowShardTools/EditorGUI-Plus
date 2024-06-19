@@ -7,6 +7,7 @@ using EditorGUIPlus.Scopes;
 using EditorGUIPlus.Scopes.Section;
 using UnityEditor;
 using UnityEngine;
+using TextEditor = EditorGUIPlus.EditorModules.TextEditor;
 
 namespace EditorGUIPlus.MaterialEditor
 {
@@ -22,6 +23,7 @@ namespace EditorGUIPlus.MaterialEditor
         private readonly TextureEditor _textureEditor;
         private readonly PopupEditor _popupEditor;
         private readonly ObjectEditor _objectEditor;
+        private readonly TextEditor _textEditor;
         
         public UnityEditor.MaterialEditor MaterialEditor;
         
@@ -39,6 +41,7 @@ namespace EditorGUIPlus.MaterialEditor
             _textureEditor = new TextureEditor(propertyService, _groupEditor);
             _popupEditor = new PopupEditor(propertyService, _groupEditor);
             _objectEditor = new ObjectEditor(_groupEditor);
+            _textEditor = new TextEditor(_groupEditor);
         }
         
         public void InitializeMaterialEditor(UnityEditor.MaterialEditor materialEditor) => 
@@ -538,6 +541,16 @@ namespace EditorGUIPlus.MaterialEditor
         public T GetMaterialAssetObjectFromGuid<T>(string guid) where T : MaterialAssetObject => 
             _objectEditor.GetMaterialAssetObjectFromGuid<T>(guid);
 
+        #endregion
+        
+        #region TextEditorRegion
+        
+        public GUIContent DrawLabel(GUIContent label, GUIContent label2, int indentLevel = 0) =>
+            _textEditor.DrawLabel(label, label2, indentLevel);
+        
+        public GUIContent DrawLabel(GUIContent label, int indentLevel = 0) =>
+            _textEditor.DrawLabel(label, new GUIContent(string.Empty), indentLevel);
+        
         #endregion
     }
 }

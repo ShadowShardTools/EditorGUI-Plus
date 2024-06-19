@@ -11,6 +11,20 @@ namespace EditorGUIPlus.EditorModules
         internal TextEditor(GroupEditor groupEditor) =>
             _groupEditor = groupEditor;
         
+        internal GUIContent DrawLabel(GUIContent label, GUIContent label2, int indentLevel = 0)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return label;
+
+            void Draw()
+            {
+                if (string.IsNullOrEmpty(label2.text))
+                    EditorGUILayout.LabelField(label);
+                else
+                    EditorGUILayout.LabelField(label, label2);
+            }
+        }
+        
         internal string DrawTextField(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
