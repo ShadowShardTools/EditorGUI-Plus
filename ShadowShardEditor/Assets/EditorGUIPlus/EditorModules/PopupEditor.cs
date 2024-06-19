@@ -1,6 +1,7 @@
 ﻿using System;
 using EditorGUIPlus.MaterialEditor;
 using UnityEditor;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 namespace EditorGUIPlus.EditorModules
@@ -36,6 +37,29 @@ namespace EditorGUIPlus.EditorModules
             return (TEnum)Enum
                 .GetValues(enumType)
                 .GetValue(enumOption);
+        }
+        
+        internal TEnum DrawEnumFlagsField<TEnum>(GUIContent label, SerializedProperty property, bool includeObsolete = false, 
+            int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return (TEnum)Enum.ToObject(typeof(TEnum), property.longValue);
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                TEnum currentValue = (TEnum)Enum.ToObject(typeof(TEnum), property.longValue);
+                TEnum newValue = (TEnum)EditorGUILayout.EnumFlagsField(label, currentValue, includeObsolete);
+                EditorGUI.showMixedValue = false;
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    property.longValue = Convert.ToInt64(newValue);
+                    onChangedCallback?.Invoke();
+                }
+            }
         }
         
         internal TEnum DrawBooleanPopup<TEnum, TProperty>(TProperty property, int indentLevel = 0, 
@@ -202,6 +226,72 @@ namespace EditorGUIPlus.EditorModules
                 {
                     _propertyService.SetEnumIndex(property, newValue);
                     KeywordsService.SetGlobalKeyword(shaderGlobalKeyword, newValue > 0);
+                    onChangedCallback?.Invoke();
+                }
+            }
+        }
+        
+        internal string DrawTagField(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            Action onChangedCallback = null)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return property.stringValue;
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                string newValue = EditorGUILayout.TagField(label, property.stringValue);
+                EditorGUI.showMixedValue = false;
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    property.stringValue = newValue;
+                    onChangedCallback?.Invoke();
+                }
+            }
+        }
+        
+        internal int DrawLayerField(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            Action onChangedCallback = null)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return property.intValue;
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                int newValue = EditorGUILayout.LayerField(label, property.intValue);
+                EditorGUI.showMixedValue = false;
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    property.intValue = newValue;
+                    onChangedCallback?.Invoke();
+                }
+            }
+        }
+        
+        internal int DrawMaskField(GUIContent label, SerializedProperty property, string[] displayedOptions, 
+            int indentLevel = 0, Action onChangedCallback = null)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return property.intValue;
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                int newValue = EditorGUILayout.MaskField(label, property.intValue, displayedOptions);
+                EditorGUI.showMixedValue = false;
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    property.intValue = newValue;
                     onChangedCallback?.Invoke();
                 }
             }

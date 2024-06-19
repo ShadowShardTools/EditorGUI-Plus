@@ -3,6 +3,7 @@ using EditorGUIPlus.Data.Enums;
 using EditorGUIPlus.Data.Range;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace EditorGUIPlus.EditorModules
 {
@@ -35,6 +36,29 @@ namespace EditorGUIPlus.EditorModules
                 if (EditorGUI.EndChangeCheck())
                 {
                     _propertyService.SetFloat(property, newValue);
+                    onChangedCallback?.Invoke();
+                }
+            }
+        }
+        
+        internal double DrawDouble(GUIContent label, SerializedProperty property, DoubleRange range, int indentLevel = 0, 
+            Action onChangedCallback = null)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return property.doubleValue;
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+                
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                double propertyValue = property.doubleValue;
+                double newValue = Math.Clamp(EditorGUILayout.DoubleField(label, propertyValue), range.Min, range.Max);
+                EditorGUI.showMixedValue = false;
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    property.doubleValue = newValue;
                     onChangedCallback?.Invoke();
                 }
             }
@@ -233,25 +257,46 @@ namespace EditorGUIPlus.EditorModules
                 }
             }
         }
-
-        internal Color DrawColor<TProperty>(GUIContent label, TProperty property, bool showAlpha = true,
-            bool hdr = false, int indentLevel = 0, Action onChangedCallback = null)
+        
+        internal Bounds DrawBoundsField(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
-            return _propertyService.GetColor(property);
+            return property.boundsValue;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-
-                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
-                Color propertyValue = _propertyService.GetColor(property);
-                Color newValue = EditorGUILayout.ColorField(label, propertyValue, true, showAlpha, hdr);
-                EditorGUI.showMixedValue = false;
                 
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                Bounds newValue = EditorGUILayout.BoundsField(label, property.boundsValue);
+                EditorGUI.showMixedValue = false;
+
                 if (EditorGUI.EndChangeCheck())
                 {
-                    _propertyService.SetColor(property, newValue);
+                    property.boundsValue = newValue;
+                    onChangedCallback?.Invoke();
+                }
+            }
+        }
+        
+        internal Rect DrawRectField(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            Action onChangedCallback = null)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return property.rectValue;
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+                
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                Rect newValue = EditorGUILayout.RectField(label, property.rectValue);
+                EditorGUI.showMixedValue = false;
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    property.rectValue = newValue;
                     onChangedCallback?.Invoke();
                 }
             }
