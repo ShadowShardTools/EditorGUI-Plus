@@ -483,6 +483,12 @@ namespace EditorGUIPlus
         public string DrawTextField(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null) =>
             _textEditor.DrawTextField(label, property, indentLevel, onChangedCallback);
         
+        public string DrawTextArea(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null) =>
+            _textEditor.DrawTextArea(label, property, indentLevel, onChangedCallback);
+        
+        public string DrawTextArea(SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null) =>
+            _textEditor.DrawTextArea(new GUIContent(string.Empty), property, indentLevel, onChangedCallback);
+        
         public string DrawFolderPathField(GUIContent label, SerializedProperty property, string defaultDirectory, 
             int indentLevel = 0, Action onChangedCallback = null) =>
             _textEditor.DrawFolderPathField(label, property, defaultDirectory, indentLevel, onChangedCallback);
