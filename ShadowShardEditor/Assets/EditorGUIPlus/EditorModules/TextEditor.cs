@@ -95,6 +95,28 @@ namespace EditorGUIPlus.EditorModules
             }
         }
         
+        internal string DrawPasswordField(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return property.stringValue;
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+                string propertyValue = property.stringValue;
+
+                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
+                string newValue = EditorGUILayout.PasswordField(label, propertyValue);
+                EditorGUI.showMixedValue = false;
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    property.stringValue = newValue;
+                    onChangedCallback?.Invoke();
+                }
+            }
+        }
+        
         internal string DrawFolderPathField(GUIContent label, SerializedProperty property, string defaultDirectory, 
             int indentLevel = 0, Action onChangedCallback = null)
         {
