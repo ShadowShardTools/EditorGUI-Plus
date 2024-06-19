@@ -28,7 +28,7 @@
 * Popups - Create dropdown menus for enum values and boolean choices.
 * Objects - Manage scriptable object fields.
 
-## Usage
+## Using EditorGUI+
 ### Initializing EditorGUI+
 To use EditorGUI+ in your custom editor scripts, you need to create an instance of the EditorGUIPlus class:
 
@@ -52,6 +52,21 @@ public class CustomEditorScript : Editor
 ```
 ### Group Editor
 Group editors help you organize your GUI elements in a structured manner.
+You can use two way of drawing groups: **Scopes** or **Methods with actions**.
+
+#### Scopes method
+Using statement will put the rest of method into the group defined by the scope.
+```csharp
+private void DrawVerticalScope()
+{
+    using var scope = _shadowShardEditor.VerticalScope();
+    GUILayout.Label("This is a vertical scope");
+    GUILayout.Label("All of this content is vertical");
+}
+```
+
+#### Methods With actions
+You may invoke method and pass your content throug a lambda.
 
 ```csharp
 Vector2 scrollPosition = Vector2.zero;
@@ -63,6 +78,14 @@ _editorGUIPlus.ScrollView(() =>
         // Draw your GUI elements here
     });
 }, ref scrollPosition);
+```
+
+Another way is to create a named method and pass a reference.
+
+```csharp
+Vector2 scrollPosition = Vector2.zero;
+
+_editorGUIPlus.ScrollView(YourMethodName, ref scrollPosition);
 ```
 
 ### Sliders
@@ -137,4 +160,151 @@ Draw and edit animation curves in your custom editor.
 SerializedProperty curveProperty = serializedObject.FindProperty("curveField");
 
 _editorGUIPlus.DrawCurveField(new GUIContent("Curve Field"), curveProperty);
+```
+
+## Using MaterialEditorGUI+
+### Initializing MaterialEditorGUI+
+To use MaterialEditorGUI+ in your own material editor scripts, you need to create an instance of the MaterialEditorGUIPlus class or use BaseShaderGUI from EditorGUI+.
+To do this in your own material editor scripts, initialize it in the base class:
+
+```csharp
+public class BaseShaderGUI : UnityEditor.ShaderGUI
+{
+    private readonly MaterialEditorGUIPlus _materialEditorGUIPlus = new();
+    .....
+    public override void OnGUI(UnityEditor.MaterialEditor materialEditorIn, MaterialProperty[] properties)
+    {
+        if (materialEditorIn == null)
+            throw new ArgumentNullException(nameof(materialEditorIn));
+            
+        _materialEditor = materialEditorIn;
+        _materialEditorGUIPlus.InitializeMaterialEditor(_materialEditor);
+        Material material = _materialEditor != null ? _materialEditor.target as Material : null;
+            
+        if (material == null)
+            return;
+    }
+}
+```
+
+### MaterialEditorGUI+ BaseShaderGUI
+
+```csharp
+using EditorGUIPlus.MaterialEditor.ShaderGUI;
+
+public class ExampleMaterialGUI : BaseShaderGUI
+{
+    public override void OnOpenGUI(Material material)
+    {
+        Sections = new List<MaterialSection>(SetSections(material));
+    }
+
+    public override IEnumerable<MaterialSection> SetSections(Material material)
+    {
+        return new List<MaterialSection>
+        {
+            new Example1Section(),
+            new Example2Section(material)
+            new Example3Section(material)
+        };
+    }
+}
+```
+
+### MaterialSection in MaterialEditorGUI+
+
+```csharp
+public class Example2Section : MaterialSection
+{
+    private Material _material;
+    protected Property TestProperty = new("_TestProfileAsset");
+    private readonly GUIContent _label = new("Test");
+
+    public Example2Section(Material material) : base(new GUIContent("Test Label"))
+    {
+        _material = material;
+    }
+
+    public override void FindProperties(MaterialProperty[] properties)
+    {
+        TestProperty.Find(properties);
+    }
+
+    public override void DrawProperties(MaterialEditorGUIPlus editor)
+    {
+        ...Draw TestProperty
+    }
+    public override void SetKeywords(Material material)
+    {
+        ...Keywords logic
+    }
+}
+```
+
+### Sliders
+Draw sliders for float and integer properties with custom ranges.
+
+```csharp
+MaterialProperty floatProperty = FindProperty("_FloatField", properties);
+MaterialProperty intProperty = FindProperty("_IntField", properties);
+
+_materialEditorGUIPlus.DrawSlider(new GUIContent("Float Slider"), floatProperty, new FloatRange(0f, 1f));
+_materialEditorGUIPlus.DrawIntSlider(new GUIContent("Int Slider"), intProperty, new IntRange(0, 10));
+```
+
+### Toggles
+Add boolean toggles to your editor interface.
+
+```csharp
+MaterialProperty toggleProperty = FindProperty("_ToggleField", properties);
+
+_materialEditorGUIPlus.DrawToggle(new GUIContent("Toggle"), toggleProperty);
+```
+
+### Vectors
+Draw vector fields for Vector2, Vector3, and Vector4 properties.
+
+```csharp
+MaterialProperty vector3Property = FindProperty("_Vector3Field", properties);
+
+_materialEditorGUIPlus.DrawVector3(new GUIContent("Vector3 Field"), vector3Property, new Vector3Range(Vector3.zero, Vector3.one));
+```
+
+### Textures
+Handle texture fields in your custom editor.
+
+```csharp
+MaterialProperty textureProperty = FindProperty("_TextureField", properties);
+
+_materialEditorGUIPlus.DrawSingleLineTexture(new GUIContent("Texture Field"), textureProperty);
+```
+
+### Popups
+Create dropdown menus for selecting from predefined options.
+
+```csharp
+MaterialProperty popupProperty = FindProperty("_PopupField", properties);
+string[] options = new string[] { "Option1", "Option2", "Option3" };
+
+_materialEditorGUIPlus.DrawPopup(new GUIContent("Popup Field"), popupProperty, options);
+```
+
+### Objects
+Manage scriptable object fields in your custom editor.
+
+```csharp
+MaterialProperty ExampleProfileAsset = FindProperty("_ExampleProfileAsset", properties);
+MaterialProperty ExampleProfileHash = FindProperty("_ExampleProfileHash", properties);
+
+_materialEditorGUIPlus.DrawMaterialAssetObject(_material, ExampleProfileAsset.MaterialProperty, ExampleProfileHash.MaterialProperty, DrawExampleProfile, 1);
+return;
+
+MaterialAssetObject DrawExampleProfile()
+{
+    string guid = ExampleProfileAsset.MaterialProperty.vectorValue.ToGuid();
+    ExampleProfile assetObject = editor.GetMaterialAssetObjectFromGuid<ExampleProfile>(guid);
+            
+    return EditorGUILayout.ObjectField(_label, assetObject, 
+        typeof(ExampleProfile), allowSceneObjects: false) as ExampleProfile;
+}
 ```
