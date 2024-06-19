@@ -39,6 +39,29 @@ namespace EditorGUIPlus.EditorModules
                 }
             }
         }
+        
+        internal double DrawDouble(GUIContent label, SerializedProperty property, DoubleRange range, int indentLevel = 0, 
+            Action onChangedCallback = null)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return property.doubleValue;
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+                
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                double propertyValue = property.doubleValue;
+                double newValue = Math.Clamp(EditorGUILayout.DoubleField(label, propertyValue), range.Min, range.Max);
+                EditorGUI.showMixedValue = false;
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    property.doubleValue = newValue;
+                    onChangedCallback?.Invoke();
+                }
+            }
+        }
 
         internal Vector2 DrawVector2<TProperty>(GUIContent label, TProperty property, Vector2Range range, 
             int indentLevel = 0, Action onChangedCallback = null)
