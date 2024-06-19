@@ -553,6 +553,12 @@ namespace EditorGUIPlus.MaterialEditor
         public GUIContent DrawLabel(GUIContent label, int indentLevel = 0) =>
             _textEditor.DrawLabel(label, new GUIContent(string.Empty), indentLevel);
         
+        public bool DrawLinkText(GUIContent label, int indentLevel = 0) =>
+            _textEditor.DrawLinkText(label, indentLevel);
+        
+        public bool DrawLinkText(GUIContent label, string url, int indentLevel = 0) =>
+            _textEditor.DrawLinkText(label, url, indentLevel);
+        
         #endregion
         
         #region MessageEditorRegion

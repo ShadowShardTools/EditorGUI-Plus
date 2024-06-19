@@ -539,6 +539,12 @@ namespace EditorGUIPlus
         
         public GUIContent DrawLabel(GUIContent label, int indentLevel = 0) =>
             _textEditor.DrawLabel(label, new GUIContent(string.Empty), indentLevel);
+
+        public bool DrawLinkText(GUIContent label, int indentLevel = 0) =>
+            _textEditor.DrawLinkText(label, indentLevel);
+        
+        public bool DrawLinkText(GUIContent label, string url, int indentLevel = 0) =>
+            _textEditor.DrawLinkText(label, url, indentLevel);
         
         public string DrawTextField(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null) =>
             _textEditor.DrawTextField(label, property, indentLevel, onChangedCallback);

@@ -25,6 +25,30 @@ namespace EditorGUIPlus.EditorModules
             }
         }
         
+        internal bool DrawLinkText(GUIContent label, int indentLevel = 0)
+        {
+            bool pressed = false;
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return pressed;
+
+            void Draw() => 
+                pressed = EditorGUILayout.LinkButton(label);
+        }
+        
+        internal bool DrawLinkText(GUIContent label, string url, int indentLevel = 0)
+        {
+            bool pressed = false;
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return pressed;
+
+            void Draw()
+            {
+                pressed = EditorGUILayout.LinkButton(label);
+                if(pressed)
+                    Application.OpenURL(url);
+            }
+        }
+        
         internal string DrawTextField(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
