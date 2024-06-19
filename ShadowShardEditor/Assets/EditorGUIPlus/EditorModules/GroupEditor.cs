@@ -3,6 +3,7 @@ using EditorGUIPlus.Scopes;
 using EditorGUIPlus.Scopes.Section;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace EditorGUIPlus.EditorModules
 {
@@ -100,6 +101,22 @@ namespace EditorGUIPlus.EditorModules
                 EditorGUILayout.LabelField(label, EditorStyles.boldLabel);
                 DrawDisabled(isDisabled, drawCall);
             }
+        }
+
+        internal void DrawInspectorTitlebar(ref bool fold, Object[] targetObjs, Action drawCall)
+        {
+            fold = EditorGUILayout.InspectorTitlebar(fold, targetObjs);
+
+            if (fold) 
+                drawCall.Invoke();
+        }
+        
+        internal void DrawFoldout(GUIContent label, ref bool fold, bool toggleOnLabelClick, Action drawCall)
+        {
+            fold = EditorGUILayout.Foldout(fold, label, toggleOnLabelClick);
+
+            if (fold) 
+                drawCall.Invoke();
         }
     }
 }

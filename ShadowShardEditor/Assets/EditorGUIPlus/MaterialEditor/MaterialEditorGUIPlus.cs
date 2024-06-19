@@ -111,6 +111,12 @@ namespace EditorGUIPlus.MaterialEditor
         public void DrawGroup(GUIContent label, Action drawCall) =>
             _groupEditor.DrawGroup(label, false, drawCall);
         
+        public void DrawFoldout(GUIContent label, ref bool fold, bool toggleOnLabelClick, Action drawCall) =>
+            _groupEditor.DrawFoldout(label, ref fold, toggleOnLabelClick, drawCall);
+        
+        public void DrawFoldout(GUIContent label, ref bool fold, Action drawCall) =>
+            _groupEditor.DrawFoldout(label, ref fold, false, drawCall);
+        
         #endregion
 
         #region SliderEditorRegion
