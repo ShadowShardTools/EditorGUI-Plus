@@ -19,6 +19,7 @@ namespace EditorGUIPlus
         private readonly ToggleEditor _toggleEditor;
         private readonly VectorEditor _vectorEditor;
         private readonly VectorIntEditor _vectorIntEditor;
+        private readonly ColorEditor _colorEditor;
         private readonly TextureEditor _textureEditor;
         private readonly PopupEditor _popupEditor;
         private readonly ObjectEditor _objectEditor;
@@ -35,6 +36,7 @@ namespace EditorGUIPlus
             _toggleEditor = new ToggleEditor(propertyService, _groupEditor);
             _vectorEditor = new VectorEditor(propertyService, _groupEditor);
             _vectorIntEditor = new VectorIntEditor(propertyService, _groupEditor);
+            _colorEditor = new ColorEditor(propertyService, _groupEditor);
             _textureEditor = new TextureEditor(propertyService, _groupEditor);
             _popupEditor = new PopupEditor(propertyService, _groupEditor);
             _objectEditor = new ObjectEditor(_groupEditor);
@@ -364,10 +366,6 @@ namespace EditorGUIPlus
             int indentLevel = 0, Action onChangedCallback = null) =>
             _vectorEditor.DrawVector4End(label, property, Vector2Range.Normalized, indentLevel, onChangedCallback);
         
-        public Color DrawColor(GUIContent label, SerializedProperty property, bool showAlpha = true, 
-            bool hdr = false, int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorEditor.DrawColor(label, property, showAlpha, hdr, indentLevel, onChangedCallback);
-        
         #endregion
         
         #region VectorIntEditorRegion
@@ -459,6 +457,18 @@ namespace EditorGUIPlus
         public Vector3Int DrawMinIntFromVector3Int(GUIContent label, SerializedProperty property, Vector3Param vector3Param, 
             int min = 0, int indentLevel = 0, Action onChangedCallback = null) =>
             _vectorIntEditor.DrawIntFromVector3Int(label, property, vector3Param, IntRange.ToMaxFrom(min), indentLevel, onChangedCallback);
+        
+        #endregion
+        
+        #region ColorEditorRegion
+        
+        public Color DrawColor(GUIContent label, SerializedProperty property, bool showAlpha = true, 
+            bool hdr = false, int indentLevel = 0, Action onChangedCallback = null) =>
+            _colorEditor.DrawColor(label, property, showAlpha, hdr, indentLevel, onChangedCallback);
+        
+        public Gradient DrawGradient(GUIContent label, SerializedProperty property, bool hdr = false, 
+            int indentLevel = 0, Action onChangedCallback = null) =>
+            _colorEditor.DrawGradient(label, property, hdr, indentLevel, onChangedCallback);
         
         #endregion
         

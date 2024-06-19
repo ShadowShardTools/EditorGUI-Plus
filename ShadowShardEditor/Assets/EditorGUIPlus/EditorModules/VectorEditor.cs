@@ -256,28 +256,5 @@ namespace EditorGUIPlus.EditorModules
                 }
             }
         }
-
-        internal Color DrawColor<TProperty>(GUIContent label, TProperty property, bool showAlpha = true,
-            bool hdr = false, int indentLevel = 0, Action onChangedCallback = null)
-        {
-            _groupEditor.DrawIndented(indentLevel, Draw);
-            return _propertyService.GetColor(property);
-
-            void Draw()
-            {
-                EditorGUI.BeginChangeCheck();
-
-                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
-                Color propertyValue = _propertyService.GetColor(property);
-                Color newValue = EditorGUILayout.ColorField(label, propertyValue, true, showAlpha, hdr);
-                EditorGUI.showMixedValue = false;
-                
-                if (EditorGUI.EndChangeCheck())
-                {
-                    _propertyService.SetColor(property, newValue);
-                    onChangedCallback?.Invoke();
-                }
-            }
-        }
     }
 }
