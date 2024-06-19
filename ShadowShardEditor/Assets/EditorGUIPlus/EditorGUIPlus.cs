@@ -376,6 +376,10 @@ namespace EditorGUIPlus
             Action onChangedCallback = null) =>
             _vectorIntEditor.DrawInt(label, property, range, indentLevel, onChangedCallback);
         
+        public long DrawLong(GUIContent label, SerializedProperty property, LongRange range, int indentLevel = 0, 
+            Action onChangedCallback = null) =>
+            _vectorIntEditor.DrawLong(label, property, range, indentLevel, onChangedCallback);
+        
         public Vector2Int DrawVector2Int(GUIContent label, SerializedProperty property, Vector2IntRange range, 
             int indentLevel = 0, Action onChangedCallback = null) =>
             _vectorIntEditor.DrawVector2Int(label, property, range, indentLevel, onChangedCallback);
@@ -387,6 +391,10 @@ namespace EditorGUIPlus
         public int DrawInt(GUIContent label, SerializedProperty property, int indentLevel = 0, 
             Action onChangedCallback = null) =>
             _vectorIntEditor.DrawInt(label, property, IntRange.Full, indentLevel, onChangedCallback);
+        
+        public long DrawLong(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            Action onChangedCallback = null) =>
+            _vectorIntEditor.DrawLong(label, property, LongRange.Full, indentLevel, onChangedCallback);
         
         public Vector2Int DrawVector2Int(GUIContent label, SerializedProperty property, int indentLevel = 0, 
             Action onChangedCallback = null) =>
@@ -408,6 +416,10 @@ namespace EditorGUIPlus
             Action onChangedCallback = null) =>
             _vectorIntEditor.DrawInt(label, property, IntRange.Normalized, indentLevel, onChangedCallback);
         
+        public long DrawNormalizedLong(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            Action onChangedCallback = null) =>
+            _vectorIntEditor.DrawLong(label, property, LongRange.Normalized, indentLevel, onChangedCallback);
+        
         public Vector2Int DrawNormalizedVector2Int(GUIContent label, SerializedProperty property, int indentLevel = 0, 
             Action onChangedCallback = null) =>
             _vectorIntEditor.DrawVector2Int(label, property, Vector2IntRange.Normalized, indentLevel, onChangedCallback);
@@ -427,6 +439,10 @@ namespace EditorGUIPlus
         public int DrawMinInt(GUIContent label, SerializedProperty property, int min = 0, int indentLevel = 0, 
             Action onChangedCallback = null) =>
             _vectorIntEditor.DrawInt(label, property, IntRange.ToMaxFrom(min), indentLevel, onChangedCallback);
+        
+        public long DrawNormalizedLong(GUIContent label, SerializedProperty property, long min = 0, int indentLevel = 0, 
+            Action onChangedCallback = null) =>
+            _vectorIntEditor.DrawLong(label, property, LongRange.ToMaxFrom(min), indentLevel, onChangedCallback);
         
         public Vector2Int DrawMinVector2Int(GUIContent label, SerializedProperty property, Vector2Int min, 
             int indentLevel = 0, Action onChangedCallback = null) =>
