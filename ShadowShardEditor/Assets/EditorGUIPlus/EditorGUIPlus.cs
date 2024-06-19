@@ -192,15 +192,25 @@ namespace EditorGUIPlus
             int indentLevel = 0, Action onChangedCallback = null) =>
             _toggleEditor.DrawToggle(label, property, toggleAlign, indentLevel, onChangedCallback);
         
+        public bool DrawToggle(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null) =>
+            _toggleEditor.DrawToggle(label, property, ToggleAlign.Right, indentLevel, onChangedCallback);
+        
         public bool DrawShaderLocalKeywordToggle(GUIContent label, Material material, SerializedProperty property,
             string shaderLocalKeyword, ToggleAlign toggleAlign = ToggleAlign.Right, 
             int indentLevel = 0, Action onChangedCallback = null) =>
             _toggleEditor.DrawShaderLocalKeywordToggle(label, material, property, shaderLocalKeyword, toggleAlign, indentLevel, onChangedCallback);
         
-        public bool DrawShaderGlobalKeywordToggle(GUIContent label, SerializedProperty property, 
-            string shaderGlobalKeyword, ToggleAlign toggleAlign = ToggleAlign.Right, int indentLevel = 0, 
-            Action onChangedCallback = null) =>
+        public bool DrawShaderLocalKeywordToggle(GUIContent label, Material material, SerializedProperty property,
+            string shaderLocalKeyword, int indentLevel = 0, Action onChangedCallback = null) =>
+            _toggleEditor.DrawShaderLocalKeywordToggle(label, material, property, shaderLocalKeyword, ToggleAlign.Right, indentLevel, onChangedCallback);
+        
+        public bool DrawShaderGlobalKeywordToggle(GUIContent label, SerializedProperty property, string shaderGlobalKeyword, 
+            ToggleAlign toggleAlign = ToggleAlign.Right, int indentLevel = 0, Action onChangedCallback = null) =>
             _toggleEditor.DrawShaderGlobalKeywordToggle(label, property, shaderGlobalKeyword, toggleAlign, indentLevel, onChangedCallback);
+        
+        public bool DrawShaderGlobalKeywordToggle(GUIContent label, SerializedProperty property, string shaderGlobalKeyword, 
+            int indentLevel = 0, Action onChangedCallback = null) =>
+            _toggleEditor.DrawShaderGlobalKeywordToggle(label, property, shaderGlobalKeyword, ToggleAlign.Right, indentLevel, onChangedCallback);
         
         #endregion
         
