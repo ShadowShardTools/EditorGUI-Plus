@@ -546,6 +546,10 @@ namespace EditorGUIPlus
             int indentLevel = 0, Action onChangedCallback = null) =>
             _popupEditor.DrawLayerField(label, property, indentLevel, onChangedCallback);
         
+        public int DrawMaskField(GUIContent label, SerializedProperty property, string[] displayedOptions, 
+            int indentLevel = 0, Action onChangedCallback = null) =>
+            _popupEditor.DrawMaskField(label, property, displayedOptions, indentLevel, onChangedCallback);
+        
         #endregion
         
         #region ObjectEditorRegion
