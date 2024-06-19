@@ -1,4 +1,5 @@
 ﻿using System;
+using EditorGUIPlus.Data.Enums;
 using EditorGUIPlus.MaterialEditor;
 using UnityEditor;
 using UnityEngine;
@@ -17,8 +18,8 @@ namespace EditorGUIPlus.EditorModules
             _groupEditor = groupEditor;
         }
         
-        internal bool DrawToggle<TProperty>(GUIContent label, TProperty property, int indentLevel = 0, 
-            Action onChangedCallback = null)
+        internal bool DrawToggle<TProperty>(GUIContent label, TProperty property, 
+            ToggleAlign toggleAlign = ToggleAlign.Right, int indentLevel = 0, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetBool(property);
@@ -29,7 +30,12 @@ namespace EditorGUIPlus.EditorModules
                 
                 EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
                 bool propertyValue = _propertyService.GetBool(property);
-                bool newValue = EditorGUILayout.Toggle(label, propertyValue);
+
+                bool isRightAlign = toggleAlign == ToggleAlign.Right;
+                bool newValue = isRightAlign ? 
+                    EditorGUILayout.Toggle(label, propertyValue) : 
+                    EditorGUILayout.ToggleLeft(label, propertyValue);
+                
                 EditorGUI.showMixedValue = false;
 
                 if (EditorGUI.EndChangeCheck())
@@ -41,7 +47,8 @@ namespace EditorGUIPlus.EditorModules
         }
         
         internal bool DrawShaderLocalKeywordToggle<TProperty>(GUIContent label, Material material, TProperty property, 
-            string shaderLocalKeyword, int indentLevel = 0, Action onChangedCallback = null)
+            string shaderLocalKeyword, ToggleAlign toggleAlign = ToggleAlign.Right, 
+            int indentLevel = 0, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetBool(property);
@@ -52,7 +59,12 @@ namespace EditorGUIPlus.EditorModules
                 
                 EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
                 bool propertyValue = _propertyService.GetBool(property);
-                bool newValue = EditorGUILayout.Toggle(label, propertyValue);
+                
+                bool isRightAlign = toggleAlign == ToggleAlign.Right;
+                bool newValue = isRightAlign ? 
+                    EditorGUILayout.Toggle(label, propertyValue) : 
+                    EditorGUILayout.ToggleLeft(label, propertyValue);
+                
                 EditorGUI.showMixedValue = false;
 
                 if (EditorGUI.EndChangeCheck())
@@ -65,7 +77,8 @@ namespace EditorGUIPlus.EditorModules
         }
         
         internal bool DrawShaderGlobalKeywordToggle<TProperty>(GUIContent label, TProperty property, 
-            string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null)
+            string shaderGlobalKeyword, ToggleAlign toggleAlign = ToggleAlign.Right,
+            int indentLevel = 0, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetBool(property);
@@ -76,7 +89,12 @@ namespace EditorGUIPlus.EditorModules
                 
                 EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
                 bool propertyValue = _propertyService.GetBool(property);
-                bool newValue = EditorGUILayout.Toggle(label, propertyValue);
+                
+                bool isRightAlign = toggleAlign == ToggleAlign.Right;
+                bool newValue = isRightAlign ? 
+                    EditorGUILayout.Toggle(label, propertyValue) : 
+                    EditorGUILayout.ToggleLeft(label, propertyValue);
+                
                 EditorGUI.showMixedValue = false;
 
                 if (EditorGUI.EndChangeCheck())

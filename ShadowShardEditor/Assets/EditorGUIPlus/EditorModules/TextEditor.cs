@@ -33,6 +33,30 @@ namespace EditorGUIPlus.EditorModules
             }
         }
         
+        internal string DrawTextArea(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return property.stringValue;
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+                string propertyValue = property.stringValue;
+
+                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
+                if(!string.IsNullOrEmpty(label.text))
+                    EditorGUILayout.PrefixLabel(label);
+                string newValue = EditorGUILayout.TextArea(propertyValue);
+                EditorGUI.showMixedValue = false;
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    property.stringValue = newValue;
+                    onChangedCallback?.Invoke();
+                }
+            }
+        }
+        
         internal string DrawFolderPathField(GUIContent label, SerializedProperty property, string defaultDirectory, 
             int indentLevel = 0, Action onChangedCallback = null)
         {
@@ -46,10 +70,12 @@ namespace EditorGUIPlus.EditorModules
 
                 using(new GUILayout.HorizontalScope())
                 {
-                    const float labelDelta = 16;
-                    EditorGUILayout.LabelField(label, GUILayout.Width(EditorGUIUtility.labelWidth - (labelDelta)));
+                    const float buttonWidth = 24f;
+                    const float spacing = 7f;
+                    EditorGUILayout.LabelField(label, GUILayout.Width(EditorGUIUtility.labelWidth - (buttonWidth + spacing)));
                     propertyValue = EditorGUILayout.TextField(propertyValue);
-                    if(GUILayout.Button(" ... ", GUILayout.ExpandWidth(false), GUILayout.Height(EditorGUIUtility.singleLineHeight)))
+                    
+                    if(GUILayout.Button(" ... ", GUILayout.Width(buttonWidth), GUILayout.Height(EditorGUIUtility.singleLineHeight)))
                     {
                         if(AssetDatabase.IsValidFolder(propertyValue))
                             propertyValue = defaultDirectory;

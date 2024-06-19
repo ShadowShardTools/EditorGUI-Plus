@@ -188,17 +188,19 @@ namespace EditorGUIPlus.MaterialEditor
         
         #region ToggleEditorRegion
 
-        public bool DrawToggle(GUIContent label, MaterialProperty property, int indentLevel = 0, 
-            Action onChangedCallback = null) =>
-            _toggleEditor.DrawToggle(label, property, indentLevel, onChangedCallback);
+        public bool DrawToggle(GUIContent label, MaterialProperty property, ToggleAlign toggleAlign = ToggleAlign.Right, 
+            int indentLevel = 0, Action onChangedCallback = null) =>
+            _toggleEditor.DrawToggle(label, property, toggleAlign, indentLevel, onChangedCallback);
         
-        public bool DrawShaderLocalKeywordToggle(GUIContent label, Material material, MaterialProperty property, 
-            string shaderLocalKeyword, int indentLevel = 0, Action onChangedCallback = null) =>
-            _toggleEditor.DrawShaderLocalKeywordToggle(label, material, property, shaderLocalKeyword, indentLevel, onChangedCallback);
+        public bool DrawShaderLocalKeywordToggle(GUIContent label, Material material, MaterialProperty property,
+            string shaderLocalKeyword, ToggleAlign toggleAlign = ToggleAlign.Right, 
+            int indentLevel = 0, Action onChangedCallback = null) =>
+            _toggleEditor.DrawShaderLocalKeywordToggle(label, material, property, shaderLocalKeyword, toggleAlign, indentLevel, onChangedCallback);
         
         public bool DrawShaderGlobalKeywordToggle(GUIContent label, MaterialProperty property, 
-            string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) =>
-            _toggleEditor.DrawShaderGlobalKeywordToggle(label, property, shaderGlobalKeyword, indentLevel, onChangedCallback);
+            string shaderGlobalKeyword, ToggleAlign toggleAlign = ToggleAlign.Right, int indentLevel = 0, 
+            Action onChangedCallback = null) =>
+            _toggleEditor.DrawShaderGlobalKeywordToggle(label, property, shaderGlobalKeyword, toggleAlign, indentLevel, onChangedCallback);
         
         #endregion
         
