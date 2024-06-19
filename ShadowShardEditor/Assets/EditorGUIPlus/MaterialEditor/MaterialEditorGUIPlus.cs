@@ -24,6 +24,7 @@ namespace EditorGUIPlus.MaterialEditor
         private readonly PopupEditor _popupEditor;
         private readonly ObjectEditor _objectEditor;
         private readonly TextEditor _textEditor;
+        private readonly MessageEditor _messageEditor;
         
         public UnityEditor.MaterialEditor MaterialEditor;
         
@@ -42,6 +43,7 @@ namespace EditorGUIPlus.MaterialEditor
             _popupEditor = new PopupEditor(propertyService, _groupEditor);
             _objectEditor = new ObjectEditor(_groupEditor);
             _textEditor = new TextEditor(_groupEditor);
+            _messageEditor = new MessageEditor(_groupEditor);
         }
         
         public void InitializeMaterialEditor(UnityEditor.MaterialEditor materialEditor) => 
@@ -550,6 +552,25 @@ namespace EditorGUIPlus.MaterialEditor
         
         public GUIContent DrawLabel(GUIContent label, int indentLevel = 0) =>
             _textEditor.DrawLabel(label, new GUIContent(string.Empty), indentLevel);
+        
+        #endregion
+        
+        #region MessageEditorRegion
+
+        public void DrawHelpBox(string message, MessageType type, bool wide = true, int indentLevel = 0) =>
+            _messageEditor.DrawHelpBox(message, type, wide);
+        
+        public void DrawNeutralBox(string message, bool wide = true, int indentLevel = 0) =>
+            _messageEditor.DrawNeutralBox(message, wide, indentLevel);
+        
+        public void DrawInfoBox(string message, bool wide = true, int indentLevel = 0) =>
+            _messageEditor.DrawInfoBox(message, wide, indentLevel);
+        
+        public void DrawWarningBox(string message, bool wide = true, int indentLevel = 0) =>
+            _messageEditor.DrawWarningBox(message, wide, indentLevel);
+        
+        public void DrawErrorBox(string message, bool wide = true, int indentLevel = 0) =>
+            _messageEditor.DrawErrorBox(message, wide, indentLevel);
         
         #endregion
     }

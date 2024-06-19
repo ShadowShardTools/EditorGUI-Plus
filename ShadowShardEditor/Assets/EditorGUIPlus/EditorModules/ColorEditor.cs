@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace EditorGUIPlus.EditorModules
 {
-    internal class ColorEditor
+    internal sealed class ColorEditor
     {
         private readonly PropertyService _propertyService;
         private readonly GroupEditor _groupEditor;

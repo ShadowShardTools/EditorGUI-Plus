@@ -25,6 +25,7 @@ namespace EditorGUIPlus
         private readonly ObjectEditor _objectEditor;
         private readonly TextEditor _textEditor;
         private readonly CurveEditor _curveEditor;
+        private readonly MessageEditor _messageEditor;
         
         public EditorGUIPlus()
         {
@@ -42,6 +43,7 @@ namespace EditorGUIPlus
             _objectEditor = new ObjectEditor(_groupEditor);
             _textEditor = new TextEditor(_groupEditor);
             _curveEditor = new CurveEditor(_groupEditor);
+            _messageEditor = new MessageEditor(_groupEditor);
         }
 
         #region GroupScopesEditorRegion
@@ -553,10 +555,29 @@ namespace EditorGUIPlus
         
         #endregion
         
-        #region CurveTEditorRegion
+        #region CurveEditorRegion
 
         public AnimationCurve DrawAnimationCurve(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null) =>
             _curveEditor.DrawAnimationCurve(label, property, indentLevel, onChangedCallback);
+        
+        #endregion
+        
+        #region MessageEditorRegion
+
+        public void DrawHelpBox(string message, MessageType type, bool wide = true, int indentLevel = 0) =>
+            _messageEditor.DrawHelpBox(message, type, wide);
+        
+        public void DrawNeutralBox(string message, bool wide = true, int indentLevel = 0) =>
+            _messageEditor.DrawNeutralBox(message, wide, indentLevel);
+        
+        public void DrawInfoBox(string message, bool wide = true, int indentLevel = 0) =>
+            _messageEditor.DrawInfoBox(message, wide, indentLevel);
+        
+        public void DrawWarningBox(string message, bool wide = true, int indentLevel = 0) =>
+            _messageEditor.DrawWarningBox(message, wide, indentLevel);
+        
+        public void DrawErrorBox(string message, bool wide = true, int indentLevel = 0) =>
+            _messageEditor.DrawErrorBox(message, wide, indentLevel);
         
         #endregion
     }
