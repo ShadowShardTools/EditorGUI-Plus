@@ -192,6 +192,10 @@ namespace EditorGUIPlus
             Action onChangedCallback = null) =>
             _toggleEditor.DrawToggle(label, property, indentLevel, onChangedCallback);
         
+        public bool DrawShaderLocalKeywordToggle(GUIContent label, Material material, SerializedProperty property, 
+            string shaderLocalKeyword, int indentLevel = 0, Action onChangedCallback = null) =>
+            _toggleEditor.DrawShaderLocalKeywordToggle(label, material, property, shaderLocalKeyword, indentLevel, onChangedCallback);
+        
         public bool DrawShaderGlobalKeywordToggle(GUIContent label, SerializedProperty property, 
             string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) =>
             _toggleEditor.DrawShaderGlobalKeywordToggle(label, property, shaderGlobalKeyword, indentLevel, onChangedCallback);

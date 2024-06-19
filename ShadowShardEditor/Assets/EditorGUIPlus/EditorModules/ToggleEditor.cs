@@ -41,7 +41,7 @@ namespace EditorGUIPlus.EditorModules
         }
         
         internal bool DrawShaderLocalKeywordToggle<TProperty>(GUIContent label, Material material, TProperty property, 
-            string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null)
+            string shaderLocalKeyword, int indentLevel = 0, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetBool(property);
@@ -58,7 +58,7 @@ namespace EditorGUIPlus.EditorModules
                 if (EditorGUI.EndChangeCheck())
                 {
                     _propertyService.SetBool(property, newValue);
-                    KeywordsService.SetKeyword(material, shaderGlobalKeyword, newValue);
+                    KeywordsService.SetKeyword(material, shaderLocalKeyword, newValue);
                     onChangedCallback?.Invoke();
                 }
             }
