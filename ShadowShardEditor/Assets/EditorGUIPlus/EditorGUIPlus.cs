@@ -364,9 +364,13 @@ namespace EditorGUIPlus
             Action onChangedCallback = null) =>
             _vectorEditor.DrawVector4Start(label, property, Vector2Range.ToMaxFrom(min), indentLevel, onChangedCallback);
         
-        public Vector4 DrawMinVector4End(GUIContent label, SerializedProperty property, 
-            int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorEditor.DrawVector4End(label, property, Vector2Range.Normalized, indentLevel, onChangedCallback);
+        public Bounds DrawBoundsField(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            Action onChangedCallback = null) =>
+            _vectorEditor.DrawBoundsField(label, property, indentLevel, onChangedCallback);
+        
+        public Rect DrawRectField(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            Action onChangedCallback = null) =>
+            _vectorEditor.DrawRectField(label, property, indentLevel, onChangedCallback);
         
         #endregion
         
@@ -459,6 +463,14 @@ namespace EditorGUIPlus
         public Vector3Int DrawMinIntFromVector3Int(GUIContent label, SerializedProperty property, Vector3Param vector3Param, 
             int min = 0, int indentLevel = 0, Action onChangedCallback = null) =>
             _vectorIntEditor.DrawIntFromVector3Int(label, property, vector3Param, IntRange.ToMaxFrom(min), indentLevel, onChangedCallback);
+        
+        public BoundsInt DrawIntBoundsField(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            Action onChangedCallback = null) =>
+            _vectorIntEditor.DrawIntBoundsField(label, property, indentLevel, onChangedCallback);
+        
+        public RectInt DrawIntRectField(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            Action onChangedCallback = null) =>
+            _vectorIntEditor.DrawIntRectField(label, property, indentLevel, onChangedCallback);
         
         #endregion
         

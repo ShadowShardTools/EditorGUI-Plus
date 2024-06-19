@@ -3,6 +3,7 @@ using EditorGUIPlus.Data.Enums;
 using EditorGUIPlus.Data.Range;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace EditorGUIPlus.EditorModules
 {
@@ -252,6 +253,50 @@ namespace EditorGUIPlus.EditorModules
                 {
                     Vector4 newVector4Value = new(propertyVector4Value.x, propertyVector4Value.y, newValue.x, newValue.y);
                     _propertyService.SetVector4(property, newVector4Value);
+                    onChangedCallback?.Invoke();
+                }
+            }
+        }
+        
+        internal Bounds DrawBoundsField(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            Action onChangedCallback = null)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return property.boundsValue;
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+                
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                Bounds newValue = EditorGUILayout.BoundsField(label, property.boundsValue);
+                EditorGUI.showMixedValue = false;
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    property.boundsValue = newValue;
+                    onChangedCallback?.Invoke();
+                }
+            }
+        }
+        
+        internal Rect DrawRectField(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            Action onChangedCallback = null)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return property.rectValue;
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+                
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                Rect newValue = EditorGUILayout.RectField(label, property.rectValue);
+                EditorGUI.showMixedValue = false;
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    property.rectValue = newValue;
                     onChangedCallback?.Invoke();
                 }
             }

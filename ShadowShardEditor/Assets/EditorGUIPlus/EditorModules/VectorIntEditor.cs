@@ -158,5 +158,49 @@ namespace EditorGUIPlus.EditorModules
                 }
             }
         }
+        
+        internal BoundsInt DrawIntBoundsField(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            Action onChangedCallback = null)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return property.boundsIntValue;
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+                
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                BoundsInt newValue = EditorGUILayout.BoundsIntField(label, property.boundsIntValue);
+                EditorGUI.showMixedValue = false;
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    property.boundsIntValue = newValue;
+                    onChangedCallback?.Invoke();
+                }
+            }
+        }
+        
+        internal RectInt DrawIntRectField(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            Action onChangedCallback = null)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return property.rectIntValue;
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+                
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                RectInt newValue = EditorGUILayout.RectIntField(label, property.rectIntValue);
+                EditorGUI.showMixedValue = false;
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    property.rectIntValue = newValue;
+                    onChangedCallback?.Invoke();
+                }
+            }
+        }
     }
 }
