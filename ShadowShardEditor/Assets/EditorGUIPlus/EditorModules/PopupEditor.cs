@@ -1,6 +1,7 @@
 ﻿using System;
 using EditorGUIPlus.MaterialEditor;
 using UnityEditor;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 namespace EditorGUIPlus.EditorModules
@@ -36,6 +37,29 @@ namespace EditorGUIPlus.EditorModules
             return (TEnum)Enum
                 .GetValues(enumType)
                 .GetValue(enumOption);
+        }
+        
+        internal TEnum DrawEnumFlagsField<TEnum>(GUIContent label, SerializedProperty property, bool includeObsolete = false, 
+            int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return (TEnum)Enum.ToObject(typeof(TEnum), property.longValue);
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                TEnum currentValue = (TEnum)Enum.ToObject(typeof(TEnum), property.longValue);
+                TEnum newValue = (TEnum)EditorGUILayout.EnumFlagsField(label, currentValue, includeObsolete);
+                EditorGUI.showMixedValue = false;
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    property.longValue = Convert.ToInt64(newValue);
+                    onChangedCallback?.Invoke();
+                }
+            }
         }
         
         internal TEnum DrawBooleanPopup<TEnum, TProperty>(TProperty property, int indentLevel = 0, 

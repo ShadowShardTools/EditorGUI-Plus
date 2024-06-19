@@ -491,6 +491,10 @@ namespace EditorGUIPlus
             Action onChangedCallback = null) where TEnum : Enum =>
             _popupEditor.DrawEnumPopup<TEnum, SerializedProperty>(label, property, indentLevel, onChangedCallback);
         
+        public TEnum DrawEnumFlagsField<TEnum>(GUIContent label, SerializedProperty property, bool includeObsolete = false,  
+            int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum =>
+            _popupEditor.DrawEnumFlagsField<TEnum>(label, property, includeObsolete, indentLevel, onChangedCallback);
+        
         public TEnum DrawBooleanPopup<TEnum>(SerializedProperty property, int indentLevel = 0, 
             Action onChangedCallback = null) where TEnum : Enum =>
             _popupEditor.DrawBooleanPopup<TEnum, SerializedProperty>(property, indentLevel, onChangedCallback);
