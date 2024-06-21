@@ -59,20 +59,17 @@ namespace EditorGUIPlus
         public EditorGUILayout.ToggleGroupScope ToggleGroupScope(GUIContent label, ref bool toggle) =>
             _groupEditor.ToggleGroupScope(label, ref toggle);
         
+        public EditorGUILayout.ToggleGroupScope ToggleGroupScope(GUIContent label, SerializedProperty property) =>
+            _groupEditor.ToggleGroupScope(label, property);
+
         public EditorGUILayout.FadeGroupScope FadeGroupScope(float value) =>
             _groupEditor.FadeGroupScope(value);
         
         public HeaderScope HeaderScope(ISection section, bool spaceAtEnd = true, bool subHeader = false) =>
             _groupEditor.HeaderScope(section, spaceAtEnd, subHeader);
         
-        public IntendedScope IntendedScope(int indentLevel) =>
-            _groupEditor.IntendedScope(indentLevel);
-        
         public DisabledScope DisabledScope(bool isDisabled) =>
             _groupEditor.DisabledScope(isDisabled);
-        
-        public IntendedDisabledScope IndentedDisabledScope(int indentLevel, bool isDisabled) =>
-            _groupEditor.IndentedDisabledScope(indentLevel, isDisabled);
         
         public GroupScope GroupScope(GUIContent label, bool isDisabled) =>
             _groupEditor.GroupScope(label, isDisabled);

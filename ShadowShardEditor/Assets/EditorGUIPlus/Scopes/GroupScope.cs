@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace EditorGUIPlus.Scopes
 {
-    public sealed class GroupScope : IDisposable
+    public sealed class GroupScope : GUI.Scope
     {
         public GroupScope(GUIContent label, bool isDisabled)
         {
@@ -13,7 +13,7 @@ namespace EditorGUIPlus.Scopes
             EditorGUI.BeginDisabledGroup(isDisabled);
         }
 
-        public void Dispose()
+        protected override void CloseScope()
         {
             EditorGUI.EndDisabledGroup();
             EditorGUILayout.EndVertical();

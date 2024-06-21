@@ -63,7 +63,6 @@ namespace ManualTesting.StandardEditor.Code.Editor
             DrawToggleGroupScope();
             DrawFadeGroupScope();
             DrawDisabledScope();
-            DrawIntendedDisabledScope();
             DrawGroupScope();
         }
 
@@ -92,7 +91,7 @@ namespace ManualTesting.StandardEditor.Code.Editor
 
         private void DrawToggleGroupScope()
         {
-            using var scope = _shadowShardEditor.ToggleGroupScope(new GUIContent("Toggle Group"), ref _shadowShardData.ToggleValue);
+            using var scope = _shadowShardEditor.ToggleGroupScope(new GUIContent("Toggle Group"), _serializedShadowShardData.FindProperty("ToggleValue"));
             GUILayout.Label("This is a toggle group scope");
             GUILayout.Label("All of this content is toggleable");
         }
@@ -109,13 +108,6 @@ namespace ManualTesting.StandardEditor.Code.Editor
             using var scope = _shadowShardEditor.DisabledScope(true);
             GUILayout.Label("This is a disabled scope");
             GUILayout.Label("All of this content is disabled");
-        }
-
-        private void DrawIntendedDisabledScope()
-        {
-            using var scope = _shadowShardEditor.IndentedDisabledScope(_shadowShardData.IndentLevel, _shadowShardData.IsDisabled);
-            GUILayout.Label("This is an intended disabled scope");
-            GUILayout.Label("All of this content is intended and disabled");
         }
 
         private void DrawGroupScope()

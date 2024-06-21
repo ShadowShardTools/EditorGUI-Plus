@@ -1,16 +1,19 @@
 using System;
 using UnityEditor;
+using UnityEngine;
 
 namespace EditorGUIPlus.Scopes
 {
-    public sealed class DisabledScope : IDisposable
+    public sealed class DisabledScope : GUI.Scope
     {
         public DisabledScope(bool isDisabled)
         {
             EditorGUI.BeginDisabledGroup(isDisabled);
         }
 
-        public void Dispose() =>
+        protected override void CloseScope()
+        {
             EditorGUI.EndDisabledGroup();
+        }
     }
 }
