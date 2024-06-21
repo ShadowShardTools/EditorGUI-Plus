@@ -3,7 +3,6 @@ using EditorGUIPlus.Data.Enums;
 using EditorGUIPlus.MaterialEditor;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace EditorGUIPlus.EditorModules
 {

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using EditorGUIPlus.MaterialEditor;
 using EditorGUIPlus.MaterialEditor.AssetObject;
 using UnityEditor;
