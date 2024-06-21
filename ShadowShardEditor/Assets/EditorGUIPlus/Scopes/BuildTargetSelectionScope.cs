@@ -1,9 +1,10 @@
 ﻿using System;
 using UnityEditor;
+using UnityEngine;
 
 namespace EditorGUIPlus.Scopes
 {
-    public class BuildTargetSelectionScope : IDisposable
+    public class BuildTargetSelectionScope : GUI.Scope
     {
         public readonly BuildTargetGroup SelectedBuildTargetGroup;
         
@@ -11,8 +12,10 @@ namespace EditorGUIPlus.Scopes
         {
             SelectedBuildTargetGroup = EditorGUILayout.BeginBuildTargetSelectionGrouping();
         }
-
-        public void Dispose() =>
+        
+        protected override void CloseScope()
+        {
             EditorGUILayout.EndBuildTargetSelectionGrouping();
+        }
     }
 }

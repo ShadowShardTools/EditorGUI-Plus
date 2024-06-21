@@ -22,23 +22,30 @@ namespace EditorGUIPlus.EditorModules
         internal ScrollableScope ScrollViewScope(ref Vector2 scrollPosition, params GUILayoutOption[] options) =>
             new(ref scrollPosition, options);
         
-        internal EditorGUILayout.ToggleGroupScope ToggleGroupScope(GUIContent label, ref bool toggle) =>
-            new(label, toggle);
+        internal EditorGUILayout.ToggleGroupScope ToggleGroupScope(GUIContent label, ref bool toggle)
+        {
+            EditorGUILayout.ToggleGroupScope scope = new(label, toggle);
+            toggle = scope.enabled;
+            
+            return scope;
+        }
         
+        public EditorGUILayout.ToggleGroupScope ToggleGroupScope(GUIContent label, SerializedProperty property)
+        {
+            EditorGUILayout.ToggleGroupScope scope = new(label, property.boolValue);
+            property.boolValue = scope.enabled;
+            
+            return scope;
+        }
+
         internal EditorGUILayout.FadeGroupScope FadeGroupScope(float value) =>
             new(value);
         
         internal HeaderScope HeaderScope(ISection section, bool spaceAtEnd = true, bool subHeader = false) =>
             new(section, spaceAtEnd, subHeader);
         
-        internal IntendedScope IntendedScope(int indentLevel) =>
-            new(indentLevel);
-        
         internal DisabledScope DisabledScope(bool isDisabled) =>
             new(isDisabled);
-        
-        internal IntendedDisabledScope IndentedDisabledScope(int indentLevel, bool isDisabled) =>
-            new(indentLevel, isDisabled);
         
         internal GroupScope GroupScope(GUIContent label, bool isDisabled) =>
             new(label, isDisabled);

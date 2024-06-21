@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace EditorGUIPlus.Scopes.Section
 {
-    public class HeaderScope : IDisposable
+    public class HeaderScope : GUI.Scope
     {
         public readonly bool Expanded;
 
@@ -44,10 +44,9 @@ namespace EditorGUIPlus.Scopes.Section
             GUI.changed = saveChangeState;
         }
 
-        void IDisposable.Dispose()
+        protected override void CloseScope()
         {
-            if (Expanded && _spaceAtEnd &&
-                (Event.current.type == EventType.Repaint || Event.current.type == EventType.Layout))
+            if (Expanded && _spaceAtEnd && (Event.current.type == EventType.Repaint || Event.current.type == EventType.Layout))
                 EditorGUILayout.Space();
 
 #if !UNITY_2020_1_OR_NEWER
