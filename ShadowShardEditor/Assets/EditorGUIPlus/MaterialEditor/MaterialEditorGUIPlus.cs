@@ -127,11 +127,11 @@ namespace EditorGUIPlus.MaterialEditor
             Action onChangedCallback = null) =>
             _sliderEditor.DrawSlider(label, property, FloatRange.Normalized, indentLevel, onChangedCallback);
         
-        public void DrawFromVector3ParamSlider(GUIContent label, MaterialProperty property, Vector3Param vectorParam, 
+        public Vector3 DrawFromVector3ParamSlider(GUIContent label, MaterialProperty property, Vector3Param vectorParam, 
             FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
             _sliderEditor.DrawFromVector3ParamSlider(label, property, vectorParam, range, indentLevel, onChangedCallback);
         
-        public void DrawFromVector3ParamSlider(GUIContent label, MaterialProperty property, Vector3Param vectorParam, 
+        public Vector3 DrawFromVector3ParamSlider(GUIContent label, MaterialProperty property, Vector3Param vectorParam, 
             int indentLevel = 0, Action onChangedCallback = null) =>
             _sliderEditor.DrawFromVector3ParamSlider(label, property, vectorParam, FloatRange.Normalized, indentLevel, onChangedCallback);
         
@@ -179,11 +179,11 @@ namespace EditorGUIPlus.MaterialEditor
             Action onChangedCallback = null) =>
             _sliderIntEditor.DrawIntSlider(label, property, IntRange.Normalized, indentLevel, onChangedCallback);
         
-        public void DrawFromVector3IntParamSlider(GUIContent label, MaterialProperty property, 
+        public Vector3Int DrawFromVector3IntParamSlider(GUIContent label, MaterialProperty property, 
             Vector3Param vectorParam, IntRange range, int indentLevel = 0, Action onChangedCallback = null) =>
             _sliderIntEditor.DrawFromVector3IntParamSlider(label, property, vectorParam, range, indentLevel, onChangedCallback);
         
-        public void DrawFromVector3IntParamSlider(GUIContent label, MaterialProperty property, 
+        public Vector3Int DrawFromVector3IntParamSlider(GUIContent label, MaterialProperty property, 
             Vector3Param vectorParam, int indentLevel = 0, Action onChangedCallback = null) =>
             _sliderIntEditor.DrawFromVector3IntParamSlider(label, property, vectorParam, IntRange.Normalized, indentLevel, onChangedCallback);
         

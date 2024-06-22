@@ -4,7 +4,7 @@ using EditorGUIPlus.Data.Range;
 using UnityEditor;
 using UnityEngine;
 
-namespace EditorGUIPlus.EditorModules
+namespace EditorGUIPlus.EditorModules.PropertyBased
 {
     internal sealed class SliderIntEditor
     {
@@ -40,11 +40,11 @@ namespace EditorGUIPlus.EditorModules
             }
         }
         
-        internal void DrawFromVector3IntParamSlider<TProperty>(GUIContent label, TProperty property, 
+        internal Vector3Int DrawFromVector3IntParamSlider<TProperty>(GUIContent label, TProperty property, 
             Vector3Param vectorParam, IntRange range, int indentLevel = 0, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
-            return;
+            return _propertyService.GetVector3Int(property);
 
             void Draw()
             {
