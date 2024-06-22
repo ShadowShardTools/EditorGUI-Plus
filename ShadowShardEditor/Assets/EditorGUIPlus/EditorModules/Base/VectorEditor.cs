@@ -156,7 +156,7 @@ namespace EditorGUIPlus.EditorModules.Base
             }
         }
         
-        internal Vector3 DrawFloatFromVector3<TProperty>(GUIContent label, ref Vector3 property, Vector3Param vector3Param, 
+        internal Vector3 DrawFloatFromVector3(GUIContent label, ref Vector3 property, Vector3Param vector3Param, 
             FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
         {
             Vector3 tempProperty = property;
@@ -182,7 +182,7 @@ namespace EditorGUIPlus.EditorModules.Base
             }
         }
         
-        internal Vector4 DrawFloatFromVector4<TProperty>(GUIContent label, ref Vector4 property, Vector4Param vector4Param, 
+        internal Vector4 DrawFloatFromVector4(GUIContent label, ref Vector4 property, Vector4Param vector4Param, 
             FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
         {
             Vector4 tempProperty = property;

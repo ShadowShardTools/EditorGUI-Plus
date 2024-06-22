@@ -59,7 +59,7 @@ namespace EditorGUIPlus.EditorModules.Base
             }
         }
         
-        internal TEnum DrawBooleanPopup<TEnum>(ref Enum enumProperty, int indentLevel = 0, 
+        internal TEnum DrawBooleanPopup<TEnum>(ref TEnum enumProperty, int indentLevel = 0, 
             Action onChangedCallback = null) where TEnum : Enum
         {
             Type enumType = typeof(TEnum);
@@ -68,7 +68,7 @@ namespace EditorGUIPlus.EditorModules.Base
             return DrawBooleanPopup<TEnum>(label, ref enumProperty, indentLevel, onChangedCallback);
         }
         
-        internal TEnum DrawBooleanPopup<TEnum>(GUIContent label, ref Enum enumProperty, int indentLevel = 0, 
+        internal TEnum DrawBooleanPopup<TEnum>(GUIContent label, ref TEnum enumProperty, int indentLevel = 0, 
             Action onChangedCallback = null) where TEnum : Enum
         {
             Type enumType = typeof(TEnum);
@@ -103,7 +103,7 @@ namespace EditorGUIPlus.EditorModules.Base
                 .GetValue(enumOption);
         }
         
-        internal TEnum DrawShaderGlobalKeywordBooleanPopup<TEnum>(ref Enum enumProperty, 
+        internal TEnum DrawShaderGlobalKeywordBooleanPopup<TEnum>(ref TEnum enumProperty, 
             string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum
         {
             Type enumType = typeof(TEnum);
@@ -113,7 +113,7 @@ namespace EditorGUIPlus.EditorModules.Base
                 indentLevel, onChangedCallback);
         }
         
-        internal TEnum DrawShaderGlobalKeywordBooleanPopup<TEnum>(GUIContent label, ref Enum enumProperty, 
+        internal TEnum DrawShaderGlobalKeywordBooleanPopup<TEnum>(GUIContent label, ref TEnum enumProperty, 
             string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum
         {
             Type enumType = typeof(TEnum);
