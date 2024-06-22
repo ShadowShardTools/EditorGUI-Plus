@@ -61,7 +61,7 @@ namespace EditorGUIPlus.EditorModules.Base
             }
         }
 
-        internal Vector2Int DrawVector2Int(GUIContent label, Vector2Int property, Vector2IntRange range, 
+        internal Vector2Int DrawVector2Int(GUIContent label, ref Vector2Int property, Vector2IntRange range, 
             int indentLevel = 0, Action onChangedCallback = null)
         {
             Vector2Int tempProperty = property;
@@ -84,7 +84,7 @@ namespace EditorGUIPlus.EditorModules.Base
             }
         }
         
-        internal Vector3Int DrawVector3Int(GUIContent label, Vector3Int property, Vector3IntRange range, 
+        internal Vector3Int DrawVector3Int(GUIContent label, ref Vector3Int property, Vector3IntRange range, 
             int indentLevel = 0, Action onChangedCallback = null)
         {
             Vector3Int tempProperty = property;
@@ -107,7 +107,7 @@ namespace EditorGUIPlus.EditorModules.Base
             }
         }
         
-        internal Vector2Int DrawIntFromVector2Int(GUIContent label, Vector2Int property, Vector2Param vector2Param, 
+        internal Vector2Int DrawIntFromVector2Int(GUIContent label, ref Vector2Int property, Vector2Param vector2Param, 
             IntRange range, int indentLevel = 0, Action onChangedCallback = null)
         {
             Vector2Int tempProperty = property;
@@ -131,7 +131,7 @@ namespace EditorGUIPlus.EditorModules.Base
             }
         }
         
-        internal Vector3Int DrawIntFromVector3Int(GUIContent label, Vector3Int property, Vector3Param vector3Param, 
+        internal Vector3Int DrawIntFromVector3Int(GUIContent label, ref Vector3Int property, Vector3Param vector3Param, 
             IntRange range, int indentLevel = 0, Action onChangedCallback = null)
         {
             Vector3Int tempProperty = property;
@@ -155,7 +155,7 @@ namespace EditorGUIPlus.EditorModules.Base
             }
         }
         
-        internal BoundsInt DrawIntBoundsField(GUIContent label, BoundsInt property, int indentLevel = 0, 
+        internal BoundsInt DrawIntBoundsField(GUIContent label, ref BoundsInt property, int indentLevel = 0, 
             Action onChangedCallback = null)
         {
             BoundsInt tempProperty = property;

@@ -42,7 +42,7 @@ namespace EditorGUIPlus.EditorModules.Base
             }
         }
         
-        internal bool DrawShaderLocalKeywordToggle(GUIContent label, Material material, bool toggle, 
+        internal bool DrawShaderLocalKeywordToggle(GUIContent label, Material material, ref bool toggle, 
             string shaderLocalKeyword, ToggleAlign toggleAlign = ToggleAlign.Right, 
             int indentLevel = 0, Action onChangedCallback = null)
         {
@@ -71,7 +71,7 @@ namespace EditorGUIPlus.EditorModules.Base
             }
         }
         
-        internal bool DrawShaderGlobalKeywordToggle(GUIContent label, bool toggle, 
+        internal bool DrawShaderGlobalKeywordToggle(GUIContent label, ref bool toggle, 
             string shaderGlobalKeyword, ToggleAlign toggleAlign = ToggleAlign.Right,
             int indentLevel = 0, Action onChangedCallback = null)
         {
