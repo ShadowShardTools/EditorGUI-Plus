@@ -20,6 +20,9 @@ namespace EditorGUIPlus.EditorModules.Base
         {
             bool tempToggle = toggle;
             _groupEditor.DrawIndented(indentLevel, Draw);
+            if(!toggle.Equals(tempToggle)) 
+                toggle = tempToggle;
+            
             return toggle;
 
             void Draw()
@@ -45,6 +48,9 @@ namespace EditorGUIPlus.EditorModules.Base
         {
             bool tempToggle = toggle;
             _groupEditor.DrawIndented(indentLevel, Draw);
+            if(!toggle.Equals(tempToggle)) 
+                toggle = tempToggle;
+            
             return toggle;
 
             void Draw()
@@ -71,6 +77,9 @@ namespace EditorGUIPlus.EditorModules.Base
         {
             bool tempToggle = toggle;
             _groupEditor.DrawIndented(indentLevel, Draw);
+            if(!toggle.Equals(tempToggle)) 
+                toggle = tempToggle;
+            
             return toggle;
 
             void Draw()

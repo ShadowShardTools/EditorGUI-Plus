@@ -17,7 +17,8 @@ namespace EditorGUIPlus.EditorModules.Base
         {
             Object localObjectProperty = objectProperty;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            objectProperty = localObjectProperty;
+            if(!objectProperty.Equals(localObjectProperty)) 
+                objectProperty = localObjectProperty;
             
             return objectProperty;
 

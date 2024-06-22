@@ -41,7 +41,8 @@ namespace EditorGUIPlus.EditorModules.Base
         {
             TEnum tempEnum = enumProperty;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            enumProperty = tempEnum;
+            if(!enumProperty.Equals(tempEnum)) 
+                enumProperty = tempEnum;
             
             return enumProperty;
 
@@ -130,7 +131,8 @@ namespace EditorGUIPlus.EditorModules.Base
         {
             TEnum tempEnum = enumProperty;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            enumProperty = tempEnum;
+            if(!enumProperty.Equals(tempEnum)) 
+                enumProperty = tempEnum;
             
             return Convert.ToInt32(enumProperty);
 
@@ -157,7 +159,8 @@ namespace EditorGUIPlus.EditorModules.Base
             
             TEnum tempEnum = enumProperty;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            enumProperty = tempEnum;
+            if(!enumProperty.Equals(tempEnum)) 
+                enumProperty = tempEnum;
             
             return Convert.ToInt32(enumProperty);
             
@@ -184,7 +187,8 @@ namespace EditorGUIPlus.EditorModules.Base
             
             TEnum tempEnum = enumProperty;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            enumProperty = tempEnum;
+            if(!enumProperty.Equals(tempEnum)) 
+                enumProperty = tempEnum;
             
             return Convert.ToInt32(enumProperty);
             
@@ -212,7 +216,8 @@ namespace EditorGUIPlus.EditorModules.Base
 
             TEnum tempEnum = enumProperty;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            enumProperty = tempEnum;
+            if(!enumProperty.Equals(tempEnum)) 
+                enumProperty = tempEnum;
             
             return Convert.ToInt32(enumProperty);
             
@@ -237,7 +242,8 @@ namespace EditorGUIPlus.EditorModules.Base
         {
             string tempTag = tag;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            tag = tempTag;
+            if(!tag.Equals(tempTag)) 
+                tag = tempTag;
             
             return tag;
 
@@ -259,7 +265,8 @@ namespace EditorGUIPlus.EditorModules.Base
         {
             int tempLayer = layer;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            layer = tempLayer;
+            if(!layer.Equals(tempLayer)) 
+                layer = tempLayer;
             
             return layer;
 
@@ -281,7 +288,8 @@ namespace EditorGUIPlus.EditorModules.Base
         {
             int tempMask = mask;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            mask = tempMask;
+            if(!mask.Equals(tempMask)) 
+                mask = tempMask;
             
             return mask;
 

@@ -20,7 +20,8 @@ namespace EditorGUIPlus.EditorModules.Base
         {
             int tempSliderValue = sliderValue;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            sliderValue = tempSliderValue;
+            if(!sliderValue.Equals(tempSliderValue)) 
+                sliderValue = tempSliderValue;
             
             return sliderValue;
 
@@ -42,7 +43,8 @@ namespace EditorGUIPlus.EditorModules.Base
         {
             Vector3Int tempVector3Int = vector3Int;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            vector3Int = tempVector3Int;
+            if(!vector3Int.Equals(tempVector3Int)) 
+                vector3Int = tempVector3Int;
             
             return vector3Int;
 
@@ -74,8 +76,12 @@ namespace EditorGUIPlus.EditorModules.Base
             int minPropertyTemp = minProperty;
             int maxPropertyTemp = maxProperty;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            minProperty = minPropertyTemp;
-            maxProperty = maxPropertyTemp;
+            
+            if (!minProperty.Equals(minPropertyTemp) || !maxProperty.Equals(maxPropertyTemp))
+            {
+                minProperty = minPropertyTemp;
+                maxProperty = maxPropertyTemp;
+            }
             
             return new IntRange(minProperty, maxProperty);
 

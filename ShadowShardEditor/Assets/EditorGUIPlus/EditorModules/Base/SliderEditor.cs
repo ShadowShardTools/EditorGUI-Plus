@@ -20,7 +20,8 @@ namespace EditorGUIPlus.EditorModules.Base
         {
             float tempSliderValue = sliderValue;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            sliderValue = tempSliderValue;
+            if(!sliderValue.Equals(tempSliderValue)) 
+                sliderValue = tempSliderValue;
             
             return sliderValue;
 
@@ -42,7 +43,8 @@ namespace EditorGUIPlus.EditorModules.Base
         {
             Vector3 tempVector3 = vector3;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            vector3 = tempVector3;
+            if(!vector3.Equals(tempVector3)) 
+                vector3 = tempVector3;
             
             return vector3;
 
@@ -75,8 +77,12 @@ namespace EditorGUIPlus.EditorModules.Base
             float minPropertyTemp = minProperty;
             float maxPropertyTemp = maxProperty;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            minProperty = minPropertyTemp;
-            maxProperty = maxPropertyTemp;
+            
+            if (!minProperty.Equals(minPropertyTemp) || !maxProperty.Equals(maxPropertyTemp))
+            {
+                minProperty = minPropertyTemp;
+                maxProperty = maxPropertyTemp;
+            }
             
             return new FloatRange(minProperty, maxProperty);
 
@@ -95,7 +101,8 @@ namespace EditorGUIPlus.EditorModules.Base
         {
             Vector4 tempVector4 = vector4;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            vector4 = tempVector4;
+            if(!vector4.Equals(tempVector4)) 
+                vector4 = tempVector4;
             
             return new FloatRange(vector4.x, vector4.y);
 
@@ -114,7 +121,8 @@ namespace EditorGUIPlus.EditorModules.Base
         {
             Vector4 tempVector4 = vector4;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            vector4 = tempVector4;
+            if(!vector4.Equals(tempVector4)) 
+                vector4 = tempVector4;
             
             return new FloatRange(vector4.z, vector4.w);
 

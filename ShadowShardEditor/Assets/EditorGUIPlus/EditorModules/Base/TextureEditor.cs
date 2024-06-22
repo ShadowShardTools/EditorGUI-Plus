@@ -18,7 +18,8 @@ namespace EditorGUIPlus.EditorModules.Base
         {
             Texture tempTexture = texture;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            texture = tempTexture;
+            if(!texture.Equals(tempTexture)) 
+                texture = tempTexture;
             
             return texture;
 

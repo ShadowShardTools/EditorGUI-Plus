@@ -54,7 +54,8 @@ namespace EditorGUIPlus.EditorModules.Base
         {
             string tempText = text;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            text = tempText;
+            if(!text.Equals(tempText)) 
+                text = tempText;
             
             return text;
 
@@ -76,7 +77,8 @@ namespace EditorGUIPlus.EditorModules.Base
         {
             string tempText = text;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            text = tempText;
+            if(!text.Equals(tempText)) 
+                text = tempText;
             
             return text;
 
@@ -102,7 +104,8 @@ namespace EditorGUIPlus.EditorModules.Base
         {
             string tempPassword = password;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            password = tempPassword;
+            if(!password.Equals(tempPassword)) 
+                password = tempPassword;
             
             return password;
 
@@ -125,7 +128,7 @@ namespace EditorGUIPlus.EditorModules.Base
             string tempPath = path;
             _groupEditor.DrawIndented(indentLevel, () => DrawPathField(ref tempPath, label, defaultDirectory));
 
-            if (path != tempPath)
+            if (!path.Equals(tempPath))
             {
                 path = tempPath;
                 onChangedCallback?.Invoke();

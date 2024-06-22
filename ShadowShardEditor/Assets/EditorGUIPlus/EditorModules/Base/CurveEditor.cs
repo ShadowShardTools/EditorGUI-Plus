@@ -18,7 +18,8 @@ namespace EditorGUIPlus.EditorModules.Base
         {
             AnimationCurve tempCurve = curve;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            curve = tempCurve;
+            if(!curve.Equals(tempCurve)) 
+                curve = tempCurve;
             
             return curve;
 
