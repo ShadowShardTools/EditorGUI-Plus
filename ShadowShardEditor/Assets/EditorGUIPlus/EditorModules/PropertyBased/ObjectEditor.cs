@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace EditorGUIPlus.EditorModules
+namespace EditorGUIPlus.EditorModules.PropertyBased
 {
     internal sealed class ObjectEditor
     {
