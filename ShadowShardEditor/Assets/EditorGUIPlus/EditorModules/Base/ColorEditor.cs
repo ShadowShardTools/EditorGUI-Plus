@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace EditorGUIPlus.EditorModules
+namespace EditorGUIPlus.EditorModules.Base
 {
     internal sealed class ColorEditor
     {
@@ -54,52 +54,6 @@ namespace EditorGUIPlus.EditorModules
                 if (EditorGUI.EndChangeCheck())
                 {
                     tempGradient = newValue;
-                    onChangedCallback?.Invoke();
-                }
-            }
-        }
-        
-        internal Color DrawColor<TProperty>(GUIContent label, TProperty property, bool showAlpha = true,
-            bool hdr = false, int indentLevel = 0, Action onChangedCallback = null)
-        {
-            _groupEditor.DrawIndented(indentLevel, Draw);
-            return _propertyService.GetColor(property);
-
-            void Draw()
-            {
-                EditorGUI.BeginChangeCheck();
-
-                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
-                Color propertyValue = _propertyService.GetColor(property);
-                Color newValue = EditorGUILayout.ColorField(label, propertyValue, true, showAlpha, hdr);
-                EditorGUI.showMixedValue = false;
-                
-                if (EditorGUI.EndChangeCheck())
-                {
-                    _propertyService.SetColor(property, newValue);
-                    onChangedCallback?.Invoke();
-                }
-            }
-        }
-        
-        internal Gradient DrawGradient(GUIContent label, SerializedProperty property, bool hdr = false, 
-            int indentLevel = 0, Action onChangedCallback = null)
-        {
-            _groupEditor.DrawIndented(indentLevel, Draw);
-            return property.gradientValue;
-
-            void Draw()
-            {
-                EditorGUI.BeginChangeCheck();
-
-                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
-                Gradient propertyValue = property.gradientValue;
-                Gradient newValue = EditorGUILayout.GradientField(label, propertyValue, hdr);
-                EditorGUI.showMixedValue = false;
-                
-                if (EditorGUI.EndChangeCheck())
-                {
-                    property.gradientValue = newValue;
                     onChangedCallback?.Invoke();
                 }
             }

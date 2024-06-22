@@ -2,6 +2,7 @@ using System;
 using EditorGUIPlus.Data.Enums;
 using EditorGUIPlus.Data.Range;
 using EditorGUIPlus.EditorModules;
+using EditorGUIPlus.EditorModules.PropertyBased;
 using EditorGUIPlus.Scopes;
 using EditorGUIPlus.Scopes.Section;
 using UnityEditor;
