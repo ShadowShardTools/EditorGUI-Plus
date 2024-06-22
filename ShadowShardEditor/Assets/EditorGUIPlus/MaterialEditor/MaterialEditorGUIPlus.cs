@@ -8,7 +8,7 @@ using EditorGUIPlus.Scopes;
 using EditorGUIPlus.Scopes.Section;
 using UnityEditor;
 using UnityEngine;
-using TextEditor = EditorGUIPlus.EditorModules.TextEditor;
+using TextEditor = EditorGUIPlus.EditorModules.PropertyBased.TextEditor;
 
 namespace EditorGUIPlus.MaterialEditor
 {
