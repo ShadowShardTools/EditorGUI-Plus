@@ -18,7 +18,8 @@ namespace EditorGUIPlus.EditorModules.Base
         {
             Color tempColor = color;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            color = tempColor;
+            if(!color.Equals(tempColor)) 
+                color = tempColor;
     
             return color;
 
@@ -40,7 +41,8 @@ namespace EditorGUIPlus.EditorModules.Base
         {
             Gradient tempGradient = gradient;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            gradient = tempGradient;
+            if(!gradient.Equals(tempGradient)) 
+                gradient = tempGradient;
             
             return gradient;
 
