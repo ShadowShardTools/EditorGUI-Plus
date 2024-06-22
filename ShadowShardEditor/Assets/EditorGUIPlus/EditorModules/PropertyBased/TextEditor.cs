@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace EditorGUIPlus.EditorModules
+namespace EditorGUIPlus.EditorModules.PropertyBased
 {
     internal sealed class TextEditor
     {
@@ -49,7 +49,8 @@ namespace EditorGUIPlus.EditorModules
             }
         }
         
-        internal string DrawTextField(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null)
+        internal string DrawTextField(GUIContent label, SerializedProperty property, int indentLevel = 0,
+            Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return property.stringValue;
@@ -71,7 +72,8 @@ namespace EditorGUIPlus.EditorModules
             }
         }
         
-        internal string DrawTextArea(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null)
+        internal string DrawTextArea(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return property.stringValue;
@@ -95,7 +97,8 @@ namespace EditorGUIPlus.EditorModules
             }
         }
         
-        internal string DrawPasswordField(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null)
+        internal string DrawPasswordField(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return property.stringValue;
@@ -120,40 +123,48 @@ namespace EditorGUIPlus.EditorModules
         internal string DrawFolderPathField(GUIContent label, SerializedProperty property, string defaultDirectory, 
             int indentLevel = 0, Action onChangedCallback = null)
         {
-            _groupEditor.DrawIndented(indentLevel, Draw);
+            _groupEditor.DrawIndented(indentLevel, () => 
+                DrawPathField(property, label, defaultDirectory, onChangedCallback));
+            
             return property.stringValue;
+        }
+        
+        private void DrawPathField(SerializedProperty property, GUIContent label, string defaultDirectory, 
+            Action onChangedCallback)
+        {
+            EditorGUI.BeginChangeCheck();
+            string propertyValue = property.stringValue;
 
-            void Draw()
+            using (new GUILayout.HorizontalScope())
             {
-                EditorGUI.BeginChangeCheck();
-                string propertyValue = property.stringValue;
+                const float buttonWidth = 24f;
+                const float spacing = 7f;
+                EditorGUILayout.LabelField(label, GUILayout.Width(EditorGUIUtility.labelWidth - (buttonWidth + spacing)));
+                propertyValue = EditorGUILayout.TextField(propertyValue);
 
-                using(new GUILayout.HorizontalScope())
+                if (GUILayout.Button(" ... ", GUILayout.Width(buttonWidth), GUILayout.Height(EditorGUIUtility.singleLineHeight)))
                 {
-                    const float buttonWidth = 24f;
-                    const float spacing = 7f;
-                    EditorGUILayout.LabelField(label, GUILayout.Width(EditorGUIUtility.labelWidth - (buttonWidth + spacing)));
-                    propertyValue = EditorGUILayout.TextField(propertyValue);
-                    
-                    if(GUILayout.Button(" ... ", GUILayout.Width(buttonWidth), GUILayout.Height(EditorGUIUtility.singleLineHeight)))
-                    {
-                        if(AssetDatabase.IsValidFolder(propertyValue))
-                            propertyValue = defaultDirectory;
-                    
-                        string chosenDirectory = EditorUtility.SaveFolderPanel("Choose folder to save", defaultDirectory, defaultDirectory);
-                    
-                        if(!string.IsNullOrEmpty(chosenDirectory)) 
-                            propertyValue = chosenDirectory;
-                    }
-                }
-
-                if(EditorGUI.EndChangeCheck())
-                {
-                    property.stringValue = propertyValue;
-                    property.serializedObject.ApplyModifiedProperties();
-                    onChangedCallback?.Invoke();
+                    propertyValue = SelectFolder(propertyValue, defaultDirectory);
                 }
             }
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                property.stringValue = propertyValue;
+                property.serializedObject.ApplyModifiedProperties();
+                onChangedCallback?.Invoke();
+            }
+        }
+
+        private string SelectFolder(string currentPath, string defaultDirectory)
+        {
+            if (!AssetDatabase.IsValidFolder(currentPath))
+            {
+                currentPath = defaultDirectory;
+            }
+
+            string chosenDirectory = EditorUtility.SaveFolderPanel("Choose folder to save", defaultDirectory, defaultDirectory);
+            return !string.IsNullOrEmpty(chosenDirectory) ? chosenDirectory : currentPath;
         }
     }
 }

@@ -85,15 +85,15 @@ MonoBehaviour:
     m_Text: Test Label
     m_Image: {fileID: 0}
     m_Tooltip: 
-  SliderValue: 0.5
+  SliderValue: 1
   MinValue: 0
   MaxValue: 1
   IntSliderValue: 5
   Vector3Value: {x: 1, y: 2, z: 3}
   Vector4Value: {x: 1, y: 2, z: 3, w: 4}
-  ToggleValue: 0
+  ToggleValue: 1
   ShaderGlobalKeyword: SHADER_GLOBAL_KEYWORD
-  FloatValue: 0
+  FloatValue: 1
   Vector2Value: {x: 0, y: 0}
   ColorValue: {r: 0, g: 0, b: 0, a: 0}
   Vector2IntValue: {x: 0, y: 0}
@@ -106,3 +106,4 @@ MonoBehaviour:
   - Option1
   - Option2
   SelectedOption: 0
+  ObjectValue: {fileID: 0}

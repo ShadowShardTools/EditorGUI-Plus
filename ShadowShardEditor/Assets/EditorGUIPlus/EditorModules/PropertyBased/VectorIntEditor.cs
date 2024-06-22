@@ -4,7 +4,7 @@ using EditorGUIPlus.Data.Range;
 using UnityEditor;
 using UnityEngine;
 
-namespace EditorGUIPlus.EditorModules
+namespace EditorGUIPlus.EditorModules.PropertyBased
 {
     public sealed class VectorIntEditor
     {

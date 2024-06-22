@@ -2,18 +2,16 @@ using System;
 using EditorGUIPlus.Data.Enums;
 using EditorGUIPlus.Data.Range;
 using EditorGUIPlus.EditorModules;
-using EditorGUIPlus.Scopes;
-using EditorGUIPlus.Scopes.Section;
+using EditorGUIPlus.EditorModules.PropertyBased;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using TextEditor = EditorGUIPlus.EditorModules.TextEditor;
+using TextEditor = EditorGUIPlus.EditorModules.PropertyBased.TextEditor;
 
 namespace EditorGUIPlus
 {
-    public sealed class EditorGUIPlus
+    public sealed class EditorGUIPlus : BaseEditorGUIPlus
     {
-        private readonly GroupEditor _groupEditor;
         private readonly SliderEditor _sliderEditor;
         private readonly SliderIntEditor _sliderIntEditor;
         private readonly ToggleEditor _toggleEditor;
@@ -25,99 +23,24 @@ namespace EditorGUIPlus
         private readonly ObjectEditor _objectEditor;
         private readonly TextEditor _textEditor;
         private readonly CurveEditor _curveEditor;
-        private readonly MessageEditor _messageEditor;
         
         public EditorGUIPlus()
         {
             PropertyService propertyService = new();
+            GroupEditor groupEditor = new();
             
-            _groupEditor = new GroupEditor();
-            _sliderEditor = new SliderEditor(propertyService, _groupEditor);
-            _sliderIntEditor = new SliderIntEditor(propertyService, _groupEditor);
-            _toggleEditor = new ToggleEditor(propertyService, _groupEditor);
-            _vectorEditor = new VectorEditor(propertyService, _groupEditor);
-            _vectorIntEditor = new VectorIntEditor(propertyService, _groupEditor);
-            _colorEditor = new ColorEditor(propertyService, _groupEditor);
-            _textureEditor = new TextureEditor(propertyService, _groupEditor);
-            _popupEditor = new PopupEditor(propertyService, _groupEditor);
-            _objectEditor = new ObjectEditor(_groupEditor);
-            _textEditor = new TextEditor(_groupEditor);
-            _curveEditor = new CurveEditor(_groupEditor);
-            _messageEditor = new MessageEditor(_groupEditor);
+            _sliderEditor = new SliderEditor(propertyService, groupEditor);
+            _sliderIntEditor = new SliderIntEditor(propertyService, groupEditor);
+            _toggleEditor = new ToggleEditor(propertyService, groupEditor);
+            _vectorEditor = new VectorEditor(propertyService, groupEditor);
+            _vectorIntEditor = new VectorIntEditor(propertyService, groupEditor);
+            _colorEditor = new ColorEditor(propertyService, groupEditor);
+            _textureEditor = new TextureEditor(propertyService, groupEditor);
+            _popupEditor = new PopupEditor(propertyService, groupEditor);
+            _objectEditor = new ObjectEditor(groupEditor);
+            _textEditor = new TextEditor(groupEditor);
+            _curveEditor = new CurveEditor(groupEditor);
         }
-
-        #region GroupScopesEditorRegion
-        public EditorGUILayout.HorizontalScope HorizontalScope(GUIStyle style = null, params GUILayoutOption[] options) =>
-            _groupEditor.HorizontalScope(style, options);
-        
-        public EditorGUILayout.VerticalScope VerticalScope(GUIStyle style = null, params GUILayoutOption[] options) =>
-            _groupEditor.VerticalScope(style, options);
-        
-        public ScrollableScope ScrollViewScope(ref Vector2 scrollPosition, params GUILayoutOption[] options) =>
-            _groupEditor.ScrollViewScope(ref scrollPosition, options);
-        
-        public EditorGUILayout.ToggleGroupScope ToggleGroupScope(GUIContent label, ref bool toggle) =>
-            _groupEditor.ToggleGroupScope(label, ref toggle);
-        
-        public EditorGUILayout.ToggleGroupScope ToggleGroupScope(GUIContent label, SerializedProperty property) =>
-            _groupEditor.ToggleGroupScope(label, property);
-
-        public EditorGUILayout.FadeGroupScope FadeGroupScope(float value) =>
-            _groupEditor.FadeGroupScope(value);
-        
-        public HeaderScope HeaderScope(ISection section, bool spaceAtEnd = true, bool subHeader = false) =>
-            _groupEditor.HeaderScope(section, spaceAtEnd, subHeader);
-        
-        public DisabledScope DisabledScope(bool isDisabled) =>
-            _groupEditor.DisabledScope(isDisabled);
-        
-        public GroupScope GroupScope(GUIContent label, bool isDisabled) =>
-            _groupEditor.GroupScope(label, isDisabled);
-        
-        public BuildTargetSelectionScope BuildTargetSelectionScope() =>
-            _groupEditor.BuildTargetSelectionScope();
-        
-        #endregion
-        
-        #region GroupEditorRegion
-        
-        public void ScrollView(Action drawCall, ref Vector2 scrollPosition, params GUILayoutOption[] options) =>
-            _groupEditor.DrawScrollView(drawCall, ref scrollPosition, options);
-        
-        public void DrawVertical(GUIStyle styles, Action drawCall) =>
-            _groupEditor.DrawVertical(styles, drawCall);
-        
-        public void DrawIndented(int indentLevel, Action drawCall) =>
-            _groupEditor.DrawIndented(indentLevel, drawCall);
-        
-        public void DrawDisabled(bool isDisabled, Action drawCall) =>
-            _groupEditor.DrawDisabled(isDisabled, drawCall);
-        
-        public void DrawIndentedDisabled(int indentLevel, bool isDisabled, Action drawCall) =>
-            _groupEditor.DrawIndentedDisabled(indentLevel, isDisabled, drawCall);
-        
-        public void DrawGroup(bool isDisabled, Action drawCall) =>
-            _groupEditor.DrawGroup(isDisabled, drawCall);
-        
-        public void DrawGroup(Action drawCall) =>
-            _groupEditor.DrawGroup(false, drawCall);
-        
-        public void DrawGroup(GUIContent label, bool isDisabled, Action drawCall) =>
-            _groupEditor.DrawGroup(label, isDisabled, drawCall);
-        
-        public void DrawGroup(GUIContent label, Action drawCall) =>
-            _groupEditor.DrawGroup(label, false, drawCall);
-        
-        public void DrawInspectorTitlebar(ref bool fold, Object[] targetObjs, Action drawCall) =>
-            _groupEditor.DrawInspectorTitlebar(ref fold, targetObjs, drawCall);
-        
-        public void DrawFoldout(GUIContent label, ref bool fold, bool toggleOnLabelClick, Action drawCall) =>
-            _groupEditor.DrawFoldout(label, ref fold, toggleOnLabelClick, drawCall);
-        
-        public void DrawFoldout(GUIContent label, ref bool fold, Action drawCall) =>
-            _groupEditor.DrawFoldout(label, ref fold, false, drawCall);
-        
-        #endregion
 
         #region SliderEditorRegion
         
@@ -129,11 +52,11 @@ namespace EditorGUIPlus
             Action onChangedCallback = null) =>
             _sliderEditor.DrawSlider(label, property, FloatRange.Normalized, indentLevel, onChangedCallback);
         
-        public void DrawFromVector3ParamSlider(GUIContent label, SerializedProperty property, Vector3Param vectorParam, 
+        public Vector3 DrawFromVector3ParamSlider(GUIContent label, SerializedProperty property, Vector3Param vectorParam, 
             FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
             _sliderEditor.DrawFromVector3ParamSlider(label, property, vectorParam, range, indentLevel, onChangedCallback);
         
-        public void DrawFromVector3ParamSlider(GUIContent label, SerializedProperty property, Vector3Param vectorParam, 
+        public Vector3 DrawFromVector3ParamSlider(GUIContent label, SerializedProperty property, Vector3Param vectorParam, 
             int indentLevel = 0, Action onChangedCallback = null) =>
             _sliderEditor.DrawFromVector3ParamSlider(label, property, vectorParam, FloatRange.Normalized, indentLevel, onChangedCallback);
         
@@ -143,7 +66,7 @@ namespace EditorGUIPlus
         
         public void DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
             SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null) =>
-            _sliderEditor.DrawVector3Sliders(labelX, labelY, labelZ, property, FloatRange.Normalized, indentLevel);
+            _sliderEditor.DrawVector3Sliders(labelX, labelY, labelZ, property, FloatRange.Normalized, indentLevel, onChangedCallback);
         
         public FloatRange DrawMinMaxSlider(GUIContent label, SerializedProperty minProperty, 
             SerializedProperty maxProperty, FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
@@ -181,11 +104,11 @@ namespace EditorGUIPlus
             Action onChangedCallback = null) =>
             _sliderIntEditor.DrawIntSlider(label, property, IntRange.Normalized, indentLevel, onChangedCallback);
         
-        public void DrawFromVector3IntParamSlider(GUIContent label, SerializedProperty property, 
+        public Vector3Int DrawFromVector3IntParamSlider(GUIContent label, SerializedProperty property, 
             Vector3Param vectorParam, IntRange range, int indentLevel = 0, Action onChangedCallback = null) =>
             _sliderIntEditor.DrawFromVector3IntParamSlider(label, property, vectorParam, range, indentLevel, onChangedCallback);
         
-        public void DrawFromVector3IntParamSlider(GUIContent label, SerializedProperty property, 
+        public Vector3Int DrawFromVector3IntParamSlider(GUIContent label, SerializedProperty property, 
             Vector3Param vectorParam, int indentLevel = 0, Action onChangedCallback = null) =>
             _sliderIntEditor.DrawFromVector3IntParamSlider(label, property, vectorParam, IntRange.Normalized, indentLevel, onChangedCallback);
         
@@ -309,11 +232,11 @@ namespace EditorGUIPlus
             Action onChangedCallback = null) =>
             _vectorEditor.DrawVector2(label, property, Vector2Range.Normalized, indentLevel, onChangedCallback);
         
-        public Vector2 DrawNormalizedVector3(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+        public Vector3 DrawNormalizedVector3(GUIContent label, SerializedProperty property, int indentLevel = 0, 
             Action onChangedCallback = null) =>
             _vectorEditor.DrawVector3(label, property, Vector3Range.Normalized, indentLevel, onChangedCallback);
         
-        public Vector2 DrawNormalizedVector4(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+        public Vector4 DrawNormalizedVector4(GUIContent label, SerializedProperty property, int indentLevel = 0, 
             Action onChangedCallback = null) =>
             _vectorEditor.DrawVector4(label, property, Vector4Range.Normalized, indentLevel, onChangedCallback);
         
@@ -349,11 +272,11 @@ namespace EditorGUIPlus
             Action onChangedCallback = null) =>
             _vectorEditor.DrawVector2(label, property, Vector2Range.ToMaxFrom(min), indentLevel, onChangedCallback);
         
-        public Vector2 DrawMinVector3(GUIContent label, SerializedProperty property, Vector3 min, int indentLevel = 0, 
+        public Vector3 DrawMinVector3(GUIContent label, SerializedProperty property, Vector3 min, int indentLevel = 0, 
             Action onChangedCallback = null) =>
             _vectorEditor.DrawVector3(label, property, Vector3Range.ToMaxFrom(min), indentLevel, onChangedCallback);
         
-        public Vector2 DrawMinVector4(GUIContent label, SerializedProperty property, Vector4 min, int indentLevel = 0, 
+        public Vector4 DrawMinVector4(GUIContent label, SerializedProperty property, Vector4 min, int indentLevel = 0, 
             Action onChangedCallback = null) =>
             _vectorEditor.DrawVector4(label, property, Vector4Range.ToMaxFrom(min), indentLevel, onChangedCallback);
         
@@ -571,22 +494,12 @@ namespace EditorGUIPlus
         
         #region TextEditorRegion
         
-        public GUIContent DrawLabel(GUIContent label, GUIContent label2, int indentLevel = 0) =>
-            _textEditor.DrawLabel(label, label2, indentLevel);
-        
-        public GUIContent DrawLabel(GUIContent label, int indentLevel = 0) =>
-            _textEditor.DrawLabel(label, new GUIContent(string.Empty), indentLevel);
-
-        public bool DrawLinkText(GUIContent label, int indentLevel = 0) =>
-            _textEditor.DrawLinkText(label, indentLevel);
-        
-        public bool DrawLinkText(GUIContent label, string url, int indentLevel = 0) =>
-            _textEditor.DrawLinkText(label, url, indentLevel);
-        
         public string DrawTextField(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null) =>
             _textEditor.DrawTextField(label, property, indentLevel, onChangedCallback);
+        
         public string DrawTextArea(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null) =>
             _textEditor.DrawTextArea(label, property, indentLevel, onChangedCallback);
+        
         public string DrawTextArea(SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null) =>
             _textEditor.DrawTextArea(new GUIContent(string.Empty), property, indentLevel, onChangedCallback);
         
@@ -605,33 +518,5 @@ namespace EditorGUIPlus
             _curveEditor.DrawAnimationCurve(label, property, indentLevel, onChangedCallback);
         
         #endregion
-        
-        #region MessageEditorRegion
-
-        public void DrawHelpBox(string message, MessageType type, bool wide = true, int indentLevel = 0) =>
-            _messageEditor.DrawHelpBox(message, type, wide);
-        
-        public void DrawNeutralBox(string message, bool wide = true, int indentLevel = 0) =>
-            _messageEditor.DrawNeutralBox(message, wide, indentLevel);
-        
-        public void DrawInfoBox(string message, bool wide = true, int indentLevel = 0) =>
-            _messageEditor.DrawInfoBox(message, wide, indentLevel);
-        
-        public void DrawWarningBox(string message, bool wide = true, int indentLevel = 0) =>
-            _messageEditor.DrawWarningBox(message, wide, indentLevel);
-        
-        public void DrawErrorBox(string message, bool wide = true, int indentLevel = 0) =>
-            _messageEditor.DrawErrorBox(message, wide, indentLevel);
-        
-        #endregion
-
-        public void Space() =>
-            EditorGUILayout.Space();
-        
-        public void Space(float width) =>
-            EditorGUILayout.Space(width);
-        
-        public void Space(float width, bool expand) =>
-            EditorGUILayout.Space(width, expand);
     }
 }

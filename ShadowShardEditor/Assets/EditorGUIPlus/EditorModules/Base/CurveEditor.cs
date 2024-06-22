@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace EditorGUIPlus.EditorModules
+namespace EditorGUIPlus.EditorModules.Base
 {
     public class CurveEditor
     {
@@ -13,23 +13,24 @@ namespace EditorGUIPlus.EditorModules
             _groupEditor = groupEditor;
         }
         
-        internal AnimationCurve DrawAnimationCurve(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+        internal AnimationCurve DrawAnimationCurve(GUIContent label, ref AnimationCurve curve, int indentLevel = 0, 
             Action onChangedCallback = null)
         {
+            AnimationCurve tempCurve = curve;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            return property.animationCurveValue;
+            if(!curve.Equals(tempCurve)) 
+                curve = tempCurve;
+            
+            return curve;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-                
-                EditorGUI.showMixedValue = property.hasMultipleDifferentValues;
-                AnimationCurve newValue = EditorGUILayout.CurveField(label, property.animationCurveValue);
-                EditorGUI.showMixedValue = false;
+                AnimationCurve newValue = EditorGUILayout.CurveField(label, tempCurve);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    property.animationCurveValue = newValue;
+                    tempCurve = newValue;
                     onChangedCallback?.Invoke();
                 }
             }
