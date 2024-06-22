@@ -6,12 +6,10 @@ namespace EditorGUIPlus.EditorModules.Base
 {
     internal sealed class ColorEditor
     {
-        private readonly PropertyService _propertyService;
         private readonly GroupEditor _groupEditor;
 
-        internal ColorEditor(PropertyService propertyService, GroupEditor groupEditor)
+        internal ColorEditor(GroupEditor groupEditor)
         {
-            _propertyService = propertyService;
             _groupEditor = groupEditor;
         }
         
