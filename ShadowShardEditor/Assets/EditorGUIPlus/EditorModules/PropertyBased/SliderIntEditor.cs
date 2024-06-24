@@ -65,12 +65,14 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
             }
         }
         
-        internal void DrawVector3IntSliders<TProperty>(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
+        internal Vector3Int DrawVector3IntSliders<TProperty>(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
             TProperty property, IntRange range, int indentLevel = 0, Action onChangedCallback = null)
         {
             DrawFromVector3IntParamSlider(labelX, property, Vector3Param.X, range, indentLevel, onChangedCallback);
             DrawFromVector3IntParamSlider(labelY, property, Vector3Param.Y, range, indentLevel, onChangedCallback);
             DrawFromVector3IntParamSlider(labelZ, property, Vector3Param.Z, range, indentLevel, onChangedCallback);
+            
+            return _propertyService.GetVector3Int(property);
         }
         
         internal IntRange DrawMinMaxIntSlider<TProperty>(GUIContent label, TProperty minProperty, TProperty maxProperty, 
