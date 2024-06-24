@@ -497,8 +497,8 @@ namespace EditorGUIPlus
         
         #region TextureEditorRegion
 
-        public Texture DrawTexture(GUIContent label, ref Texture property, int indentLevel = 0, Action onChangedCallback = null) =>
-            _textureEditor.DrawTexture(label, ref property, indentLevel, onChangedCallback);
+        public Texture DrawTexture(GUIContent label, Texture texture, int indentLevel = 0, Action onChangedCallback = null) =>
+            _textureEditor.DrawTexture(label, texture, indentLevel, onChangedCallback);
         
         #endregion
         

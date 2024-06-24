@@ -17,7 +17,6 @@ namespace EditorGUIPlus.EditorModules.Base
             bool hdr = false, int indentLevel = 0, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
-    
             return color;
 
             void Draw()
@@ -37,7 +36,6 @@ namespace EditorGUIPlus.EditorModules.Base
             int indentLevel = 0, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
-            
             return gradient;
 
             void Draw()

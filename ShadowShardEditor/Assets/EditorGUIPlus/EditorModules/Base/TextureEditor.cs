@@ -13,24 +13,19 @@ namespace EditorGUIPlus.EditorModules.Base
             _groupEditor = groupEditor;
         }
 
-        internal Texture DrawTexture(GUIContent label, ref Texture texture, int indentLevel = 0, 
-            Action onChangedCallback = null)
+        internal Texture DrawTexture(GUIContent label, Texture texture, int indentLevel = 0, Action onChangedCallback = null)
         {
-            Texture tempTexture = texture;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!texture.Equals(tempTexture)) 
-                texture = tempTexture;
-            
             return texture;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-                Texture newValue = EditorGUILayout.ObjectField(label, tempTexture, typeof(Texture), false) as Texture;
+                Texture newValue = EditorGUILayout.ObjectField(label, texture, typeof(Texture), false) as Texture;
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempTexture = newValue;
+                    texture = newValue;
                     onChangedCallback?.Invoke();
                 }
             }

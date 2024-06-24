@@ -17,7 +17,6 @@ namespace EditorGUIPlus.EditorModules.Base
             Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
-            
             return curve;
 
             void Draw()

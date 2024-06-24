@@ -40,7 +40,6 @@ namespace EditorGUIPlus.EditorModules.Base
             int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
-            
             return enumProperty;
 
             void Draw()
@@ -126,7 +125,6 @@ namespace EditorGUIPlus.EditorModules.Base
             Action onChangedCallback = null) where TEnum : Enum
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
-            
             return Convert.ToInt32(enumProperty);
 
             void Draw()
@@ -151,7 +149,6 @@ namespace EditorGUIPlus.EditorModules.Base
                 return 0;
             
             _groupEditor.DrawIndented(indentLevel, Draw);
-            
             return Convert.ToInt32(enumProperty);
             
             void Draw()
@@ -176,7 +173,6 @@ namespace EditorGUIPlus.EditorModules.Base
                 return 0;
             
             _groupEditor.DrawIndented(indentLevel, Draw);
-            
             return Convert.ToInt32(enumProperty);
             
             void Draw()
@@ -202,7 +198,6 @@ namespace EditorGUIPlus.EditorModules.Base
                 return 0;
 
             _groupEditor.DrawIndented(indentLevel, Draw);
-            
             return Convert.ToInt32(enumProperty);
             
             void Draw()
@@ -225,7 +220,6 @@ namespace EditorGUIPlus.EditorModules.Base
             Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
-            
             return tag;
 
             void Draw()
@@ -245,7 +239,6 @@ namespace EditorGUIPlus.EditorModules.Base
             Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
-            
             return layer;
 
             void Draw()
@@ -265,7 +258,6 @@ namespace EditorGUIPlus.EditorModules.Base
             int indentLevel = 0, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
-            
             return mask;
 
             void Draw()

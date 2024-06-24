@@ -16,7 +16,6 @@ namespace EditorGUIPlus.EditorModules.Base
             bool allowSceneObjects = true, Action<Object> onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
-            
             return objectProperty;
 
             void Draw()
