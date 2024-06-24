@@ -382,101 +382,94 @@ namespace EditorGUIPlus
         
         #region VectorIntEditorRegion
 
-        public int DrawInt(GUIContent label, ref int property, IntRange range, int indentLevel = 0, 
+        public int DrawInt(GUIContent label, int property, IntRange range, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorIntEditor.DrawInt(label, ref property, range, indentLevel, onChangedCallback);
+            _vectorIntEditor.DrawInt(label, property, range, indentLevel, onChangedCallback);
         
-        public long DrawLong(GUIContent label, ref long property, LongRange range, int indentLevel = 0, 
+        public long DrawLong(GUIContent label, long property, LongRange range, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorIntEditor.DrawLong(label, ref property, range, indentLevel, onChangedCallback);
+            _vectorIntEditor.DrawLong(label, property, range, indentLevel, onChangedCallback);
         
-        public Vector2Int DrawVector2Int(GUIContent label, ref Vector2Int property, Vector2IntRange range, 
+        public Vector2Int DrawVector2Int(GUIContent label, Vector2Int vector2Int, Vector2IntRange range, 
             int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorIntEditor.DrawVector2Int(label, ref property, range, indentLevel, onChangedCallback);
+            _vectorIntEditor.DrawVector2Int(label, vector2Int, range, indentLevel, onChangedCallback);
         
-        public Vector3Int DrawVector3Int(GUIContent label, ref Vector3Int property, Vector3IntRange range, 
+        public Vector3Int DrawVector3Int(GUIContent label, Vector3Int vector3Int, Vector3IntRange range, 
             int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorIntEditor.DrawVector3Int(label, ref property, range, indentLevel, onChangedCallback);
+            _vectorIntEditor.DrawVector3Int(label, vector3Int, range, indentLevel, onChangedCallback);
         
-        public int DrawInt(GUIContent label, ref int property, int indentLevel = 0, 
+        public int DrawInt(GUIContent label, int property, int indentLevel = 0, Action onChangedCallback = null) =>
+            _vectorIntEditor.DrawInt(label, property, IntRange.Full, indentLevel, onChangedCallback);
+        
+        public long DrawLong(GUIContent label, long property, int indentLevel = 0, Action onChangedCallback = null) =>
+            _vectorIntEditor.DrawLong(label, property, LongRange.Full, indentLevel, onChangedCallback);
+        
+        public Vector2Int DrawVector2Int(GUIContent label, Vector2Int vector2Int, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorIntEditor.DrawInt(label, ref property, IntRange.Full, indentLevel, onChangedCallback);
+            _vectorIntEditor.DrawVector2Int(label, vector2Int, Vector2IntRange.Full, indentLevel, onChangedCallback);
         
-        public long DrawLong(GUIContent label, ref long property, int indentLevel = 0, 
+        public Vector3Int DrawVector3Int(GUIContent label, Vector3Int vector3Int, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorIntEditor.DrawLong(label, ref property, LongRange.Full, indentLevel, onChangedCallback);
+            _vectorIntEditor.DrawVector3Int(label, vector3Int, Vector3IntRange.Full, indentLevel, onChangedCallback);
         
-        public Vector2Int DrawVector2Int(GUIContent label, ref Vector2Int property, int indentLevel = 0, 
-            Action onChangedCallback = null) =>
-            _vectorIntEditor.DrawVector2Int(label, ref property, Vector2IntRange.Full, indentLevel, onChangedCallback);
-        
-        public Vector3Int DrawVector3Int(GUIContent label, ref Vector3Int property, int indentLevel = 0, 
-            Action onChangedCallback = null) =>
-            _vectorIntEditor.DrawVector3Int(label, ref property, Vector3IntRange.Full, indentLevel, onChangedCallback);
-        
-        public Vector2Int DrawIntFromVector2Int(GUIContent label, ref Vector2Int property, Vector2Param vector2Param, 
+        public Vector2Int DrawIntFromVector2Int(GUIContent label, Vector2Int vector2Int, Vector2Param vector2Param, 
             IntRange range, int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorIntEditor.DrawIntFromVector2Int(label, ref property, vector2Param, range, indentLevel, onChangedCallback);
+            _vectorIntEditor.DrawIntFromVector2Int(label, vector2Int, vector2Param, range, indentLevel, onChangedCallback);
         
-        public Vector3Int DrawIntFromVector3Int(GUIContent label, ref Vector3Int property, Vector3Param vector3Param, 
+        public Vector3Int DrawIntFromVector3Int(GUIContent label, Vector3Int vector3Int, Vector3Param vector3Param, 
             IntRange range, int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorIntEditor.DrawIntFromVector3Int(label, ref property, vector3Param, range, indentLevel, onChangedCallback);
+            _vectorIntEditor.DrawIntFromVector3Int(label, vector3Int, vector3Param, range, indentLevel, onChangedCallback);
         
-        public int DrawNormalizedInt(GUIContent label, ref int property, int indentLevel = 0, 
+        public int DrawNormalizedInt(GUIContent label, int property, int indentLevel = 0, Action onChangedCallback = null) =>
+            _vectorIntEditor.DrawInt(label, property, IntRange.Normalized, indentLevel, onChangedCallback);
+        
+        public long DrawNormalizedLong(GUIContent label, long property, int indentLevel = 0, Action onChangedCallback = null) =>
+            _vectorIntEditor.DrawLong(label, property, LongRange.Normalized, indentLevel, onChangedCallback);
+        
+        public Vector2Int DrawNormalizedVector2Int(GUIContent label, Vector2Int vector2Int, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorIntEditor.DrawInt(label, ref property, IntRange.Normalized, indentLevel, onChangedCallback);
+            _vectorIntEditor.DrawVector2Int(label, vector2Int, Vector2IntRange.Normalized, indentLevel, onChangedCallback);
         
-        public long DrawNormalizedLong(GUIContent label, ref long property, int indentLevel = 0, 
+        public Vector3Int DrawNormalizedVector3Int(GUIContent label, ref Vector3Int vector3Int, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorIntEditor.DrawLong(label, ref property, LongRange.Normalized, indentLevel, onChangedCallback);
+            _vectorIntEditor.DrawVector3Int(label, vector3Int, Vector3IntRange.Normalized, indentLevel, onChangedCallback);
         
-        public Vector2Int DrawNormalizedVector2Int(GUIContent label, ref Vector2Int property, int indentLevel = 0, 
-            Action onChangedCallback = null) =>
-            _vectorIntEditor.DrawVector2Int(label, ref property, Vector2IntRange.Normalized, indentLevel, onChangedCallback);
-        
-        public Vector3Int DrawNormalizedVector3Int(GUIContent label, ref Vector3Int property, int indentLevel = 0, 
-            Action onChangedCallback = null) =>
-            _vectorIntEditor.DrawVector3Int(label, ref property, Vector3IntRange.Normalized, indentLevel, onChangedCallback);
-        
-        public Vector2Int DrawNormalizedIntFromVector2Int(GUIContent label, ref Vector2Int property, 
+        public Vector2Int DrawNormalizedIntFromVector2Int(GUIContent label, Vector2Int vector2Int, 
             Vector2Param vector2Param, int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorIntEditor.DrawIntFromVector2Int(label, ref property, vector2Param, IntRange.Normalized, indentLevel, onChangedCallback);
+            _vectorIntEditor.DrawIntFromVector2Int(label, vector2Int, vector2Param, IntRange.Normalized, indentLevel, onChangedCallback);
         
-        public Vector3Int DrawNormalizedIntFromVector3Int(GUIContent label, ref Vector3Int property, 
+        public Vector3Int DrawNormalizedIntFromVector3Int(GUIContent label, ref Vector3Int vector3Int, 
             Vector3Param vector3Param, int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorIntEditor.DrawIntFromVector3Int(label, ref property, vector3Param, IntRange.Normalized, indentLevel, onChangedCallback);
+            _vectorIntEditor.DrawIntFromVector3Int(label, vector3Int, vector3Param, IntRange.Normalized, indentLevel, onChangedCallback);
         
-        public int DrawMinInt(GUIContent label, ref int property, int min = 0, int indentLevel = 0, 
+        public int DrawMinInt(GUIContent label, int property, int min = 0, int indentLevel = 0, Action onChangedCallback = null) =>
+            _vectorIntEditor.DrawInt(label, property, IntRange.ToMaxFrom(min), indentLevel, onChangedCallback);
+        
+        public long DrawNormalizedLong(GUIContent label, long property, long min = 0, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorIntEditor.DrawInt(label, ref property, IntRange.ToMaxFrom(min), indentLevel, onChangedCallback);
+            _vectorIntEditor.DrawLong(label, property, LongRange.ToMaxFrom(min), indentLevel, onChangedCallback);
         
-        public long DrawNormalizedLong(GUIContent label, ref long property, long min = 0, int indentLevel = 0, 
-            Action onChangedCallback = null) =>
-            _vectorIntEditor.DrawLong(label, ref property, LongRange.ToMaxFrom(min), indentLevel, onChangedCallback);
-        
-        public Vector2Int DrawMinVector2Int(GUIContent label, ref Vector2Int property, Vector2Int min, 
+        public Vector2Int DrawMinVector2Int(GUIContent label, Vector2Int vector2Int, Vector2Int min, 
             int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorIntEditor.DrawVector2Int(label, ref property, Vector2IntRange.ToMaxFrom(min), indentLevel, onChangedCallback);
+            _vectorIntEditor.DrawVector2Int(label, vector2Int, Vector2IntRange.ToMaxFrom(min), indentLevel, onChangedCallback);
         
-        public Vector3Int DrawMinVector3Int(GUIContent label, ref Vector3Int property, Vector3Int min, 
+        public Vector3Int DrawMinVector3Int(GUIContent label, Vector3Int vector3Int, Vector3Int min, 
             int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorIntEditor.DrawVector3Int(label, ref property, Vector3IntRange.ToMaxFrom(min), indentLevel, onChangedCallback);
+            _vectorIntEditor.DrawVector3Int(label, vector3Int, Vector3IntRange.ToMaxFrom(min), indentLevel, onChangedCallback);
         
-        public Vector2Int DrawMinIntFromVector2Int(GUIContent label, ref Vector2Int property, Vector2Param vector2Param, 
+        public Vector2Int DrawMinIntFromVector2Int(GUIContent label, Vector2Int vector2Int, Vector2Param vector2Param, 
             int min = 0, int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorIntEditor.DrawIntFromVector2Int(label, ref property, vector2Param, IntRange.ToMaxFrom(min), indentLevel, onChangedCallback);
+            _vectorIntEditor.DrawIntFromVector2Int(label, vector2Int, vector2Param, IntRange.ToMaxFrom(min), indentLevel, onChangedCallback);
         
-        public Vector3Int DrawMinIntFromVector3Int(GUIContent label, ref Vector3Int property, Vector3Param vector3Param, 
+        public Vector3Int DrawMinIntFromVector3Int(GUIContent label, ref Vector3Int vector3Int, Vector3Param vector3Param, 
             int min = 0, int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorIntEditor.DrawIntFromVector3Int(label, ref property, vector3Param, IntRange.ToMaxFrom(min), indentLevel, onChangedCallback);
+            _vectorIntEditor.DrawIntFromVector3Int(label, vector3Int, vector3Param, IntRange.ToMaxFrom(min), indentLevel, onChangedCallback);
         
-        public BoundsInt DrawIntBoundsField(GUIContent label, ref BoundsInt property, int indentLevel = 0, 
-            Action onChangedCallback = null) =>
-            _vectorIntEditor.DrawIntBoundsField(label, ref property, indentLevel, onChangedCallback);
+        public BoundsInt DrawIntBoundsField(GUIContent label, BoundsInt boundsInt, int indentLevel = 0, Action onChangedCallback = null) =>
+            _vectorIntEditor.DrawIntBoundsField(label, boundsInt, indentLevel, onChangedCallback);
         
-        public RectInt DrawIntRectField(GUIContent label, ref RectInt property, int indentLevel = 0, 
-            Action onChangedCallback = null) =>
-            _vectorIntEditor.DrawIntRectField(label, ref property, indentLevel, onChangedCallback);
+        public RectInt DrawIntRectField(GUIContent label, RectInt rectInt, int indentLevel = 0, Action onChangedCallback = null) =>
+            _vectorIntEditor.DrawIntRectField(label, rectInt, indentLevel, onChangedCallback);
         
         #endregion
         
