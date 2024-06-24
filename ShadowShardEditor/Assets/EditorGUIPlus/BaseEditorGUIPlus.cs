@@ -229,157 +229,154 @@ namespace EditorGUIPlus
         
         #region VectorEditorRegion
 
-        public float DrawFloat(GUIContent label, ref float property, FloatRange range, int indentLevel = 0, 
+        public float DrawFloat(GUIContent label, float property, FloatRange range, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorEditor.DrawFloat(label, ref property, range, indentLevel, onChangedCallback);
+            _vectorEditor.DrawFloat(label, property, range, indentLevel, onChangedCallback);
         
-        public double DrawDouble(GUIContent label, ref double property, DoubleRange range, int indentLevel = 0, 
+        public double DrawDouble(GUIContent label, double property, DoubleRange range, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorEditor.DrawDouble(label, ref property, range, indentLevel, onChangedCallback);
+            _vectorEditor.DrawDouble(label, property, range, indentLevel, onChangedCallback);
         
-        public Vector2 DrawVector2(GUIContent label, ref Vector2 property, Vector2Range range, int indentLevel = 0, 
+        public Vector2 DrawVector2(GUIContent label, Vector2 vector2, Vector2Range range, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorEditor.DrawVector2(label, ref property, range, indentLevel, onChangedCallback);
+            _vectorEditor.DrawVector2(label, vector2, range, indentLevel, onChangedCallback);
         
-        public Vector3 DrawVector3(GUIContent label, ref Vector3 property, Vector3Range range, int indentLevel = 0, 
+        public Vector3 DrawVector3(GUIContent label, Vector3 vector3, Vector3Range range, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorEditor.DrawVector3(label, ref property, range, indentLevel, onChangedCallback);
+            _vectorEditor.DrawVector3(label, vector3, range, indentLevel, onChangedCallback);
         
-        public Vector4 DrawVector4(GUIContent label, ref Vector4 property, Vector4Range range, int indentLevel = 0, 
+        public Vector4 DrawVector4(GUIContent label, Vector4 vector4, Vector4Range range, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorEditor.DrawVector4(label, ref property, range, indentLevel, onChangedCallback);
+            _vectorEditor.DrawVector4(label, vector4, range, indentLevel, onChangedCallback);
         
-        public float DrawFloat(GUIContent label, ref float property, int indentLevel = 0, 
+        public float DrawFloat(GUIContent label, float property, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorEditor.DrawFloat(label, ref property, FloatRange.Full, indentLevel, onChangedCallback);
+            _vectorEditor.DrawFloat(label, property, FloatRange.Full, indentLevel, onChangedCallback);
         
-        public double DrawDouble(GUIContent label, ref double property, int indentLevel = 0, 
+        public double DrawDouble(GUIContent label, double property, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorEditor.DrawDouble(label, ref property, DoubleRange.Full, indentLevel, onChangedCallback);
+            _vectorEditor.DrawDouble(label, property, DoubleRange.Full, indentLevel, onChangedCallback);
         
-        public Vector2 DrawVector2(GUIContent label, ref Vector2 property, int indentLevel = 0, 
+        public Vector2 DrawVector2(GUIContent label, Vector2 vector2, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorEditor.DrawVector2(label, ref property, Vector2Range.Full, indentLevel, onChangedCallback);
+            _vectorEditor.DrawVector2(label, vector2, Vector2Range.Full, indentLevel, onChangedCallback);
         
-        public Vector3 DrawVector3(GUIContent label, ref Vector3 property, int indentLevel = 0, 
+        public Vector3 DrawVector3(GUIContent label, Vector3 vector3, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorEditor.DrawVector3(label, ref property, Vector3Range.Full, indentLevel, onChangedCallback);
+            _vectorEditor.DrawVector3(label, vector3, Vector3Range.Full, indentLevel, onChangedCallback);
         
-        public Vector4 DrawVector4(GUIContent label, ref Vector4 property, int indentLevel = 0,
+        public Vector4 DrawVector4(GUIContent label, Vector4 vector4, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorEditor.DrawVector4(label, ref property, Vector4Range.Full, indentLevel, onChangedCallback);
+            _vectorEditor.DrawVector4(label, vector4, Vector4Range.Full, indentLevel, onChangedCallback);
         
-        public Vector4 DrawVector4Start(GUIContent label, ref Vector4 property, Vector2Range range, 
-            int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorEditor.DrawVector4Start(label, ref property, range, indentLevel, onChangedCallback);
-        
-        public Vector4 DrawVector4Start(GUIContent label, ref Vector4 property, int indentLevel = 0, 
+        public Vector4 DrawVector4Start(GUIContent label, Vector4 vector4, Vector2Range range, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorEditor.DrawVector4Start(label, ref property, Vector2Range.Full, indentLevel, onChangedCallback);
+            _vectorEditor.DrawVector4Start(label, vector4, range, indentLevel, onChangedCallback);
         
-        public Vector4 DrawVector4End(GUIContent label, ref Vector4 property, Vector2Range range, 
-            int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorEditor.DrawVector4End(label, ref property, range, indentLevel, onChangedCallback);
+        public Vector4 DrawVector4Start(GUIContent label, Vector4 vector4, int indentLevel = 0, 
+            Action onChangedCallback = null) =>
+            _vectorEditor.DrawVector4Start(label, vector4, Vector2Range.Full, indentLevel, onChangedCallback);
         
-        public Vector4 DrawVector4End(GUIContent label, ref Vector4 property, 
-            int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorEditor.DrawVector4End(label, ref property, Vector2Range.Full, indentLevel, onChangedCallback);
+        public Vector4 DrawVector4End(GUIContent label, Vector4 vector4, Vector2Range range, int indentLevel = 0, 
+            Action onChangedCallback = null) =>
+            _vectorEditor.DrawVector4End(label, vector4, range, indentLevel, onChangedCallback);
         
-        public Vector2 DrawFloatFromVector2(GUIContent label, ref Vector2 property, Vector2Param vector2Param, 
+        public Vector4 DrawVector4End(GUIContent label, Vector4 vector4, int indentLevel = 0, Action onChangedCallback = null) =>
+            _vectorEditor.DrawVector4End(label, vector4, Vector2Range.Full, indentLevel, onChangedCallback);
+        
+        public Vector2 DrawFloatFromVector2(GUIContent label, Vector2 vector2, Vector2Param vector2Param, 
             FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorEditor.DrawFloatFromVector2(label, ref property, vector2Param, range, indentLevel, onChangedCallback);
+            _vectorEditor.DrawFloatFromVector2(label, vector2, vector2Param, range, indentLevel, onChangedCallback);
         
-        public Vector3 DrawFloatFromVector3(GUIContent label, ref Vector3 property, Vector3Param vector3Param, 
+        public Vector3 DrawFloatFromVector3(GUIContent label, Vector3 vector3, Vector3Param vector3Param, FloatRange range, 
+            int indentLevel = 0, Action onChangedCallback = null) =>
+            _vectorEditor.DrawFloatFromVector3(label, vector3, vector3Param, range, indentLevel, onChangedCallback);
+        
+        public Vector4 DrawFloatFromVector4(GUIContent label, Vector4 vector4, Vector4Param vector4Param, 
             FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorEditor.DrawFloatFromVector3(label, ref property, vector3Param, range, indentLevel, onChangedCallback);
+            _vectorEditor.DrawFloatFromVector4(label, vector4, vector4Param, range, indentLevel, onChangedCallback);
         
-        public Vector4 DrawFloatFromVector4(GUIContent label, ref Vector4 property, Vector4Param vector4Param, 
-            FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorEditor.DrawFloatFromVector4(label, ref property, vector4Param, range, indentLevel, onChangedCallback);
-        
-        public float DrawNormalizedFloat(GUIContent label, ref float property, int indentLevel = 0, 
+        public float DrawNormalizedFloat(GUIContent label, float property, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorEditor.DrawFloat(label, ref property, FloatRange.Normalized, indentLevel, onChangedCallback);
+            _vectorEditor.DrawFloat(label, property, FloatRange.Normalized, indentLevel, onChangedCallback);
         
-        public double DrawNormalizedDouble(GUIContent label, ref double property, int indentLevel = 0, 
+        public double DrawNormalizedDouble(GUIContent label, double property, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorEditor.DrawDouble(label, ref property, DoubleRange.Normalized, indentLevel, onChangedCallback);
+            _vectorEditor.DrawDouble(label, property, DoubleRange.Normalized, indentLevel, onChangedCallback);
         
-        public Vector2 DrawNormalizedVector2(GUIContent label, ref Vector2 property, int indentLevel = 0, 
+        public Vector2 DrawNormalizedVector2(GUIContent label, Vector2 vector2, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorEditor.DrawVector2(label, ref property, Vector2Range.Normalized, indentLevel, onChangedCallback);
+            _vectorEditor.DrawVector2(label, vector2, Vector2Range.Normalized, indentLevel, onChangedCallback);
         
-        public Vector3 DrawNormalizedVector3(GUIContent label, ref Vector3 property, int indentLevel = 0, 
+        public Vector3 DrawNormalizedVector3(GUIContent label, Vector3 vector3, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorEditor.DrawVector3(label, ref property, Vector3Range.Normalized, indentLevel, onChangedCallback);
+            _vectorEditor.DrawVector3(label, vector3, Vector3Range.Normalized, indentLevel, onChangedCallback);
         
-        public Vector4 DrawNormalizedVector4(GUIContent label, ref Vector4 property, int indentLevel = 0, 
+        public Vector4 DrawNormalizedVector4(GUIContent label, Vector4 vector4, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorEditor.DrawVector4(label, ref property, Vector4Range.Normalized, indentLevel, onChangedCallback);
+            _vectorEditor.DrawVector4(label, vector4, Vector4Range.Normalized, indentLevel, onChangedCallback);
         
-        public Vector2 DrawNormalizedFloatFromVector2(GUIContent label, ref Vector2 property, Vector2Param vector2Param, 
+        public Vector2 DrawNormalizedFloatFromVector2(GUIContent label, Vector2 vector2, Vector2Param vector2Param, 
             int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorEditor.DrawFloatFromVector2(label, ref property, vector2Param, FloatRange.Normalized, indentLevel, onChangedCallback);
+            _vectorEditor.DrawFloatFromVector2(label, vector2, vector2Param, FloatRange.Normalized, indentLevel, onChangedCallback);
         
-        public Vector3 DrawNormalizedFloatFromVector3(GUIContent label, ref Vector3 property, Vector3Param vector3Param, 
+        public Vector3 DrawNormalizedFloatFromVector3(GUIContent label, Vector3 vector3, Vector3Param vector3Param, 
             int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorEditor.DrawFloatFromVector3(label, ref property, vector3Param, FloatRange.Normalized, indentLevel, onChangedCallback);
+            _vectorEditor.DrawFloatFromVector3(label, vector3, vector3Param, FloatRange.Normalized, indentLevel, onChangedCallback);
         
-        public Vector4 DrawNormalizedFloatFromVector4(GUIContent label, ref Vector4 property, Vector4Param vector4Param, 
+        public Vector4 DrawNormalizedFloatFromVector4(GUIContent label, Vector4 vector4, Vector4Param vector4Param, 
             int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorEditor.DrawFloatFromVector4(label, ref property, vector4Param, FloatRange.Normalized, indentLevel, onChangedCallback);
+            _vectorEditor.DrawFloatFromVector4(label, vector4, vector4Param, FloatRange.Normalized, indentLevel, onChangedCallback);
         
-        public Vector4 DrawNormalizedVector4Start(GUIContent label, ref Vector4 property, int indentLevel = 0, 
+        public Vector4 DrawNormalizedVector4Start(GUIContent label, Vector4 vector4, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorEditor.DrawVector4Start(label, ref property, Vector2Range.Normalized, indentLevel, onChangedCallback);
+            _vectorEditor.DrawVector4Start(label, vector4, Vector2Range.Normalized, indentLevel, onChangedCallback);
         
-        public Vector4 DrawNormalizedVector4End(GUIContent label, ref Vector4 property, int indentLevel = 0, 
+        public Vector4 DrawNormalizedVector4End(GUIContent label, Vector4 vector4, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorEditor.DrawVector4End(label, ref property, Vector2Range.Normalized, indentLevel, onChangedCallback);
+            _vectorEditor.DrawVector4End(label, vector4, Vector2Range.Normalized, indentLevel, onChangedCallback);
         
-        public float DrawMinFloat(GUIContent label, ref float property, float min = 0.0f, int indentLevel = 0,
+        public float DrawMinFloat(GUIContent label, float property, float min = 0.0f, int indentLevel = 0,
             Action onChangedCallback = null) =>
-            _vectorEditor.DrawFloat(label, ref property, FloatRange.ToMaxFrom(min), indentLevel, onChangedCallback);
+            _vectorEditor.DrawFloat(label, property, FloatRange.ToMaxFrom(min), indentLevel, onChangedCallback);
         
-        public double DrawMinDouble(GUIContent label, ref double property, double min = 0.0, 
-            int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorEditor.DrawDouble(label, ref property, DoubleRange.ToMaxFrom(min), indentLevel, onChangedCallback);
-        
-        public Vector2 DrawMinVector2(GUIContent label, ref Vector2 property, Vector2 min, int indentLevel = 0, 
+        public double DrawMinDouble(GUIContent label, double property, double min = 0.0, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorEditor.DrawVector2(label, ref property, Vector2Range.ToMaxFrom(min), indentLevel, onChangedCallback);
+            _vectorEditor.DrawDouble(label, property, DoubleRange.ToMaxFrom(min), indentLevel, onChangedCallback);
         
-        public Vector3 DrawMinVector3(GUIContent label, ref Vector3 property, Vector3 min, int indentLevel = 0, 
+        public Vector2 DrawMinVector2(GUIContent label, Vector2 vector2, Vector2 min, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorEditor.DrawVector3(label, ref property, Vector3Range.ToMaxFrom(min), indentLevel, onChangedCallback);
+            _vectorEditor.DrawVector2(label, vector2, Vector2Range.ToMaxFrom(min), indentLevel, onChangedCallback);
         
-        public Vector4 DrawMinVector4(GUIContent label, ref Vector4 property, Vector4 min, int indentLevel = 0, 
+        public Vector3 DrawMinVector3(GUIContent label, Vector3 vector3, Vector3 min, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorEditor.DrawVector4(label, ref property, Vector4Range.ToMaxFrom(min), indentLevel, onChangedCallback);
+            _vectorEditor.DrawVector3(label, vector3, Vector3Range.ToMaxFrom(min), indentLevel, onChangedCallback);
         
-        public Vector2 DrawMinFloatFromVector2(GUIContent label, ref Vector2 property, Vector2Param vector2Param, 
+        public Vector4 DrawMinVector4(GUIContent label, Vector4 vector4, Vector4 min, int indentLevel = 0, 
+            Action onChangedCallback = null) =>
+            _vectorEditor.DrawVector4(label, vector4, Vector4Range.ToMaxFrom(min), indentLevel, onChangedCallback);
+        
+        public Vector2 DrawMinFloatFromVector2(GUIContent label, Vector2 vector2, Vector2Param vector2Param, 
             float min = 0.0f, int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorEditor.DrawFloatFromVector2(label, ref property, vector2Param, FloatRange.ToMaxFrom(min), indentLevel, onChangedCallback);
+            _vectorEditor.DrawFloatFromVector2(label, vector2, vector2Param, FloatRange.ToMaxFrom(min), indentLevel, onChangedCallback);
         
-        public Vector3 DrawMinFloatFromVector3(GUIContent label, ref Vector3 property, Vector3Param vector3Param, 
+        public Vector3 DrawMinFloatFromVector3(GUIContent label, Vector3 vector3, Vector3Param vector3Param, 
             float min = 0.0f, int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorEditor.DrawFloatFromVector3(label, ref property, vector3Param, FloatRange.ToMaxFrom(min), indentLevel, onChangedCallback);
+            _vectorEditor.DrawFloatFromVector3(label, vector3, vector3Param, FloatRange.ToMaxFrom(min), indentLevel, onChangedCallback);
         
-        public Vector4 DrawMinFloatFromVector4(GUIContent label, ref Vector4 property, Vector4Param vector4Param, 
+        public Vector4 DrawMinFloatFromVector4(GUIContent label, Vector4 vector4, Vector4Param vector4Param, 
             float min = 0.0f, int indentLevel = 0, Action onChangedCallback = null) =>
-            _vectorEditor.DrawFloatFromVector4(label, ref property, vector4Param, FloatRange.ToMaxFrom(min), indentLevel, onChangedCallback);
+            _vectorEditor.DrawFloatFromVector4(label, vector4, vector4Param, FloatRange.ToMaxFrom(min), indentLevel, onChangedCallback);
         
-        public Vector4 DrawMinVector4Start(GUIContent label, ref Vector4 property, Vector2 min, int indentLevel = 0, 
+        public Vector4 DrawMinVector4Start(GUIContent label, Vector4 vector4, Vector2 min, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _vectorEditor.DrawVector4Start(label, ref property, Vector2Range.ToMaxFrom(min), indentLevel, onChangedCallback);
+            _vectorEditor.DrawVector4Start(label, vector4, Vector2Range.ToMaxFrom(min), indentLevel, onChangedCallback);
         
-        public Bounds DrawBoundsField(GUIContent label, ref Bounds property, int indentLevel = 0, 
-            Action onChangedCallback = null) =>
-            _vectorEditor.DrawBoundsField(label, ref property, indentLevel, onChangedCallback);
+        public Bounds DrawBoundsField(GUIContent label, Bounds bounds, int indentLevel = 0, Action onChangedCallback = null) =>
+            _vectorEditor.DrawBoundsField(label, bounds, indentLevel, onChangedCallback);
         
-        public Rect DrawRectField(GUIContent label, ref Rect property, int indentLevel = 0, 
-            Action onChangedCallback = null) =>
-            _vectorEditor.DrawRectField(label, ref property, indentLevel, onChangedCallback);
+        public Rect DrawRectField(GUIContent label, Rect rect, int indentLevel = 0, Action onChangedCallback = null) =>
+            _vectorEditor.DrawRectField(label, rect, indentLevel, onChangedCallback);
         
         #endregion
         
