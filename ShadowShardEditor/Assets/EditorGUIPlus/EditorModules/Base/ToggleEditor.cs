@@ -15,13 +15,10 @@ namespace EditorGUIPlus.EditorModules.Base
             _groupEditor = groupEditor;
         }
         
-        internal bool DrawToggle(GUIContent label, ref bool toggle, 
-            ToggleAlign toggleAlign = ToggleAlign.Right, int indentLevel = 0, Action onChangedCallback = null)
+        internal bool DrawToggle(GUIContent label, bool toggle, ToggleAlign toggleAlign = ToggleAlign.Right, 
+            int indentLevel = 0, Action onChangedCallback = null)
         {
-            bool tempToggle = toggle;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!toggle.Equals(tempToggle)) 
-                toggle = tempToggle;
             
             return toggle;
 
@@ -31,25 +28,22 @@ namespace EditorGUIPlus.EditorModules.Base
 
                 bool isRightAlign = toggleAlign == ToggleAlign.Right;
                 bool newValue = isRightAlign ? 
-                    EditorGUILayout.Toggle(label, tempToggle) : 
-                    EditorGUILayout.ToggleLeft(label, tempToggle);
+                    EditorGUILayout.Toggle(label, toggle) : 
+                    EditorGUILayout.ToggleLeft(label, toggle);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempToggle = newValue;
+                    toggle = newValue;
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal bool DrawShaderLocalKeywordToggle(GUIContent label, Material material, ref bool toggle, 
+        internal bool DrawShaderLocalKeywordToggle(GUIContent label, Material material, bool toggle, 
             string shaderLocalKeyword, ToggleAlign toggleAlign = ToggleAlign.Right, 
             int indentLevel = 0, Action onChangedCallback = null)
         {
-            bool tempToggle = toggle;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!toggle.Equals(tempToggle)) 
-                toggle = tempToggle;
             
             return toggle;
 
@@ -59,26 +53,22 @@ namespace EditorGUIPlus.EditorModules.Base
                 
                 bool isRightAlign = toggleAlign == ToggleAlign.Right;
                 bool newValue = isRightAlign ? 
-                    EditorGUILayout.Toggle(label, tempToggle) : 
-                    EditorGUILayout.ToggleLeft(label, tempToggle);
+                    EditorGUILayout.Toggle(label, toggle) : 
+                    EditorGUILayout.ToggleLeft(label, toggle);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempToggle = newValue;
+                    toggle = newValue;
                     KeywordsService.SetKeyword(material, shaderLocalKeyword, newValue);
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal bool DrawShaderGlobalKeywordToggle(GUIContent label, ref bool toggle, 
-            string shaderGlobalKeyword, ToggleAlign toggleAlign = ToggleAlign.Right,
-            int indentLevel = 0, Action onChangedCallback = null)
+        internal bool DrawShaderGlobalKeywordToggle(GUIContent label, bool toggle, string shaderGlobalKeyword, 
+            ToggleAlign toggleAlign = ToggleAlign.Right, int indentLevel = 0, Action onChangedCallback = null)
         {
-            bool tempToggle = toggle;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!toggle.Equals(tempToggle)) 
-                toggle = tempToggle;
             
             return toggle;
 
@@ -88,12 +78,12 @@ namespace EditorGUIPlus.EditorModules.Base
                 
                 bool isRightAlign = toggleAlign == ToggleAlign.Right;
                 bool newValue = isRightAlign ? 
-                    EditorGUILayout.Toggle(label, tempToggle) : 
-                    EditorGUILayout.ToggleLeft(label, tempToggle);
+                    EditorGUILayout.Toggle(label, toggle) : 
+                    EditorGUILayout.ToggleLeft(label, toggle);
                 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempToggle = newValue;
+                    toggle = newValue;
                     KeywordsService.SetGlobalKeyword(shaderGlobalKeyword, newValue);
                     onChangedCallback?.Invoke();
                 }
