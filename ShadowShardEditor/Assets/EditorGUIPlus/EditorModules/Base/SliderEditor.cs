@@ -15,60 +15,54 @@ namespace EditorGUIPlus.EditorModules.Base
             _groupEditor = groupEditor;
         }
 
-        internal float DrawSlider(GUIContent label, ref float sliderValue, FloatRange range, int indentLevel = 0, 
+        internal float DrawSlider(GUIContent label, float sliderValue, FloatRange range, int indentLevel = 0, 
             Action onChangedCallback = null)
         {
-            float tempSliderValue = sliderValue;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!sliderValue.Equals(tempSliderValue)) 
-                sliderValue = tempSliderValue;
-            
             return sliderValue;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-                float newValue = EditorGUILayout.Slider(label, tempSliderValue, range.Min, range.Max);
+                float newValue = EditorGUILayout.Slider(label, sliderValue, range.Min, range.Max);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempSliderValue = newValue;
+                    sliderValue = newValue;
                     onChangedCallback?.Invoke();
                 }
             }
         }
 
-        internal Vector3 DrawFromVector3ParamSlider(GUIContent label, ref Vector3 vector3, Vector3Param vectorParam, 
+        internal Vector3 DrawFromVector3ParamSlider(GUIContent label, Vector3 vector3, Vector3Param vectorParam, 
             FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
         {
-            Vector3 tempVector3 = vector3;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!vector3.Equals(tempVector3)) 
-                vector3 = tempVector3;
-            
             return vector3;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
 
-                float channelValue = tempVector3[(int)vectorParam];
+                float channelValue = vector3[(int)vectorParam];
                 float newValue = EditorGUILayout.Slider(label, channelValue, range.Min, range.Max);
 
                 if(EditorGUI.EndChangeCheck())
                 {
-                    tempVector3[(int)vectorParam] = newValue;
+                    vector3[(int)vectorParam] = newValue;
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal void DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, ref Vector3 property, 
+        internal Vector3 DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, Vector3 vector3, 
             FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
         {
-            DrawFromVector3ParamSlider(labelX, ref property, Vector3Param.X, range, indentLevel, onChangedCallback);
-            DrawFromVector3ParamSlider(labelY, ref property, Vector3Param.Y, range, indentLevel, onChangedCallback);
-            DrawFromVector3ParamSlider(labelZ, ref property, Vector3Param.Z, range, indentLevel, onChangedCallback);
+            vector3 = DrawFromVector3ParamSlider(labelX, vector3, Vector3Param.X, range, indentLevel, onChangedCallback);
+            vector3 = DrawFromVector3ParamSlider(labelY, vector3, Vector3Param.Y, range, indentLevel, onChangedCallback);
+            vector3 = DrawFromVector3ParamSlider(labelZ, vector3, Vector3Param.Z, range, indentLevel, onChangedCallback);
+
+            return vector3;
         }
         
         internal FloatRange DrawMinMaxSlider(GUIContent label, ref float minProperty, ref float maxProperty, 
@@ -96,40 +90,32 @@ namespace EditorGUIPlus.EditorModules.Base
             }
         }
         
-        internal FloatRange DrawMinMaxVector4StartSlider(GUIContent label, ref Vector4 vector4, FloatRange range, 
+        internal Vector4 DrawMinMaxVector4StartSlider(GUIContent label, Vector4 vector4, FloatRange range, 
             int indentLevel = 0, Action onChangedCallback = null)
         {
-            Vector4 tempVector4 = vector4;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!vector4.Equals(tempVector4)) 
-                vector4 = tempVector4;
-            
-            return new FloatRange(vector4.x, vector4.y);
+            return vector4;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-                EditorGUILayout.MinMaxSlider(label, ref tempVector4.x, ref tempVector4.y, range.Min, range.Max);
+                EditorGUILayout.MinMaxSlider(label, ref vector4.x, ref vector4.y, range.Min, range.Max);
 
                 if (EditorGUI.EndChangeCheck()) 
                     onChangedCallback?.Invoke();
             }
         }
 
-        internal FloatRange DrawMinMaxVector4EndSlider(GUIContent label, ref Vector4 vector4, FloatRange range, 
+        internal Vector4 DrawMinMaxVector4EndSlider(GUIContent label, Vector4 vector4, FloatRange range, 
             int indentLevel = 0, Action onChangedCallback = null)
         {
-            Vector4 tempVector4 = vector4;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!vector4.Equals(tempVector4)) 
-                vector4 = tempVector4;
-            
-            return new FloatRange(vector4.z, vector4.w);
+            return vector4;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-                EditorGUILayout.MinMaxSlider(label, ref tempVector4.z, ref tempVector4.w, range.Min, range.Max);
+                EditorGUILayout.MinMaxSlider(label, ref vector4.z, ref vector4.w, range.Min, range.Max);
 
                 if (EditorGUI.EndChangeCheck()) 
                     onChangedCallback?.Invoke();
