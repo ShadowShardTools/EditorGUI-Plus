@@ -13,24 +13,21 @@ namespace EditorGUIPlus.EditorModules.Base
             _groupEditor = groupEditor;
         }
         
-        internal AnimationCurve DrawAnimationCurve(GUIContent label, ref AnimationCurve curve, int indentLevel = 0, 
+        internal AnimationCurve DrawAnimationCurve(GUIContent label, AnimationCurve curve, int indentLevel = 0, 
             Action onChangedCallback = null)
         {
-            AnimationCurve tempCurve = curve;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!curve.Equals(tempCurve)) 
-                curve = tempCurve;
             
             return curve;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-                AnimationCurve newValue = EditorGUILayout.CurveField(label, tempCurve);
+                AnimationCurve newValue = EditorGUILayout.CurveField(label, curve);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempCurve = newValue;
+                    curve = newValue;
                     onChangedCallback?.Invoke();
                 }
             }

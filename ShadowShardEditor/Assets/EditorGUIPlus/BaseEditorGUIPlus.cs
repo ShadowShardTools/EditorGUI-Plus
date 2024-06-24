@@ -485,13 +485,13 @@ namespace EditorGUIPlus
         
         #region ColorEditorRegion
         
-        public Color DrawColor(GUIContent label, ref Color property, bool showAlpha = true, 
+        public Color DrawColor(GUIContent label,  Color color, bool showAlpha = true, 
             bool hdr = false, int indentLevel = 0, Action onChangedCallback = null) =>
-            _colorEditor.DrawColor(label, ref property, showAlpha, hdr, indentLevel, onChangedCallback);
+            _colorEditor.DrawColor(label, color, showAlpha, hdr, indentLevel, onChangedCallback);
         
-        public Gradient DrawGradient(GUIContent label, ref Gradient property, bool hdr = false, 
+        public Gradient DrawGradient(GUIContent label, Gradient gradient, bool hdr = false, 
             int indentLevel = 0, Action onChangedCallback = null) =>
-            _colorEditor.DrawGradient(label, ref property, hdr, indentLevel, onChangedCallback);
+            _colorEditor.DrawGradient(label, gradient, hdr, indentLevel, onChangedCallback);
         
         #endregion
         
@@ -504,68 +504,68 @@ namespace EditorGUIPlus
         
         #region PopupEditorRegion
         
-        public TEnum DrawEnumPopup<TEnum>(ref TEnum property, int indentLevel = 0, 
+        public TEnum DrawEnumPopup<TEnum>(TEnum property, int indentLevel = 0, 
             Action onChangedCallback = null) where TEnum : Enum =>
-            _popupEditor.DrawEnumPopup(ref property, indentLevel, onChangedCallback);
+            _popupEditor.DrawEnumPopup(property, indentLevel, onChangedCallback);
         
-        public TEnum DrawEnumPopup<TEnum>(GUIContent label, ref TEnum property, int indentLevel = 0, 
+        public TEnum DrawEnumPopup<TEnum>(GUIContent label, TEnum property, int indentLevel = 0, 
             Action onChangedCallback = null) where TEnum : Enum =>
-            _popupEditor.DrawEnumPopup(label, ref property, indentLevel, onChangedCallback);
+            _popupEditor.DrawEnumPopup(label, property, indentLevel, onChangedCallback);
         
-        public TEnum DrawEnumFlagsField<TEnum>(GUIContent label, ref TEnum property, bool includeObsolete = false,  
+        public TEnum DrawEnumFlagsField<TEnum>(GUIContent label, TEnum property, bool includeObsolete = false,  
             int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum =>
-            _popupEditor.DrawEnumFlagsField(label, ref property, includeObsolete, indentLevel, onChangedCallback);
+            _popupEditor.DrawEnumFlagsField(label, property, includeObsolete, indentLevel, onChangedCallback);
         
-        public TEnum DrawBooleanPopup<TEnum>(ref TEnum property, int indentLevel = 0, 
+        public TEnum DrawBooleanPopup<TEnum>(TEnum property, int indentLevel = 0, 
             Action onChangedCallback = null) where TEnum : Enum =>
-            _popupEditor.DrawBooleanPopup(ref property, indentLevel, onChangedCallback);
+            _popupEditor.DrawBooleanPopup(property, indentLevel, onChangedCallback);
         
-        public TEnum DrawBooleanPopup<TEnum>(GUIContent label, ref TEnum property, int indentLevel = 0, 
+        public TEnum DrawBooleanPopup<TEnum>(GUIContent label, TEnum property, int indentLevel = 0, 
             Action onChangedCallback = null) where TEnum : Enum =>
-            _popupEditor.DrawBooleanPopup(label, ref property, indentLevel, onChangedCallback);
+            _popupEditor.DrawBooleanPopup(label, property, indentLevel, onChangedCallback);
         
-        public TEnum DrawShaderGlobalKeywordBooleanPopup<TEnum>(ref TEnum property, string shaderGlobalKeyword, 
+        public TEnum DrawShaderGlobalKeywordBooleanPopup<TEnum>(TEnum property, string shaderGlobalKeyword, 
             int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum =>
-            _popupEditor.DrawShaderGlobalKeywordBooleanPopup(ref property, shaderGlobalKeyword, 
+            _popupEditor.DrawShaderGlobalKeywordBooleanPopup(property, shaderGlobalKeyword, 
                 indentLevel, onChangedCallback);
         
-        public TEnum DrawShaderGlobalKeywordBooleanPopup<TEnum>(GUIContent label, ref TEnum property, 
+        public TEnum DrawShaderGlobalKeywordBooleanPopup<TEnum>(GUIContent label, TEnum property, 
             string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum =>
-            _popupEditor.DrawShaderGlobalKeywordBooleanPopup(label, ref property, shaderGlobalKeyword, 
+            _popupEditor.DrawShaderGlobalKeywordBooleanPopup(label, property, shaderGlobalKeyword, 
                 indentLevel, onChangedCallback);
         
-        public int DrawPopup<TEnum>(GUIContent label, ref TEnum property, string[] displayedOptions, 
+        public int DrawPopup<TEnum>(GUIContent label, TEnum property, string[] displayedOptions, 
             int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum =>
-            _popupEditor.DrawPopup(label, ref property, displayedOptions, indentLevel, onChangedCallback);
+            _popupEditor.DrawPopup(label, property, displayedOptions, indentLevel, onChangedCallback);
         
-        public int DrawBooleanPopup<TEnum>(GUIContent label, ref TEnum property, string[] displayedOptions, 
+        public int DrawBooleanPopup<TEnum>(GUIContent label, TEnum property, string[] displayedOptions, 
             int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum =>
-            _popupEditor.DrawBooleanPopup(label, ref property, displayedOptions, indentLevel, onChangedCallback);
+            _popupEditor.DrawBooleanPopup(label, property, displayedOptions, indentLevel, onChangedCallback);
         
-        public int DrawShaderGlobalKeywordBooleanPopup<TEnum>(GUIContent label, ref TEnum property, 
+        public int DrawShaderGlobalKeywordBooleanPopup<TEnum>(GUIContent label, TEnum property, 
             string[] displayedOptions, string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum =>
-            _popupEditor.DrawShaderGlobalKeywordBooleanPopup(label, ref property, displayedOptions, shaderGlobalKeyword, 
+            _popupEditor.DrawShaderGlobalKeywordBooleanPopup(label, property, displayedOptions, shaderGlobalKeyword, 
                 indentLevel, onChangedCallback);
         
-        public string DrawTagField(GUIContent label, ref string property,
+        public string DrawTagField(GUIContent label, string property,
             int indentLevel = 0, Action onChangedCallback = null) =>
-            _popupEditor.DrawTagField(label, ref property, indentLevel, onChangedCallback);
+            _popupEditor.DrawTagField(label, property, indentLevel, onChangedCallback);
         
-        public int DrawLayerField(GUIContent label, ref int property,
+        public int DrawLayerField(GUIContent label, int layer,
             int indentLevel = 0, Action onChangedCallback = null) =>
-            _popupEditor.DrawLayerField(label, ref property, indentLevel, onChangedCallback);
+            _popupEditor.DrawLayerField(label,  layer, indentLevel, onChangedCallback);
         
-        public int DrawMaskField(GUIContent label, ref int property, string[] displayedOptions, 
+        public int DrawMaskField(GUIContent label, int mask, string[] displayedOptions, 
             int indentLevel = 0, Action onChangedCallback = null) =>
-            _popupEditor.DrawMaskField(label, ref property, displayedOptions, indentLevel, onChangedCallback);
+            _popupEditor.DrawMaskField(label,  mask, displayedOptions, indentLevel, onChangedCallback);
         
         #endregion
         
         #region ObjectEditorRegion
 
-        public Object DrawObjectField(GUIContent label, ref Object property, int indentLevel = 0,
+        public Object DrawObjectField(GUIContent label, Object objectProperty, int indentLevel = 0,
             bool allowSceneObjects = true, Action<Object> onChangedCallback = null) =>
-            _objectEditor.DrawObjectField(label, ref property, indentLevel, allowSceneObjects, onChangedCallback);
+            _objectEditor.DrawObjectField(label, objectProperty, indentLevel, allowSceneObjects, onChangedCallback);
         
         #endregion
         
@@ -603,9 +603,9 @@ namespace EditorGUIPlus
         
         #region CurveEditorRegion
 
-        public AnimationCurve DrawAnimationCurve(GUIContent label, ref AnimationCurve property, int indentLevel = 0, 
+        public AnimationCurve DrawAnimationCurve(GUIContent label, AnimationCurve curve, int indentLevel = 0, 
             Action onChangedCallback = null) =>
-            _curveEditor.DrawAnimationCurve(label, ref property, indentLevel, onChangedCallback);
+            _curveEditor.DrawAnimationCurve(label, curve, indentLevel, onChangedCallback);
         
         #endregion
         

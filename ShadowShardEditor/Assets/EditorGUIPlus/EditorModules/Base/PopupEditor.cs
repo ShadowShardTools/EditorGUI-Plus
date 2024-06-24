@@ -16,63 +16,59 @@ namespace EditorGUIPlus.EditorModules.Base
             _groupEditor = groupEditor;
         }
         
-        internal TEnum DrawEnumPopup<TEnum>(ref TEnum enumProperty, int indentLevel = 0, 
+        internal TEnum DrawEnumPopup<TEnum>(TEnum enumProperty, int indentLevel = 0, 
             Action onChangedCallback = null) where TEnum : Enum
         {
             Type enumType = typeof(TEnum);
             GUIContent label = new(ObjectNames.NicifyVariableName(enumType.Name));
             
-            return DrawEnumPopup(label, ref enumProperty, indentLevel, onChangedCallback);
+            return DrawEnumPopup(label, enumProperty, indentLevel, onChangedCallback);
         }
         
-        internal TEnum DrawEnumPopup<TEnum>(GUIContent label, ref TEnum enumProperty, int indentLevel = 0, 
+        internal TEnum DrawEnumPopup<TEnum>(GUIContent label, TEnum enumProperty, int indentLevel = 0, 
             Action onChangedCallback = null) where TEnum : Enum
         {
             Type enumType = typeof(TEnum);
-            int enumOption = DrawPopup(label, ref enumProperty, Enum.GetNames(enumType), indentLevel, onChangedCallback);
+            int enumOption = DrawPopup(label, enumProperty, Enum.GetNames(enumType), indentLevel, onChangedCallback);
 
             return (TEnum)Enum
                 .GetValues(enumType)
                 .GetValue(enumOption);
         }
         
-        internal TEnum DrawEnumFlagsField<TEnum>(GUIContent label, ref TEnum enumProperty, bool includeObsolete = false,
+        internal TEnum DrawEnumFlagsField<TEnum>(GUIContent label, TEnum enumProperty, bool includeObsolete = false,
             int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum
         {
-            TEnum tempEnum = enumProperty;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!enumProperty.Equals(tempEnum)) 
-                enumProperty = tempEnum;
             
             return enumProperty;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-                TEnum newValue = (TEnum)EditorGUILayout.EnumFlagsField(label, tempEnum, includeObsolete);
+                TEnum newValue = (TEnum)EditorGUILayout.EnumFlagsField(label, enumProperty, includeObsolete);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempEnum = newValue;
+                    enumProperty = newValue;
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal TEnum DrawBooleanPopup<TEnum>(ref TEnum enumProperty, int indentLevel = 0, 
-            Action onChangedCallback = null) where TEnum : Enum
+        internal TEnum DrawBooleanPopup<TEnum>(TEnum enumProperty, int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum
         {
             Type enumType = typeof(TEnum);
             GUIContent label = new(ObjectNames.NicifyVariableName(enumType.Name));
 
-            return DrawBooleanPopup<TEnum>(label, ref enumProperty, indentLevel, onChangedCallback);
+            return DrawBooleanPopup(label, enumProperty, indentLevel, onChangedCallback);
         }
         
-        internal TEnum DrawBooleanPopup<TEnum>(GUIContent label, ref TEnum enumProperty, int indentLevel = 0, 
+        internal TEnum DrawBooleanPopup<TEnum>(GUIContent label, TEnum enumProperty, int indentLevel = 0, 
             Action onChangedCallback = null) where TEnum : Enum
         {
             Type enumType = typeof(TEnum);
-            int enumOption = DrawBooleanPopup(label, ref enumProperty, Enum.GetNames(enumType), 
+            int enumOption = DrawBooleanPopup(label, enumProperty, Enum.GetNames(enumType), 
                 indentLevel, onChangedCallback);
 
             return (TEnum)Enum
@@ -80,22 +76,22 @@ namespace EditorGUIPlus.EditorModules.Base
                 .GetValue(enumOption);
         }
         
-        internal TEnum DrawShaderLocalKeywordBooleanPopup<TEnum>(Material material, ref Enum enumProperty,
+        internal TEnum DrawShaderLocalKeywordBooleanPopup<TEnum>(Material material, Enum enumProperty,
             string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum
         {
             Type enumType = typeof(TEnum);
             GUIContent label = new(ObjectNames.NicifyVariableName(enumType.Name));
 
-            return DrawShaderLocalKeywordBooleanPopup<TEnum>(label, material, ref enumProperty, shaderGlobalKeyword, 
+            return DrawShaderLocalKeywordBooleanPopup<TEnum>(label, material, enumProperty, shaderGlobalKeyword, 
                 indentLevel, onChangedCallback);
         }
         
         internal TEnum DrawShaderLocalKeywordBooleanPopup<TEnum>(GUIContent label, Material material, 
-            ref Enum enumProperty, string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum
+            Enum enumProperty, string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum
         {
             Type enumType = typeof(TEnum);
             
-            int enumOption = DrawShaderLocalKeywordBooleanPopup(label, material, ref enumProperty, 
+            int enumOption = DrawShaderLocalKeywordBooleanPopup(label, material, enumProperty, 
                 Enum.GetNames(enumType), shaderGlobalKeyword, indentLevel, onChangedCallback);
 
             return (TEnum)Enum
@@ -103,22 +99,22 @@ namespace EditorGUIPlus.EditorModules.Base
                 .GetValue(enumOption);
         }
         
-        internal TEnum DrawShaderGlobalKeywordBooleanPopup<TEnum>(ref TEnum enumProperty, 
+        internal TEnum DrawShaderGlobalKeywordBooleanPopup<TEnum>(TEnum enumProperty, 
             string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum
         {
             Type enumType = typeof(TEnum);
             GUIContent label = new(ObjectNames.NicifyVariableName(enumType.Name));
 
-            return DrawShaderGlobalKeywordBooleanPopup<TEnum>(label, ref enumProperty, shaderGlobalKeyword, 
+            return DrawShaderGlobalKeywordBooleanPopup(label, enumProperty, shaderGlobalKeyword, 
                 indentLevel, onChangedCallback);
         }
         
-        internal TEnum DrawShaderGlobalKeywordBooleanPopup<TEnum>(GUIContent label, ref TEnum enumProperty, 
+        internal TEnum DrawShaderGlobalKeywordBooleanPopup<TEnum>(GUIContent label, TEnum enumProperty, 
             string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum
         {
             Type enumType = typeof(TEnum);
             
-            int enumOption = DrawShaderGlobalKeywordBooleanPopup(label, ref enumProperty, 
+            int enumOption = DrawShaderGlobalKeywordBooleanPopup(label, enumProperty, 
                 Enum.GetNames(enumType), shaderGlobalKeyword, indentLevel, onChangedCallback);
 
             return (TEnum)Enum
@@ -126,13 +122,10 @@ namespace EditorGUIPlus.EditorModules.Base
                 .GetValue(enumOption);
         }
         
-        internal int DrawPopup<TEnum>(GUIContent label, ref TEnum enumProperty, string[] displayedOptions, int indentLevel = 0, 
+        internal int DrawPopup<TEnum>(GUIContent label, TEnum enumProperty, string[] displayedOptions, int indentLevel = 0, 
             Action onChangedCallback = null) where TEnum : Enum
         {
-            TEnum tempEnum = enumProperty;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!enumProperty.Equals(tempEnum)) 
-                enumProperty = tempEnum;
             
             return Convert.ToInt32(enumProperty);
 
@@ -140,27 +133,24 @@ namespace EditorGUIPlus.EditorModules.Base
             {
                 EditorGUI.BeginChangeCheck();
 
-                int propertyValue = Convert.ToInt32(tempEnum);
+                int propertyValue = Convert.ToInt32(enumProperty);
                 int newValue = EditorGUILayout.Popup(label, propertyValue, displayedOptions);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempEnum = (TEnum)Enum.ToObject(tempEnum.GetType(), newValue);
+                    enumProperty = (TEnum)Enum.ToObject(enumProperty.GetType(), newValue);
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal int DrawBooleanPopup<TEnum>(GUIContent label, ref TEnum enumProperty, string[] displayedOptions, 
+        internal int DrawBooleanPopup<TEnum>(GUIContent label, TEnum enumProperty, string[] displayedOptions, 
             int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum
         {
             if (!IsDisplayedBooleanErrorMessage(displayedOptions)) 
                 return 0;
             
-            TEnum tempEnum = enumProperty;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!enumProperty.Equals(tempEnum)) 
-                enumProperty = tempEnum;
             
             return Convert.ToInt32(enumProperty);
             
@@ -168,27 +158,24 @@ namespace EditorGUIPlus.EditorModules.Base
             {
                 EditorGUI.BeginChangeCheck();
             
-                int propertyValue = Convert.ToInt32(tempEnum);
+                int propertyValue = Convert.ToInt32(enumProperty);
                 int newValue = EditorGUILayout.Popup(label, propertyValue, displayedOptions);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempEnum = (TEnum)Enum.ToObject(tempEnum.GetType(), newValue);
+                    enumProperty = (TEnum)Enum.ToObject(enumProperty.GetType(), newValue);
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal int DrawShaderLocalKeywordBooleanPopup<TEnum>(GUIContent label, Material material, ref TEnum enumProperty, 
+        internal int DrawShaderLocalKeywordBooleanPopup<TEnum>(GUIContent label, Material material, TEnum enumProperty, 
             string[] displayedOptions, string shaderLocalKeyword, int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum
         {
             if (!IsDisplayedBooleanErrorMessage(displayedOptions)) 
                 return 0;
             
-            TEnum tempEnum = enumProperty;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!enumProperty.Equals(tempEnum)) 
-                enumProperty = tempEnum;
             
             return Convert.ToInt32(enumProperty);
             
@@ -196,28 +183,25 @@ namespace EditorGUIPlus.EditorModules.Base
             {
                 EditorGUI.BeginChangeCheck();
             
-                int propertyValue = Convert.ToInt32(tempEnum);
+                int propertyValue = Convert.ToInt32(enumProperty);
                 int newValue = EditorGUILayout.Popup(label, propertyValue, displayedOptions);
             
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempEnum = (TEnum)Enum.ToObject(tempEnum.GetType(), newValue);
+                    enumProperty = (TEnum)Enum.ToObject(enumProperty.GetType(), newValue);
                     KeywordsService.SetKeyword(material, shaderLocalKeyword, newValue > 0);
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal int DrawShaderGlobalKeywordBooleanPopup<TEnum>(GUIContent label, ref TEnum enumProperty, 
+        internal int DrawShaderGlobalKeywordBooleanPopup<TEnum>(GUIContent label, TEnum enumProperty, 
             string[] displayedOptions, string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum
         {
             if (!IsDisplayedBooleanErrorMessage(displayedOptions)) 
                 return 0;
 
-            TEnum tempEnum = enumProperty;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!enumProperty.Equals(tempEnum)) 
-                enumProperty = tempEnum;
             
             return Convert.ToInt32(enumProperty);
             
@@ -225,82 +209,73 @@ namespace EditorGUIPlus.EditorModules.Base
             {
                 EditorGUI.BeginChangeCheck();
             
-                int propertyValue = Convert.ToInt32(tempEnum);
+                int propertyValue = Convert.ToInt32(enumProperty);
                 int newValue = EditorGUILayout.Popup(label, propertyValue, displayedOptions);
             
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempEnum = (TEnum)Enum.ToObject(tempEnum.GetType(), newValue);
+                    enumProperty = (TEnum)Enum.ToObject(enumProperty.GetType(), newValue);
                     KeywordsService.SetGlobalKeyword(shaderGlobalKeyword, newValue > 0);
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal string DrawTagField(GUIContent label, ref string tag, int indentLevel = 0, 
+        internal string DrawTagField(GUIContent label, string tag, int indentLevel = 0, 
             Action onChangedCallback = null)
         {
-            string tempTag = tag;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!tag.Equals(tempTag)) 
-                tag = tempTag;
             
             return tag;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-                string newValue = EditorGUILayout.TagField(label, tempTag);
+                string newValue = EditorGUILayout.TagField(label, tag);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempTag = newValue;
+                    tag = newValue;
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal int DrawLayerField(GUIContent label, ref int layer, int indentLevel = 0, 
+        internal int DrawLayerField(GUIContent label, int layer, int indentLevel = 0, 
             Action onChangedCallback = null)
         {
-            int tempLayer = layer;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!layer.Equals(tempLayer)) 
-                layer = tempLayer;
             
             return layer;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-                int newValue = EditorGUILayout.LayerField(label, tempLayer);
+                int newValue = EditorGUILayout.LayerField(label, layer);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempLayer = newValue;
+                    layer = newValue;
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal int DrawMaskField(GUIContent label, ref int mask, string[] displayedOptions, 
+        internal int DrawMaskField(GUIContent label, int mask, string[] displayedOptions, 
             int indentLevel = 0, Action onChangedCallback = null)
         {
-            int tempMask = mask;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!mask.Equals(tempMask)) 
-                mask = tempMask;
             
             return mask;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-                int newValue = EditorGUILayout.MaskField(label, tempMask, displayedOptions);
+                int newValue = EditorGUILayout.MaskField(label, mask, displayedOptions);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempMask = newValue;
+                    mask = newValue;
                     onChangedCallback?.Invoke();
                 }
             }
