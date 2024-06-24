@@ -151,19 +151,19 @@ namespace EditorGUIPlus.MaterialEditor
             MaterialProperty maxProperty, int indentLevel = 0, Action onChangedCallback = null) =>
             _sliderEditor.DrawMinMaxSlider(label, minProperty, maxProperty, FloatRange.Normalized, indentLevel, onChangedCallback);
         
-        public FloatRange DrawMinMaxVector4StartSlider(GUIContent label, MaterialProperty property, FloatRange range, 
+        public Vector4 DrawMinMaxVector4StartSlider(GUIContent label, MaterialProperty property, FloatRange range, 
             int indentLevel = 0, Action onChangedCallback = null) =>
             _sliderEditor.DrawMinMaxVector4StartSlider(label, property, range, indentLevel, onChangedCallback);
         
-        public FloatRange DrawMinMaxVector4StartSlider(GUIContent label, MaterialProperty property, 
+        public Vector4 DrawMinMaxVector4StartSlider(GUIContent label, MaterialProperty property, 
             int indentLevel = 0, Action onChangedCallback = null) =>
             _sliderEditor.DrawMinMaxVector4StartSlider(label, property, FloatRange.Normalized, indentLevel, onChangedCallback);
         
-        public FloatRange DrawMinMaxVector4EndSlider(GUIContent label, MaterialProperty property, FloatRange range, 
+        public Vector4 DrawMinMaxVector4EndSlider(GUIContent label, MaterialProperty property, FloatRange range, 
             int indentLevel = 0, Action onChangedCallback = null) =>
             _sliderEditor.DrawMinMaxVector4EndSlider(label, property, range, indentLevel, onChangedCallback);
         
-        public FloatRange DrawMinMaxVector4EndSlider(GUIContent label, MaterialProperty property, int indentLevel = 0, 
+        public Vector4 DrawMinMaxVector4EndSlider(GUIContent label, MaterialProperty property, int indentLevel = 0, 
             Action onChangedCallback = null) =>
             _sliderEditor.DrawMinMaxVector4EndSlider(label, property, FloatRange.Normalized, indentLevel, onChangedCallback);
 

@@ -15,59 +15,52 @@ namespace EditorGUIPlus.EditorModules.Base
             _groupEditor = groupEditor;
         }
         
-        internal int DrawIntSlider(GUIContent label, ref int sliderValue, IntRange range, int indentLevel = 0, 
-            Action onChangedCallback = null)
+        internal int DrawIntSlider(GUIContent label, int sliderValue, IntRange range, int indentLevel = 0, Action onChangedCallback = null)
         {
-            int tempSliderValue = sliderValue;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!sliderValue.Equals(tempSliderValue)) 
-                sliderValue = tempSliderValue;
-            
             return sliderValue;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-                int newValue = EditorGUILayout.IntSlider(label, tempSliderValue, range.Min, range.Max);
+                int newValue = EditorGUILayout.IntSlider(label, sliderValue, range.Min, range.Max);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempSliderValue = newValue;
+                    sliderValue = newValue;
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal Vector3Int DrawFromVector3IntParamSlider(GUIContent label, ref Vector3Int vector3Int, 
+        internal Vector3Int DrawFromVector3IntParamSlider(GUIContent label, Vector3Int vector3Int, 
             Vector3Param vectorParam, IntRange range, int indentLevel = 0, Action onChangedCallback = null)
         {
-            Vector3Int tempVector3Int = vector3Int;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!vector3Int.Equals(tempVector3Int)) 
-                vector3Int = tempVector3Int;
-            
             return vector3Int;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-                int channelValue = tempVector3Int[(int)vectorParam];
+                int channelValue = vector3Int[(int)vectorParam];
                 int newValue = EditorGUILayout.IntSlider(label, channelValue, range.Min, range.Max);
 
                 if(EditorGUI.EndChangeCheck())
                 {
-                    tempVector3Int[(int)vectorParam] = newValue;
+                    vector3Int[(int)vectorParam] = newValue;
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal void DrawVector3IntSliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
-            ref Vector3Int property, IntRange range, int indentLevel = 0, Action onChangedCallback = null)
+        internal Vector3Int DrawVector3IntSliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
+            Vector3Int vector3Int, IntRange range, int indentLevel = 0, Action onChangedCallback = null)
         {
-            DrawFromVector3IntParamSlider(labelX, ref property, Vector3Param.X, range, indentLevel, onChangedCallback);
-            DrawFromVector3IntParamSlider(labelY, ref property, Vector3Param.Y, range, indentLevel, onChangedCallback);
-            DrawFromVector3IntParamSlider(labelZ, ref property, Vector3Param.Z, range, indentLevel, onChangedCallback);
+            vector3Int = DrawFromVector3IntParamSlider(labelX, vector3Int, Vector3Param.X, range, indentLevel, onChangedCallback);
+            vector3Int = DrawFromVector3IntParamSlider(labelY, vector3Int, Vector3Param.Y, range, indentLevel, onChangedCallback);
+            vector3Int = DrawFromVector3IntParamSlider(labelZ, vector3Int, Vector3Param.Z, range, indentLevel, onChangedCallback);
+            
+            return vector3Int;
         }
         
         internal IntRange DrawMinMaxIntSlider(GUIContent label, ref int minProperty, ref int maxProperty, 

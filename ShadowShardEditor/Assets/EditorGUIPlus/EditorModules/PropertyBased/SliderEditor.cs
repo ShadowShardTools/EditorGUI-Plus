@@ -65,12 +65,14 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
             }
         }
         
-        internal void DrawVector3Sliders<TProperty>(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
+        internal Vector3 DrawVector3Sliders<TProperty>(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
             TProperty property, FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
         {
             DrawFromVector3ParamSlider(labelX, property, Vector3Param.X, range, indentLevel, onChangedCallback);
             DrawFromVector3ParamSlider(labelY, property, Vector3Param.Y, range, indentLevel, onChangedCallback);
             DrawFromVector3ParamSlider(labelZ, property, Vector3Param.Z, range, indentLevel, onChangedCallback);
+
+            return _propertyService.GetVector3(property);
         }
         
         internal FloatRange DrawMinMaxSlider<TProperty>(GUIContent label, TProperty minProperty, TProperty maxProperty, 
@@ -98,11 +100,11 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
             }
         }
         
-        internal FloatRange DrawMinMaxVector4StartSlider<TProperty>(GUIContent label, TProperty property, 
+        internal Vector4 DrawMinMaxVector4StartSlider<TProperty>(GUIContent label, TProperty property, 
             FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
-            return new FloatRange(_propertyService.GetVector4(property).x, _propertyService.GetVector4(property).y);
+            return _propertyService.GetVector4(property);
 
             void Draw()
             {
@@ -121,11 +123,11 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
             }
         }
 
-        internal FloatRange DrawMinMaxVector4EndSlider<TProperty>(GUIContent label, TProperty property, FloatRange range, 
+        internal Vector4 DrawMinMaxVector4EndSlider<TProperty>(GUIContent label, TProperty property, FloatRange range, 
             int indentLevel = 0, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
-            return new FloatRange(_propertyService.GetVector4(property).z, _propertyService.GetVector4(property).w);
+            return _propertyService.GetVector4(property);
 
             void Draw()
             {

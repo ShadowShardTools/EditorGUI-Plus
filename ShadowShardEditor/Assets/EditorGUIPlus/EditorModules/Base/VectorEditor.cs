@@ -15,292 +15,240 @@ namespace EditorGUIPlus.EditorModules.Base
             _groupEditor = groupEditor;
         }
         
-        internal float DrawFloat(GUIContent label, ref float property, FloatRange range, int indentLevel = 0, 
+        internal float DrawFloat(GUIContent label, float property, FloatRange range, int indentLevel = 0, 
             Action onChangedCallback = null)
         {
-            float tempProperty = property;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!property.Equals(tempProperty)) 
-                property = tempProperty;
-            
             return property;
             
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-                float newValue = Mathf.Clamp(EditorGUILayout.FloatField(label, tempProperty), range.Min, range.Max);
+                float newValue = Mathf.Clamp(EditorGUILayout.FloatField(label, property), range.Min, range.Max);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempProperty = newValue;
+                    property = newValue;
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal double DrawDouble(GUIContent label, ref double property, DoubleRange range, int indentLevel = 0, 
+        internal double DrawDouble(GUIContent label, double property, DoubleRange range, int indentLevel = 0, 
             Action onChangedCallback = null)
         {
-            double tempProperty = property;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!property.Equals(tempProperty)) 
-                property = tempProperty;
-            
             return property;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-                double newValue = Math.Clamp(EditorGUILayout.DoubleField(label, tempProperty), range.Min, range.Max);
+                double newValue = Math.Clamp(EditorGUILayout.DoubleField(label, property), range.Min, range.Max);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempProperty = newValue;
+                    property = newValue;
                     onChangedCallback?.Invoke();
                 }
             }
         }
 
-        internal Vector2 DrawVector2(GUIContent label, ref Vector2 property, Vector2Range range, int indentLevel = 0, 
+        internal Vector2 DrawVector2(GUIContent label, Vector2 vector2, Vector2Range range, int indentLevel = 0, 
             Action onChangedCallback = null)
         {
-            Vector2 tempProperty = property;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!property.Equals(tempProperty)) 
-                property = tempProperty;
-            
-            return property;
+            return vector2;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-                Vector2 newValue = EditorGUILayout.Vector2Field(label, tempProperty).Clamp(range.Min, range.Max);
+                Vector2 newValue = EditorGUILayout.Vector2Field(label, vector2).Clamp(range.Min, range.Max);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempProperty = newValue;
+                    vector2 = newValue;
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal Vector3 DrawVector3(GUIContent label, ref Vector3 property, Vector3Range range, int indentLevel = 0, 
+        internal Vector3 DrawVector3(GUIContent label, Vector3 vector3, Vector3Range range, int indentLevel = 0, 
             Action onChangedCallback = null)
         {
-            Vector3 tempProperty = property;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!property.Equals(tempProperty)) 
-                property = tempProperty;
-            
-            return property;
+            return vector3;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-                Vector3 newValue = EditorGUILayout.Vector3Field(label, tempProperty).Clamp(range.Min, range.Max);
+                Vector3 newValue = EditorGUILayout.Vector3Field(label, vector3).Clamp(range.Min, range.Max);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempProperty = newValue;
+                    vector3 = newValue;
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal Vector4 DrawVector4(GUIContent label, ref Vector4 property, Vector4Range range, 
-            int indentLevel = 0, Action onChangedCallback = null)
+        internal Vector4 DrawVector4(GUIContent label, Vector4 vector4, Vector4Range range, int indentLevel = 0, 
+            Action onChangedCallback = null)
         {
-            Vector4 tempProperty = property;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!property.Equals(tempProperty)) 
-                property = tempProperty;
-            
-            return property;
+            return vector4;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-                Vector4 newValue = EditorGUILayout.Vector4Field(label, tempProperty).Clamp(range.Min, range.Max);
+                Vector4 newValue = EditorGUILayout.Vector4Field(label, vector4).Clamp(range.Min, range.Max);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempProperty = newValue;
+                    vector4 = newValue;
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal Vector2 DrawFloatFromVector2(GUIContent label, ref Vector2 property, Vector2Param vector2Param, 
+        internal Vector2 DrawFloatFromVector2(GUIContent label, Vector2 vector2, Vector2Param vector2Param, 
             FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
         {
-            Vector2 tempProperty = property;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!property.Equals(tempProperty)) 
-                property = tempProperty;
-
-            return property;
+            return vector2;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
                 
-                float val = tempProperty[(int)vector2Param];
+                float val = vector2[(int)vector2Param];
                 float newValue = Mathf.Clamp(EditorGUILayout.FloatField(label, val), range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempProperty[(int)vector2Param] = newValue;
+                    vector2[(int)vector2Param] = newValue;
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal Vector3 DrawFloatFromVector3(GUIContent label, ref Vector3 property, Vector3Param vector3Param, 
+        internal Vector3 DrawFloatFromVector3(GUIContent label, Vector3 vector3, Vector3Param vector3Param, 
             FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
         {
-            Vector3 tempProperty = property;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!property.Equals(tempProperty)) 
-                property = tempProperty;
-
-            return property;
+            return vector3;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
                 
-                float val = tempProperty[(int)vector3Param];
+                float val = vector3[(int)vector3Param];
                 float newValue = Mathf.Clamp(EditorGUILayout.FloatField(label, val), range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempProperty[(int)vector3Param] = newValue;
+                    vector3[(int)vector3Param] = newValue;
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal Vector4 DrawFloatFromVector4(GUIContent label, ref Vector4 property, Vector4Param vector4Param, 
+        internal Vector4 DrawFloatFromVector4(GUIContent label, Vector4 vector4, Vector4Param vector4Param, 
             FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
         {
-            Vector4 tempProperty = property;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!property.Equals(tempProperty)) 
-                property = tempProperty;
-
-            return property;
+            return vector4;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
                 
-                float val = tempProperty[(int)vector4Param];
+                float val = vector4[(int)vector4Param];
                 float newValue = Mathf.Clamp(EditorGUILayout.FloatField(label, val), range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempProperty[(int)vector4Param] = newValue;
+                    vector4[(int)vector4Param] = newValue;
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal Vector4 DrawVector4Start(GUIContent label, ref Vector4 property, Vector2Range range, 
-            int indentLevel = 0, Action onChangedCallback = null)
+        internal Vector4 DrawVector4Start(GUIContent label, Vector4 vector4, Vector2Range range, int indentLevel = 0, 
+            Action onChangedCallback = null)
         {
-            Vector4 tempProperty = property;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!property.Equals(tempProperty)) 
-                property = tempProperty;
-
-            return property;
+            return vector4;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
                 
-                Vector2 propertyValue = new(tempProperty.x, tempProperty.y);
+                Vector2 propertyValue = new(vector4.x, vector4.y);
                 Vector2 newValue = EditorGUILayout.Vector2Field(label, propertyValue).Clamp(range.Min, range.Max);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    Vector4 newVector4Value = new(newValue.x, newValue.y, tempProperty.z, tempProperty.w);
-                    tempProperty = newVector4Value;
+                    vector4 = new Vector4(newValue.x, newValue.y, vector4.z, vector4.w);
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal Vector4 DrawVector4End(GUIContent label, ref Vector4 property, Vector2Range range, 
-            int indentLevel = 0, Action onChangedCallback = null)
+        internal Vector4 DrawVector4End(GUIContent label, Vector4 vector4, Vector2Range range, int indentLevel = 0, 
+            Action onChangedCallback = null)
         {
-            Vector4 tempProperty = property;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!property.Equals(tempProperty)) 
-                property = tempProperty;
-
-            return property;
+            return vector4;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
                 
-                Vector2 propertyValue = new(tempProperty.z, tempProperty.w);
+                Vector2 propertyValue = new(vector4.z, vector4.w);
                 Vector2 newValue = EditorGUILayout.Vector2Field(label, propertyValue).Clamp(range.Min, range.Max);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    Vector4 newVector4Value = new(tempProperty.x, tempProperty.y, newValue.x, newValue.y);
-                    tempProperty = newVector4Value;
+                    vector4 = new Vector4(vector4.x, vector4.y, newValue.x, newValue.y);
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal Bounds DrawBoundsField(GUIContent label, ref Bounds property, int indentLevel = 0, 
-            Action onChangedCallback = null)
+        internal Bounds DrawBoundsField(GUIContent label, Bounds bounds, int indentLevel = 0, Action onChangedCallback = null)
         {
-            Bounds tempProperty = property;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!property.Equals(tempProperty)) 
-                property = tempProperty;
-
-            return property;
+            return bounds;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-                Bounds newValue = EditorGUILayout.BoundsField(label, tempProperty);
+                Bounds newValue = EditorGUILayout.BoundsField(label, bounds);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempProperty = newValue;
+                    bounds = newValue;
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal Rect DrawRectField(GUIContent label, ref Rect property, int indentLevel = 0, 
-            Action onChangedCallback = null)
+        internal Rect DrawRectField(GUIContent label, Rect rect, int indentLevel = 0, Action onChangedCallback = null)
         {
-            Rect tempProperty = property;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!property.Equals(tempProperty)) 
-                property = tempProperty;
-
-            return property;
+            return rect;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-                Rect newValue = EditorGUILayout.RectField(label, tempProperty);
+                Rect newValue = EditorGUILayout.RectField(label, rect);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempProperty = newValue;
+                    rect = newValue;
                     onChangedCallback?.Invoke();
                 }
             }
