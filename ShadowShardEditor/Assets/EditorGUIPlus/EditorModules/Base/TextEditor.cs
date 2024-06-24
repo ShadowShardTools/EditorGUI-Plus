@@ -49,37 +49,27 @@ namespace EditorGUIPlus.EditorModules.Base
             }
         }
         
-        internal string DrawTextField(GUIContent label, ref string text, int indentLevel = 0, 
-            Action onChangedCallback = null)
+        internal string DrawTextField(GUIContent label, string text, int indentLevel = 0, Action onChangedCallback = null)
         {
-            string tempText = text;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!text.Equals(tempText)) 
-                text = tempText;
-            
             return text;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-                string newValue = EditorGUILayout.TextField(label, tempText);
+                string newValue = EditorGUILayout.TextField(label, text);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempText = newValue;
+                    text = newValue;
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal string DrawTextArea(GUIContent label, ref string text, int indentLevel = 0, 
-            Action onChangedCallback = null)
+        internal string DrawTextArea(GUIContent label, string text, int indentLevel = 0, Action onChangedCallback = null)
         {
-            string tempText = text;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!text.Equals(tempText)) 
-                text = tempText;
-            
             return text;
 
             void Draw()
@@ -89,72 +79,64 @@ namespace EditorGUIPlus.EditorModules.Base
                 if(!string.IsNullOrEmpty(label.text))
                     EditorGUILayout.PrefixLabel(label);
                 
-                string newValue = EditorGUILayout.TextArea(tempText);
+                string newValue = EditorGUILayout.TextArea(text);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempText = newValue;
+                    text = newValue;
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal string DrawPasswordField(GUIContent label, ref string password, int indentLevel = 0, 
-            Action onChangedCallback = null)
+        internal string DrawPasswordField(GUIContent label, string password, int indentLevel = 0, Action onChangedCallback = null)
         {
-            string tempPassword = password;
             _groupEditor.DrawIndented(indentLevel, Draw);
-            if(!password.Equals(tempPassword)) 
-                password = tempPassword;
-            
             return password;
 
             void Draw()
             {
                 EditorGUI.BeginChangeCheck();
-                string newValue = EditorGUILayout.PasswordField(label, tempPassword);
+                string newValue = EditorGUILayout.PasswordField(label, password);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    tempPassword = newValue;
+                    password = newValue;
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
-        internal string DrawFolderPathField(GUIContent label, ref string path, string defaultDirectory, 
-            int indentLevel = 0, Action onChangedCallback = null)
+        internal string DrawFolderPathField(GUIContent label, string path, string defaultDirectory, int indentLevel = 0, 
+            Action onChangedCallback = null)
         {
-            string tempPath = path;
-            _groupEditor.DrawIndented(indentLevel, () => DrawPathField(ref tempPath, label, defaultDirectory));
-
-            if (!path.Equals(tempPath))
-            {
-                path = tempPath;
-                onChangedCallback?.Invoke();
-            }
-
+            _groupEditor.DrawIndented(indentLevel, Draw);
             return path;
-        }
-        
-        private void DrawPathField(ref string tempPath, GUIContent label, string defaultDirectory)
-        {
-            EditorGUI.BeginChangeCheck();
-
-            using (new GUILayout.HorizontalScope())
+            
+            void Draw()
             {
-                const float buttonWidth = 24f;
-                const float spacing = 7f;
-                EditorGUILayout.LabelField(label, GUILayout.Width(EditorGUIUtility.labelWidth - (buttonWidth + spacing)));
-                tempPath = EditorGUILayout.TextField(tempPath);
+                EditorGUI.BeginChangeCheck();
 
-                if (GUILayout.Button(" ... ", GUILayout.Width(buttonWidth), GUILayout.Height(EditorGUIUtility.singleLineHeight)))
+                string tempPath = path;
+                using (new GUILayout.HorizontalScope())
                 {
-                    tempPath = SelectFolder(tempPath, defaultDirectory);
+                    const float buttonWidth = 24f;
+                    const float spacing = 7f;
+                    EditorGUILayout.LabelField(label, GUILayout.Width(EditorGUIUtility.labelWidth - (buttonWidth + spacing)));
+                    tempPath = EditorGUILayout.TextField(tempPath);
+
+                    if (GUILayout.Button(" ... ", GUILayout.Width(buttonWidth), GUILayout.Height(EditorGUIUtility.singleLineHeight)))
+                    {
+                        tempPath = SelectFolder(tempPath, defaultDirectory);
+                    }
+                }
+            
+                if (EditorGUI.EndChangeCheck())
+                {
+                    path = tempPath;
+                    onChangedCallback?.Invoke();
                 }
             }
-
-            EditorGUI.EndChangeCheck();
         }
         
         private string SelectFolder(string currentPath, string defaultDirectory)

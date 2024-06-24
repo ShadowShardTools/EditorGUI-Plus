@@ -583,21 +583,21 @@ namespace EditorGUIPlus
         public bool DrawLinkText(GUIContent label, string url, int indentLevel = 0) =>
             _textEditor.DrawLinkText(label, url, indentLevel);
         
-        public string DrawTextField(GUIContent label, ref string property, int indentLevel = 0, Action onChangedCallback = null) =>
-            _textEditor.DrawTextField(label, ref property, indentLevel, onChangedCallback);
+        public string DrawTextField(GUIContent label, string text, int indentLevel = 0, Action onChangedCallback = null) =>
+            _textEditor.DrawTextField(label, text, indentLevel, onChangedCallback);
         
-        public string DrawTextArea(GUIContent label, ref string property, int indentLevel = 0, Action onChangedCallback = null) =>
-            _textEditor.DrawTextArea(label, ref property, indentLevel, onChangedCallback);
+        public string DrawTextArea(GUIContent label, string text, int indentLevel = 0, Action onChangedCallback = null) =>
+            _textEditor.DrawTextArea(label, text, indentLevel, onChangedCallback);
         
-        public string DrawTextArea(ref string property, int indentLevel = 0, Action onChangedCallback = null) =>
-            _textEditor.DrawTextArea(new GUIContent(string.Empty), ref property, indentLevel, onChangedCallback);
+        public string DrawTextArea(string text, int indentLevel = 0, Action onChangedCallback = null) =>
+            _textEditor.DrawTextArea(new GUIContent(string.Empty), text, indentLevel, onChangedCallback);
         
-        public string DrawPasswordField(GUIContent label, ref string property, int indentLevel = 0, Action onChangedCallback = null) =>
-            _textEditor.DrawPasswordField(label, ref property, indentLevel, onChangedCallback);
+        public string DrawPasswordField(GUIContent label, string password, int indentLevel = 0, Action onChangedCallback = null) =>
+            _textEditor.DrawPasswordField(label, password, indentLevel, onChangedCallback);
         
-        public string DrawFolderPathField(GUIContent label, ref string property, string defaultDirectory, 
-            int indentLevel = 0, Action onChangedCallback = null) =>
-            _textEditor.DrawFolderPathField(label, ref property, defaultDirectory, indentLevel, onChangedCallback);
+        public string DrawFolderPathField(GUIContent label, string path, string defaultDirectory, int indentLevel = 0,
+            Action onChangedCallback = null) =>
+            _textEditor.DrawFolderPathField(label, path, defaultDirectory, indentLevel, onChangedCallback);
         
         #endregion
         
