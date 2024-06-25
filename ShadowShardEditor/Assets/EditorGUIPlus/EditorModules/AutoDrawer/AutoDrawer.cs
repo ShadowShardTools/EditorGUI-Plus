@@ -9,49 +9,6 @@ namespace EditorGUIPlus.EditorModules.AutoDrawer
     {
         private readonly EditorGUIPlus _editorGUIPlus = new();
 
-        public void Draw(GUIContent label, SerializedObject serializedObject)
-        {
-            try
-            {
-                DrawField(new GUIContent(label), serializedObject);
-            }
-            catch(ArgumentException _)
-            {
-                SerializedProperty iterator = serializedObject.GetIterator();
-                iterator.Next(true);
-                if(iterator.propertyType == SerializedPropertyType.Generic)
-                    Draw(iterator);
-                else
-                    DrawField(new GUIContent(iterator.displayName), iterator);
-                
-                while(iterator.Next(false))
-                {
-                    if(iterator.propertyType == SerializedPropertyType.Generic)
-                    {
-                        Draw(iterator, iterator);
-                        continue;
-                    }
-                    
-                    DrawField(new GUIContent(iterator.displayName), iterator);
-                }
-            }
-        }
-
-        public void Draw(SerializedProperty property)
-        {
-            try
-            {
-                DrawField(new GUIContent(property.displayName), property);
-            }
-            catch(ArgumentException _)
-            {
-                foreach(SerializedProperty subProperty in property)
-                {
-                    DrawField(new GUIContent(subProperty.displayName), subProperty);
-                }
-            }
-        }
-
         public void DrawField(GUIContent label, SerializedProperty property)
         {
             SerializedPropertyType type = property.propertyType;

@@ -204,7 +204,11 @@ namespace ManualTesting.StandardEditor.Code.Editor
         private void DrawAutoDrawer()
         {
             using GroupScope scope = _shadowShardEditor.GroupScope(new GUIContent("AutoDrawer"), isDisabled: false);
-            _autoDrawer.Draw(new GUIContent("Перемога"), _serializedShadowShardData);
+            _autoDrawer.DrawField(new GUIContent("Label"), _serializedShadowShardData.FindProperty("IntValue"));
+            _autoDrawer.DrawField(new GUIContent("Label"), _serializedShadowShardData.FindProperty("ToggleValue"));
+            _autoDrawer.DrawField(new GUIContent("Label"), _serializedShadowShardData.FindProperty("FloatValue"));
+            _autoDrawer.DrawField(new GUIContent("Label"), _serializedShadowShardData.FindProperty("Vector2Value"));
+            _autoDrawer.DrawField(new GUIContent("Label"), _serializedShadowShardData.FindProperty("Vector3Value"));
         }
     }
 }
