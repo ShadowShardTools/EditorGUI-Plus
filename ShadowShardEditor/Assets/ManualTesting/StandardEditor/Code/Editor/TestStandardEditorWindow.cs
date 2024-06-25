@@ -1,7 +1,8 @@
 using EditorGUIPlus.Data.Enums;
 using EditorGUIPlus.Data.Range;
+using EditorGUIPlus.EditorModules.AutoDrawer;
 using EditorGUIPlus.Scopes;
-using EditorGUIPlus.Scopes.Section;
+using ManualTesting.StandardEditor.Code.Data;
 using UnityEditor;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ namespace ManualTesting.StandardEditor.Code.Editor
         private SerializedObject _serializedShadowShardData;
         private Vector2 _scrollPosition;
         private Vector2 _innerScrollPosition;
+        private AutoDrawer _autoDrawer = new();
 
         [MenuItem("Window/EditorTesting/Standard Editor Tests")]
         public static void ShowWindow() =>
@@ -47,6 +49,8 @@ namespace ManualTesting.StandardEditor.Code.Editor
             DrawVectorEditors();
             DrawTextureAndPopupEditors();
             DrawObjectAndTextEditors();
+            
+            DrawAutoDrawer();
 
             if(EditorGUI.EndChangeCheck())
             {
@@ -164,7 +168,7 @@ namespace ManualTesting.StandardEditor.Code.Editor
                 new GUIContent("Shader Global Keyword Toggle"), _serializedShadowShardData.FindProperty("ToggleValue"), _shadowShardData.ShaderGlobalKeyword,
                 _shadowShardData.IndentLevel);
         }
-        
+
         private void DrawVectorEditors()
         {
             _shadowShardEditor.DrawFloat(new GUIContent("Float"), _serializedShadowShardData.FindProperty("FloatValue"), FloatRange.Normalized, _shadowShardData.IndentLevel);
@@ -181,7 +185,7 @@ namespace ManualTesting.StandardEditor.Code.Editor
             _shadowShardEditor.DrawVector2Int(new GUIContent("Vector2Int"), _serializedShadowShardData.FindProperty("Vector2IntValue"), Vector2IntRange.Normalized, _shadowShardData.IndentLevel);
             _shadowShardEditor.DrawVector3Int(new GUIContent("Vector3Int"), _serializedShadowShardData.FindProperty("Vector3IntValue"), Vector3IntRange.Normalized, _shadowShardData.IndentLevel);
         }
-        
+
         private void DrawTextureAndPopupEditors()
         {
             _shadowShardEditor.DrawTexture(new GUIContent("Texture"), _serializedShadowShardData.FindProperty("TextureValue"), _shadowShardData.IndentLevel);
@@ -189,12 +193,18 @@ namespace ManualTesting.StandardEditor.Code.Editor
             _shadowShardEditor.DrawBooleanPopup(new GUIContent("Boolean Popup"), _serializedShadowShardData.FindProperty("SelectedOption"), _shadowShardData.DisplayedOptions, _shadowShardData.IndentLevel);
             _shadowShardEditor.DrawShaderGlobalKeywordBooleanPopup(new GUIContent("Shader Global Keyword Boolean Popup"), _serializedShadowShardData.FindProperty("SelectedOption"), _shadowShardData.DisplayedOptions, _shadowShardData.ShaderGlobalKeyword, _shadowShardData.IndentLevel);
         }
-        
+
         private void DrawObjectAndTextEditors()
         {
             _shadowShardEditor.DrawObjectField<Object>(new GUIContent("Object Field"), _serializedShadowShardData.FindProperty("ObjectValue"), _shadowShardData.IndentLevel, true, null);
             _shadowShardEditor.DrawTextField(new GUIContent("Text Field"), _serializedShadowShardData.FindProperty("TextFieldValue"), _shadowShardData.IndentLevel);
             _shadowShardEditor.DrawFolderPathField(new GUIContent("Folder Path"), _serializedShadowShardData.FindProperty("FolderPathValue"), "", _shadowShardData.IndentLevel);
+        }
+
+        private void DrawAutoDrawer()
+        {
+            using GroupScope scope = _shadowShardEditor.GroupScope(new GUIContent("AutoDrawer"), isDisabled: false);
+            _autoDrawer.Draw(new GUIContent("Перемога"), _serializedShadowShardData);
         }
     }
 }

@@ -36,6 +36,13 @@ namespace EditorGUIPlus.EditorModules.Base
                 .GetValue(enumOption);
         }
         
+        internal void DrawEnumPopup(GUIContent label, SerializedProperty enumProperty, int indentLevel = 0, 
+            Action onChangedCallback = null)
+        {
+            Type enumType = enumProperty.boxedValue.GetType();
+            DrawPopup(label, enumProperty, Enum.GetNames(enumType), indentLevel, onChangedCallback);
+        }
+        
         internal TEnum DrawEnumFlagsField<TEnum>(GUIContent label, TEnum enumProperty, bool includeObsolete = false,
             int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum
         {
@@ -137,6 +144,27 @@ namespace EditorGUIPlus.EditorModules.Base
                 if (EditorGUI.EndChangeCheck())
                 {
                     enumProperty = (TEnum)Enum.ToObject(enumProperty.GetType(), newValue);
+                    onChangedCallback?.Invoke();
+                }
+            }
+        }
+
+        private int DrawPopup(GUIContent label, SerializedProperty enumProperty, string[] displayedOptions, int indentLevel = 0, 
+            Action onChangedCallback = null)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return enumProperty.enumValueIndex;
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+
+                int propertyValue = Convert.ToInt32(enumProperty);
+                int newValue = EditorGUILayout.Popup(label, propertyValue, displayedOptions);
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    enumProperty.enumValueIndex = newValue;
                     onChangedCallback?.Invoke();
                 }
             }

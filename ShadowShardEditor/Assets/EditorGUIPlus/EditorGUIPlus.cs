@@ -490,6 +490,10 @@ namespace EditorGUIPlus
             bool allowSceneObjects = true, Action<TObject> onChangedCallback = null) where TObject : Object =>
             _objectEditor.DrawObjectField(label, property, indentLevel, allowSceneObjects, onChangedCallback);
         
+        public void DrawObjectField(GUIContent label, SerializedProperty property, int indentLevel = 0,
+            bool allowSceneObjects = true, Action onChangedCallback = null) =>
+            _objectEditor.DrawObjectField(label, property, indentLevel, allowSceneObjects, onChangedCallback);
+        
         #endregion
         
         #region TextEditorRegion
