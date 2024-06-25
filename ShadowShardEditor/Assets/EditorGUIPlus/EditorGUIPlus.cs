@@ -23,6 +23,7 @@ namespace EditorGUIPlus
         private readonly ObjectEditor _objectEditor;
         private readonly TextEditor _textEditor;
         private readonly CurveEditor _curveEditor;
+        private readonly FieldDrawer _fieldDrawer;
         
         public EditorGUIPlus()
         {
@@ -40,6 +41,7 @@ namespace EditorGUIPlus
             _objectEditor = new ObjectEditor(groupEditor);
             _textEditor = new TextEditor(groupEditor);
             _curveEditor = new CurveEditor(groupEditor);
+            _fieldDrawer = new FieldDrawer();
         }
 
         #region SliderEditorRegion
@@ -522,5 +524,11 @@ namespace EditorGUIPlus
             _curveEditor.DrawAnimationCurve(label, property, indentLevel, onChangedCallback);
         
         #endregion
+
+        public void DrawField(GUIContent label, SerializedProperty property) =>
+            _fieldDrawer.DrawField(this, label, property);
+        
+        public TType DrawField<TType>(GUIContent label, TType value) =>
+            _fieldDrawer.DrawField(this, label, value);
     }
 }

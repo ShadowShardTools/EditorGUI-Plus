@@ -1,6 +1,5 @@
 using EditorGUIPlus.Data.Enums;
 using EditorGUIPlus.Data.Range;
-using EditorGUIPlus.EditorModules.AutoDrawer;
 using EditorGUIPlus.Scopes;
 using ManualTesting.StandardEditor.Code.Data;
 using UnityEditor;
@@ -15,7 +14,6 @@ namespace ManualTesting.StandardEditor.Code.Editor
         private SerializedObject _serializedShadowShardData;
         private Vector2 _scrollPosition;
         private Vector2 _innerScrollPosition;
-        private AutoDrawer _autoDrawer = new();
 
         [MenuItem("Window/EditorTesting/Standard Editor Tests")]
         public static void ShowWindow() =>
@@ -204,11 +202,11 @@ namespace ManualTesting.StandardEditor.Code.Editor
         private void DrawAutoDrawer()
         {
             using GroupScope scope = _shadowShardEditor.GroupScope(new GUIContent("AutoDrawer"), isDisabled: false);
-            _autoDrawer.DrawField(new GUIContent("Label"), _serializedShadowShardData.FindProperty("IntValue"));
-            _autoDrawer.DrawField(new GUIContent("Label"), _serializedShadowShardData.FindProperty("ToggleValue"));
-            _autoDrawer.DrawField(new GUIContent("Label"), _serializedShadowShardData.FindProperty("FloatValue"));
-            _autoDrawer.DrawField(new GUIContent("Label"), _serializedShadowShardData.FindProperty("Vector2Value"));
-            _autoDrawer.DrawField(new GUIContent("Label"), _serializedShadowShardData.FindProperty("Vector3Value"));
+            _shadowShardEditor.DrawField(new GUIContent("Label"), _serializedShadowShardData.FindProperty("IntValue"));
+            _shadowShardEditor.DrawField(new GUIContent("Label"), _serializedShadowShardData.FindProperty("ToggleValue"));
+            _shadowShardEditor.DrawField(new GUIContent("Label"), _serializedShadowShardData.FindProperty("FloatValue"));
+            _shadowShardEditor.DrawField(new GUIContent("Label"), _serializedShadowShardData.FindProperty("Vector2Value"));
+            _shadowShardEditor.DrawField(new GUIContent("Label"), _serializedShadowShardData.FindProperty("Vector3Value"));
         }
     }
 }
