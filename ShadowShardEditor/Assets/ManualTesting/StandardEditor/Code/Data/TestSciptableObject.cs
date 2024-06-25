@@ -1,8 +1,9 @@
+using System.ComponentModel;
 using EditorGUIPlus.Data.Range;
 using UnityEditor;
 using UnityEngine;
 
-namespace ManualTesting.StandardEditor.Code
+namespace ManualTesting.StandardEditor.Code.Data
 {
     [CreateAssetMenu(fileName = "TestData", menuName = "Static data/Test/Standard editor")]
     public class ShadowShardData : ScriptableObject

@@ -101,7 +101,7 @@ MonoBehaviour:
   TextureValue: {fileID: 0}
   TextFieldValue: 
   FolderPathValue: 
-  IntValue: 0
+  IntValue: 100
   DisplayedOptions:
   - Option1
   - Option2
