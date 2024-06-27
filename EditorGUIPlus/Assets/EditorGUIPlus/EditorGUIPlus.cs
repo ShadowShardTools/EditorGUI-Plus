@@ -10,7 +10,7 @@ using TextEditor = EditorGUIPlus.EditorModules.PropertyBased.TextEditor;
 
 namespace EditorGUIPlus
 {
-    public sealed class EditorGUIPlus : BaseEditorGUIPlus
+    public sealed class EditorGUIPlus : BaseEditorGUIPlus, IEditorGUIPlus
     {
         private readonly SliderEditor _sliderEditor;
         private readonly SliderIntEditor _sliderIntEditor;
