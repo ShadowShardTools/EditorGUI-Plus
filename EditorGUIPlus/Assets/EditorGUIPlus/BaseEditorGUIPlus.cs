@@ -502,10 +502,6 @@ namespace EditorGUIPlus
             Action onChangedCallback = null) where TEnum : Enum =>
             _popupEditor.DrawEnumPopup(label, property, indentLevel, onChangedCallback);
         
-        public void DrawEnumPopup(GUIContent label, SerializedProperty property, int indentLevel = 0, 
-            Action onChangedCallback = null) =>
-            _popupEditor.DrawEnumPopup(label, property, indentLevel, onChangedCallback);
-        
         public TEnum DrawEnumFlagsField<TEnum>(GUIContent label, TEnum property, bool includeObsolete = false,  
             int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum =>
             _popupEditor.DrawEnumFlagsField(label, property, includeObsolete, indentLevel, onChangedCallback);
@@ -621,7 +617,10 @@ namespace EditorGUIPlus
             _messageEditor.DrawErrorBox(message, wide, indentLevel);
         
         #endregion
-
+        
+        public TType DrawField<TType>(GUIContent label, TType value, int indentLevel = 0, Action onChangedCallback = null) =>
+            _fieldDrawer.DrawField(this, label, value, indentLevel, onChangedCallback);
+        
         public void Space() =>
             EditorGUILayout.Space();
         

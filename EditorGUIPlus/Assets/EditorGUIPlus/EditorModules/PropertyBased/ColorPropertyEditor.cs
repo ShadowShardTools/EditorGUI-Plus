@@ -16,7 +16,7 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
         }
         
         internal Color DrawColor<TProperty>(GUIContent label, TProperty property, bool showAlpha = true,
-            bool hdr = false, int indentLevel = 0, Action onChangedCallback = null)
+            bool hdr = false, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetColor(property);
@@ -32,14 +32,14 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    _propertyService.SetColor(property, newValue);
+                    _propertyService.SetColor(property, newValue, applyModifiedProperties);
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
         internal Gradient DrawGradient(GUIContent label, SerializedProperty property, bool hdr = false, 
-            int indentLevel = 0, Action onChangedCallback = null)
+            int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return property.gradientValue;
@@ -56,6 +56,8 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                 if (EditorGUI.EndChangeCheck())
                 {
                     property.gradientValue = newValue;
+                    if (applyModifiedProperties)
+                        property.serializedObject.ApplyModifiedProperties();
                     onChangedCallback?.Invoke();
                 }
             }

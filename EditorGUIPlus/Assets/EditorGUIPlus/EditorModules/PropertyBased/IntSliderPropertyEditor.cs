@@ -18,7 +18,7 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
         }
         
         internal int DrawIntSlider<TProperty>(GUIContent label, TProperty property, IntRange range, int indentLevel = 0, 
-            Action onChangedCallback = null)
+            bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetInt(property);
@@ -34,14 +34,15 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    _propertyService.SetInt(property, newValue);
+                    _propertyService.SetInt(property, newValue, applyModifiedProperties);
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
         internal Vector3Int DrawFromVector3IntParamSlider<TProperty>(GUIContent label, TProperty property, 
-            Vector3Param vectorParam, IntRange range, int indentLevel = 0, Action onChangedCallback = null)
+            Vector3Param vectorParam, IntRange range, int indentLevel = 0, bool applyModifiedProperties = false, 
+            Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector3Int(property);
@@ -59,24 +60,25 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                 if(EditorGUI.EndChangeCheck())
                 {
                     propertyValue[(int)vectorParam] = newValue;
-                    _propertyService.SetVector3Int(property, propertyValue);
+                    _propertyService.SetVector3Int(property, propertyValue, applyModifiedProperties);
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
         internal Vector3Int DrawVector3IntSliders<TProperty>(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
-            TProperty property, IntRange range, int indentLevel = 0, Action onChangedCallback = null)
+            TProperty property, IntRange range, int indentLevel = 0, bool applyModifiedProperties = false, 
+            Action onChangedCallback = null)
         {
-            DrawFromVector3IntParamSlider(labelX, property, Vector3Param.X, range, indentLevel, onChangedCallback);
-            DrawFromVector3IntParamSlider(labelY, property, Vector3Param.Y, range, indentLevel, onChangedCallback);
-            DrawFromVector3IntParamSlider(labelZ, property, Vector3Param.Z, range, indentLevel, onChangedCallback);
+            DrawFromVector3IntParamSlider(labelX, property, Vector3Param.X, range, indentLevel, applyModifiedProperties, onChangedCallback);
+            DrawFromVector3IntParamSlider(labelY, property, Vector3Param.Y, range, indentLevel, applyModifiedProperties, onChangedCallback);
+            DrawFromVector3IntParamSlider(labelZ, property, Vector3Param.Z, range, indentLevel, applyModifiedProperties, onChangedCallback);
             
             return _propertyService.GetVector3Int(property);
         }
         
         internal IntRange DrawMinMaxIntSlider<TProperty>(GUIContent label, TProperty minProperty, TProperty maxProperty, 
-            IntRange range, int indentLevel = 0, Action onChangedCallback = null)
+            IntRange range, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return new IntRange(_propertyService.GetInt(minProperty), _propertyService.GetInt(maxProperty));
@@ -93,8 +95,8 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    _propertyService.SetInt(minProperty, (int)minValue);
-                    _propertyService.SetInt(maxProperty, (int)maxValue);
+                    _propertyService.SetInt(minProperty, (int)minValue, applyModifiedProperties);
+                    _propertyService.SetInt(maxProperty, (int)maxValue, applyModifiedProperties);
                     onChangedCallback?.Invoke();
                 }
             }

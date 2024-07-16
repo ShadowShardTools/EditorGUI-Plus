@@ -14,7 +14,7 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
         }
         
         internal AnimationCurve DrawAnimationCurve(GUIContent label, SerializedProperty property, int indentLevel = 0, 
-            Action onChangedCallback = null)
+            bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return property.animationCurveValue;
@@ -30,6 +30,8 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                 if (EditorGUI.EndChangeCheck())
                 {
                     property.animationCurveValue = newValue;
+                    if (applyModifiedProperties)
+                        property.serializedObject.ApplyModifiedProperties();
                     onChangedCallback?.Invoke();
                 }
             }

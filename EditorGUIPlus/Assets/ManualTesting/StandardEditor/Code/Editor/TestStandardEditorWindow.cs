@@ -52,8 +52,10 @@ namespace ManualTesting.StandardEditor.Code.Editor
 
             if(EditorGUI.EndChangeCheck())
             {
+                Undo.RecordObject(_shadowShardData, "Modify Shadow Shard Data");
                 _serializedShadowShardData.ApplyModifiedProperties();
                 _serializedShadowShardData.Update();
+                EditorUtility.SetDirty(_shadowShardData);
             }
         }
 
@@ -194,7 +196,7 @@ namespace ManualTesting.StandardEditor.Code.Editor
 
         private void DrawObjectAndTextEditors()
         {
-            _shadowShardEditor.DrawObjectField<Object>(new GUIContent("Object Field"), _serializedShadowShardData.FindProperty("ObjectValue"), _shadowShardData.IndentLevel, true, null);
+            _shadowShardEditor.DrawObjectField<Object>(new GUIContent("Object Field"), _serializedShadowShardData.FindProperty("ObjectValue"), _shadowShardData.IndentLevel, true);
             _shadowShardEditor.DrawTextField(new GUIContent("Text Field"), _serializedShadowShardData.FindProperty("TextFieldValue"), _shadowShardData.IndentLevel);
             _shadowShardEditor.DrawFolderPathField(new GUIContent("Folder Path"), _serializedShadowShardData.FindProperty("FolderPathValue"), "", "", _shadowShardData.IndentLevel);
         }
@@ -202,11 +204,11 @@ namespace ManualTesting.StandardEditor.Code.Editor
         private void DrawAutoDrawer()
         {
             using GroupScope scope = _shadowShardEditor.GroupScope(new GUIContent("AutoDrawer"), isDisabled: false);
-            _shadowShardEditor.DrawField(new GUIContent("Label"), _serializedShadowShardData.FindProperty("IntValue"));
-            _shadowShardEditor.DrawField(new GUIContent("Label"), _serializedShadowShardData.FindProperty("ToggleValue"));
-            _shadowShardEditor.DrawField(new GUIContent("Label"), _serializedShadowShardData.FindProperty("FloatValue"));
-            _shadowShardEditor.DrawField(new GUIContent("Label"), _serializedShadowShardData.FindProperty("Vector2Value"));
-            _shadowShardEditor.DrawField(new GUIContent("Label"), _serializedShadowShardData.FindProperty("Vector3Value"));
+            _shadowShardEditor.DrawField(new GUIContent("Label"), _serializedShadowShardData.FindProperty("IntValue"), applyModifiedProperties: false);
+            _shadowShardEditor.DrawField(new GUIContent("Label"), _serializedShadowShardData.FindProperty("ToggleValue"), applyModifiedProperties: false);
+            _shadowShardEditor.DrawField(new GUIContent("Label"), _serializedShadowShardData.FindProperty("FloatValue"), applyModifiedProperties: false);
+            _shadowShardEditor.DrawField(new GUIContent("Label"), _serializedShadowShardData.FindProperty("Vector2Value"), applyModifiedProperties: false);
+            _shadowShardEditor.DrawField(new GUIContent("Label"), _serializedShadowShardData.FindProperty("Vector3Value"), applyModifiedProperties: false);
         }
     }
 }
