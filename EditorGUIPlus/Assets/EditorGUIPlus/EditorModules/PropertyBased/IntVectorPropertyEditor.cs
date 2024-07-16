@@ -6,12 +6,12 @@ using UnityEngine;
 
 namespace EditorGUIPlus.EditorModules.PropertyBased
 {
-    public sealed class VectorIntEditor
+    public sealed class IntVectorPropertyEditor
     {
         private readonly PropertyService _propertyService;
         private readonly GroupEditor _groupEditor;
 
-        internal VectorIntEditor(PropertyService propertyService, GroupEditor groupEditor)
+        internal IntVectorPropertyEditor(PropertyService propertyService, GroupEditor groupEditor)
         {
             _propertyService = propertyService;
             _groupEditor = groupEditor;

@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace EditorGUIPlus.EditorModules.PropertyBased
 {
-    public class CurveEditor
+    public class CurvePropertyEditor
     {
         private readonly GroupEditor _groupEditor;
 
-        internal CurveEditor(GroupEditor groupEditor)
+        internal CurvePropertyEditor(GroupEditor groupEditor)
         {
             _groupEditor = groupEditor;
         }

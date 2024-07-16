@@ -5,14 +5,14 @@ using UnityEngine;
 
 namespace EditorGUIPlus.EditorModules.PropertyBased
 {
-    internal sealed class PopupEditor
+    internal sealed class PopupPropertyEditor
     {
         private const string BooleanDisplayedOptionsError = "The displayedOptions array should contain exactly two options.";
 
         private readonly PropertyService _propertyService;
         private readonly GroupEditor _groupEditor;
 
-        internal PopupEditor(PropertyService propertyService, GroupEditor groupEditor)
+        internal PopupPropertyEditor(PropertyService propertyService, GroupEditor groupEditor)
         {
             _propertyService = propertyService;
             _groupEditor = groupEditor;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace EditorGUIPlus.EditorModules.PropertyBased
 {
-    internal sealed class TextureEditor
+    internal sealed class TexturePropertyEditor
     {
         private static readonly GUIContent FixNormal =
             EditorGUIUtility.TrTextContent("Fix now", "Converts the assigned texture to be a normal map format.");
@@ -15,7 +15,7 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
         private readonly PropertyService _propertyService;
         private readonly GroupEditor _groupEditor;
 
-        internal TextureEditor(PropertyService propertyService, GroupEditor groupEditor)
+        internal TexturePropertyEditor(PropertyService propertyService, GroupEditor groupEditor)
         {
             _propertyService = propertyService;
             _groupEditor = groupEditor;

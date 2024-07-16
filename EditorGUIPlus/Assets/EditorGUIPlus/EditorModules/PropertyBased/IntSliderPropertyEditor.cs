@@ -6,12 +6,12 @@ using UnityEngine;
 
 namespace EditorGUIPlus.EditorModules.PropertyBased
 {
-    internal sealed class SliderIntEditor
+    internal sealed class IntSliderPropertyEditor
     {
         private readonly PropertyService _propertyService;
         private readonly GroupEditor _groupEditor;
 
-        internal SliderIntEditor(PropertyService propertyService, GroupEditor groupEditor)
+        internal IntSliderPropertyEditor(PropertyService propertyService, GroupEditor groupEditor)
         {
             _propertyService = propertyService;
             _groupEditor = groupEditor;

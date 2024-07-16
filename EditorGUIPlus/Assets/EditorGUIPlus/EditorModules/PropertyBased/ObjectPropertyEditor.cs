@@ -7,11 +7,11 @@ using Object = UnityEngine.Object;
 
 namespace EditorGUIPlus.EditorModules.PropertyBased
 {
-    internal sealed class ObjectEditor
+    internal sealed class ObjectPropertyEditor
     {
         private readonly GroupEditor _groupEditor;
 
-        internal ObjectEditor(GroupEditor groupEditor) =>
+        internal ObjectPropertyEditor(GroupEditor groupEditor) =>
             _groupEditor = groupEditor;
         
         internal void DrawObjectField<TObject>(GUIContent label, SerializedProperty property, int indentLevel = 0,
