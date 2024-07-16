@@ -438,6 +438,10 @@ namespace EditorGUIPlus
             bool applyModifiedProperties = false, Action onChangedCallback = null) where TEnum : Enum =>
             _popupPropertyEditor.DrawEnumPopup<TEnum, SerializedProperty>(label, property, indentLevel, applyModifiedProperties, onChangedCallback);
         
+        public void DrawEnumPopup(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            bool applyModifiedProperties = false, Action onChangedCallback = null) =>
+            _popupPropertyEditor.DrawEnumPopup(label, property, indentLevel, applyModifiedProperties, onChangedCallback);
+        
         public TEnum DrawEnumFlagsField<TEnum>(GUIContent label, SerializedProperty property, bool includeObsolete = false,  
             int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null) where TEnum : Enum =>
             _popupPropertyEditor.DrawEnumFlagsField<TEnum>(label, property, includeObsolete, indentLevel, applyModifiedProperties, onChangedCallback);
@@ -526,10 +530,8 @@ namespace EditorGUIPlus
         
         #endregion
 
-        public void DrawField(GUIContent label, SerializedProperty property) =>
-            _fieldDrawer.DrawField(this, label, property);
-        
-        public TType DrawField<TType>(GUIContent label, TType value) =>
-            _fieldDrawer.DrawField(this, label, value);
+        public void DrawField(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            bool applyModifiedProperties = false, Action onChangedCallback = null) =>
+            _fieldDrawer.DrawField(this, label, property, indentLevel, applyModifiedProperties, onChangedCallback);
     }
 }

@@ -38,6 +38,10 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                 .GetValue(enumOption);
         }
         
+        internal void DrawEnumPopup(GUIContent label, SerializedProperty enumProperty, int indentLevel = 0, 
+            bool applyModifiedProperties = false, Action onChangedCallback = null) =>
+            DrawPopup(label, enumProperty, enumProperty.enumDisplayNames, indentLevel, applyModifiedProperties, onChangedCallback);
+        
         internal TEnum DrawEnumFlagsField<TEnum>(GUIContent label, SerializedProperty property, bool includeObsolete = false, 
             int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null) where TEnum : Enum
         {

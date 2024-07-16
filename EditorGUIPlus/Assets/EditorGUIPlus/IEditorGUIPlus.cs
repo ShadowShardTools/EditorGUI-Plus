@@ -538,14 +538,14 @@ namespace EditorGUIPlus
         TEnum DrawEnumPopup<TEnum>(GUIContent label, SerializedProperty property, int indentLevel = 0, 
             bool applyModifiedProperties = false, Action onChangedCallback = null) where TEnum : Enum;
 
+        void DrawEnumPopup(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            bool applyModifiedProperties = false, Action onChangedCallback = null);
+
         TEnum DrawEnumPopup<TEnum>(TEnum property, int indentLevel = 0, 
             Action onChangedCallback = null) where TEnum : Enum;
 
         TEnum DrawEnumPopup<TEnum>(GUIContent label, TEnum property, int indentLevel = 0, 
             Action onChangedCallback = null) where TEnum : Enum;
-
-        void DrawEnumPopup(GUIContent label, SerializedProperty property, int indentLevel = 0, 
-            Action onChangedCallback = null);
 
         TEnum DrawEnumFlagsField<TEnum>(GUIContent label, SerializedProperty property, bool includeObsolete = false,  
             int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null) where TEnum : Enum;
@@ -642,8 +642,10 @@ namespace EditorGUIPlus
         AnimationCurve DrawAnimationCurve(GUIContent label, AnimationCurve curve, int indentLevel = 0, 
             Action onChangedCallback = null);
 
-        void DrawField(GUIContent label, SerializedProperty property);
-        TType DrawField<TType>(GUIContent label, TType value);
+        void DrawField(GUIContent label, SerializedProperty property, int indentLevel = 0, 
+            bool applyModifiedProperties = false, Action onChangedCallback = null);
+
+        TType DrawField<TType>(GUIContent label, TType value, int indentLevel = 0, Action onChangedCallback = null);
         void InitializeBaseEditors();
         EditorGUILayout.HorizontalScope HorizontalScope(GUIStyle style = null, params GUILayoutOption[] options);
         EditorGUILayout.VerticalScope VerticalScope(GUIStyle style = null, params GUILayoutOption[] options);
