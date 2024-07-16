@@ -589,8 +589,8 @@ namespace EditorGUIPlus
         public string DrawPasswordField(GUIContent label, string password, int indentLevel = 0, Action onChangedCallback = null) =>
             _textEditor.DrawPasswordField(label, password, indentLevel, onChangedCallback);
         
-        public string DrawFolderPathField(GUIContent label, string path, string defaultDirectory, int indentLevel = 0,
-            Action onChangedCallback = null) =>
+        public string DrawFolderPathField(GUIContent label, string path, string defaultDirectory, string defaultName, 
+            int indentLevel = 0, Action onChangedCallback = null) =>
             _textEditor.DrawFolderPathField(label, path, defaultDirectory, indentLevel, onChangedCallback);
         
         #endregion

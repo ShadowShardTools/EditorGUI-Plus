@@ -514,8 +514,8 @@ namespace EditorGUIPlus
             _textPropertyEditor.DrawPasswordField(label, property, indentLevel, onChangedCallback);
         
         public string DrawFolderPathField(GUIContent label, SerializedProperty property, string defaultDirectory, 
-            int indentLevel = 0, Action onChangedCallback = null) =>
-            _textPropertyEditor.DrawFolderPathField(label, property, defaultDirectory, indentLevel, onChangedCallback);
+            string defaultName, int indentLevel = 0, Action onChangedCallback = null) =>
+            _textPropertyEditor.DrawFolderPathField(label, property, defaultDirectory, defaultName, indentLevel, onChangedCallback);
         
         #endregion
         

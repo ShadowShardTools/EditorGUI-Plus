@@ -121,32 +121,41 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
         }
         
         internal string DrawFolderPathField(GUIContent label, SerializedProperty property, string defaultDirectory, 
-            int indentLevel = 0, Action onChangedCallback = null)
+            string defaultName, int indentLevel = 0, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, () => 
-                DrawPathField(property, label, defaultDirectory, onChangedCallback));
+                DrawPathField(property, label, defaultDirectory, defaultName, onChangedCallback));
             
             return property.stringValue;
         }
         
         private void DrawPathField(SerializedProperty property, GUIContent label, string defaultDirectory, 
-            Action onChangedCallback)
+            string defaultName, Action onChangedCallback)
         {
             EditorGUI.BeginChangeCheck();
             string propertyValue = property.stringValue;
 
-            using (new GUILayout.HorizontalScope())
-            {
-                const float buttonWidth = 24f;
-                const float spacing = 7f;
-                EditorGUILayout.LabelField(label, GUILayout.Width(EditorGUIUtility.labelWidth - (buttonWidth + spacing)));
-                propertyValue = EditorGUILayout.TextField(propertyValue);
+            EditorGUILayout.BeginHorizontal();
 
-                if (GUILayout.Button(" ... ", GUILayout.Width(buttonWidth), GUILayout.Height(EditorGUIUtility.singleLineHeight)))
-                {
-                    propertyValue = SelectFolder(propertyValue, defaultDirectory);
-                }
+            float labelWidth = EditorGUIUtility.labelWidth - 1;
+            EditorGUILayout.LabelField(label, EditorStyles.label, GUILayout.Width(labelWidth));
+
+            Rect position = EditorGUILayout.GetControlRect();
+            float buttonWidth = 30;
+            int indentLevelCompensation = EditorGUI.indentLevel * 15;
+            float textFieldWidth = position.width - buttonWidth + indentLevelCompensation;
+
+            Rect textFieldRect = new(position.x - indentLevelCompensation, position.y, textFieldWidth, EditorGUIUtility.singleLineHeight);
+            Rect buttonRect = new(textFieldRect.x + textFieldWidth, position.y, buttonWidth, EditorGUIUtility.singleLineHeight);
+
+            propertyValue = EditorGUI.TextField(textFieldRect, propertyValue);
+
+            if (GUI.Button(buttonRect, " ... "))
+            {
+                propertyValue = SelectFolder(propertyValue, defaultDirectory, defaultName);
             }
+
+            EditorGUILayout.EndHorizontal();
 
             if (EditorGUI.EndChangeCheck())
             {
@@ -156,14 +165,12 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
             }
         }
 
-        private string SelectFolder(string currentPath, string defaultDirectory)
+        private string SelectFolder(string currentPath, string defaultDirectory, string defaultName)
         {
-            if (!AssetDatabase.IsValidFolder(currentPath))
-            {
+            if (!AssetDatabase.IsValidFolder(currentPath)) 
                 currentPath = defaultDirectory;
-            }
 
-            string chosenDirectory = EditorUtility.SaveFolderPanel("Choose folder to save", defaultDirectory, defaultDirectory);
+            string chosenDirectory = EditorUtility.SaveFolderPanel("Choose folder to save", defaultDirectory, defaultName);
             return !string.IsNullOrEmpty(chosenDirectory) ? chosenDirectory : currentPath;
         }
     }

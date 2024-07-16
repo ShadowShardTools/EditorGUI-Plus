@@ -631,11 +631,11 @@ namespace EditorGUIPlus
         string DrawPasswordField(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null);
         string DrawPasswordField(GUIContent label, string password, int indentLevel = 0, Action onChangedCallback = null);
 
-        string DrawFolderPathField(GUIContent label, SerializedProperty property, string defaultDirectory, 
+        string DrawFolderPathField(GUIContent label, SerializedProperty property, string defaultDirectory, string defaultName,
             int indentLevel = 0, Action onChangedCallback = null);
 
-        string DrawFolderPathField(GUIContent label, string path, string defaultDirectory, int indentLevel = 0,
-            Action onChangedCallback = null);
+        string DrawFolderPathField(GUIContent label, string path, string defaultDirectory, string defaultName, 
+            int indentLevel = 0, Action onChangedCallback = null);
 
         AnimationCurve DrawAnimationCurve(GUIContent label, SerializedProperty property, int indentLevel = 0, Action onChangedCallback = null);
 
