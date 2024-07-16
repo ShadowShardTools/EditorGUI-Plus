@@ -18,7 +18,7 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
         }
         
         internal float DrawFloat<TProperty>(GUIContent label, TProperty property, FloatRange range, int indentLevel = 0, 
-            Action onChangedCallback = null)
+            bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetFloat(property);
@@ -34,14 +34,14 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    _propertyService.SetFloat(property, newValue);
+                    _propertyService.SetFloat(property, newValue, applyModifiedProperties);
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
         internal double DrawDouble(GUIContent label, SerializedProperty property, DoubleRange range, int indentLevel = 0, 
-            Action onChangedCallback = null)
+            bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return property.doubleValue;
@@ -58,13 +58,15 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                 if (EditorGUI.EndChangeCheck())
                 {
                     property.doubleValue = newValue;
+                    if (applyModifiedProperties)
+                        property.serializedObject.ApplyModifiedProperties();
                     onChangedCallback?.Invoke();
                 }
             }
         }
 
         internal Vector2 DrawVector2<TProperty>(GUIContent label, TProperty property, Vector2Range range, 
-            int indentLevel = 0, Action onChangedCallback = null)
+            int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector2(property);
@@ -80,14 +82,14 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    _propertyService.SetVector2(property, newValue);
+                    _propertyService.SetVector2(property, newValue, applyModifiedProperties);
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
         internal Vector3 DrawVector3<TProperty>(GUIContent label, TProperty property, Vector3Range range, 
-            int indentLevel = 0, Action onChangedCallback = null)
+            int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector3(property);
@@ -103,14 +105,14 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    _propertyService.SetVector3(property, newValue);
+                    _propertyService.SetVector3(property, newValue, applyModifiedProperties);
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
         internal Vector4 DrawVector4<TProperty>(GUIContent label, TProperty property, Vector4Range range, 
-            int indentLevel = 0, Action onChangedCallback = null)
+            int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector4(property);
@@ -126,14 +128,14 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    _propertyService.SetVector4(property, newValue);
+                    _propertyService.SetVector4(property, newValue, applyModifiedProperties);
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
         internal Vector2 DrawFloatFromVector2<TProperty>(GUIContent label, TProperty property, Vector2Param vector2Param, 
-            FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
+            FloatRange range, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector2(property);
@@ -151,14 +153,14 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                 if (EditorGUI.EndChangeCheck())
                 {
                     propertyValue[(int)vector2Param] = newValue;
-                    _propertyService.SetVector2(property, propertyValue);
+                    _propertyService.SetVector2(property, propertyValue, applyModifiedProperties);
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
         internal Vector3 DrawFloatFromVector3<TProperty>(GUIContent label, TProperty property, Vector3Param vector3Param, 
-            FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
+            FloatRange range, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector3(property);
@@ -176,14 +178,14 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                 if (EditorGUI.EndChangeCheck())
                 {
                     propertyValue[(int)vector3Param] = newValue;
-                    _propertyService.SetVector3(property, propertyValue);
+                    _propertyService.SetVector3(property, propertyValue, applyModifiedProperties);
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
         internal Vector4 DrawFloatFromVector4<TProperty>(GUIContent label, TProperty property, Vector4Param vector4Param, 
-            FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
+            FloatRange range, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector4(property);
@@ -201,14 +203,14 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                 if (EditorGUI.EndChangeCheck())
                 {
                     propertyValue[(int)vector4Param] = newValue;
-                    _propertyService.SetVector4(property, propertyValue);
+                    _propertyService.SetVector4(property, propertyValue, applyModifiedProperties);
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
         internal Vector4 DrawVector4Start<TProperty>(GUIContent label, TProperty property, Vector2Range range, 
-            int indentLevel = 0, Action onChangedCallback = null)
+            int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector4(property);
@@ -226,14 +228,14 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                 if (EditorGUI.EndChangeCheck())
                 {
                     Vector4 newVector4Value = new(newValue.x, newValue.y, propertyVector4Value.z, propertyVector4Value.w);
-                    _propertyService.SetVector4(property, newVector4Value);
+                    _propertyService.SetVector4(property, newVector4Value, applyModifiedProperties);
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
         internal Vector4 DrawVector4End<TProperty>(GUIContent label, TProperty property, Vector2Range range, 
-            int indentLevel = 0, Action onChangedCallback = null)
+            int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector4(property);
@@ -251,14 +253,14 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                 if (EditorGUI.EndChangeCheck())
                 {
                     Vector4 newVector4Value = new(propertyVector4Value.x, propertyVector4Value.y, newValue.x, newValue.y);
-                    _propertyService.SetVector4(property, newVector4Value);
+                    _propertyService.SetVector4(property, newVector4Value, applyModifiedProperties);
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
         internal Bounds DrawBoundsField(GUIContent label, SerializedProperty property, int indentLevel = 0, 
-            Action onChangedCallback = null)
+            bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return property.boundsValue;
@@ -274,13 +276,15 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                 if (EditorGUI.EndChangeCheck())
                 {
                     property.boundsValue = newValue;
+                    if (applyModifiedProperties)
+                        property.serializedObject.ApplyModifiedProperties();
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
         internal Rect DrawRectField(GUIContent label, SerializedProperty property, int indentLevel = 0, 
-            Action onChangedCallback = null)
+            bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return property.rectValue;
@@ -296,6 +300,8 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                 if (EditorGUI.EndChangeCheck())
                 {
                     property.rectValue = newValue;
+                    if (applyModifiedProperties)
+                        property.serializedObject.ApplyModifiedProperties();
                     onChangedCallback?.Invoke();
                 }
             }

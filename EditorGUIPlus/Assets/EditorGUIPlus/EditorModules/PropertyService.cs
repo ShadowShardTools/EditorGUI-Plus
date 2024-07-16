@@ -15,8 +15,8 @@ namespace EditorGUIPlus.EditorModules
                 _ => default
             };
         }
-        
-        internal void SetFloat(object property, float newValue)
+
+        internal void SetFloat(object property, float newValue, bool applyModifiedProperties = false)
         {
             switch (property)
             {
@@ -25,7 +25,8 @@ namespace EditorGUIPlus.EditorModules
                     break;
                 case SerializedProperty serializedProperty:
                     serializedProperty.floatValue = newValue;
-                    serializedProperty.serializedObject.ApplyModifiedProperties();
+                    if(applyModifiedProperties)
+                        serializedProperty.serializedObject.ApplyModifiedProperties();
                     break;
             }
         }
@@ -40,7 +41,7 @@ namespace EditorGUIPlus.EditorModules
             };
         }
         
-        internal void SetBool(object property, bool newValue)
+        internal void SetBool(object property, bool newValue, bool applyModifiedProperties = false)
         {
             switch (property)
             {
@@ -49,7 +50,8 @@ namespace EditorGUIPlus.EditorModules
                     break;
                 case SerializedProperty serializedProperty:
                     serializedProperty.boolValue = newValue;
-                    serializedProperty.serializedObject.ApplyModifiedProperties();
+                    if(applyModifiedProperties)
+                        serializedProperty.serializedObject.ApplyModifiedProperties();
                     break;
             }
         }
@@ -64,7 +66,7 @@ namespace EditorGUIPlus.EditorModules
             };
         }
         
-        internal void SetVector2(object property, Vector2 newValue)
+        internal void SetVector2(object property, Vector2 newValue, bool applyModifiedProperties = false)
         {
             switch (property)
             {
@@ -73,12 +75,13 @@ namespace EditorGUIPlus.EditorModules
                     break;
                 case SerializedProperty serializedProperty:
                     serializedProperty.vector2Value = newValue;
-                    serializedProperty.serializedObject.ApplyModifiedProperties();
+                    if(applyModifiedProperties)
+                        serializedProperty.serializedObject.ApplyModifiedProperties();
                     break;
             }
         }
         
-        internal Vector3 GetVector3(object property)
+        internal Vector3 GetVector3(object property, bool applyModifiedProperties = false)
         {
             return property switch
             {
@@ -88,7 +91,7 @@ namespace EditorGUIPlus.EditorModules
             };
         }
         
-        internal void SetVector3(object property, Vector3 newValue)
+        internal void SetVector3(object property, Vector3 newValue, bool applyModifiedProperties = false)
         {
             switch (property)
             {
@@ -97,7 +100,8 @@ namespace EditorGUIPlus.EditorModules
                     break;
                 case SerializedProperty serializedProperty:
                     serializedProperty.vector3Value = newValue;
-                    serializedProperty.serializedObject.ApplyModifiedProperties();
+                    if(applyModifiedProperties)
+                        serializedProperty.serializedObject.ApplyModifiedProperties();
                     break;
             }
         }
@@ -112,7 +116,7 @@ namespace EditorGUIPlus.EditorModules
             };
         }
         
-        internal void SetVector4(object property, Vector4 newValue)
+        internal void SetVector4(object property, Vector4 newValue, bool applyModifiedProperties = false)
         {
             switch (property)
             {
@@ -121,7 +125,8 @@ namespace EditorGUIPlus.EditorModules
                     break;
                 case SerializedProperty serializedProperty:
                     serializedProperty.vector4Value = newValue;
-                    serializedProperty.serializedObject.ApplyModifiedProperties();
+                    if(applyModifiedProperties)
+                        serializedProperty.serializedObject.ApplyModifiedProperties();
                     break;
             }
         }
@@ -136,7 +141,7 @@ namespace EditorGUIPlus.EditorModules
             };
         }
         
-        internal void SetColor(object property, Vector4 newValue)
+        internal void SetColor(object property, Vector4 newValue, bool applyModifiedProperties = false)
         {
             switch (property)
             {
@@ -145,7 +150,8 @@ namespace EditorGUIPlus.EditorModules
                     break;
                 case SerializedProperty serializedProperty:
                     serializedProperty.colorValue = newValue;
-                    serializedProperty.serializedObject.ApplyModifiedProperties();
+                    if(applyModifiedProperties)
+                        serializedProperty.serializedObject.ApplyModifiedProperties();
                     break;
             }
         }
@@ -160,7 +166,7 @@ namespace EditorGUIPlus.EditorModules
             };
         }
         
-        internal void SetInt(object property, int newValue)
+        internal void SetInt(object property, int newValue, bool applyModifiedProperties = false)
         {
             switch (property)
             {
@@ -169,7 +175,8 @@ namespace EditorGUIPlus.EditorModules
                     break;
                 case SerializedProperty serializedProperty:
                     serializedProperty.intValue = newValue;
-                    serializedProperty.serializedObject.ApplyModifiedProperties();
+                    if(applyModifiedProperties)
+                        serializedProperty.serializedObject.ApplyModifiedProperties();
                     break;
             }
         }
@@ -184,7 +191,7 @@ namespace EditorGUIPlus.EditorModules
             };
         }
         
-        internal void SetVector2Int(object property, Vector2Int newValue)
+        internal void SetVector2Int(object property, Vector2Int newValue, bool applyModifiedProperties = false)
         {
             switch (property)
             {
@@ -193,7 +200,8 @@ namespace EditorGUIPlus.EditorModules
                     break;
                 case SerializedProperty serializedProperty:
                     serializedProperty.vector2IntValue = newValue;
-                    serializedProperty.serializedObject.ApplyModifiedProperties();
+                    if(applyModifiedProperties)
+                        serializedProperty.serializedObject.ApplyModifiedProperties();
                     break;
             }
         }
@@ -208,7 +216,7 @@ namespace EditorGUIPlus.EditorModules
             };
         }
         
-        internal void SetVector3Int(object property, Vector3Int newValue)
+        internal void SetVector3Int(object property, Vector3Int newValue, bool applyModifiedProperties = false)
         {
             switch (property)
             {
@@ -217,7 +225,8 @@ namespace EditorGUIPlus.EditorModules
                     break;
                 case SerializedProperty serializedProperty:
                     serializedProperty.vector3IntValue = newValue;
-                    serializedProperty.serializedObject.ApplyModifiedProperties();
+                    if(applyModifiedProperties)
+                        serializedProperty.serializedObject.ApplyModifiedProperties();
                     break;
             }
         }
@@ -232,7 +241,7 @@ namespace EditorGUIPlus.EditorModules
             };
         }
         
-        public void SetEnumIndex(object property, int value)
+        public void SetEnumIndex(object property, int value, bool applyModifiedProperties = false)
         {
             switch (property)
             {
@@ -241,6 +250,8 @@ namespace EditorGUIPlus.EditorModules
                     break;
                 case SerializedProperty serializedProperty:
                     serializedProperty.enumValueIndex = value;
+                    if(applyModifiedProperties)
+                        serializedProperty.serializedObject.ApplyModifiedProperties();
                     break;
             }
         }
@@ -255,7 +266,7 @@ namespace EditorGUIPlus.EditorModules
             };
         }
         
-        internal void SetTexture(object property, Texture newValue)
+        internal void SetTexture(object property, Texture newValue, bool applyModifiedProperties = false)
         {
             switch (property)
             {
@@ -264,7 +275,8 @@ namespace EditorGUIPlus.EditorModules
                     break;
                 case SerializedProperty serializedProperty:
                     serializedProperty.objectReferenceValue = newValue;
-                    serializedProperty.serializedObject.ApplyModifiedProperties();
+                    if(applyModifiedProperties)
+                        serializedProperty.serializedObject.ApplyModifiedProperties();
                     break;
             }
         }

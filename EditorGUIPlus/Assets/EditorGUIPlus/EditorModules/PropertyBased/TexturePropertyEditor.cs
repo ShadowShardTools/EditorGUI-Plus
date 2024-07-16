@@ -22,7 +22,7 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
         }
 
         internal Texture DrawTexture<TProperty>(GUIContent label, TProperty property, int indentLevel = 0, 
-            Action onChangedCallback = null)
+            bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetTexture(property);
@@ -38,7 +38,7 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    _propertyService.SetTexture(property, newValue);
+                    _propertyService.SetTexture(property, newValue, applyModifiedProperties);
                     onChangedCallback?.Invoke();
                 }
             }

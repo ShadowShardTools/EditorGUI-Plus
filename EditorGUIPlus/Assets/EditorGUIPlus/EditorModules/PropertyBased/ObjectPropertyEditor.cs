@@ -15,7 +15,7 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
             _groupEditor = groupEditor;
         
         internal void DrawObjectField<TObject>(GUIContent label, SerializedProperty property, int indentLevel = 0,
-            bool allowSceneObjects = true, Action<TObject> onChangedCallback = null)
+            bool allowSceneObjects = true, bool applyModifiedProperties = false, Action<TObject> onChangedCallback = null)
             where TObject : Object
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
@@ -33,14 +33,15 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                 if(EditorGUI.EndChangeCheck())
                 {
                     property.objectReferenceValue = newValue;
-                    property.serializedObject.ApplyModifiedProperties();
+                    if (applyModifiedProperties)
+                        property.serializedObject.ApplyModifiedProperties();
                     onChangedCallback?.Invoke(newValue);
                 }
             }
         }
         
         internal void DrawObjectField(GUIContent label, SerializedProperty property, int indentLevel = 0,
-            bool allowSceneObjects = true, Action onChangedCallback = null)
+            bool allowSceneObjects = true, bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return;
@@ -56,7 +57,8 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                 if(EditorGUI.EndChangeCheck())
                 {
                     property.objectReferenceValue = newValue;
-                    property.serializedObject.ApplyModifiedProperties();
+                    if (applyModifiedProperties)
+                        property.serializedObject.ApplyModifiedProperties();
                     onChangedCallback?.Invoke();
                 }
             }

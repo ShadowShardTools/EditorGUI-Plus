@@ -52,8 +52,10 @@ namespace ManualTesting.StandardEditor.Code.Editor
 
             if(EditorGUI.EndChangeCheck())
             {
+                Undo.RecordObject(_shadowShardData, "Modify Shadow Shard Data");
                 _serializedShadowShardData.ApplyModifiedProperties();
                 _serializedShadowShardData.Update();
+                EditorUtility.SetDirty(_shadowShardData);
             }
         }
 
@@ -194,7 +196,7 @@ namespace ManualTesting.StandardEditor.Code.Editor
 
         private void DrawObjectAndTextEditors()
         {
-            _shadowShardEditor.DrawObjectField<Object>(new GUIContent("Object Field"), _serializedShadowShardData.FindProperty("ObjectValue"), _shadowShardData.IndentLevel, true, null);
+            _shadowShardEditor.DrawObjectField<Object>(new GUIContent("Object Field"), _serializedShadowShardData.FindProperty("ObjectValue"), _shadowShardData.IndentLevel, true);
             _shadowShardEditor.DrawTextField(new GUIContent("Text Field"), _serializedShadowShardData.FindProperty("TextFieldValue"), _shadowShardData.IndentLevel);
             _shadowShardEditor.DrawFolderPathField(new GUIContent("Folder Path"), _serializedShadowShardData.FindProperty("FolderPathValue"), "", "", _shadowShardData.IndentLevel);
         }

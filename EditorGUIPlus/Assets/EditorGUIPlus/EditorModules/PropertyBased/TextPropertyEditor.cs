@@ -50,7 +50,7 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
         }
         
         internal string DrawTextField(GUIContent label, SerializedProperty property, int indentLevel = 0,
-            Action onChangedCallback = null)
+            bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return property.stringValue;
@@ -73,7 +73,7 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
         }
         
         internal string DrawTextArea(GUIContent label, SerializedProperty property, int indentLevel = 0, 
-            Action onChangedCallback = null)
+            bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return property.stringValue;
@@ -92,13 +92,15 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                 if (EditorGUI.EndChangeCheck())
                 {
                     property.stringValue = newValue;
+                    if (applyModifiedProperties)
+                        property.serializedObject.ApplyModifiedProperties();
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
         internal string DrawPasswordField(GUIContent label, SerializedProperty property, int indentLevel = 0, 
-            Action onChangedCallback = null)
+            bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return property.stringValue;
@@ -115,22 +117,24 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                 if (EditorGUI.EndChangeCheck())
                 {
                     property.stringValue = newValue;
+                    if (applyModifiedProperties)
+                        property.serializedObject.ApplyModifiedProperties();
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
         internal string DrawFolderPathField(GUIContent label, SerializedProperty property, string defaultDirectory, 
-            string defaultName, int indentLevel = 0, Action onChangedCallback = null)
+            string defaultName, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, () => 
-                DrawPathField(property, label, defaultDirectory, defaultName, onChangedCallback));
+                DrawPathField(property, label, defaultDirectory, defaultName, applyModifiedProperties, onChangedCallback));
             
             return property.stringValue;
         }
         
         private void DrawPathField(SerializedProperty property, GUIContent label, string defaultDirectory, 
-            string defaultName, Action onChangedCallback)
+            string defaultName, bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             EditorGUI.BeginChangeCheck();
             string propertyValue = property.stringValue;
@@ -160,7 +164,8 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
             if (EditorGUI.EndChangeCheck())
             {
                 property.stringValue = propertyValue;
-                property.serializedObject.ApplyModifiedProperties();
+                if (applyModifiedProperties)
+                    property.serializedObject.ApplyModifiedProperties();
                 onChangedCallback?.Invoke();
             }
         }

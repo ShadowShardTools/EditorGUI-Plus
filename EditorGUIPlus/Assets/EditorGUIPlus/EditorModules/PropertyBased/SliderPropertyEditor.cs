@@ -18,7 +18,7 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
         }
 
         internal float DrawSlider<TProperty>(GUIContent label, TProperty property, FloatRange range, 
-            int indentLevel = 0, Action onChangedCallback = null)
+            int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetFloat(property);
@@ -34,14 +34,15 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    _propertyService.SetFloat(property, newValue);
+                    _propertyService.SetFloat(property, newValue, applyModifiedProperties);
                     onChangedCallback?.Invoke();
                 }
             }
         }
 
         internal Vector3 DrawFromVector3ParamSlider<TProperty>(GUIContent label, TProperty property, 
-            Vector3Param vectorParam, FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
+            Vector3Param vectorParam, FloatRange range, int indentLevel = 0, bool applyModifiedProperties = false, 
+            Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector3(property);
@@ -59,24 +60,25 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                 if(EditorGUI.EndChangeCheck())
                 {
                     propertyValue[(int)vectorParam] = newValue;
-                    _propertyService.SetVector3(property, propertyValue);
+                    _propertyService.SetVector3(property, propertyValue, applyModifiedProperties);
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
         internal Vector3 DrawVector3Sliders<TProperty>(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
-            TProperty property, FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
+            TProperty property, FloatRange range, int indentLevel = 0, bool applyModifiedProperties = false, 
+            Action onChangedCallback = null)
         {
-            DrawFromVector3ParamSlider(labelX, property, Vector3Param.X, range, indentLevel, onChangedCallback);
-            DrawFromVector3ParamSlider(labelY, property, Vector3Param.Y, range, indentLevel, onChangedCallback);
-            DrawFromVector3ParamSlider(labelZ, property, Vector3Param.Z, range, indentLevel, onChangedCallback);
+            DrawFromVector3ParamSlider(labelX, property, Vector3Param.X, range, indentLevel, applyModifiedProperties, onChangedCallback);
+            DrawFromVector3ParamSlider(labelY, property, Vector3Param.Y, range, indentLevel, applyModifiedProperties, onChangedCallback);
+            DrawFromVector3ParamSlider(labelZ, property, Vector3Param.Z, range, indentLevel, applyModifiedProperties, onChangedCallback);
 
             return _propertyService.GetVector3(property);
         }
         
         internal FloatRange DrawMinMaxSlider<TProperty>(GUIContent label, TProperty minProperty, TProperty maxProperty, 
-            FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
+            FloatRange range, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return new FloatRange(_propertyService.GetFloat(minProperty), _propertyService.GetFloat(maxProperty));
@@ -93,15 +95,15 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    _propertyService.SetFloat(minProperty, minValue);
-                    _propertyService.SetFloat(maxProperty, maxValue);
+                    _propertyService.SetFloat(minProperty, minValue, applyModifiedProperties);
+                    _propertyService.SetFloat(maxProperty, maxValue, applyModifiedProperties);
                     onChangedCallback?.Invoke();
                 }
             }
         }
         
         internal Vector4 DrawMinMaxVector4StartSlider<TProperty>(GUIContent label, TProperty property, 
-            FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
+            FloatRange range, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector4(property);
@@ -117,14 +119,14 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    _propertyService.SetVector4(property, propertyValue);
+                    _propertyService.SetVector4(property, propertyValue, applyModifiedProperties);
                     onChangedCallback?.Invoke();
                 }
             }
         }
 
         internal Vector4 DrawMinMaxVector4EndSlider<TProperty>(GUIContent label, TProperty property, FloatRange range, 
-            int indentLevel = 0, Action onChangedCallback = null)
+            int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetVector4(property);
@@ -140,7 +142,7 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    _propertyService.SetVector4(property, propertyValue);
+                    _propertyService.SetVector4(property, propertyValue, applyModifiedProperties);
                     onChangedCallback?.Invoke();
                 }
             }

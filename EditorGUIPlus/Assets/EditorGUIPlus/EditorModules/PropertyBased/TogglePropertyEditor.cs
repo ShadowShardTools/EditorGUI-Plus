@@ -18,7 +18,8 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
         }
         
         internal bool DrawToggle<TProperty>(GUIContent label, TProperty property, 
-            ToggleAlign toggleAlign = ToggleAlign.Right, int indentLevel = 0, Action onChangedCallback = null)
+            ToggleAlign toggleAlign = ToggleAlign.Right, int indentLevel = 0, bool applyModifiedProperties = false, 
+            Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetBool(property);
@@ -39,7 +40,7 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    _propertyService.SetBool(property, newValue);
+                    _propertyService.SetBool(property, newValue, applyModifiedProperties);
                     onChangedCallback?.Invoke();
                 }
             }
@@ -47,7 +48,7 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
         
         internal bool DrawShaderLocalKeywordToggle<TProperty>(GUIContent label, Material material, TProperty property, 
             string shaderLocalKeyword, ToggleAlign toggleAlign = ToggleAlign.Right, 
-            int indentLevel = 0, Action onChangedCallback = null)
+            int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetBool(property);
@@ -68,7 +69,7 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    _propertyService.SetBool(property, newValue);
+                    _propertyService.SetBool(property, newValue, applyModifiedProperties);
                     KeywordsService.SetKeyword(material, shaderLocalKeyword, newValue);
                     onChangedCallback?.Invoke();
                 }
@@ -77,7 +78,7 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
         
         internal bool DrawShaderGlobalKeywordToggle<TProperty>(GUIContent label, TProperty property, 
             string shaderGlobalKeyword, ToggleAlign toggleAlign = ToggleAlign.Right,
-            int indentLevel = 0, Action onChangedCallback = null)
+            int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null)
         {
             _groupEditor.DrawIndented(indentLevel, Draw);
             return _propertyService.GetBool(property);
@@ -98,7 +99,7 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    _propertyService.SetBool(property, newValue);
+                    _propertyService.SetBool(property, newValue, applyModifiedProperties);
                     KeywordsService.SetGlobalKeyword(shaderGlobalKeyword, newValue);
                     onChangedCallback?.Invoke();
                 }
