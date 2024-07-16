@@ -6,12 +6,12 @@ using UnityEngine;
 
 namespace EditorGUIPlus.EditorModules
 {
-    internal sealed class ToggleEditor
+    internal sealed class TogglePropertyEditor
     {
         private readonly PropertyService _propertyService;
         private readonly GroupEditor _groupEditor;
 
-        internal ToggleEditor(PropertyService propertyService, GroupEditor groupEditor)
+        internal TogglePropertyEditor(PropertyService propertyService, GroupEditor groupEditor)
         {
             _propertyService = propertyService;
             _groupEditor = groupEditor;

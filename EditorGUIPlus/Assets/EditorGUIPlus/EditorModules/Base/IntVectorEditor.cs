@@ -6,11 +6,11 @@ using UnityEngine;
 
 namespace EditorGUIPlus.EditorModules.Base
 {
-    public sealed class VectorIntEditor
+    public sealed class IntVectorEditor
     {
         private readonly GroupEditor _groupEditor;
 
-        internal VectorIntEditor(GroupEditor groupEditor)
+        internal IntVectorEditor(GroupEditor groupEditor)
         {
             _groupEditor = groupEditor;
         }

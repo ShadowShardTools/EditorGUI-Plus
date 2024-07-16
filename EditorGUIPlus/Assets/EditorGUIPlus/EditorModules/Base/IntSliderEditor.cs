@@ -6,11 +6,11 @@ using UnityEngine;
 
 namespace EditorGUIPlus.EditorModules.Base
 {
-    internal sealed class SliderIntEditor
+    internal sealed class IntSliderEditor
     {
         private readonly GroupEditor _groupEditor;
 
-        internal SliderIntEditor(GroupEditor groupEditor)
+        internal IntSliderEditor(GroupEditor groupEditor)
         {
             _groupEditor = groupEditor;
         }

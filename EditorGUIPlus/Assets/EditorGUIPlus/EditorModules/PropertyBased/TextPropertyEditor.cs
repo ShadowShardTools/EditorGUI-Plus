@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace EditorGUIPlus.EditorModules.PropertyBased
 {
-    internal sealed class TextEditor
+    internal sealed class TextPropertyEditor
     {
         private readonly GroupEditor _groupEditor;
 
-        internal TextEditor(GroupEditor groupEditor) =>
+        internal TextPropertyEditor(GroupEditor groupEditor) =>
             _groupEditor = groupEditor;
         
         internal GUIContent DrawLabel(GUIContent label, GUIContent label2, int indentLevel = 0)
