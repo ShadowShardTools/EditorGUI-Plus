@@ -33,6 +33,27 @@ namespace EditorGUIPlus.EditorModules.Base
                 }
             }
         }
+        
+        internal Vector2 DrawFromVector2ParamSlider(GUIContent label, Vector2 vector2, Vector2Param vectorParam, 
+            FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return vector2;
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+
+                float channelValue = vector2[(int)vectorParam];
+                float newValue = EditorGUILayout.Slider(label, channelValue, range.Min, range.Max);
+
+                if(EditorGUI.EndChangeCheck())
+                {
+                    vector2[(int)vectorParam] = newValue;
+                    onChangedCallback?.Invoke();
+                }
+            }
+        }
 
         internal Vector3 DrawFromVector3ParamSlider(GUIContent label, Vector3 vector3, Vector3Param vectorParam, 
             FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
@@ -50,6 +71,27 @@ namespace EditorGUIPlus.EditorModules.Base
                 if(EditorGUI.EndChangeCheck())
                 {
                     vector3[(int)vectorParam] = newValue;
+                    onChangedCallback?.Invoke();
+                }
+            }
+        }
+        
+        internal Vector4 DrawFromVector4ParamSlider(GUIContent label, Vector4 vector4, Vector4Param vectorParam, 
+            FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return vector4;
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+
+                float channelValue = vector4[(int)vectorParam];
+                float newValue = EditorGUILayout.Slider(label, channelValue, range.Min, range.Max);
+
+                if(EditorGUI.EndChangeCheck())
+                {
+                    vector4[(int)vectorParam] = newValue;
                     onChangedCallback?.Invoke();
                 }
             }

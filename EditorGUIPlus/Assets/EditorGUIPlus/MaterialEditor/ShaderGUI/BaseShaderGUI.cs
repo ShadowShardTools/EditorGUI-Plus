@@ -9,13 +9,13 @@ namespace EditorGUIPlus.MaterialEditor.ShaderGUI
 {
     public class BaseShaderGUI : UnityEditor.ShaderGUI
     {
-        private readonly MaterialEditorGUIPlus _materialEditorGUIPlus = new();
+        private readonly MaterialEditorGUIPlus _materialEditorGUIPlus = new MaterialEditorGUIPlus();
         private UnityEditor.MaterialEditor _materialEditor;
         
         protected bool FirstTimeApply = true;
-        protected static Vector2 IconSize = new(5, 5);
+        protected static Vector2 IconSize = new Vector2(5, 5);
 
-        protected List<MaterialSection> Sections = new();
+        protected List<MaterialSection> Sections = new List<MaterialSection>();
 
         public virtual void MaterialChanged(Material material) => 
             ValidateMaterial(material);
@@ -73,7 +73,7 @@ namespace EditorGUIPlus.MaterialEditor.ShaderGUI
         {
             EditorGUIUtility.SetIconSize(IconSize);
 
-            using HeaderScope header = new(section, _materialEditor);
+            using HeaderScope header = new HeaderScope(section, _materialEditor);
             if (header.Expanded)
                 section.DrawProperties(_materialEditorGUIPlus);
         }

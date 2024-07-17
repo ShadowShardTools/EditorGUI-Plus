@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace EditorGUIPlus.MaterialEditor
 {
-    public sealed class MaterialEditorGUIPlus
+    public sealed class MaterialEditorGUIPlus : IMaterialEditorGUIPlus
     {
         private readonly GroupEditor _groupEditor;
         private readonly SliderPropertyEditor _sliderPropertyEditor;
@@ -30,7 +30,7 @@ namespace EditorGUIPlus.MaterialEditor
         
         public MaterialEditorGUIPlus()
         {
-            PropertyService propertyService = new();
+            PropertyService propertyService = new PropertyService();
             
             _groupEditor = new GroupEditor();
             _sliderPropertyEditor = new SliderPropertyEditor(propertyService, _groupEditor);
@@ -126,14 +126,6 @@ namespace EditorGUIPlus.MaterialEditor
             Action onChangedCallback = null) =>
             _sliderPropertyEditor.DrawSlider(label, property, FloatRange.Normalized, indentLevel, false, onChangedCallback);
         
-        public Vector3 DrawFromVector3ParamSlider(GUIContent label, MaterialProperty property, Vector3Param vectorParam, 
-            FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
-            _sliderPropertyEditor.DrawFromVector3ParamSlider(label, property, vectorParam, range, indentLevel, false, onChangedCallback);
-        
-        public Vector3 DrawFromVector3ParamSlider(GUIContent label, MaterialProperty property, Vector3Param vectorParam, 
-            int indentLevel = 0, Action onChangedCallback = null) =>
-            _sliderPropertyEditor.DrawFromVector3ParamSlider(label, property, vectorParam, FloatRange.Normalized, indentLevel, false, onChangedCallback);
-        
         public void DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
             MaterialProperty property, FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
             _sliderPropertyEditor.DrawVector3Sliders(labelX, labelY, labelZ, property, range, indentLevel, false, onChangedCallback);
@@ -141,6 +133,14 @@ namespace EditorGUIPlus.MaterialEditor
         public void DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
             MaterialProperty property, int indentLevel = 0, Action onChangedCallback = null) =>
             _sliderPropertyEditor.DrawVector3Sliders(labelX, labelY, labelZ, property, FloatRange.Normalized, indentLevel, false, onChangedCallback);
+        
+        public Vector4 DrawFromVector4ParamSlider(GUIContent label, MaterialProperty property, Vector4Param vectorParam, 
+            FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
+            _sliderPropertyEditor.DrawFromVector4ParamSlider(label, property, vectorParam, range, indentLevel, false, onChangedCallback);
+        
+        public Vector4 DrawFromVector4ParamSlider(GUIContent label, MaterialProperty property, Vector4Param vectorParam, 
+            int indentLevel = 0, Action onChangedCallback = null) =>
+            _sliderPropertyEditor.DrawFromVector4ParamSlider(label, property, vectorParam, FloatRange.Normalized, indentLevel, false, onChangedCallback);
         
         public FloatRange DrawMinMaxSlider(GUIContent label, MaterialProperty minProperty, 
             MaterialProperty maxProperty, FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>

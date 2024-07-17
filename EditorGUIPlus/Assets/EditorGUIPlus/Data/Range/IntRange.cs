@@ -14,9 +14,9 @@ namespace EditorGUIPlus.Data.Range
             Max = max;
         }
 
-        public static IntRange Normalized => new(0, 1);
-        public static IntRange Full => new(int.MinValue, int.MaxValue);
+        public static IntRange Normalized => new IntRange(0, 1);
+        public static IntRange Full => new IntRange(int.MinValue, int.MaxValue);
         
-        public static IntRange ToMaxFrom(int min) => new(min, int.MaxValue);
+        public static IntRange ToMaxFrom(int min) => new IntRange(min, int.MaxValue);
     }
 }

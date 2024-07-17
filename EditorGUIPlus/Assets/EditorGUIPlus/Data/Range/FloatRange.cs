@@ -14,9 +14,9 @@ namespace EditorGUIPlus.Data.Range
             Max = max;
         }
 
-        public static FloatRange Normalized => new(0.0f, 1.0f);
-        public static FloatRange Full => new(float.MinValue, float.MaxValue);
+        public static FloatRange Normalized => new FloatRange(0.0f, 1.0f);
+        public static FloatRange Full => new FloatRange(float.MinValue, float.MaxValue);
         
-        public static FloatRange ToMaxFrom(float min) => new(min, float.MaxValue);
+        public static FloatRange ToMaxFrom(float min) => new FloatRange(min, float.MaxValue);
     }
 }

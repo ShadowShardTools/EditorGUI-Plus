@@ -14,9 +14,9 @@ namespace EditorGUIPlus.Data.Range
             Max = max;
         }
 
-        public static LongRange Normalized => new(0, 1);
-        public static LongRange Full => new(long.MinValue, long.MaxValue);
+        public static LongRange Normalized => new LongRange(0, 1);
+        public static LongRange Full => new LongRange(long.MinValue, long.MaxValue);
         
-        public static LongRange ToMaxFrom(long min) => new(min, long.MaxValue);
+        public static LongRange ToMaxFrom(long min) => new LongRange(min, long.MaxValue);
     }
 }
