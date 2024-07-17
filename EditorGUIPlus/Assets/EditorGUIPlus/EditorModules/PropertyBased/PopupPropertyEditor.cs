@@ -22,7 +22,7 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
             bool applyModifiedProperties = false, Action onChangedCallback = null) where TEnum : Enum
         {
             Type enumType = typeof(TEnum);
-            GUIContent label = new(ObjectNames.NicifyVariableName(enumType.Name));
+            GUIContent label = new GUIContent(ObjectNames.NicifyVariableName(enumType.Name));
             
             return DrawEnumPopup<TEnum, TProperty>(label, property, indentLevel, applyModifiedProperties, onChangedCallback);
         }
@@ -69,7 +69,7 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
             bool applyModifiedProperties = false, Action onChangedCallback = null) where TEnum : Enum
         {
             Type enumType = typeof(TEnum);
-            GUIContent label = new(ObjectNames.NicifyVariableName(enumType.Name));
+            GUIContent label = new GUIContent(ObjectNames.NicifyVariableName(enumType.Name));
 
             return DrawBooleanPopup<TEnum, TProperty>(label, property, indentLevel, applyModifiedProperties, onChangedCallback);
         }
@@ -89,7 +89,7 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
             string shaderGlobalKeyword, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null) where TEnum : Enum
         {
             Type enumType = typeof(TEnum);
-            GUIContent label = new(ObjectNames.NicifyVariableName(enumType.Name));
+            GUIContent label = new GUIContent(ObjectNames.NicifyVariableName(enumType.Name));
 
             return DrawShaderLocalKeywordBooleanPopup<TEnum, TProperty>(label, material, property, shaderGlobalKeyword, 
                 indentLevel, applyModifiedProperties, onChangedCallback);
@@ -114,7 +114,7 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
             Action onChangedCallback = null) where TEnum : Enum
         {
             Type enumType = typeof(TEnum);
-            GUIContent label = new(ObjectNames.NicifyVariableName(enumType.Name));
+            GUIContent label = new GUIContent(ObjectNames.NicifyVariableName(enumType.Name));
 
             return DrawShaderGlobalKeywordBooleanPopup<TEnum, TProperty>(label, property, shaderGlobalKeyword, 
                 indentLevel, applyModifiedProperties, onChangedCallback);

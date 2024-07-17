@@ -79,7 +79,7 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
-  IndentLevel: 2
+  IndentLevel: 3
   IsDisabled: 0
   Label:
     m_Text: Test Label
@@ -101,7 +101,7 @@ MonoBehaviour:
   TextureValue: {fileID: 0}
   TextFieldValue: 
   FolderPathValue: 
-  IntValue: 100
+  IntValue: 102
   DisplayedOptions:
   - Option1
   - Option2

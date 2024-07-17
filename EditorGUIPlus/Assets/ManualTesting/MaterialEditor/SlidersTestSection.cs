@@ -34,8 +34,8 @@ namespace ManualTesting.MaterialEditor
         {
             editor.DrawSlider(_floatLabel, FloatValue.MaterialProperty, _testFloatRange, 1);
             editor.DrawSlider(_floatLabel, FloatValue.MaterialProperty, 1);
-            editor.DrawFromVector3ParamSlider(_vectorLabel, VectorValue.MaterialProperty, Vector3Param.X, _testFloatRange, 1);
-            editor.DrawFromVector3ParamSlider(_vectorLabel, VectorValue.MaterialProperty, Vector3Param.Y, 1);
+            editor.DrawFromVector4ParamSlider(_vectorLabel, VectorValue.MaterialProperty, Vector4Param.X, _testFloatRange, 1);
+            editor.DrawFromVector4ParamSlider(_vectorLabel, VectorValue.MaterialProperty, Vector4Param.Y, 1);
             editor.DrawVector3Sliders(_vectorLabel, _vectorLabel, _vectorLabel, VectorValue.MaterialProperty, _testFloatRange, 1);
             editor.DrawVector3Sliders(_vectorLabel, _vectorLabel, _vectorLabel, VectorValue.MaterialProperty, 1);
             editor.DrawMinMaxSlider(_floatLabel, FloatMinValue.MaterialProperty, FloatMaxValue.MaterialProperty, _testFloatRange,1);

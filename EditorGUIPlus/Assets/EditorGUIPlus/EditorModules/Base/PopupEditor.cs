@@ -20,7 +20,7 @@ namespace EditorGUIPlus.EditorModules.Base
             Action onChangedCallback = null) where TEnum : Enum
         {
             Type enumType = typeof(TEnum);
-            GUIContent label = new(ObjectNames.NicifyVariableName(enumType.Name));
+            GUIContent label = new GUIContent(ObjectNames.NicifyVariableName(enumType.Name));
             
             return DrawEnumPopup(label, enumProperty, indentLevel, onChangedCallback);
         }
@@ -58,7 +58,7 @@ namespace EditorGUIPlus.EditorModules.Base
         internal TEnum DrawBooleanPopup<TEnum>(TEnum enumProperty, int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum
         {
             Type enumType = typeof(TEnum);
-            GUIContent label = new(ObjectNames.NicifyVariableName(enumType.Name));
+            GUIContent label = new GUIContent(ObjectNames.NicifyVariableName(enumType.Name));
 
             return DrawBooleanPopup(label, enumProperty, indentLevel, onChangedCallback);
         }
@@ -79,7 +79,7 @@ namespace EditorGUIPlus.EditorModules.Base
             string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum
         {
             Type enumType = typeof(TEnum);
-            GUIContent label = new(ObjectNames.NicifyVariableName(enumType.Name));
+            GUIContent label = new GUIContent(ObjectNames.NicifyVariableName(enumType.Name));
 
             return DrawShaderLocalKeywordBooleanPopup<TEnum>(label, material, enumProperty, shaderGlobalKeyword, 
                 indentLevel, onChangedCallback);
@@ -102,7 +102,7 @@ namespace EditorGUIPlus.EditorModules.Base
             string shaderGlobalKeyword, int indentLevel = 0, Action onChangedCallback = null) where TEnum : Enum
         {
             Type enumType = typeof(TEnum);
-            GUIContent label = new(ObjectNames.NicifyVariableName(enumType.Name));
+            GUIContent label = new GUIContent(ObjectNames.NicifyVariableName(enumType.Name));
 
             return DrawShaderGlobalKeywordBooleanPopup(label, enumProperty, shaderGlobalKeyword, 
                 indentLevel, onChangedCallback);

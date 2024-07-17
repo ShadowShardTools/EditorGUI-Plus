@@ -7,7 +7,7 @@ namespace EditorGUIPlus.MaterialEditor.AssetObject
     {
         [SerializeField]
         [HideInInspector]
-        private List<Material> childMaterials = new();
+        private List<Material> childMaterials = new List<Material>();
         
         public readonly uint Hash;
 

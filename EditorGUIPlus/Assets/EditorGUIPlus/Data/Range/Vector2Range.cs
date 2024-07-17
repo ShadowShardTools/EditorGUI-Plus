@@ -15,12 +15,12 @@ namespace EditorGUIPlus.Data.Range
             Max = max;
         }
 
-        private static Vector2 MinValue => new(float.MinValue, float.MinValue);
-        private static Vector2 MaxValue => new(float.MaxValue, float.MaxValue);
+        private static Vector2 MinValue => new Vector2(float.MinValue, float.MinValue);
+        private static Vector2 MaxValue => new Vector2(float.MaxValue, float.MaxValue);
 
-        public static Vector2Range Normalized => new(Vector2.zero, Vector2.one);
-        public static Vector2Range Full => new(MinValue, MaxValue);
+        public static Vector2Range Normalized => new Vector2Range(Vector2.zero, Vector2.one);
+        public static Vector2Range Full => new Vector2Range(MinValue, MaxValue);
         
-        public static Vector2Range ToMaxFrom(Vector2 min) => new(min, MaxValue);
+        public static Vector2Range ToMaxFrom(Vector2 min) => new Vector2Range(min, MaxValue);
     }
 }

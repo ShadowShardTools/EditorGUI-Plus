@@ -221,13 +221,13 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
 
                 EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
                 Vector4 propertyVector4Value = _propertyService.GetVector4(property);
-                Vector2 propertyValue = new(propertyVector4Value.x, propertyVector4Value.y);
+                Vector2 propertyValue = new Vector2(propertyVector4Value.x, propertyVector4Value.y);
                 Vector2 newValue = EditorGUILayout.Vector2Field(label, propertyValue).Clamp(range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    Vector4 newVector4Value = new(newValue.x, newValue.y, propertyVector4Value.z, propertyVector4Value.w);
+                    Vector4 newVector4Value = new Vector4(newValue.x, newValue.y, propertyVector4Value.z, propertyVector4Value.w);
                     _propertyService.SetVector4(property, newVector4Value, applyModifiedProperties);
                     onChangedCallback?.Invoke();
                 }
@@ -246,13 +246,13 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
 
                 EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
                 Vector4 propertyVector4Value = _propertyService.GetVector4(property);
-                Vector2 propertyValue = new(propertyVector4Value.z, propertyVector4Value.w);
+                Vector2 propertyValue = new Vector2(propertyVector4Value.z, propertyVector4Value.w);
                 Vector2 newValue = EditorGUILayout.Vector2Field(label, propertyValue).Clamp(range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    Vector4 newVector4Value = new(propertyVector4Value.x, propertyVector4Value.y, newValue.x, newValue.y);
+                    Vector4 newVector4Value = new Vector4(propertyVector4Value.x, propertyVector4Value.y, newValue.x, newValue.y);
                     _propertyService.SetVector4(property, newVector4Value, applyModifiedProperties);
                     onChangedCallback?.Invoke();
                 }

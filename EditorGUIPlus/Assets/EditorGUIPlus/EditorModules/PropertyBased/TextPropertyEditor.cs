@@ -149,8 +149,8 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
             int indentLevelCompensation = EditorGUI.indentLevel * 15;
             float textFieldWidth = position.width - buttonWidth + indentLevelCompensation;
 
-            Rect textFieldRect = new(position.x - indentLevelCompensation, position.y, textFieldWidth, EditorGUIUtility.singleLineHeight);
-            Rect buttonRect = new(textFieldRect.x + textFieldWidth, position.y, buttonWidth, EditorGUIUtility.singleLineHeight);
+            Rect textFieldRect = new Rect(position.x - indentLevelCompensation, position.y, textFieldWidth, EditorGUIUtility.singleLineHeight);
+            Rect buttonRect = new Rect(textFieldRect.x + textFieldWidth, position.y, buttonWidth, EditorGUIUtility.singleLineHeight);
 
             propertyValue = EditorGUI.TextField(textFieldRect, propertyValue);
 

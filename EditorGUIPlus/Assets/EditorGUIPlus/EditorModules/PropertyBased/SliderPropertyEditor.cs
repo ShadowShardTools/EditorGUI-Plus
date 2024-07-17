@@ -39,6 +39,32 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                 }
             }
         }
+        
+        internal Vector2 DrawFromVector2ParamSlider<TProperty>(GUIContent label, TProperty property, 
+            Vector2Param vectorParam, FloatRange range, int indentLevel = 0, bool applyModifiedProperties = false, 
+            Action onChangedCallback = null)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return _propertyService.GetVector2(property);
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                Vector3 propertyValue = _propertyService.GetVector2(property);
+                float channelValue = propertyValue[(int)vectorParam];
+                float newValue = EditorGUILayout.Slider(label, channelValue, range.Min, range.Max);
+                EditorGUI.showMixedValue = false;
+
+                if(EditorGUI.EndChangeCheck())
+                {
+                    propertyValue[(int)vectorParam] = newValue;
+                    _propertyService.SetVector2(property, propertyValue, applyModifiedProperties);
+                    onChangedCallback?.Invoke();
+                }
+            }
+        }
 
         internal Vector3 DrawFromVector3ParamSlider<TProperty>(GUIContent label, TProperty property, 
             Vector3Param vectorParam, FloatRange range, int indentLevel = 0, bool applyModifiedProperties = false, 
@@ -61,6 +87,32 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                 {
                     propertyValue[(int)vectorParam] = newValue;
                     _propertyService.SetVector3(property, propertyValue, applyModifiedProperties);
+                    onChangedCallback?.Invoke();
+                }
+            }
+        }
+        
+        internal Vector4 DrawFromVector4ParamSlider<TProperty>(GUIContent label, TProperty property, 
+            Vector4Param vectorParam, FloatRange range, int indentLevel = 0, bool applyModifiedProperties = false, 
+            Action onChangedCallback = null)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return _propertyService.GetVector4(property);
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                Vector3 propertyValue = _propertyService.GetVector4(property);
+                float channelValue = propertyValue[(int)vectorParam];
+                float newValue = EditorGUILayout.Slider(label, channelValue, range.Min, range.Max);
+                EditorGUI.showMixedValue = false;
+
+                if(EditorGUI.EndChangeCheck())
+                {
+                    propertyValue[(int)vectorParam] = newValue;
+                    _propertyService.SetVector4(property, propertyValue, applyModifiedProperties);
                     onChangedCallback?.Invoke();
                 }
             }

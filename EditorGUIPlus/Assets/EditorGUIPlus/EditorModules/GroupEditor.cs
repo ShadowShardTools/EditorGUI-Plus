@@ -20,11 +20,11 @@ namespace EditorGUIPlus.EditorModules
                 : new EditorGUILayout.VerticalScope(options);
         
         internal ScrollableScope ScrollViewScope(ref Vector2 scrollPosition, params GUILayoutOption[] options) =>
-            new(ref scrollPosition, options);
+            new ScrollableScope(ref scrollPosition, options);
         
         internal EditorGUILayout.ToggleGroupScope ToggleGroupScope(GUIContent label, ref bool toggle)
         {
-            EditorGUILayout.ToggleGroupScope scope = new(label, toggle);
+            EditorGUILayout.ToggleGroupScope scope = new EditorGUILayout.ToggleGroupScope(label, toggle);
             toggle = scope.enabled;
             
             return scope;
@@ -32,29 +32,30 @@ namespace EditorGUIPlus.EditorModules
         
         public EditorGUILayout.ToggleGroupScope ToggleGroupScope(GUIContent label, SerializedProperty property)
         {
-            EditorGUILayout.ToggleGroupScope scope = new(label, property.boolValue);
+            EditorGUILayout.ToggleGroupScope scope = new EditorGUILayout.ToggleGroupScope(label, property.boolValue);
             property.boolValue = scope.enabled;
             
             return scope;
         }
 
         internal EditorGUILayout.FadeGroupScope FadeGroupScope(float value) =>
-            new(value);
+            new EditorGUILayout.FadeGroupScope(value);
         
         internal HeaderScope HeaderScope(ISection section, bool spaceAtEnd = true, bool subHeader = false) =>
-            new(section, spaceAtEnd, subHeader);
+            new HeaderScope(section, spaceAtEnd, subHeader);
         
         internal DisabledScope DisabledScope(bool isDisabled) =>
-            new(isDisabled);
+            new DisabledScope(isDisabled);
         
         internal GroupScope GroupScope(GUIContent label, bool isDisabled) =>
-            new(label, isDisabled);
+            new GroupScope(label, isDisabled);
         
-        internal BuildTargetSelectionScope BuildTargetSelectionScope() => new();
+        internal BuildTargetSelectionScope BuildTargetSelectionScope() => 
+            new BuildTargetSelectionScope();
         
         internal void DrawScrollView(Action drawCall, ref Vector2 scrollPosition, params GUILayoutOption[] options)
         {
-            using EditorGUILayout.ScrollViewScope scrollViewScope = new(scrollPosition, options);
+            using EditorGUILayout.ScrollViewScope scrollViewScope = new EditorGUILayout.ScrollViewScope(scrollPosition, options);
             scrollPosition = scrollViewScope.scrollPosition;
             drawCall.Invoke();
         }

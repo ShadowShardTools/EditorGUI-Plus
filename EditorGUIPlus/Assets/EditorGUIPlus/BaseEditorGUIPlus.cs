@@ -129,6 +129,14 @@ namespace EditorGUIPlus
             Action onChangedCallback = null) =>
             _sliderEditor.DrawSlider(label, sliderValue, FloatRange.Normalized, indentLevel, onChangedCallback);
         
+        public Vector2 DrawFromVector2ParamSlider(GUIContent label, Vector2 vector2, Vector2Param vectorParam, 
+            FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
+            _sliderEditor.DrawFromVector2ParamSlider(label, vector2, vectorParam, range, indentLevel, onChangedCallback);
+        
+        public Vector2 DrawFromVector2ParamSlider(GUIContent label, Vector2 vector2, Vector2Param vectorParam, 
+            int indentLevel = 0, Action onChangedCallback = null) =>
+            _sliderEditor.DrawFromVector2ParamSlider(label, vector2, vectorParam, FloatRange.Normalized, indentLevel, onChangedCallback);
+        
         public Vector3 DrawFromVector3ParamSlider(GUIContent label, Vector3 vector3, Vector3Param vectorParam, 
             FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
             _sliderEditor.DrawFromVector3ParamSlider(label, vector3, vectorParam, range, indentLevel, onChangedCallback);
@@ -144,6 +152,14 @@ namespace EditorGUIPlus
         public Vector3 DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, Vector3 vector3, 
             int indentLevel = 0, Action onChangedCallback = null) =>
             _sliderEditor.DrawVector3Sliders(labelX, labelY, labelZ, vector3, FloatRange.Normalized, indentLevel, onChangedCallback);
+        
+        public Vector4 DrawFromVector4ParamSlider(GUIContent label, Vector4 vector4, Vector4Param vectorParam, 
+            FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
+            _sliderEditor.DrawFromVector4ParamSlider(label, vector4, vectorParam, range, indentLevel, onChangedCallback);
+        
+        public Vector4 DrawFromVector4ParamSlider(GUIContent label, Vector4 vector4, Vector4Param vectorParam, 
+            int indentLevel = 0, Action onChangedCallback = null) =>
+            _sliderEditor.DrawFromVector4ParamSlider(label, vector4, vectorParam, FloatRange.Normalized, indentLevel, onChangedCallback);
         
         public FloatRange DrawMinMaxSlider(GUIContent label, ref float minProperty, ref float maxProperty, 
             FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>

@@ -23,6 +23,18 @@ namespace EditorGUIPlus
         float DrawSlider(GUIContent label, float sliderValue, int indentLevel = 0, 
             Action onChangedCallback = null);
 
+        Vector2 DrawFromVector2ParamSlider(GUIContent label, SerializedProperty property, Vector2Param vectorParam, 
+            FloatRange range, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null);
+
+        Vector2 DrawFromVector2ParamSlider(GUIContent label, SerializedProperty property, Vector2Param vectorParam, 
+            int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null);
+
+        Vector2 DrawFromVector2ParamSlider(GUIContent label, Vector2 vector2, Vector2Param vectorParam, 
+            FloatRange range, int indentLevel = 0, Action onChangedCallback = null);
+
+        Vector2 DrawFromVector2ParamSlider(GUIContent label, Vector2 vector2, Vector2Param vectorParam, 
+            int indentLevel = 0, Action onChangedCallback = null);
+
         Vector3 DrawFromVector3ParamSlider(GUIContent label, SerializedProperty property, Vector3Param vectorParam, 
             FloatRange range, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null);
 
@@ -45,6 +57,18 @@ namespace EditorGUIPlus
             FloatRange range, int indentLevel = 0, Action onChangedCallback = null);
 
         Vector3 DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, Vector3 vector3, 
+            int indentLevel = 0, Action onChangedCallback = null);
+
+        Vector4 DrawFromVector4ParamSlider(GUIContent label, SerializedProperty property, Vector4Param vectorParam, 
+            FloatRange range, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null);
+
+        Vector4 DrawFromVector4ParamSlider(GUIContent label, SerializedProperty property, Vector4Param vectorParam, 
+            int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null);
+
+        Vector4 DrawFromVector4ParamSlider(GUIContent label, Vector4 vector4, Vector4Param vectorParam, 
+            FloatRange range, int indentLevel = 0, Action onChangedCallback = null);
+
+        Vector4 DrawFromVector4ParamSlider(GUIContent label, Vector4 vector4, Vector4Param vectorParam, 
             int indentLevel = 0, Action onChangedCallback = null);
 
         FloatRange DrawMinMaxSlider(GUIContent label, SerializedProperty minProperty, 

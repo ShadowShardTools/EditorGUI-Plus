@@ -186,7 +186,7 @@ namespace EditorGUIPlus.EditorModules.Base
             {
                 EditorGUI.BeginChangeCheck();
                 
-                Vector2 propertyValue = new(vector4.x, vector4.y);
+                Vector2 propertyValue = new Vector2(vector4.x, vector4.y);
                 Vector2 newValue = EditorGUILayout.Vector2Field(label, propertyValue).Clamp(range.Min, range.Max);
 
                 if (EditorGUI.EndChangeCheck())
@@ -207,7 +207,7 @@ namespace EditorGUIPlus.EditorModules.Base
             {
                 EditorGUI.BeginChangeCheck();
                 
-                Vector2 propertyValue = new(vector4.z, vector4.w);
+                Vector2 propertyValue = new Vector2(vector4.z, vector4.w);
                 Vector2 newValue = EditorGUILayout.Vector2Field(label, propertyValue).Clamp(range.Min, range.Max);
 
                 if (EditorGUI.EndChangeCheck())

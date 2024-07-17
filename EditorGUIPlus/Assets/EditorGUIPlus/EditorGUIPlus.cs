@@ -26,8 +26,8 @@ namespace EditorGUIPlus
         
         public EditorGUIPlus()
         {
-            PropertyService propertyService = new();
-            GroupEditor groupEditor = new();
+            PropertyService propertyService = new PropertyService();
+            GroupEditor groupEditor = new GroupEditor();
 
             InitializeBaseEditors();
             
@@ -55,6 +55,14 @@ namespace EditorGUIPlus
             bool applyModifiedProperties = false, Action onChangedCallback = null) =>
             _sliderPropertyEditor.DrawSlider(label, property, FloatRange.Normalized, indentLevel, applyModifiedProperties, onChangedCallback);
         
+        public Vector2 DrawFromVector2ParamSlider(GUIContent label, SerializedProperty property, Vector2Param vectorParam, 
+            FloatRange range, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null) =>
+            _sliderPropertyEditor.DrawFromVector2ParamSlider(label, property, vectorParam, range, indentLevel, applyModifiedProperties, onChangedCallback);
+        
+        public Vector2 DrawFromVector2ParamSlider(GUIContent label, SerializedProperty property, Vector2Param vectorParam, 
+            int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null) =>
+            _sliderPropertyEditor.DrawFromVector2ParamSlider(label, property, vectorParam, FloatRange.Normalized, indentLevel, applyModifiedProperties, onChangedCallback);
+        
         public Vector3 DrawFromVector3ParamSlider(GUIContent label, SerializedProperty property, Vector3Param vectorParam, 
             FloatRange range, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null) =>
             _sliderPropertyEditor.DrawFromVector3ParamSlider(label, property, vectorParam, range, indentLevel, applyModifiedProperties, onChangedCallback);
@@ -70,6 +78,14 @@ namespace EditorGUIPlus
         public Vector3 DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
             SerializedProperty property, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null) =>
             _sliderPropertyEditor.DrawVector3Sliders(labelX, labelY, labelZ, property, FloatRange.Normalized, indentLevel, applyModifiedProperties, onChangedCallback);
+        
+        public Vector4 DrawFromVector4ParamSlider(GUIContent label, SerializedProperty property, Vector4Param vectorParam, 
+            FloatRange range, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null) =>
+            _sliderPropertyEditor.DrawFromVector4ParamSlider(label, property, vectorParam, range, indentLevel, applyModifiedProperties, onChangedCallback);
+        
+        public Vector4 DrawFromVector4ParamSlider(GUIContent label, SerializedProperty property, Vector4Param vectorParam, 
+            int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null) =>
+            _sliderPropertyEditor.DrawFromVector4ParamSlider(label, property, vectorParam, FloatRange.Normalized, indentLevel, applyModifiedProperties, onChangedCallback);
         
         public FloatRange DrawMinMaxSlider(GUIContent label, SerializedProperty minProperty, 
             SerializedProperty maxProperty, FloatRange range, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null) =>
