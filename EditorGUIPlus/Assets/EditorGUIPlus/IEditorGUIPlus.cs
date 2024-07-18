@@ -119,6 +119,32 @@ namespace EditorGUIPlus
         int DrawIntSlider(GUIContent label, int sliderValue, int indentLevel = 0, 
             Action onChangedCallback = null);
 
+        Vector2Int DrawFromVector2IntParamSlider(GUIContent label, Vector2Int vector2Int, 
+            Vector2Param vectorParam, IntRange range, int indentLevel = 0, bool applyModifiedProperties = false, 
+            Action onChangedCallback = null);
+
+        Vector2Int DrawFromVector2IntParamSlider(GUIContent label, Vector2Int vector2Int, 
+            Vector2Param vectorParam, int indentLevel = 0, bool applyModifiedProperties = false, 
+            Action onChangedCallback = null);
+
+        Vector2Int DrawFromVector2IntParamSlider(GUIContent label, Vector2Int vector2Int, 
+            Vector2Param vectorParam, IntRange range, int indentLevel = 0, Action onChangedCallback = null);
+
+        Vector2Int DrawFromVector2IntParamSlider(GUIContent label, Vector2Int vector2Int, 
+            Vector2Param vectorParam, int indentLevel = 0, Action onChangedCallback = null);
+
+        Vector2Int DrawVector2IntSliders(GUIContent labelX, GUIContent labelY, SerializedProperty property, 
+            IntRange range, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null);
+
+        Vector2Int DrawVector2IntSliders(GUIContent labelX, GUIContent labelY, SerializedProperty property,
+            int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null);
+
+        Vector2Int DrawVector2IntSliders(GUIContent labelX, GUIContent labelY, Vector2Int vector2Int,
+            IntRange range, int indentLevel = 0, Action onChangedCallback = null);
+
+        Vector2Int DrawVector2IntSliders(GUIContent labelX, GUIContent labelY, Vector2Int vector2Int, 
+            int indentLevel = 0, Action onChangedCallback = null);
+
         Vector3Int DrawFromVector3IntParamSlider(GUIContent label, SerializedProperty property, 
             Vector3Param vectorParam, IntRange range, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null);
 
@@ -142,6 +168,18 @@ namespace EditorGUIPlus
 
         Vector3Int DrawVector3IntSliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, Vector3Int vector3Int, 
             int indentLevel = 0, Action onChangedCallback = null);
+
+        IntRange DrawMinMaxIntSlider(GUIContent label, SerializedProperty minProperty, SerializedProperty maxProperty, 
+            IntRange range, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null);
+
+        IntRange DrawMinMaxIntSlider(GUIContent label, SerializedProperty minProperty, SerializedProperty maxProperty, 
+            int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null);
+
+        IntRange DrawMinMaxIntSlider(GUIContent label, ref int minProperty, ref int maxProperty, 
+            IntRange range, int indentLevel = 0, Action onChangedCallback = null);
+
+        IntRange DrawMinMaxIntSlider(GUIContent label, ref int minProperty, ref int maxProperty, int indentLevel = 0, 
+            Action onChangedCallback = null);
 
         bool DrawToggle(GUIContent label, SerializedProperty property, ToggleAlign toggleAlign = ToggleAlign.Right, 
             int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null);
@@ -693,6 +731,13 @@ namespace EditorGUIPlus
         void DrawInspectorTitlebar(ref bool fold, Object[] targetObjs, Action drawCall);
         void DrawFoldout(GUIContent label, ref bool fold, bool toggleOnLabelClick, Action drawCall);
         void DrawFoldout(GUIContent label, ref bool fold, Action drawCall);
+
+        Vector2 DrawVector2Sliders(GUIContent labelX, GUIContent labelY, Vector2 vector2, 
+            FloatRange range, int indentLevel = 0, Action onChangedCallback = null);
+
+        Vector2 DrawVector2Sliders(GUIContent labelX, GUIContent labelY, Vector2 vector2, int indentLevel = 0, 
+            Action onChangedCallback = null);
+
         GUIContent DrawLabel(GUIContent label, GUIContent label2, int indentLevel = 0);
         GUIContent DrawLabel(GUIContent label, int indentLevel = 0);
         bool DrawLinkText(GUIContent label, int indentLevel = 0);

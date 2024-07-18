@@ -126,11 +126,19 @@ namespace EditorGUIPlus.MaterialEditor
             Action onChangedCallback = null) =>
             _sliderPropertyEditor.DrawSlider(label, property, FloatRange.Normalized, indentLevel, false, onChangedCallback);
         
-        public void DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
+        public Vector2 DrawVector2Sliders(GUIContent labelX, GUIContent labelY, MaterialProperty property, FloatRange range, 
+            int indentLevel = 0, Action onChangedCallback = null) =>
+            _sliderPropertyEditor.DrawVector2Sliders(labelX, labelY, property, range, indentLevel, false, onChangedCallback);
+        
+        public Vector2 DrawVector2Sliders(GUIContent labelX, GUIContent labelY, MaterialProperty property,
+            int indentLevel = 0, Action onChangedCallback = null) =>
+            _sliderPropertyEditor.DrawVector2Sliders(labelX, labelY, property, FloatRange.Normalized, indentLevel, false, onChangedCallback);
+        
+        public Vector3 DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
             MaterialProperty property, FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
             _sliderPropertyEditor.DrawVector3Sliders(labelX, labelY, labelZ, property, range, indentLevel, false, onChangedCallback);
         
-        public void DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
+        public Vector3 DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
             MaterialProperty property, int indentLevel = 0, Action onChangedCallback = null) =>
             _sliderPropertyEditor.DrawVector3Sliders(labelX, labelY, labelZ, property, FloatRange.Normalized, indentLevel, false, onChangedCallback);
         
@@ -178,6 +186,14 @@ namespace EditorGUIPlus.MaterialEditor
             Action onChangedCallback = null) =>
             _intSliderPropertyEditor.DrawIntSlider(label, property, IntRange.Normalized, indentLevel, false, onChangedCallback);
         
+        public Vector2Int DrawVector2IntSliders(GUIContent labelX, GUIContent labelY, MaterialProperty property, 
+            IntRange range, int indentLevel = 0, Action onChangedCallback = null) =>
+            _intSliderPropertyEditor.DrawVector2IntSliders(labelX, labelY, property, range, indentLevel, false, onChangedCallback);
+        
+        public Vector2Int DrawVector2IntSliders(GUIContent labelX, GUIContent labelY, MaterialProperty property, 
+            int indentLevel = 0, Action onChangedCallback = null) =>
+            _intSliderPropertyEditor.DrawVector2IntSliders(labelX, labelY, property, IntRange.Normalized, indentLevel, false, onChangedCallback);
+        
         public Vector3Int DrawFromVector3IntParamSlider(GUIContent label, MaterialProperty property, 
             Vector3Param vectorParam, IntRange range, int indentLevel = 0, Action onChangedCallback = null) =>
             _intSliderPropertyEditor.DrawFromVector3IntParamSlider(label, property, vectorParam, range, indentLevel, false, onChangedCallback);
@@ -186,14 +202,22 @@ namespace EditorGUIPlus.MaterialEditor
             Vector3Param vectorParam, int indentLevel = 0, Action onChangedCallback = null) =>
             _intSliderPropertyEditor.DrawFromVector3IntParamSlider(label, property, vectorParam, IntRange.Normalized, indentLevel, false, onChangedCallback);
         
-        public void DrawVector3IntSliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
+        public Vector3Int DrawVector3IntSliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
             MaterialProperty property, IntRange range, int indentLevel = 0, Action onChangedCallback = null) =>
             _intSliderPropertyEditor.DrawVector3IntSliders(labelX, labelY, labelZ, property, range, indentLevel, false, onChangedCallback);
         
-        public void DrawVector3IntSliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
+        public Vector3Int DrawVector3IntSliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
             MaterialProperty property, int indentLevel = 0, Action onChangedCallback = null) =>
             _intSliderPropertyEditor.DrawVector3IntSliders(labelX, labelY, labelZ, property, IntRange.Normalized, indentLevel, false, onChangedCallback);
 
+        public IntRange DrawMinMaxIntSlider(GUIContent label, MaterialProperty minProperty, MaterialProperty maxProperty, 
+            IntRange range, int indentLevel = 0, Action onChangedCallback = null) =>
+            _intSliderPropertyEditor.DrawMinMaxIntSlider(label, minProperty, maxProperty, range, indentLevel, false, onChangedCallback);
+        
+        public IntRange DrawMinMaxSlider(GUIContent label, ref int minProperty, ref int maxProperty, int indentLevel = 0, 
+            Action onChangedCallback = null) =>
+            _intSliderPropertyEditor.DrawMinMaxIntSlider(label, minProperty, maxProperty, IntRange.Normalized, indentLevel, false, onChangedCallback);
+        
         #endregion
         
         #region ToggleEditorRegion

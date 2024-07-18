@@ -97,6 +97,15 @@ namespace EditorGUIPlus.EditorModules.Base
             }
         }
         
+        internal Vector2 DrawVector2Sliders(GUIContent labelX, GUIContent labelY, Vector2 vector2, FloatRange range, 
+            int indentLevel = 0, Action onChangedCallback = null)
+        {
+            vector2 = DrawFromVector2ParamSlider(labelX, vector2, Vector2Param.X, range, indentLevel, onChangedCallback);
+            vector2 = DrawFromVector2ParamSlider(labelY, vector2, Vector2Param.Y, range, indentLevel, onChangedCallback);
+
+            return vector2;
+        }
+        
         internal Vector3 DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, Vector3 vector3, 
             FloatRange range, int indentLevel = 0, Action onChangedCallback = null)
         {

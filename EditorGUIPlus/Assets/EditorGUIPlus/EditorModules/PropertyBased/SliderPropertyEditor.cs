@@ -52,7 +52,7 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                 EditorGUI.BeginChangeCheck();
 
                 EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
-                Vector3 propertyValue = _propertyService.GetVector2(property);
+                Vector2 propertyValue = _propertyService.GetVector2(property);
                 float channelValue = propertyValue[(int)vectorParam];
                 float newValue = EditorGUILayout.Slider(label, channelValue, range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
@@ -104,7 +104,7 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                 EditorGUI.BeginChangeCheck();
 
                 EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
-                Vector3 propertyValue = _propertyService.GetVector4(property);
+                Vector4 propertyValue = _propertyService.GetVector4(property);
                 float channelValue = propertyValue[(int)vectorParam];
                 float newValue = EditorGUILayout.Slider(label, channelValue, range.Min, range.Max);
                 EditorGUI.showMixedValue = false;
@@ -116,6 +116,15 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                     onChangedCallback?.Invoke();
                 }
             }
+        }
+        
+        internal Vector2 DrawVector2Sliders<TProperty>(GUIContent labelX, GUIContent labelY, TProperty property, 
+            FloatRange range, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null)
+        {
+            DrawFromVector2ParamSlider(labelX, property, Vector2Param.X, range, indentLevel, applyModifiedProperties, onChangedCallback);
+            DrawFromVector2ParamSlider(labelY, property, Vector2Param.Y, range, indentLevel, applyModifiedProperties, onChangedCallback);
+
+            return _propertyService.GetVector2(property);
         }
         
         internal Vector3 DrawVector3Sliders<TProperty>(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
