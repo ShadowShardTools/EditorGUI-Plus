@@ -40,6 +40,32 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
             }
         }
         
+        internal Vector2Int DrawFromVector2IntParamSlider<TProperty>(GUIContent label, TProperty property, 
+            Vector2Param vectorParam, IntRange range, int indentLevel = 0, bool applyModifiedProperties = false, 
+            Action onChangedCallback = null)
+        {
+            _groupEditor.DrawIndented(indentLevel, Draw);
+            return _propertyService.GetVector2Int(property);
+
+            void Draw()
+            {
+                EditorGUI.BeginChangeCheck();
+
+                EditorGUI.showMixedValue = _propertyService.HasMixedValue(property);
+                Vector2Int propertyValue = _propertyService.GetVector2Int(property);
+                int channelValue = propertyValue[(int)vectorParam];
+                int newValue = EditorGUILayout.IntSlider(label, channelValue, range.Min, range.Max);
+                EditorGUI.showMixedValue = false;
+
+                if(EditorGUI.EndChangeCheck())
+                {
+                    propertyValue[(int)vectorParam] = newValue;
+                    _propertyService.SetVector2Int(property, propertyValue, applyModifiedProperties);
+                    onChangedCallback?.Invoke();
+                }
+            }
+        }
+        
         internal Vector3Int DrawFromVector3IntParamSlider<TProperty>(GUIContent label, TProperty property, 
             Vector3Param vectorParam, IntRange range, int indentLevel = 0, bool applyModifiedProperties = false, 
             Action onChangedCallback = null)
@@ -64,6 +90,15 @@ namespace EditorGUIPlus.EditorModules.PropertyBased
                     onChangedCallback?.Invoke();
                 }
             }
+        }
+        
+        internal Vector2Int DrawVector2IntSliders<TProperty>(GUIContent labelX, GUIContent labelY, TProperty property,
+            IntRange range, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null)
+        {
+            DrawFromVector2IntParamSlider(labelX, property, Vector2Param.X, range, indentLevel, applyModifiedProperties, onChangedCallback);
+            DrawFromVector2IntParamSlider(labelY, property, Vector2Param.Y, range, indentLevel, applyModifiedProperties, onChangedCallback);
+            
+            return _propertyService.GetVector2Int(property);
         }
         
         internal Vector3Int DrawVector3IntSliders<TProperty>(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 

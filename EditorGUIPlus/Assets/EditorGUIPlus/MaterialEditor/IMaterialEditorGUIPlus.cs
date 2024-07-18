@@ -39,10 +39,16 @@ namespace EditorGUIPlus.MaterialEditor
         float DrawSlider(GUIContent label, MaterialProperty property, int indentLevel = 0, 
             Action onChangedCallback = null);
 
-        void DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
+        Vector2 DrawVector2Sliders(GUIContent labelX, GUIContent labelY, MaterialProperty property, FloatRange range, 
+            int indentLevel = 0, Action onChangedCallback = null);
+
+        Vector2 DrawVector2Sliders(GUIContent labelX, GUIContent labelY, MaterialProperty property,
+            int indentLevel = 0, Action onChangedCallback = null);
+
+        Vector3 DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
             MaterialProperty property, FloatRange range, int indentLevel = 0, Action onChangedCallback = null);
 
-        void DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
+        Vector3 DrawVector3Sliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
             MaterialProperty property, int indentLevel = 0, Action onChangedCallback = null);
 
         Vector4 DrawFromVector4ParamSlider(GUIContent label, MaterialProperty property, Vector4Param vectorParam, 
@@ -56,6 +62,9 @@ namespace EditorGUIPlus.MaterialEditor
 
         FloatRange DrawMinMaxSlider(GUIContent label, MaterialProperty minProperty, 
             MaterialProperty maxProperty, int indentLevel = 0, Action onChangedCallback = null);
+
+        IntRange DrawMinMaxSlider(GUIContent label, ref int minProperty, ref int maxProperty, int indentLevel = 0, 
+            Action onChangedCallback = null);
 
         Vector4 DrawMinMaxVector4StartSlider(GUIContent label, MaterialProperty property, FloatRange range, 
             int indentLevel = 0, Action onChangedCallback = null);
@@ -75,17 +84,26 @@ namespace EditorGUIPlus.MaterialEditor
         int DrawIntSlider(GUIContent label, MaterialProperty property, int indentLevel = 0, 
             Action onChangedCallback = null);
 
+        Vector2Int DrawVector2IntSliders(GUIContent labelX, GUIContent labelY, MaterialProperty property, 
+            IntRange range, int indentLevel = 0, Action onChangedCallback = null);
+
+        Vector2Int DrawVector2IntSliders(GUIContent labelX, GUIContent labelY, MaterialProperty property, 
+            int indentLevel = 0, Action onChangedCallback = null);
+
         Vector3Int DrawFromVector3IntParamSlider(GUIContent label, MaterialProperty property, 
             Vector3Param vectorParam, IntRange range, int indentLevel = 0, Action onChangedCallback = null);
 
         Vector3Int DrawFromVector3IntParamSlider(GUIContent label, MaterialProperty property, 
             Vector3Param vectorParam, int indentLevel = 0, Action onChangedCallback = null);
 
-        void DrawVector3IntSliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
+        Vector3Int DrawVector3IntSliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
             MaterialProperty property, IntRange range, int indentLevel = 0, Action onChangedCallback = null);
 
-        void DrawVector3IntSliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
+        Vector3Int DrawVector3IntSliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, 
             MaterialProperty property, int indentLevel = 0, Action onChangedCallback = null);
+
+        IntRange DrawMinMaxIntSlider(GUIContent label, MaterialProperty minProperty, MaterialProperty maxProperty, 
+            IntRange range, int indentLevel = 0, Action onChangedCallback = null);
 
         bool DrawToggle(GUIContent label, MaterialProperty property, ToggleAlign toggleAlign = ToggleAlign.Right, 
             int indentLevel = 0, Action onChangedCallback = null);

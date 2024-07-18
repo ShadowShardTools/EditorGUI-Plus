@@ -137,6 +137,14 @@ namespace EditorGUIPlus
             int indentLevel = 0, Action onChangedCallback = null) =>
             _sliderEditor.DrawFromVector2ParamSlider(label, vector2, vectorParam, FloatRange.Normalized, indentLevel, onChangedCallback);
         
+        public Vector2 DrawVector2Sliders(GUIContent labelX, GUIContent labelY, Vector2 vector2, 
+            FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
+            _sliderEditor.DrawVector2Sliders(labelX, labelY, vector2, range, indentLevel, onChangedCallback);
+        
+        public Vector2 DrawVector2Sliders(GUIContent labelX, GUIContent labelY, Vector2 vector2, int indentLevel = 0, 
+            Action onChangedCallback = null) =>
+            _sliderEditor.DrawVector2Sliders(labelX, labelY, vector2, FloatRange.Normalized, indentLevel, onChangedCallback);
+        
         public Vector3 DrawFromVector3ParamSlider(GUIContent label, Vector3 vector3, Vector3Param vectorParam, 
             FloatRange range, int indentLevel = 0, Action onChangedCallback = null) =>
             _sliderEditor.DrawFromVector3ParamSlider(label, vector3, vectorParam, range, indentLevel, onChangedCallback);
@@ -197,6 +205,22 @@ namespace EditorGUIPlus
             Action onChangedCallback = null) =>
             _intSliderEditor.DrawIntSlider(label,  sliderValue, IntRange.Normalized, indentLevel, onChangedCallback);
         
+        public Vector2Int DrawFromVector2IntParamSlider(GUIContent label, Vector2Int vector2Int, 
+            Vector2Param vectorParam, IntRange range, int indentLevel = 0, Action onChangedCallback = null) =>
+            _intSliderEditor.DrawFromVector2IntParamSlider(label, vector2Int, vectorParam, range, indentLevel, onChangedCallback);
+        
+        public Vector2Int DrawFromVector2IntParamSlider(GUIContent label, Vector2Int vector2Int, 
+            Vector2Param vectorParam, int indentLevel = 0, Action onChangedCallback = null) =>
+            _intSliderEditor.DrawFromVector2IntParamSlider(label, vector2Int, vectorParam, IntRange.Normalized, indentLevel, onChangedCallback);
+        
+        public Vector2Int DrawVector2IntSliders(GUIContent labelX, GUIContent labelY, Vector2Int vector2Int,
+            IntRange range, int indentLevel = 0, Action onChangedCallback = null) =>
+            _intSliderEditor.DrawVector2IntSliders(labelX, labelY, vector2Int, range, indentLevel, onChangedCallback);
+        
+        public Vector2Int DrawVector2IntSliders(GUIContent labelX, GUIContent labelY, Vector2Int vector2Int, 
+            int indentLevel = 0, Action onChangedCallback = null) =>
+            _intSliderEditor.DrawVector2IntSliders(labelX, labelY, vector2Int, IntRange.Normalized, indentLevel, onChangedCallback);
+        
         public Vector3Int DrawFromVector3IntParamSlider(GUIContent label, Vector3Int vector3Int, 
             Vector3Param vectorParam, IntRange range, int indentLevel = 0, Action onChangedCallback = null) =>
             _intSliderEditor.DrawFromVector3IntParamSlider(label, vector3Int, vectorParam, range, indentLevel, onChangedCallback);
@@ -212,6 +236,14 @@ namespace EditorGUIPlus
         public Vector3Int DrawVector3IntSliders(GUIContent labelX, GUIContent labelY, GUIContent labelZ, Vector3Int vector3Int, 
             int indentLevel = 0, Action onChangedCallback = null) =>
             _intSliderEditor.DrawVector3IntSliders(labelX, labelY, labelZ, vector3Int, IntRange.Normalized, indentLevel, onChangedCallback);
+        
+        public IntRange DrawMinMaxIntSlider(GUIContent label, ref int minProperty, ref int maxProperty, 
+            IntRange range, int indentLevel = 0, Action onChangedCallback = null) =>
+            _intSliderEditor.DrawMinMaxIntSlider(label, ref minProperty, ref maxProperty, range, indentLevel, onChangedCallback);
+        
+        public IntRange DrawMinMaxIntSlider(GUIContent label, ref int minProperty, ref int maxProperty, int indentLevel = 0, 
+            Action onChangedCallback = null) =>
+            _intSliderEditor.DrawMinMaxIntSlider(label, ref minProperty, ref maxProperty, IntRange.Normalized, indentLevel, onChangedCallback);
 
         #endregion
         
