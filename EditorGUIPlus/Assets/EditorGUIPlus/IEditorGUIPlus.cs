@@ -731,6 +731,7 @@ namespace EditorGUIPlus
         DisabledScope DisabledScope(bool isDisabled);
         GroupScope GroupScope(GUIContent label, bool isDisabled);
         BuildTargetSelectionScope BuildTargetSelectionScope();
+        EditorGUI.IndentLevelScope IndentLevelScope(int increment);
         void ScrollView(Action drawCall, ref Vector2 scrollPosition, params GUILayoutOption[] options);
         void DrawVertical(GUIStyle styles, Action drawCall);
         void DrawIndented(int indentLevel, Action drawCall);

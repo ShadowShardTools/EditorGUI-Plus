@@ -53,6 +53,9 @@ namespace EditorGUIPlus.EditorModules
         internal BuildTargetSelectionScope BuildTargetSelectionScope() => 
             new BuildTargetSelectionScope();
         
+        internal EditorGUI.IndentLevelScope IndentLevelScope(int increment) =>
+            new EditorGUI.IndentLevelScope(increment);
+        
         internal void DrawScrollView(Action drawCall, ref Vector2 scrollPosition, params GUILayoutOption[] options)
         {
             using EditorGUILayout.ScrollViewScope scrollViewScope = new EditorGUILayout.ScrollViewScope(scrollPosition, options);
