@@ -77,6 +77,9 @@ namespace EditorGUIPlus
         public BuildTargetSelectionScope BuildTargetSelectionScope() =>
             _groupEditor.BuildTargetSelectionScope();
         
+        public EditorGUI.IndentLevelScope IndentLevelScope(int increment) =>
+            _groupEditor.IndentLevelScope(increment);
+        
         #endregion
         
         #region GroupEditorRegion

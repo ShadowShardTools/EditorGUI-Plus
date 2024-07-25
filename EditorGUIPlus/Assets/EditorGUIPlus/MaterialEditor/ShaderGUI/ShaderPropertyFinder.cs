@@ -5,7 +5,7 @@ using UnityEditor;
 
 namespace EditorGUIPlus.MaterialEditor.ShaderGUI
 {
-    public static class PropertyFinder
+    public static class ShaderPropertyFinder
     {
         public static MaterialProperty FindOptionalProperty(string propertyName, MaterialProperty[] properties) => 
             FindProperty(propertyName, properties, false);

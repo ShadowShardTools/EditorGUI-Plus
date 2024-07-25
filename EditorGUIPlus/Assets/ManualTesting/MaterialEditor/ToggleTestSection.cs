@@ -9,8 +9,8 @@ namespace ManualTesting.MaterialEditor
 {
     public class ToggleTestSection : MaterialSection
     {
-        protected Property ToggleValue = new("_ToggleValue");
-        protected Property ShaderKeywordToggle = new("_ShaderKeywordToggle");
+        protected ShaderProperty ToggleValue = new("_ToggleValue");
+        protected ShaderProperty ShaderKeywordToggle = new("_ShaderKeywordToggle");
 
         private readonly GUIContent _toggleLabel = new("Toggle Test");
 

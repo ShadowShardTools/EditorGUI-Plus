@@ -9,8 +9,8 @@ namespace ManualTesting.MaterialEditor
 public class ObjectTestSection : MaterialSection
 {
     private Material _material;
-    protected Property TestProfileAsset = new("_TestProfileAsset");
-    protected Property TestProfileHash = new("_TestProfileHash");
+    protected ShaderProperty TestProfileAsset = new("_TestProfileAsset");
+    protected ShaderProperty TestProfileHash = new("_TestProfileHash");
     private readonly GUIContent _label = new("Test");
     public ObjectTestSection(Material material) : base(new GUIContent("Test Label"))
     {
