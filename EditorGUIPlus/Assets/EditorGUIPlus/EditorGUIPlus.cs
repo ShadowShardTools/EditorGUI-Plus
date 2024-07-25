@@ -63,6 +63,14 @@ namespace EditorGUIPlus
             int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null) =>
             _sliderPropertyEditor.DrawFromVector2ParamSlider(label, property, vectorParam, FloatRange.Normalized, indentLevel, applyModifiedProperties, onChangedCallback);
         
+        public Vector2 DrawVector2Sliders(GUIContent labelX, GUIContent labelY, SerializedProperty property, 
+            FloatRange range, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null) => 
+            _sliderPropertyEditor.DrawVector2Sliders(labelX, labelY, property, range, indentLevel, applyModifiedProperties, onChangedCallback);
+                
+        public Vector2 DrawVector2Sliders(GUIContent labelX, GUIContent labelY, SerializedProperty property, 
+            int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null) =>
+            _sliderPropertyEditor.DrawVector2Sliders(labelX, labelY, property, FloatRange.Normalized, indentLevel, applyModifiedProperties, onChangedCallback);
+        
         public Vector3 DrawFromVector3ParamSlider(GUIContent label, SerializedProperty property, Vector3Param vectorParam, 
             FloatRange range, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null) =>
             _sliderPropertyEditor.DrawFromVector3ParamSlider(label, property, vectorParam, range, indentLevel, applyModifiedProperties, onChangedCallback);

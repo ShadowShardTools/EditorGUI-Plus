@@ -35,6 +35,18 @@ namespace EditorGUIPlus
         Vector2 DrawFromVector2ParamSlider(GUIContent label, Vector2 vector2, Vector2Param vectorParam, 
             int indentLevel = 0, Action onChangedCallback = null);
 
+        Vector2 DrawVector2Sliders(GUIContent labelX, GUIContent labelY, SerializedProperty property, 
+            FloatRange range, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null);
+
+        Vector2 DrawVector2Sliders(GUIContent labelX, GUIContent labelY, SerializedProperty property, 
+            int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null);
+
+        Vector2 DrawVector2Sliders(GUIContent labelX, GUIContent labelY, Vector2 vector2, 
+            FloatRange range, int indentLevel = 0, Action onChangedCallback = null);
+
+        Vector2 DrawVector2Sliders(GUIContent labelX, GUIContent labelY, Vector2 vector2, int indentLevel = 0, 
+            Action onChangedCallback = null);
+
         Vector3 DrawFromVector3ParamSlider(GUIContent label, SerializedProperty property, Vector3Param vectorParam, 
             FloatRange range, int indentLevel = 0, bool applyModifiedProperties = false, Action onChangedCallback = null);
 
@@ -731,13 +743,6 @@ namespace EditorGUIPlus
         void DrawInspectorTitlebar(ref bool fold, Object[] targetObjs, Action drawCall);
         void DrawFoldout(GUIContent label, ref bool fold, bool toggleOnLabelClick, Action drawCall);
         void DrawFoldout(GUIContent label, ref bool fold, Action drawCall);
-
-        Vector2 DrawVector2Sliders(GUIContent labelX, GUIContent labelY, Vector2 vector2, 
-            FloatRange range, int indentLevel = 0, Action onChangedCallback = null);
-
-        Vector2 DrawVector2Sliders(GUIContent labelX, GUIContent labelY, Vector2 vector2, int indentLevel = 0, 
-            Action onChangedCallback = null);
-
         GUIContent DrawLabel(GUIContent label, GUIContent label2, int indentLevel = 0);
         GUIContent DrawLabel(GUIContent label, int indentLevel = 0);
         bool DrawLinkText(GUIContent label, int indentLevel = 0);

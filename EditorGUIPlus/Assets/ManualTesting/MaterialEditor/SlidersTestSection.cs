@@ -9,10 +9,10 @@ namespace ManualTesting.MaterialEditor
 {
     public class SlidersTestSection : MaterialSection
     {
-        protected Property FloatValue = new("_FloatValue");
-        protected Property FloatMinValue = new("_FloatMinValue");
-        protected Property FloatMaxValue = new("_FloatMaxValue");
-        protected Property VectorValue = new("_VectorValue");
+        protected ShaderProperty FloatValue = new("_FloatValue");
+        protected ShaderProperty FloatMinValue = new("_FloatMinValue");
+        protected ShaderProperty FloatMaxValue = new("_FloatMaxValue");
+        protected ShaderProperty VectorValue = new("_VectorValue");
 
         private readonly GUIContent _floatLabel = new("Float Test");
         private readonly GUIContent _vectorLabel = new("Vector Test");

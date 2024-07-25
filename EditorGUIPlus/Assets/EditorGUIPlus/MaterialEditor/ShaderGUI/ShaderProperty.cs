@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace EditorGUIPlus.MaterialEditor.ShaderGUI
 {
-    public struct Property
+    public struct ShaderProperty
     {
         private readonly string _name;
         public int ID { get; }
         public MaterialProperty MaterialProperty { get; set; }
 
-        public Property(string name)
+        public ShaderProperty(string name)
         {
             _name = name;
             ID = Shader.PropertyToID(name);
@@ -17,6 +17,6 @@ namespace EditorGUIPlus.MaterialEditor.ShaderGUI
         }
 
         public void Find(MaterialProperty[] properties) => 
-            MaterialProperty = PropertyFinder.FindOptionalProperty(_name, properties);
+            MaterialProperty = ShaderPropertyFinder.FindOptionalProperty(_name, properties);
     }
 }

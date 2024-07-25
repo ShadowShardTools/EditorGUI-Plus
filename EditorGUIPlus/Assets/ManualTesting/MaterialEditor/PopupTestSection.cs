@@ -9,10 +9,10 @@ namespace ManualTesting.MaterialEditor
 {
     public class PopupTestSection : MaterialSection
     {
-        protected Property Color = new("_Color");
-        protected Property BaseMap = new("_BaseMap");
-        protected Property VectorValue = new("_VectorValue");
-        protected Property EnumValue = new("_EnumValue");
+        protected ShaderProperty Color = new("_Color");
+        protected ShaderProperty BaseMap = new("_BaseMap");
+        protected ShaderProperty VectorValue = new("_VectorValue");
+        protected ShaderProperty EnumValue = new("_EnumValue");
 
         private readonly GUIContent _colorLabel = new("Color Test");
         private readonly GUIContent _floatLabel = new("Float Test");
